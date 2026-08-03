@@ -10,13 +10,31 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-:root{--bg:#000814;--bg2:#001d3d;--bg3:#003566;--surf:rgba(0,29,61,.5);--cy:#00e5ff;--cy2:#00b8d4;--vi:#7c4dff;--pk:#ff4081;--tx:#e0f7fa;--tx2:#80deea;--tx3:#4dd0e1;--tx4:#00838f;--ok:#00e676;--wr:#ffc400;--er:#ff5252;--gd:linear-gradient(135deg,#00e5ff,#7c4dff);--gd2:linear-gradient(135deg,#7c4dff,#ff4081);--glow:0 0 20px rgba(0,229,255,.5);--border:rgba(0,229,255,.15);--border2:rgba(0,229,255,.3)}
+:root{
+--bg:#000814;--bg2:#001d3d;--bg3:#003566;
+--surf:rgba(0,29,61,.55);
+--cy:#00e5ff;--cy2:#00b8d4;--vi:#7c4dff;--pk:#ff4081;
+--tx:#e0f7fa;--tx2:#80deea;--tx3:#4dd0e1;--tx4:#00838f;
+--ok:#00e676;--wr:#ffc400;--er:#ff5252;
+--gd:linear-gradient(135deg,#00e5ff,#7c4dff);
+--gd2:linear-gradient(135deg,#7c4dff,#ff4081);
+--glow:0 0 20px rgba(0,229,255,.5);
+--border:rgba(0,229,255,.15);--border2:rgba(0,229,255,.3)
+}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{overscroll-behavior:none}
 body{font-family:'Space Grotesk',system-ui,sans-serif;background:var(--bg);color:var(--tx);min-height:100dvh;overflow-x:hidden;line-height:1.5;-webkit-font-smoothing:antialiased}
-body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle at 20% 20%,rgba(0,229,255,.08),transparent 40%),radial-gradient(circle at 80% 60%,rgba(124,77,255,.08),transparent 40%),radial-gradient(circle at 50% 100%,rgba(255,64,129,.05),transparent 50%);pointer-events:none;z-index:0}
-body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,229,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;mask-image:radial-gradient(ellipse at center,black 30%,transparent 70%)}
-::-webkit-scrollbar{width:4px;height:4px}::-webkit-scrollbar-thumb{background:var(--cy2);border-radius:2px}
+body::before{content:'';position:fixed;inset:0;background-image:
+radial-gradient(circle at 20% 20%,rgba(0,229,255,.08),transparent 40%),
+radial-gradient(circle at 80% 60%,rgba(124,77,255,.08),transparent 40%),
+radial-gradient(circle at 50% 100%,rgba(255,64,129,.05),transparent 50%);
+pointer-events:none;z-index:0}
+body::after{content:'';position:fixed;inset:0;
+background-image:linear-gradient(rgba(0,229,255,.03) 1px,transparent 1px),
+linear-gradient(90deg,rgba(0,229,255,.03) 1px,transparent 1px);
+background-size:40px 40px;pointer-events:none;z-index:0;
+mask-image:radial-gradient(ellipse at center,black 30%,transparent 70%)}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--cy2);border-radius:2px}
 ::selection{background:var(--cy);color:var(--bg)}
 input,textarea,select,button{font-family:inherit}
 a{color:var(--cy);text-decoration:none}
@@ -33,21 +51,19 @@ a{color:var(--cy);text-decoration:none}
 @keyframes borderGlow{0%,100%{box-shadow:0 0 20px rgba(0,229,255,.2)}50%{box-shadow:0 0 40px rgba(0,229,255,.5),0 0 60px rgba(124,77,255,.2)}}
 @keyframes voiceOrbit{from{transform:rotate(0deg) translateX(80px) rotate(0deg)}to{transform:rotate(360deg) translateX(80px) rotate(-360deg)}}
 @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
-.fadeUp{animation:fadeUp .4s ease both}
-.fadeIn{animation:fadeIn .4s ease both}
+@keyframes soundWave{0%,100%{height:8px}50%{height:30px}}
 
-#splash{position:fixed;inset:0;background:radial-gradient(ellipse at center,var(--bg2) 0%,var(--bg) 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:10000;transition:opacity .6s,visibility .6s}
+/* ─── SPLASH ─── */
+#splash{position:fixed;inset:0;background:radial-gradient(ellipse at center,var(--bg2),var(--bg) 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:10000;transition:opacity .6s,visibility .6s}
 #splash.done{opacity:0;visibility:hidden;pointer-events:none}
 .splash-logo{width:140px;height:140px;margin-bottom:32px;animation:breath 3s ease infinite}
-.splash-logo svg{width:100%;height:100%;filter:drop-shadow(0 0 25px rgba(0,229,255,.6))}
 .splash-t{font-size:32px;font-weight:700;letter-spacing:8px;background:var(--gd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.splash-sub{color:var(--tx4);font-size:11px;margin-top:8px;letter-spacing:4px;text-transform:uppercase;font-weight:500}
+.splash-sub{color:var(--tx4);font-size:11px;margin-top:8px;letter-spacing:4px;text-transform:uppercase}
 .splash-bar{width:200px;height:2px;background:var(--surf);border-radius:1px;margin-top:36px;overflow:hidden}
 .splash-fill{height:100%;background:var(--gd);border-radius:1px;transition:width .3s;width:0%;box-shadow:var(--glow)}
-.splash-st{color:var(--tx4);font-size:10px;margin-top:14px;min-height:14px;letter-spacing:1.5px;text-transform:uppercase;font-family:'JetBrains Mono',monospace}
+.splash-st{color:var(--tx4);font-size:10px;margin-top:14px;letter-spacing:1.5px;text-transform:uppercase;font-family:'JetBrains Mono',monospace}
 
-.dw-logo{width:100%;height:100%}
-
+/* ─── AUTH ─── */
 #auth{position:fixed;inset:0;background:var(--bg);display:none;align-items:center;justify-content:center;z-index:9000;padding:24px}
 #auth.on{display:flex}
 .auth-w{width:100%;max-width:400px;position:relative;z-index:1}
@@ -62,7 +78,7 @@ a{color:var(--cy);text-decoration:none}
 .fg{margin-bottom:16px}
 .fg label{display:block;font-size:10px;font-weight:600;color:var(--tx3);margin-bottom:6px;letter-spacing:1.5px;text-transform:uppercase}
 .fi{width:100%;padding:13px 14px;background:var(--surf);border:1px solid var(--border);border-radius:10px;color:var(--tx);font-size:14px;transition:.3s;outline:none;backdrop-filter:blur(20px)}
-.fi:focus{border-color:var(--cy);box-shadow:0 0 0 3px rgba(0,229,255,.1),var(--glow)}
+.fi:focus{border-color:var(--cy);box-shadow:0 0 0 3px rgba(0,229,255,.1)}
 .fi::placeholder{color:var(--tx4)}
 .auth-btn{width:100%;padding:14px;background:var(--gd);border:none;border-radius:10px;color:var(--bg);font-size:12px;font-weight:700;cursor:pointer;transition:.3s;margin-top:8px;letter-spacing:2px;text-transform:uppercase;box-shadow:var(--glow)}
 .auth-btn:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(0,229,255,.7)}
@@ -71,61 +87,67 @@ a{color:var(--cy);text-decoration:none}
 .bio-s{text-align:center;margin-top:28px;padding-top:24px;border-top:1px solid var(--border)}
 .bio-btn{width:62px;height:62px;border-radius:50%;background:var(--surf);border:2px solid var(--cy);color:var(--cy);font-size:24px;cursor:pointer;transition:.3s;display:inline-flex;align-items:center;justify-content:center;animation:borderGlow 3s infinite;backdrop-filter:blur(20px)}
 .bio-btn:hover{background:var(--cy);color:var(--bg)}
-.bio-label{display:block;color:var(--tx4);font-size:10px;margin-top:10px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase}
+.bio-label{display:block;color:var(--tx4);font-size:10px;margin-top:10px;letter-spacing:1.5px;text-transform:uppercase}
 
+/* ─── APP ─── */
 #app{display:none;min-height:100dvh;padding-bottom:76px;position:relative;z-index:1}
 #app.on{display:block}
 
-.hdr{position:sticky;top:0;background:rgba(0,8,20,.85);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;z-index:100;border-bottom:1px solid var(--border)}
+.hdr{position:sticky;top:0;background:rgba(0,8,20,.88);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;z-index:100;border-bottom:1px solid var(--border)}
 .hdr-l{display:flex;align-items:center;gap:12px}
 .hdr-logo{width:38px;height:38px}
 .hdr-info h1{font-size:14px;font-weight:700;letter-spacing:3px;background:var(--gd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .hdr-st{font-size:9px;color:var(--ok);display:flex;align-items:center;gap:5px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;margin-top:1px}
 .hdr-st::before{content:'';width:5px;height:5px;background:var(--ok);border-radius:50%;box-shadow:0 0 8px var(--ok);animation:pulse 2s infinite}
+.hdr-st.off{color:var(--wr)}.hdr-st.off::before{background:var(--wr);box-shadow:0 0 8px var(--wr)}
 .hdr-r{display:flex;gap:6px}
-.hdr-btn{width:36px;height:36px;border-radius:10px;background:var(--surf);border:1px solid var(--border);color:var(--tx3);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.25s;position:relative;backdrop-filter:blur(20px)}
-.hdr-btn:hover{color:var(--cy);border-color:var(--cy);box-shadow:var(--glow)}
+.hdr-btn{width:36px;height:36px;border-radius:10px;background:var(--surf);border:1px solid var(--border);color:var(--tx3);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.25s;backdrop-filter:blur(20px)}
+.hdr-btn:hover{color:var(--cy);border-color:var(--cy)}
 
+/* ─── PAGES ─── */
 .pg{display:none;padding:16px;animation:fadeUp .35s both}
 .pg.on{display:block}
+.pg-t{text-align:center;margin-bottom:20px;font-size:12px;font-weight:700;letter-spacing:4px;text-transform:uppercase;background:var(--gd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
+/* ─── VOICE MODE ─── */
 .voice-mode{display:flex;flex-direction:column;align-items:center;justify-content:space-between;min-height:calc(100dvh - 130px);padding:20px 16px;text-align:center}
-.voice-status{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--tx4);font-weight:600;margin-top:8px}
+.voice-status{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--tx4);font-weight:600;margin-top:8px;min-height:16px}
 .voice-status.listening{color:var(--cy);animation:pulse 1.5s infinite}
 .voice-status.speaking{color:var(--vi)}
 .voice-status.thinking{color:var(--pk)}
 .voice-core{width:280px;height:280px;position:relative;display:flex;align-items:center;justify-content:center;margin:20px 0;cursor:pointer;-webkit-user-select:none;user-select:none}
 .core-svg{position:absolute;inset:0;filter:drop-shadow(0 0 30px rgba(0,229,255,.4))}
-.core-orb{width:100px;height:100px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--cy) 0%,var(--vi) 50%,var(--pk) 100%);position:relative;transition:.4s;animation:breath 3s infinite;box-shadow:0 0 60px rgba(0,229,255,.5),inset 0 0 40px rgba(255,255,255,.2)}
-.voice-core.listening .core-orb{animation:pulse .8s infinite;background:radial-gradient(circle at 30% 30%,#fff,var(--cy) 50%,var(--vi) 100%)}
-.voice-core.speaking .core-orb{animation:pulse .5s infinite;background:radial-gradient(circle at 30% 30%,#fff,var(--vi) 50%,var(--pk) 100%)}
-.voice-core.thinking .core-orb{animation:spin 2s linear infinite}
-.core-ripple{position:absolute;width:100px;height:100px;border-radius:50%;border:2px solid var(--cy);opacity:0;pointer-events:none}
+.core-orb{width:100px;height:100px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--cy),var(--vi) 50%,var(--pk) 100%);position:relative;transition:.4s;animation:breath 3s infinite;box-shadow:0 0 60px rgba(0,229,255,.5),inset 0 0 40px rgba(255,255,255,.2);z-index:2}
+.voice-core.listening .core-orb{animation:pulse .8s infinite;background:radial-gradient(circle at 30% 30%,#fff,var(--cy) 50%,var(--vi) 100%);box-shadow:0 0 80px rgba(0,229,255,.7)}
+.voice-core.speaking .core-orb{animation:pulse .5s infinite;background:radial-gradient(circle at 30% 30%,#fff,var(--vi) 50%,var(--pk) 100%);box-shadow:0 0 80px rgba(124,77,255,.7)}
+.voice-core.thinking .core-orb{animation:spin 2s linear infinite;box-shadow:0 0 80px rgba(255,64,129,.5)}
+.core-ripple{position:absolute;width:100px;height:100px;border-radius:50%;border:2px solid var(--cy);opacity:0;pointer-events:none;z-index:1}
 .voice-core.listening .core-ripple{animation:coreRipple 2s infinite}
 .voice-core.listening .core-ripple:nth-child(2){animation-delay:.6s}
 .voice-core.listening .core-ripple:nth-child(3){animation-delay:1.2s}
-.orbit-dot{position:absolute;top:50%;left:50%;width:8px;height:8px;background:var(--cy);border-radius:50%;margin:-4px 0 0 -4px;box-shadow:0 0 12px var(--cy);animation:voiceOrbit 4s linear infinite}
-.orbit-dot:nth-child(2){background:var(--vi);box-shadow:0 0 12px var(--vi);animation-delay:-1.3s}
-.orbit-dot:nth-child(3){background:var(--pk);box-shadow:0 0 12px var(--pk);animation-delay:-2.6s}
+.orbit-dot{position:absolute;top:50%;left:50%;width:8px;height:8px;background:var(--cy);border-radius:50%;margin:-4px;box-shadow:0 0 12px var(--cy);animation:voiceOrbit 4s linear infinite;z-index:1}
+.orbit-dot:nth-child(5){background:var(--vi);box-shadow:0 0 12px var(--vi);animation-delay:-1.3s}
+.orbit-dot:nth-child(6){background:var(--pk);box-shadow:0 0 12px var(--pk);animation-delay:-2.6s}
 .wave-viz{display:flex;gap:3px;align-items:center;height:40px;margin-top:24px;opacity:0;transition:.3s}
 .wave-viz.on{opacity:1}
-.wave-bar{width:3px;height:8px;background:var(--gd);border-radius:2px;transition:height .1s}
-.voice-transcript{min-height:60px;max-width:600px;font-size:16px;color:var(--tx);margin:20px 0;line-height:1.5;padding:0 20px}
-.voice-transcript.user{color:var(--cy)}
+.wave-bar{width:3px;background:var(--gd);border-radius:2px;transition:height .08s;height:8px}
+.voice-transcript{min-height:60px;max-width:600px;font-size:16px;color:var(--tx);margin:20px 0;line-height:1.6;padding:0 20px}
+.voice-transcript.user-tx{color:var(--cy)}
 .voice-transcript.empty{color:var(--tx4);font-style:italic;font-size:13px}
 .voice-controls{display:flex;gap:12px;justify-content:center;margin-top:16px}
 .vc-btn{width:52px;height:52px;border-radius:14px;background:var(--surf);border:1px solid var(--border);color:var(--tx2);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.25s;backdrop-filter:blur(20px)}
 .vc-btn:hover{border-color:var(--cy);color:var(--cy);box-shadow:var(--glow)}
 .vc-btn.on{background:var(--cy);color:var(--bg);border-color:var(--cy);box-shadow:var(--glow)}
 .vc-btn.large{width:64px;height:64px;font-size:22px;border-radius:16px}
-.hands-free-toggle{display:flex;align-items:center;gap:10px;padding:10px 18px;background:var(--surf);border:1px solid var(--border);border-radius:24px;cursor:pointer;transition:.25s;backdrop-filter:blur(20px);margin-top:12px}
-.hands-free-toggle.on{border-color:var(--cy);background:rgba(0,229,255,.1);box-shadow:var(--glow)}
+.hf-toggle{display:flex;align-items:center;gap:10px;padding:10px 18px;background:var(--surf);border:1px solid var(--border);border-radius:24px;cursor:pointer;transition:.25s;backdrop-filter:blur(20px);margin-top:12px}
+.hf-toggle.on{border-color:var(--cy);background:rgba(0,229,255,.1);box-shadow:var(--glow)}
 .hf-dot{width:8px;height:8px;border-radius:50%;background:var(--tx4);transition:.3s}
-.hands-free-toggle.on .hf-dot{background:var(--cy);box-shadow:0 0 8px var(--cy);animation:pulse 1.5s infinite}
+.hf-toggle.on .hf-dot{background:var(--cy);box-shadow:0 0 8px var(--cy);animation:pulse 1.5s infinite}
 .hf-label{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx2)}
-.hands-free-toggle.on .hf-label{color:var(--cy)}
+.hf-toggle.on .hf-label{color:var(--cy)}
 
-.chat-c{max-width:820px;margin:0 auto;display:flex;flex-direction:column;height:calc(100dvh - 140px)}
+/* ─── CHAT ─── */
+.chat-c{max-width:800px;margin:0 auto;display:flex;flex-direction:column;height:calc(100dvh - 140px)}
 .chat-msgs{flex:1;overflow-y:auto;padding:8px 0;scroll-behavior:smooth}
 .msg{display:flex;gap:10px;margin-bottom:16px;animation:fadeUp .3s both}
 .msg.u{flex-direction:row-reverse}
@@ -136,7 +158,7 @@ a{color:var(--cy);text-decoration:none}
 .msg-bub{padding:12px 15px;border-radius:14px;font-size:14px;line-height:1.65;word-wrap:break-word;backdrop-filter:blur(20px)}
 .msg.ai .msg-bub{background:var(--surf);border:1px solid var(--border);border-bottom-left-radius:4px}
 .msg.u .msg-bub{background:linear-gradient(135deg,rgba(0,229,255,.15),rgba(124,77,255,.15));border:1px solid var(--border2);border-bottom-right-radius:4px}
-.msg-t{font-size:9px;color:var(--tx4);margin-top:4px;padding:0 2px;font-weight:500}
+.msg-t{font-size:9px;color:var(--tx4);margin-top:4px;padding:0 2px}
 .msg.u .msg-t{text-align:right}
 .msg-bub pre{background:rgba(0,0,0,.4);padding:12px;border-radius:8px;overflow-x:auto;margin:8px 0;font-family:'JetBrains Mono',monospace;font-size:12px;border:1px solid var(--border);position:relative}
 .msg-bub code{font-family:'JetBrains Mono',monospace;background:rgba(0,229,255,.1);padding:2px 5px;border-radius:4px;font-size:12px;color:var(--cy)}
@@ -145,7 +167,7 @@ a{color:var(--cy);text-decoration:none}
 .msg-acts{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}
 .msg-act{padding:5px 10px;background:var(--surf);border:1px solid var(--border);border-radius:6px;color:var(--tx3);font-size:10px;cursor:pointer;display:flex;align-items:center;gap:4px;transition:.2s;font-weight:500;backdrop-filter:blur(10px)}
 .msg-act:hover{border-color:var(--cy);color:var(--cy)}
-.msg-act.primary{background:var(--gd);color:var(--bg);border-color:var(--cy);font-weight:700}
+.msg-act.primary{background:var(--gd);color:var(--bg);border-color:var(--cy)}
 .typing{display:none;padding:12px 15px;background:var(--surf);border:1px solid var(--border);border-radius:14px;border-bottom-left-radius:4px;width:fit-content;gap:5px;align-items:center;margin-bottom:14px;backdrop-filter:blur(20px)}
 .typing.on{display:flex}
 .typing span{width:6px;height:6px;background:var(--cy);border-radius:50%;animation:typing 1.2s infinite;box-shadow:0 0 8px var(--cy)}
@@ -157,7 +179,7 @@ a{color:var(--cy);text-decoration:none}
 .chat-tl{display:flex;gap:2px}
 .ct-btn{width:34px;height:34px;border-radius:9px;background:transparent;border:none;color:var(--tx3);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s}
 .ct-btn:hover{color:var(--cy);background:rgba(0,229,255,.08)}
-.ct-btn.on{color:var(--cy);background:rgba(0,229,255,.12)}
+.ct-btn.on{color:var(--cy);background:rgba(0,229,255,.15);box-shadow:inset 0 0 10px rgba(0,229,255,.2)}
 #chatIn{flex:1;background:transparent;border:none;color:var(--tx);font-size:14px;resize:none;outline:none;max-height:100px;min-height:34px;line-height:1.45;padding:7px 4px}
 #chatIn::placeholder{color:var(--tx4)}
 .send-btn{width:36px;height:36px;border-radius:10px;background:var(--gd);border:none;color:var(--bg);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s;flex-shrink:0;box-shadow:0 0 12px rgba(0,229,255,.4)}
@@ -167,96 +189,90 @@ a{color:var(--cy);text-decoration:none}
 .qp-i{padding:7px 14px;background:var(--surf);border:1px solid var(--border);border-radius:18px;color:var(--tx3);font-size:11px;cursor:pointer;white-space:nowrap;transition:.25s;display:flex;align-items:center;gap:5px;font-weight:500;backdrop-filter:blur(20px)}
 .qp-i:hover{border-color:var(--cy);color:var(--cy)}
 
-.pg-t{text-align:center;margin-bottom:20px;font-size:12px;font-weight:700;letter-spacing:4px;text-transform:uppercase;background:var(--gd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-
-.mode-selector{display:flex;gap:6px;max-width:760px;margin:0 auto 16px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
-.mode-selector::-webkit-scrollbar{display:none}
+/* ─── CREATE ─── */
+.mode-sel{display:flex;gap:6px;max-width:800px;margin:0 auto 16px;overflow-x:auto;scrollbar-width:none}
+.mode-sel::-webkit-scrollbar{display:none}
 .mode-btn{padding:10px 16px;background:var(--surf);border:1px solid var(--border);border-radius:10px;color:var(--tx3);font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;transition:.25s;display:flex;align-items:center;gap:6px;letter-spacing:1px;text-transform:uppercase;backdrop-filter:blur(20px)}
 .mode-btn.on{background:var(--gd);color:var(--bg);border-color:var(--cy);box-shadow:var(--glow)}
-
-.gen-form{max-width:760px;margin:0 auto;background:var(--surf);border-radius:14px;padding:20px;border:1px solid var(--border);backdrop-filter:blur(20px);margin-bottom:16px}
+.gen-form{max-width:800px;margin:0 auto 16px;background:var(--surf);border-radius:14px;padding:20px;border:1px solid var(--border);backdrop-filter:blur(20px)}
 .gen-form h3{font-size:13px;font-weight:700;margin-bottom:14px;letter-spacing:2px;text-transform:uppercase;color:var(--tx2)}
-.gta{width:100%;min-height:100px;padding:12px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;color:var(--tx);font-size:13px;resize:vertical;outline:none;transition:.3s;font-family:inherit}
+.gta{width:100%;min-height:100px;padding:12px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;color:var(--tx);font-size:13px;resize:vertical;outline:none;transition:.3s}
 .gta:focus{border-color:var(--cy)}
 .go{display:flex;gap:8px;margin:12px 0;flex-wrap:wrap}
 .go-i{padding:7px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--tx3);font-size:11px;cursor:pointer;transition:.25s;font-weight:500}
 .go-i.on{border-color:var(--cy);color:var(--cy);background:rgba(0,229,255,.1)}
 .g-btn{padding:12px 24px;background:var(--gd);border:none;border-radius:10px;color:var(--bg);font-size:11px;font-weight:700;cursor:pointer;transition:.25s;display:inline-flex;align-items:center;gap:8px;letter-spacing:2px;text-transform:uppercase;box-shadow:var(--glow)}
-.g-btn:hover{transform:translateY(-1px);box-shadow:0 0 25px rgba(0,229,255,.6)}
+.g-btn:hover{transform:translateY(-1px)}
 .g-btn:disabled{opacity:.5;cursor:not-allowed}
-.g-btn.sec{background:var(--surf);color:var(--cy);border:1px solid var(--border2);box-shadow:none}
-.g-btn.sec:hover{border-color:var(--cy);box-shadow:var(--glow)}
-
-.gen-result{max-width:760px;margin:0 auto;background:var(--surf);border-radius:14px;padding:16px;border:1px solid var(--border);backdrop-filter:blur(20px);margin-bottom:16px;display:none}
+.gen-result{max-width:800px;margin:0 auto 16px;background:var(--surf);border-radius:14px;padding:16px;border:1px solid var(--border);backdrop-filter:blur(20px);display:none}
 .gen-result.on{display:block;animation:fadeUp .35s}
 .gr-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px}
 .gr-h span{font-weight:700;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--tx2)}
 .gr-actions{display:flex;gap:6px;flex-wrap:wrap}
 .gr-c{background:var(--bg);border-radius:10px;padding:14px;max-height:420px;overflow-y:auto;border:1px solid var(--border)}
 .gr-c pre{font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.65;white-space:pre-wrap;word-wrap:break-word;color:var(--tx2)}
-
 .preview-frame{width:100%;height:500px;border:1px solid var(--border);border-radius:10px;background:#fff}
 .gen-img{width:100%;border-radius:10px;box-shadow:0 0 30px rgba(0,229,255,.2)}
 .loading-shimmer{background:linear-gradient(90deg,var(--bg2) 25%,var(--surf) 50%,var(--bg2) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:10px;min-height:200px;display:flex;align-items:center;justify-content:center;color:var(--tx4);font-size:11px;letter-spacing:2px;text-transform:uppercase}
+.deploy-status{background:rgba(0,230,118,.05);border:1px solid rgba(0,230,118,.3);border-radius:10px;padding:14px;margin-top:12px;font-size:12px;color:var(--tx2);line-height:1.7}
+.deploy-status.err{background:rgba(255,82,82,.05);border-color:rgba(255,82,82,.3)}
+.deploy-link{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--gd);color:var(--bg);border-radius:8px;font-weight:700;font-size:11px;letter-spacing:1px;text-transform:uppercase;margin-top:8px}
 
+/* ─── SETTINGS ─── */
 .set-c{max-width:600px;margin:0 auto}
 .set-s{background:var(--surf);border-radius:14px;padding:18px;margin-bottom:12px;border:1px solid var(--border);backdrop-filter:blur(20px)}
 .set-st{font-size:11px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;letter-spacing:2px;text-transform:uppercase;color:var(--tx2)}
 .set-st i{color:var(--cy);font-size:13px}
 .si{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--border);gap:12px}
 .si:last-child{border-bottom:none}
-.si-info h4{font-size:13px;font-weight:600;color:var(--tx)}
-.si-info p{font-size:11px;color:var(--tx4);margin-top:2px}
+.si-info h4{font-size:13px;font-weight:600}.si-info p{font-size:11px;color:var(--tx4);margin-top:2px}
 .tog{width:44px;height:24px;background:var(--bg2);border-radius:12px;cursor:pointer;position:relative;transition:.3s;border:1px solid var(--border);flex-shrink:0}
 .tog.on{background:var(--cy);border-color:var(--cy);box-shadow:0 0 12px rgba(0,229,255,.4)}
 .tog::after{content:'';width:16px;height:16px;background:var(--tx2);border-radius:50%;position:absolute;top:3px;left:3px;transition:.3s}
 .tog.on::after{transform:translateX(20px);background:var(--bg)}
-.set-sel{padding:7px 10px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--tx);font-size:12px;outline:none}
 .set-inp{padding:9px 12px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--tx);font-size:12px;outline:none;width:100%;font-family:'JetBrains Mono',monospace}
 .set-inp:focus{border-color:var(--cy)}
-.vl{display:grid;gap:6px;margin-top:8px;max-height:280px;overflow-y:auto}
+.set-sel{padding:7px 10px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--tx);font-size:12px;outline:none}
+.vl{display:grid;gap:6px;margin-top:8px;max-height:250px;overflow-y:auto}
 .vi{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--bg2);border-radius:10px;cursor:pointer;border:1px solid transparent;transition:.25s}
 .vi:hover{border-color:var(--border2)}
 .vi.on{border-color:var(--cy);background:rgba(0,229,255,.08)}
-.vi-i{display:flex;align-items:center;gap:8px;overflow:hidden}
-.vi-i span{font-size:12px;font-weight:500;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vi-i{display:flex;align-items:center;gap:8px;overflow:hidden;flex:1;min-width:0}
+.vi-i span{font-size:12px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .vi-i small{color:var(--tx4);font-size:10px}
 .vp-btn{width:28px;height:28px;border-radius:8px;background:var(--cy);border:none;color:var(--bg);font-size:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.dev-info{text-align:center;padding:20px;margin-top:16px;border-top:1px solid var(--border)}
-.dev-info p{font-size:10px;color:var(--tx4);line-height:1.7;letter-spacing:.5px}
 .api-info{background:rgba(0,229,255,.05);border:1px solid var(--border2);border-radius:10px;padding:12px;font-size:11px;color:var(--tx3);margin-top:10px;line-height:1.6}
 .api-info a{color:var(--cy);font-weight:600}
 .api-info strong{color:var(--cy)}
+.dev-info{text-align:center;padding:20px;margin-top:16px;border-top:1px solid var(--border)}
+.dev-info p{font-size:10px;color:var(--tx4);line-height:1.7}
 
-.bnav{position:fixed;bottom:0;left:0;right:0;background:rgba(0,8,20,.9);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);display:flex;padding:8px 12px;padding-bottom:max(8px,env(safe-area-inset-bottom));border-top:1px solid var(--border);z-index:100}
+/* ─── NAV ─── */
+.bnav{position:fixed;bottom:0;left:0;right:0;background:rgba(0,8,20,.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);display:flex;padding:8px 12px;padding-bottom:max(8px,env(safe-area-inset-bottom));border-top:1px solid var(--border);z-index:100}
 .ni{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;cursor:pointer;color:var(--tx4);transition:.25s;background:none;border:none}
 .ni.on{color:var(--cy)}
 .ni.on i{filter:drop-shadow(0 0 8px var(--cy))}
-.ni i{font-size:16px;transition:.25s}
-.ni span{font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase}
+.ni i{font-size:16px}.ni span{font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase}
 
+/* ─── MODAL ─── */
 .mo-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:7000;padding:20px;backdrop-filter:blur(6px)}
 .mo-bg.on{display:flex}
-.mo{background:var(--bg2);border-radius:16px;padding:24px;max-width:520px;width:100%;max-height:85vh;overflow-y:auto;animation:scaleIn .3s;border:1px solid var(--border2);box-shadow:0 0 60px rgba(0,229,255,.15)}
+.mo{background:var(--bg2);border-radius:16px;padding:24px;max-width:520px;width:100%;max-height:85vh;overflow-y:auto;animation:scaleIn .3s;border:1px solid var(--border2)}
 .mo-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
 .mo-t{font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--tx2)}
 .mo-x{width:30px;height:30px;border-radius:8px;background:var(--surf);border:1px solid var(--border);color:var(--tx);font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 
+/* ─── TOAST ─── */
 .toast-c{position:fixed;top:16px;right:16px;z-index:9999;display:flex;flex-direction:column;gap:6px;pointer-events:none;max-width:calc(100vw - 32px)}
-.toast{background:var(--bg2);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;animation:fadeUp .3s;border:1px solid var(--border);box-shadow:0 4px 20px rgba(0,0,0,.4);min-width:240px;pointer-events:auto;backdrop-filter:blur(20px)}
+.toast{background:var(--bg2);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;animation:fadeUp .3s;border:1px solid var(--border);box-shadow:0 4px 20px rgba(0,0,0,.4);min-width:200px;pointer-events:auto;backdrop-filter:blur(20px)}
 .toast.ok{border-left:3px solid var(--ok)}.toast.er{border-left:3px solid var(--er)}.toast.wr{border-left:3px solid var(--wr)}.toast.info{border-left:3px solid var(--cy)}
-.toast i{color:var(--cy)}
-.toast.ok i{color:var(--ok)}.toast.er i{color:var(--er)}.toast.wr i{color:var(--wr)}
-
-.deploy-status{background:rgba(0,230,118,.05);border:1px solid rgba(0,230,118,.3);border-radius:10px;padding:14px;margin-top:12px;font-size:12px;color:var(--tx2);line-height:1.7}
-.deploy-status.err{background:rgba(255,82,82,.05);border-color:rgba(255,82,82,.3)}
-.deploy-link{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--gd);color:var(--bg);border-radius:8px;font-weight:700;font-size:11px;letter-spacing:1px;text-transform:uppercase;margin-top:8px;text-decoration:none}
 
 @media(max-width:480px){
 .msg-body{max-width:85%}
 .gen-form{padding:16px}
 .voice-core{width:240px;height:240px}
 .core-orb{width:80px;height:80px}
+.core-ripple{width:80px;height:80px}
 }
 </style>
 </head>
@@ -266,22 +282,24 @@ a{color:var(--cy);text-decoration:none}
 <defs>
 <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00e5ff"/><stop offset="100%" stop-color="#7c4dff"/></linearGradient>
 <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#7c4dff"/><stop offset="100%" stop-color="#ff4081"/></linearGradient>
-<radialGradient id="gCore" cx="50%" cy="40%"><stop offset="0%" stop-color="#ffffff"/><stop offset="30%" stop-color="#00e5ff"/><stop offset="70%" stop-color="#7c4dff"/><stop offset="100%" stop-color="#ff4081"/></radialGradient>
+<radialGradient id="gCore" cx="50%" cy="40%"><stop offset="0%" stop-color="#fff"/><stop offset="30%" stop-color="#00e5ff"/><stop offset="70%" stop-color="#7c4dff"/><stop offset="100%" stop-color="#ff4081"/></radialGradient>
 <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
 </defs>
 </svg>
 
 <template id="tmplLogo">
-<svg class="dw-logo" viewBox="0 0 100 100">
+<svg viewBox="0 0 100 100" style="width:100%;height:100%">
 <circle cx="50" cy="50" r="46" fill="none" stroke="url(#g1)" stroke-width="2" stroke-dasharray="8 4" style="animation:orbitSpin 12s linear infinite;transform-origin:center"/>
 <circle cx="50" cy="50" r="38" fill="none" stroke="url(#g2)" stroke-width="1" stroke-dasharray="2 6" style="animation:orbitSpin 18s linear infinite reverse;transform-origin:center"/>
 <polygon points="50,15 78,32 78,68 50,85 22,68 22,32" fill="none" stroke="url(#g1)" stroke-width="1.5" opacity=".6"/>
-<polygon points="50,25 68,35 68,65 50,75 32,65 32,35" fill="none" stroke="url(#g1)" stroke-width="1.5" opacity=".3"/>
 <circle cx="50" cy="50" r="14" fill="url(#gCore)" filter="url(#glow)"/>
-<circle cx="50" cy="15" r="1.5" fill="#00e5ff"/><circle cx="78" cy="32" r="1.5" fill="#00e5ff"/><circle cx="78" cy="68" r="1.5" fill="#00e5ff"/><circle cx="50" cy="85" r="1.5" fill="#00e5ff"/><circle cx="22" cy="68" r="1.5" fill="#00e5ff"/><circle cx="22" cy="32" r="1.5" fill="#00e5ff"/>
+<circle cx="50" cy="15" r="1.5" fill="#00e5ff"/><circle cx="78" cy="32" r="1.5" fill="#00e5ff"/>
+<circle cx="78" cy="68" r="1.5" fill="#7c4dff"/><circle cx="50" cy="85" r="1.5" fill="#7c4dff"/>
+<circle cx="22" cy="68" r="1.5" fill="#ff4081"/><circle cx="22" cy="32" r="1.5" fill="#ff4081"/>
 </svg>
 </template>
 
+<!-- SPLASH -->
 <div id="splash">
 <div class="splash-logo" id="splashLogo"></div>
 <div class="splash-t">DARWIN</div>
@@ -290,36 +308,38 @@ a{color:var(--cy);text-decoration:none}
 <div class="splash-st" id="sSt">Initialisation</div>
 </div>
 
+<!-- AUTH -->
 <div id="auth">
-<div class="auth-w fadeUp">
+<div class="auth-w" style="animation:fadeUp .5s both">
 <div class="auth-hd">
 <div class="auth-logo" id="authLogo"></div>
 <div class="auth-t">DARWIN</div>
-<div class="auth-d">Système d'Intelligence</div>
+<div class="auth-d">Accès au système</div>
 </div>
 <div class="auth-tabs">
-<div class="auth-tab on" onclick="DarwinAuth.switchTab('login')">Accès</div>
-<div class="auth-tab" onclick="DarwinAuth.switchTab('register')">Créer</div>
+<div class="auth-tab on" onclick="Auth.switchTab('login')">Connexion</div>
+<div class="auth-tab" onclick="Auth.switchTab('register')">Inscription</div>
 </div>
-<form class="auth-f on" id="fLogin" onsubmit="return DarwinAuth.login(event)">
-<div class="fg"><label>Identifiant</label><input type="email" class="fi" id="lEmail" placeholder="email@exemple.com" required></div>
-<div class="fg"><label>Code d'accès</label><input type="password" class="fi" id="lPass" placeholder="••••••••" required></div>
+<form class="auth-f on" id="fLogin" onsubmit="return Auth.login(event)">
+<div class="fg"><label>Email</label><input type="email" class="fi" id="lEmail" placeholder="votre@email.com" required></div>
+<div class="fg"><label>Mot de passe</label><input type="password" class="fi" id="lPass" placeholder="••••••••" required></div>
 <button type="submit" class="auth-btn">Se connecter</button>
 </form>
-<form class="auth-f" id="fReg" onsubmit="return DarwinAuth.register(event)">
+<form class="auth-f" id="fReg" onsubmit="return Auth.register(event)">
 <div class="fg"><label>Nom</label><input type="text" class="fi" id="rName" placeholder="Votre nom" required></div>
-<div class="fg"><label>Identifiant</label><input type="email" class="fi" id="rEmail" placeholder="email@exemple.com" required></div>
-<div class="fg"><label>Code d'accès</label><input type="password" class="fi" id="rPass" placeholder="Minimum 6 caractères" required minlength="6"></div>
-<div class="fg"><label>Confirmation</label><input type="password" class="fi" id="rPass2" placeholder="Confirmez le code" required></div>
-<button type="submit" class="auth-btn">Créer un accès</button>
+<div class="fg"><label>Email</label><input type="email" class="fi" id="rEmail" placeholder="votre@email.com" required></div>
+<div class="fg"><label>Mot de passe</label><input type="password" class="fi" id="rPass" placeholder="6 caractères min." required minlength="6"></div>
+<div class="fg"><label>Confirmation</label><input type="password" class="fi" id="rPass2" placeholder="Confirmez" required></div>
+<button type="submit" class="auth-btn">Créer mon compte</button>
 </form>
 <div class="bio-s">
-<button class="bio-btn" onclick="DarwinAuth.biometric()" id="bioBtn"><i class="fas fa-fingerprint"></i></button>
+<button class="bio-btn" onclick="Auth.biometric()" id="bioBtn"><i class="fas fa-fingerprint"></i></button>
 <span class="bio-label">Biométrie</span>
 </div>
 </div>
 </div>
 
+<!-- APP -->
 <div id="app">
 <header class="hdr">
 <div class="hdr-l">
@@ -327,35 +347,32 @@ a{color:var(--cy);text-decoration:none}
 <div class="hdr-info"><h1>DARWIN</h1><div class="hdr-st" id="hdrStatus">En ligne</div></div>
 </div>
 <div class="hdr-r">
-<button class="hdr-btn" onclick="DarwinUI.nav('settings')"><i class="fas fa-sliders-h"></i></button>
+<button class="hdr-btn" onclick="UI.nav('settings')"><i class="fas fa-sliders-h"></i></button>
 </div>
 </header>
 
 <!-- VOICE -->
 <div class="pg on" id="pg-voice">
 <div class="voice-mode">
-<div class="voice-status" id="voiceStatus">Prêt</div>
-<div class="voice-core" id="voiceCore" onclick="DarwinVoice.tap()">
+<div class="voice-status" id="vStatus">Prêt</div>
+<div class="voice-core" id="vCore" onclick="Voice.tap()">
 <svg class="core-svg" viewBox="0 0 280 280">
 <circle cx="140" cy="140" r="130" fill="none" stroke="url(#g1)" stroke-width="1" stroke-dasharray="6 4" opacity=".3" style="animation:orbitSpin 20s linear infinite;transform-origin:center"/>
 <circle cx="140" cy="140" r="110" fill="none" stroke="url(#g2)" stroke-width="1" stroke-dasharray="2 8" opacity=".4" style="animation:orbitSpin 15s linear infinite reverse;transform-origin:center"/>
 <circle cx="140" cy="140" r="88" fill="none" stroke="url(#g1)" stroke-width=".5" opacity=".2"/>
-<g style="animation:orbitSpin 30s linear infinite;transform-origin:center">
-<circle cx="140" cy="30" r="2" fill="#00e5ff"/><circle cx="140" cy="250" r="2" fill="#7c4dff"/><circle cx="30" cy="140" r="2" fill="#ff4081"/><circle cx="250" cy="140" r="2" fill="#00e5ff"/>
-</g>
 </svg>
 <div class="core-ripple"></div><div class="core-ripple"></div><div class="core-ripple"></div>
 <div class="orbit-dot"></div><div class="orbit-dot"></div><div class="orbit-dot"></div>
 <div class="core-orb"></div>
 </div>
 <div class="wave-viz" id="waveViz"></div>
-<div class="voice-transcript empty" id="voiceTx">Touchez la sphère pour parler</div>
+<div class="voice-transcript empty" id="vTx">Touchez la sphère pour parler</div>
 <div class="voice-controls">
-<button class="vc-btn" onclick="DarwinUI.nav('chat')"><i class="fas fa-keyboard"></i></button>
-<button class="vc-btn large" onclick="DarwinVoice.tap()" id="micLarge"><i class="fas fa-microphone"></i></button>
-<button class="vc-btn" onclick="DarwinVoice.stopAll()"><i class="fas fa-stop"></i></button>
+<button class="vc-btn" onclick="UI.nav('chat')"><i class="fas fa-keyboard"></i></button>
+<button class="vc-btn large" onclick="Voice.tap()" id="micMain"><i class="fas fa-microphone"></i></button>
+<button class="vc-btn" onclick="Voice.stopAll()"><i class="fas fa-stop"></i></button>
 </div>
-<div class="hands-free-toggle" id="hfToggle" onclick="DarwinVoice.toggleHandsFree()">
+<div class="hf-toggle" id="hfBtn" onclick="Voice.toggleHF()">
 <div class="hf-dot"></div>
 <div class="hf-label">Mode mains-libres</div>
 </div>
@@ -366,108 +383,70 @@ a{color:var(--cy);text-decoration:none}
 <div class="pg" id="pg-chat">
 <div class="chat-c">
 <div class="qp">
-<div class="qp-i" onclick="DarwinChat.quick('Explique-moi la physique quantique simplement')"><i class="fas fa-brain"></i> Expliquer</div>
-<div class="qp-i" onclick="DarwinChat.quick('Écris-moi un poème')"><i class="fas fa-feather"></i> Écrire</div>
-<div class="qp-i" onclick="DarwinChat.quick('Traduis en anglais : bonjour comment vas-tu ?')"><i class="fas fa-language"></i> Traduire</div>
-<div class="qp-i" onclick="DarwinChat.quick('Résous : 25 * 4 + racine carrée de 144')"><i class="fas fa-calculator"></i> Calculer</div>
-<div class="qp-i" onclick="DarwinChat.quick('Donne-moi une recette de cuisine simple')"><i class="fas fa-utensils"></i> Recette</div>
-<div class="qp-i" onclick="DarwinChat.quick('Aide-moi à préparer un entretien')"><i class="fas fa-briefcase"></i> Coach</div>
+<div class="qp-i" onclick="Chat.quick('Explique la relativité simplement')"><i class="fas fa-brain"></i> Expliquer</div>
+<div class="qp-i" onclick="Chat.quick('Génère une image d\'un paysage futuriste')"><i class="fas fa-image"></i> Image IA</div>
+<div class="qp-i" onclick="Chat.quick('Écris du code Python pour trier une liste')"><i class="fas fa-code"></i> Code</div>
+<div class="qp-i" onclick="Chat.quick('Traduis en anglais : bonjour')"><i class="fas fa-language"></i> Traduire</div>
+<div class="qp-i" onclick="Chat.quick('Crée un site web portfolio')"><i class="fas fa-globe"></i> Site</div>
 </div>
 <div class="chat-msgs" id="chatMsgs"></div>
 <div class="typing" id="typInd"><span></span><span></span><span></span></div>
 <div class="chat-in">
 <div class="chat-wrap">
 <div class="chat-tl">
-<button class="ct-btn" onclick="DarwinVoice.tap()" id="micBtn"><i class="fas fa-microphone"></i></button>
+<button class="ct-btn" onclick="Voice.tap()" id="micChat"><i class="fas fa-microphone"></i></button>
 <button class="ct-btn" onclick="document.getElementById('fUp').click()"><i class="fas fa-paperclip"></i></button>
 </div>
-<textarea id="chatIn" placeholder="Écrivez ou dictez..." rows="1" onkeydown="DarwinChat.keydown(event)" oninput="DarwinChat.resize(this)"></textarea>
-<button class="send-btn" onclick="DarwinChat.send()"><i class="fas fa-paper-plane"></i></button>
+<textarea id="chatIn" placeholder="Message ou commande vocale..." rows="1" onkeydown="Chat.kd(event)" oninput="Chat.rs(this)"></textarea>
+<button class="send-btn" onclick="Chat.send()"><i class="fas fa-paper-plane"></i></button>
 </div>
 </div>
 </div>
 </div>
 
-<!-- CREATE (universal generator) -->
+<!-- CREATE -->
 <div class="pg" id="pg-create">
 <div class="pg-t">Studio de création</div>
-<div class="mode-selector">
-<div class="mode-btn on" onclick="DarwinCreate.setMode('image',this)"><i class="fas fa-image"></i> Image</div>
-<div class="mode-btn" onclick="DarwinCreate.setMode('code',this)"><i class="fas fa-code"></i> Code</div>
-<div class="mode-btn" onclick="DarwinCreate.setMode('website',this)"><i class="fas fa-globe"></i> Site web</div>
-<div class="mode-btn" onclick="DarwinCreate.setMode('app',this)"><i class="fas fa-mobile-alt"></i> App</div>
-<div class="mode-btn" onclick="DarwinCreate.setMode('video',this)"><i class="fas fa-film"></i> Vidéo</div>
+<div class="mode-sel">
+<div class="mode-btn on" onclick="Create.setMode('image',this)"><i class="fas fa-image"></i> Image</div>
+<div class="mode-btn" onclick="Create.setMode('code',this)"><i class="fas fa-code"></i> Code</div>
+<div class="mode-btn" onclick="Create.setMode('website',this)"><i class="fas fa-globe"></i> Site</div>
+<div class="mode-btn" onclick="Create.setMode('app',this)"><i class="fas fa-mobile-alt"></i> App</div>
 </div>
-
 <div class="gen-form">
 <h3 id="createTitle">Génération d'image</h3>
 <textarea class="gta" id="createPrompt" placeholder="Décrivez ce que vous voulez créer..."></textarea>
-
-<div id="opts-image">
-<div class="go">
-<div class="go-i on" onclick="DarwinCreate.opt(this,'style')">Photoréaliste</div>
-<div class="go-i" onclick="DarwinCreate.opt(this,'style')">Art numérique</div>
-<div class="go-i" onclick="DarwinCreate.opt(this,'style')">Anime</div>
-<div class="go-i" onclick="DarwinCreate.opt(this,'style')">3D</div>
-<div class="go-i" onclick="DarwinCreate.opt(this,'style')">Cyberpunk</div>
-<div class="go-i" onclick="DarwinCreate.opt(this,'style')">Fantasy</div>
+<div id="opts-image"><div class="go">
+<div class="go-i on" onclick="Create.opt(this)">Photoréaliste</div>
+<div class="go-i" onclick="Create.opt(this)">Art numérique</div>
+<div class="go-i" onclick="Create.opt(this)">Anime</div>
+<div class="go-i" onclick="Create.opt(this)">3D</div>
+<div class="go-i" onclick="Create.opt(this)">Cyberpunk</div>
+</div></div>
+<div id="opts-code" style="display:none"><div class="go">
+<div class="go-i on" onclick="Create.opt(this)">Python</div>
+<div class="go-i" onclick="Create.opt(this)">JavaScript</div>
+<div class="go-i" onclick="Create.opt(this)">TypeScript</div>
+<div class="go-i" onclick="Create.opt(this)">Java</div>
+<div class="go-i" onclick="Create.opt(this)">C++</div>
+<div class="go-i" onclick="Create.opt(this)">PHP</div>
+</div></div>
+<div id="opts-website" style="display:none"><div class="go">
+<div class="go-i on" onclick="Create.opt(this)">Portfolio</div>
+<div class="go-i" onclick="Create.opt(this)">Landing page</div>
+<div class="go-i" onclick="Create.opt(this)">E-commerce</div>
+<div class="go-i" onclick="Create.opt(this)">Blog</div>
+</div></div>
+<div id="opts-app" style="display:none"><div class="go">
+<div class="go-i on" onclick="Create.opt(this)">PWA</div>
+<div class="go-i" onclick="Create.opt(this)">React Native</div>
+<div class="go-i" onclick="Create.opt(this)">Flutter</div>
+</div></div>
+<button class="g-btn" onclick="Create.run()" id="createBtn"><i class="fas fa-bolt"></i> Générer</button>
 </div>
-<div class="go">
-<div class="go-i on" onclick="DarwinCreate.opt(this,'ratio')">Carré</div>
-<div class="go-i" onclick="DarwinCreate.opt(this,'ratio')">Portrait</div>
-<div class="go-i" onclick="DarwinCreate.opt(this,'ratio')">Paysage</div>
-</div>
-</div>
-
-<div id="opts-code" style="display:none">
-<div class="go">
-<div class="go-i on" onclick="DarwinCreate.opt(this,'lang')">Python</div>
-<div class="go-i" onclick="DarwinCreate.opt(this,'lang')">JavaScript</div>
-<div class="go-i" onclick="DarwinCreate.opt(this,'lang')">TypeScript</div>
-<div class="go-i" onclick="DarwinCreate.opt(this,'lang')">Java</div>
-<div class="go-i" onclick="DarwinCreate.opt(this,'lang')">C++</div>
-<div class="go-i" onclick="DarwinCreate.opt(this,'lang')">Rust</div>
-<div class="go-i" onclick="DarwinCreate.opt(this,'lang')">Go</div>
-<div class="go-i" onclick="DarwinCreate.opt(this,'lang')">PHP</div>
-<div class="go-i" onclick="DarwinCreate.opt(this,'lang')">SQL</div>
-</div>
-</div>
-
-<div id="opts-website" style="display:none">
-<div class="go">
-<div class="go-i on" onclick="DarwinCreate.opt(this,'wtype')">Portfolio</div>
-<div class="go-i" onclick="DarwinCreate.opt(this,'wtype')">Landing</div>
-<div class="go-i" onclick="DarwinCreate.opt(this,'wtype')">E-commerce</div>
-<div class="go-i" onclick="DarwinCreate.opt(this,'wtype')">Blog</div>
-<div class="go-i" onclick="DarwinCreate.opt(this,'wtype')">Dashboard</div>
-<div class="go-i" onclick="DarwinCreate.opt(this,'wtype')">Restaurant</div>
-</div>
-</div>
-
-<div id="opts-app" style="display:none">
-<div class="go">
-<div class="go-i on" onclick="DarwinCreate.opt(this,'apptype')">PWA</div>
-<div class="go-i" onclick="DarwinCreate.opt(this,'apptype')">React Native</div>
-<div class="go-i" onclick="DarwinCreate.opt(this,'apptype')">Flutter</div>
-</div>
-</div>
-
-<div id="opts-video" style="display:none">
-<div class="go">
-<div class="go-i on" onclick="DarwinCreate.opt(this,'vtype')">GIF animé</div>
-<div class="go-i" onclick="DarwinCreate.opt(this,'vtype')">Slideshow</div>
-</div>
-</div>
-
-<button class="g-btn" onclick="DarwinCreate.generate()" id="createBtn"><i class="fas fa-bolt"></i> Générer</button>
-</div>
-
 <div class="gen-result" id="createResult">
-<div class="gr-h">
-<span id="resultTitle">Résultat</span>
-<div class="gr-actions" id="resultActions"></div>
-</div>
-<div id="resultContent"></div>
+<div class="gr-h"><span id="resTitle">Résultat</span><div class="gr-actions" id="resActs"></div></div>
+<div id="resContent"></div>
 </div>
 </div>
 
@@ -475,583 +454,1057 @@ a{color:var(--cy);text-decoration:none}
 <div class="pg" id="pg-settings">
 <div class="set-c">
 <div class="pg-t">Configuration</div>
-
-<div class="set-s"><div class="set-st"><i class="fas fa-brain"></i> Intelligence IA</div>
+<div class="set-s"><div class="set-st"><i class="fas fa-brain"></i> Intelligence</div>
 <div class="si" style="flex-direction:column;align-items:stretch;gap:8px">
-<div class="si-info"><h4>Clé API Gemini</h4><p>Active l'intelligence complète (gratuit)</p></div>
-<input type="password" class="set-inp" id="apiKeyInp" placeholder="AIzaSy..." onchange="DarwinAI.saveKey(this.value)">
-<div class="api-info">
-<strong>1)</strong> Ouvrir : <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a><br>
-<strong>2)</strong> "Create API Key" → copier<br>
-<strong>3)</strong> Coller ci-dessus. C'est gratuit et instantané.
-</div>
-</div>
-<div class="si"><div class="si-info"><h4>Modèle</h4><p>Version du moteur IA</p></div><select class="set-sel" id="modelSel" onchange="DarwinAI.setModel(this.value)">
-<option value="gemini-2.0-flash-exp">Gemini 2.0 Flash</option>
-<option value="gemini-1.5-flash">Gemini 1.5 Flash</option>
-<option value="gemini-1.5-pro">Gemini 1.5 Pro</option>
-</select></div>
-</div>
-
-<div class="set-s"><div class="set-st"><i class="fab fa-github"></i> Publication GitHub</div>
+<div class="si-info"><h4>Clé API Gemini</h4><p>Nécessaire pour les réponses intelligentes</p></div>
+<input type="password" class="set-inp" id="apiKeyInp" placeholder="AIzaSy..." onchange="AI.saveKey(this.value)">
+<div class="api-info"><strong>1.</strong> <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a><br><strong>2.</strong> Create API Key → copier<br><strong>3.</strong> Coller ci-dessus (gratuit)</div>
+</div></div>
+<div class="set-s"><div class="set-st"><i class="fab fa-github"></i> GitHub</div>
 <div class="si" style="flex-direction:column;align-items:stretch;gap:8px">
-<div class="si-info"><h4>Token GitHub</h4><p>Nécessaire pour publier sites et code</p></div>
-<input type="password" class="set-inp" id="ghTokenInp" placeholder="ghp_..." onchange="DarwinGH.saveToken(this.value)">
-<input type="text" class="set-inp" id="ghUserInp" placeholder="Votre username GitHub" onchange="DarwinGH.saveUser(this.value)" style="margin-top:6px">
-<div class="api-info">
-<strong>1)</strong> Ouvrir : <a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a><br>
-<strong>2)</strong> "Generate new token (classic)"<br>
-<strong>3)</strong> Cocher <strong>repo</strong> et <strong>workflow</strong><br>
-<strong>4)</strong> Générer, copier, coller ci-dessus + votre username.<br>
-Darwin pourra créer des repos et déployer sur GitHub Pages.
-</div>
-</div>
-</div>
-
-<div class="set-s"><div class="set-st"><i class="fas fa-user"></i> Identité</div>
-<div class="si"><div class="si-info"><h4 id="pName">—</h4><p id="pEmail">—</p></div><button class="msg-act" onclick="DarwinUI.editProfile()"><i class="fas fa-pen"></i></button></div>
-</div>
-
+<div class="si-info"><h4>Token et username</h4><p>Pour publier sites et code en ligne</p></div>
+<input type="password" class="set-inp" id="ghTokenInp" placeholder="ghp_..." onchange="GH.saveToken(this.value)">
+<input type="text" class="set-inp" id="ghUserInp" placeholder="Username GitHub" onchange="GH.saveUser(this.value)" style="margin-top:6px">
+<div class="api-info"><a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a> → Generate → cocher <strong>repo</strong></div>
+</div></div>
+<div class="set-s"><div class="set-st"><i class="fas fa-user"></i> Profil</div>
+<div class="si"><div class="si-info"><h4 id="pName">—</h4><p id="pEmail">—</p></div><button class="msg-act" onclick="UI.editProfile()"><i class="fas fa-pen"></i></button></div></div>
 <div class="set-s"><div class="set-st"><i class="fas fa-volume-up"></i> Voix</div>
-<div class="si"><div class="si-info"><h4>Réponses vocales</h4><p>Darwin parle ses réponses</p></div><button class="tog on" id="togVoice" onclick="DarwinUI.tog(this,'voice')"></button></div>
+<div class="si"><div class="si-info"><h4>Réponses vocales</h4></div><button class="tog on" id="togVoice" onclick="UI.tog(this,'voice')"></button></div>
 <div class="vl" id="voiceList"></div>
-<div class="si" style="flex-direction:column;align-items:stretch;gap:6px"><div class="si-info"><h4>Vitesse</h4></div><input type="range" min="0.5" max="2" step="0.1" value="1" id="sRate" style="width:100%;accent-color:var(--cy)" onchange="DarwinVoice.setRate(this.value)"></div>
-<div class="si" style="flex-direction:column;align-items:stretch;gap:6px"><div class="si-info"><h4>Tonalité</h4></div><input type="range" min="0.5" max="2" step="0.1" value="1" id="sPitch" style="width:100%;accent-color:var(--cy)" onchange="DarwinVoice.setPitch(this.value)"></div>
+<div class="si" style="flex-direction:column;align-items:stretch;gap:6px"><h4 style="font-size:12px">Vitesse</h4><input type="range" min="0.5" max="2" step="0.1" value="1" id="sRate" style="width:100%;accent-color:var(--cy)" onchange="Voice.setRate(this.value)"></div>
+<div class="si" style="flex-direction:column;align-items:stretch;gap:6px"><h4 style="font-size:12px">Tonalité</h4><input type="range" min="0.5" max="2" step="0.1" value="1" id="sPitch" style="width:100%;accent-color:var(--cy)" onchange="Voice.setPitch(this.value)"></div>
 </div>
-
 <div class="set-s"><div class="set-st"><i class="fas fa-info-circle"></i> Système</div>
-<div class="si"><div class="si-info"><h4>Darwin AI</h4><p>Version 4.0 · Neural Studio</p></div></div>
-<div class="si"><div class="si-info"><h4>Concepteur</h4><p>DESSOUASSI Oboube Anael David</p></div></div>
-</div>
-
-<button class="auth-btn" style="background:linear-gradient(135deg,#ff5252,#ff4081);box-shadow:0 0 20px rgba(255,82,82,.3);margin-top:8px" onclick="DarwinAuth.logout()">Déconnexion</button>
-<div class="dev-info"><p>DARWIN AI · Neural Intelligence System<br>© 2025 DESSOUASSI Oboube Anael David<br>Tous droits réservés</p></div>
+<div class="si"><div class="si-info"><h4>Darwin AI v4</h4><p>DESSOUASSI Oboube Anael David</p></div></div></div>
+<button class="auth-btn" style="background:linear-gradient(135deg,#ff5252,#ff4081);box-shadow:none;margin-top:8px" onclick="Auth.logout()">Déconnexion</button>
+<div class="dev-info"><p>© 2025 DESSOUASSI Oboube Anael David</p></div>
 </div>
 </div>
 
 <nav class="bnav">
-<button class="ni on" onclick="DarwinUI.nav('voice')"><i class="fas fa-microphone"></i><span>Voix</span></button>
-<button class="ni" onclick="DarwinUI.nav('chat')"><i class="fas fa-comment-dots"></i><span>Chat</span></button>
-<button class="ni" onclick="DarwinUI.nav('create')"><i class="fas fa-bolt"></i><span>Créer</span></button>
-<button class="ni" onclick="DarwinUI.nav('settings')"><i class="fas fa-sliders-h"></i><span>Config</span></button>
+<button class="ni on" onclick="UI.nav('voice')"><i class="fas fa-microphone"></i><span>Voix</span></button>
+<button class="ni" onclick="UI.nav('chat')"><i class="fas fa-comment-dots"></i><span>Chat</span></button>
+<button class="ni" onclick="UI.nav('create')"><i class="fas fa-bolt"></i><span>Créer</span></button>
+<button class="ni" onclick="UI.nav('settings')"><i class="fas fa-sliders-h"></i><span>Config</span></button>
 </nav>
 </div>
 
-<div class="mo-bg" id="moBg" onclick="DarwinUI.closeModal(event)"><div class="mo" onclick="event.stopPropagation()"><div class="mo-hd"><span class="mo-t" id="moT"></span><button class="mo-x" onclick="DarwinUI.hideModal()"><i class="fas fa-times"></i></button></div><div id="moB"></div></div></div>
-
+<div class="mo-bg" id="moBg" onclick="if(event.target===this)hideModal()"><div class="mo" onclick="event.stopPropagation()"><div class="mo-hd"><span class="mo-t" id="moT"></span><button class="mo-x" onclick="hideModal()"><i class="fas fa-times"></i></button></div><div id="moB"></div></div></div>
 <div class="toast-c" id="toastC"></div>
-<input type="file" id="fUp" style="display:none" onchange="DarwinChat.files(event)">
+<input type="file" id="fUp" style="display:none" onchange="Chat.files(event)">
 
 <script>
-/* ═══════════════════════════════════════════════════════
-   DARWIN AI v4.0 — Neural Studio
+/* ═══════════════════════════════════════════════
+   DARWIN AI v4 — FINAL
    © 2025 DESSOUASSI Oboube Anael David
-   ═══════════════════════════════════════════════════════ */
+   ═══════════════════════════════════════════════ */
 
-const S={_p:'dw4_',set(k,v){try{localStorage.setItem(this._p+k,JSON.stringify(v))}catch(e){}},get(k,d=null){try{const v=localStorage.getItem(this._p+k);return v?JSON.parse(v):d}catch(e){return d}},rm(k){localStorage.removeItem(this._p+k)}};
-
-const ST={
-    user:null,authed:false,page:'voice',
-    voiceOn:true,selVoice:null,rate:1,pitch:1,voices:[],
-    listening:false,recog:null,synth:window.speechSynthesis,
-    handsFree:false,speaking:false,thinking:false,recogRestart:false,
-    convos:[],apiKey:'',model:'gemini-2.0-flash-exp',
-    ghToken:'',ghUser:'',
-    createMode:'image',createOpts:{style:'Photoréaliste',ratio:'Carré',lang:'Python',wtype:'Portfolio',apptype:'PWA',vtype:'GIF animé'},
-    lastGenerated:null
+// ─── Storage ───
+const LS = {
+    _p: 'dw4_',
+    set(k, v) { try { localStorage.setItem(this._p + k, JSON.stringify(v)) } catch(e) {} },
+    get(k, d = null) { try { const v = localStorage.getItem(this._p + k); return v ? JSON.parse(v) : d } catch(e) { return d } },
+    rm(k) { localStorage.removeItem(this._p + k) }
 };
 
-const SYSTEM_PROMPT=`Tu es Darwin, un assistant vocal intelligent créé par DESSOUASSI Oboube Anael David. Tu es expert en tout domaine : technique, créatif, scientifique, culturel.
+// ─── State ───
+const ST = {
+    user: null, authed: false, page: 'voice',
+    voiceOn: true, selVoice: null, rate: 1, pitch: 1, voices: [],
+    listening: false, recog: null, synth: window.speechSynthesis,
+    handsFree: false, speaking: false, thinking: false,
+    convos: [],
+    apiKey: '', model: 'gemini-2.0-flash-exp',
+    ghToken: '', ghUser: '',
+    createMode: 'image', selOpt: 'Photoréaliste',
+    lastGen: null
+};
 
-RÈGLES CRITIQUES :
-- Réponds en français sauf demande contraire
-- N'utilise JAMAIS d'emojis ni de symboles décoratifs (tes réponses sont lues à voix haute)
-- Sois concis et naturel comme dans une conversation orale
-- Pour le code, utilise des blocs markdown \`\`\`langage
-- Ne dis jamais "en tant qu'IA" - tu es Darwin
-- Pour les questions complexes, structure ta réponse clairement
-- Sois précis, expert et utile`;
+const SYS_PROMPT = `Tu es Darwin, un assistant vocal créé par DESSOUASSI Oboube Anael David. Tu es expert en tout.
 
-document.addEventListener('DOMContentLoaded',async()=>{
+RÈGLES :
+- Français par défaut
+- JAMAIS d'emojis ni symboles (lu à voix haute)
+- Concis et naturel
+- Code en blocs markdown
+- Ne dis jamais "en tant qu'IA"
+- Tu es Darwin, tu aides sur absolument tout`;
+
+// ─── Init ───
+document.addEventListener('DOMContentLoaded', async () => {
     injectLogos();
-    const fill=document.getElementById('sFill'),st=document.getElementById('sSt');
-    const steps=[['Neural core','15'],['Voice engine','35'],['Generators','55'],['GitHub API','75'],['System','92'],['Ready','100']];
-    for(const[t,p]of steps){st.textContent=t;fill.style.width=p+'%';await wait(280)}
-    await wait(300);document.getElementById('splash').classList.add('done');
+    const fill = document.getElementById('sFill');
+    const st = document.getElementById('sSt');
+    for (const [t, p] of [['Neural core','15'],['Voice','40'],['Generators','65'],['Systems','90'],['Ready','100']]) {
+        st.textContent = t; fill.style.width = p + '%'; await wait(280);
+    }
+    await wait(300);
+    document.getElementById('splash').classList.add('done');
     loadCfg();
-    const u=S.get('user');
-    if(u){ST.user=u;ST.authed=true;enterApp()}else document.getElementById('auth').classList.add('on');
-    DarwinVoice.initRecog();DarwinVoice.initVoices();initWaveBars();setupPWA();
+    const u = LS.get('user');
+    if (u) { ST.user = u; ST.authed = true; enterApp(); }
+    else document.getElementById('auth').classList.add('on');
+    Voice.initRecog();
+    Voice.initVoices();
+    initWaveBars();
+    setupPWA();
 });
 
-function wait(ms){return new Promise(r=>setTimeout(r,ms))}
-function injectLogos(){
-    const t=document.getElementById('tmplLogo');
-    ['splashLogo','authLogo','hdrLogo'].forEach(id=>{const el=document.getElementById(id);if(el)el.appendChild(t.content.cloneNode(true))});
+function wait(ms) { return new Promise(r => setTimeout(r, ms)) }
+
+function injectLogos() {
+    const t = document.getElementById('tmplLogo');
+    ['splashLogo','authLogo','hdrLogo'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el && t) el.appendChild(t.content.cloneNode(true));
+    });
 }
-function enterApp(){
+
+function enterApp() {
     document.getElementById('auth').classList.remove('on');
     document.getElementById('app').classList.add('on');
-    if(ST.user){document.getElementById('pName').textContent=ST.user.name;document.getElementById('pEmail').textContent=ST.user.email}
-    document.getElementById('apiKeyInp').value=ST.apiKey||'';
-    document.getElementById('ghTokenInp').value=ST.ghToken||'';
-    document.getElementById('ghUserInp').value=ST.ghUser||'';
-    document.getElementById('modelSel').value=ST.model;
+    if (ST.user) {
+        document.getElementById('pName').textContent = ST.user.name;
+        document.getElementById('pEmail').textContent = ST.user.email;
+    }
+    document.getElementById('apiKeyInp').value = ST.apiKey || '';
+    document.getElementById('ghTokenInp').value = ST.ghToken || '';
+    document.getElementById('ghUserInp').value = ST.ghUser || '';
     updateStatus();
-    const cv=S.get('convos',[]);
-    if(cv.length){ST.convos=cv;renderAllMsgs()}
+    const cv = LS.get('convos', []);
+    if (cv.length) { ST.convos = cv; renderAllMsgs(); }
 }
-function loadCfg(){
-    const c=S.get('cfg',{});
-    Object.assign(ST,{voiceOn:c.voiceOn??true,rate:c.rate??1,pitch:c.pitch??1,apiKey:c.apiKey||'',model:c.model||'gemini-2.0-flash-exp',ghToken:c.ghToken||'',ghUser:c.ghUser||''});
-    setTimeout(()=>{
-        const v=document.getElementById('togVoice');if(v)v.classList.toggle('on',ST.voiceOn);
-        const r=document.getElementById('sRate');if(r)r.value=ST.rate;
-        const p=document.getElementById('sPitch');if(p)p.value=ST.pitch;
-    },80);
+
+function loadCfg() {
+    const c = LS.get('cfg', {});
+    ST.voiceOn = c.voiceOn ?? true;
+    ST.rate = c.rate ?? 1;
+    ST.pitch = c.pitch ?? 1;
+    ST.apiKey = c.apiKey || '';
+    ST.model = c.model || 'gemini-2.0-flash-exp';
+    ST.ghToken = c.ghToken || '';
+    ST.ghUser = c.ghUser || '';
+    setTimeout(() => {
+        const v = document.getElementById('togVoice');
+        if (v) v.classList.toggle('on', ST.voiceOn);
+        const r = document.getElementById('sRate'); if (r) r.value = ST.rate;
+        const p = document.getElementById('sPitch'); if (p) p.value = ST.pitch;
+    }, 80);
 }
-function saveCfg(){S.set('cfg',{voiceOn:ST.voiceOn,rate:ST.rate,pitch:ST.pitch,apiKey:ST.apiKey,model:ST.model,ghToken:ST.ghToken,ghUser:ST.ghUser})}
-function updateStatus(){const el=document.getElementById('hdrStatus');if(!el)return;el.textContent=ST.apiKey?'Neural actif':'Mode limité'}
 
-/* ═══ AUTH ═══ */
-const DarwinAuth={
-    switchTab(t){document.querySelectorAll('.auth-tab').forEach((e,i)=>e.classList.toggle('on',t==='login'?i===0:i===1));document.getElementById('fLogin').classList.toggle('on',t==='login');document.getElementById('fReg').classList.toggle('on',t==='register')},
-    login(e){e.preventDefault();const em=document.getElementById('lEmail').value.trim(),pw=document.getElementById('lPass').value;const users=S.get('users',[]);const u=users.find(x=>x.email===em);if(u&&u.pw===btoa(pw)){ST.user={name:u.name,email:u.email};ST.authed=true;S.set('user',ST.user);enterApp();toast('Bienvenue '+u.name,'ok')}else if(!u)toast('Compte introuvable','er');else toast('Code incorrect','er');return false},
-    register(e){e.preventDefault();const nm=document.getElementById('rName').value.trim(),em=document.getElementById('rEmail').value.trim(),pw=document.getElementById('rPass').value,pw2=document.getElementById('rPass2').value;if(pw!==pw2){toast('Les codes ne correspondent pas','er');return false}if(pw.length<6){toast('Minimum 6 caractères','er');return false}const users=S.get('users',[]);if(users.find(x=>x.email===em)){toast('Email déjà utilisé','er');return false}users.push({name:nm,email:em,pw:btoa(pw),ts:Date.now()});S.set('users',users);ST.user={name:nm,email:em};ST.authed=true;S.set('user',ST.user);enterApp();toast('Compte créé','ok');return false},
-    async biometric(){const btn=document.getElementById('bioBtn');btn.innerHTML='<i class="fas fa-spinner fa-spin"></i>';if(window.PublicKeyCredential){try{await navigator.credentials.create({publicKey:{challenge:crypto.getRandomValues(new Uint8Array(32)),rp:{name:'Darwin AI'},user:{id:crypto.getRandomValues(new Uint8Array(16)),name:'user@darwin.ai',displayName:'User'},pubKeyCredParams:[{alg:-7,type:'public-key'},{alg:-257,type:'public-key'}],authenticatorSelection:{authenticatorAttachment:'platform',userVerification:'required'},timeout:60000,attestation:'none'}});this._enter()}catch(e){this._enter()}}else this._enter();btn.innerHTML='<i class="fas fa-fingerprint"></i>'},
-    _enter(){const u=S.get('user');if(u){ST.user=u;ST.authed=true;enterApp();toast('Accès autorisé','ok')}else toast('Créez d\'abord un compte','wr')},
-    logout(){S.rm('user');ST.user=null;ST.authed=false;ST.convos=[];document.getElementById('app').classList.remove('on');document.getElementById('auth').classList.add('on');document.getElementById('chatMsgs').innerHTML='';toast('Déconnecté','ok')}
-};
+function saveCfg() {
+    LS.set('cfg', {
+        voiceOn: ST.voiceOn, rate: ST.rate, pitch: ST.pitch,
+        apiKey: ST.apiKey, model: ST.model,
+        ghToken: ST.ghToken, ghUser: ST.ghUser
+    });
+}
 
-/* ═══ UI ═══ */
-const DarwinUI={
-    nav(pg){ST.page=pg;document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));document.getElementById('pg-'+pg).classList.add('on');const idx=['voice','chat','create','settings'].indexOf(pg);if(idx>=0)document.querySelectorAll('.ni')[idx].classList.add('on')},
-    tog(el,key){el.classList.toggle('on');const on=el.classList.contains('on');if(key==='voice')ST.voiceOn=on;saveCfg()},
-    editProfile(){showModal('Profil',`<div class="fg"><label>Nom</label><input type="text" class="fi" id="edName" value="${ST.user?.name||''}"></div><button class="auth-btn" onclick="DarwinUI.saveProfile()">Enregistrer</button>`)},
-    saveProfile(){const nm=document.getElementById('edName').value.trim();if(nm){ST.user.name=nm;S.set('user',ST.user);document.getElementById('pName').textContent=nm;const u=S.get('users',[]);const usr=u.find(x=>x.email===ST.user.email);if(usr){usr.name=nm;S.set('users',u)}hideModal();toast('Mis à jour','ok')}},
-    closeModal(e){if(e.target===e.currentTarget)hideModal()}
-};
+function updateStatus() {
+    const el = document.getElementById('hdrStatus');
+    if (ST.apiKey) { el.textContent = 'Neural actif'; el.className = 'hdr-st'; }
+    else { el.textContent = 'Clé API requise'; el.className = 'hdr-st off'; }
+}
 
-/* ═══ AI ENGINE ═══ */
-const DarwinAI={
-    saveKey(k){ST.apiKey=k.trim();saveCfg();updateStatus();if(k)toast('Clé enregistrée','ok')},
-    setModel(m){ST.model=m;saveCfg()},
-
-    async ask(prompt,history=[],systemOverride=null){
-        if(!ST.apiKey)return this._local(prompt);
-        try{
-            const contents=[];
-            history.slice(-8).forEach(m=>contents.push({role:m.role==='ai'?'model':'user',parts:[{text:m.text}]}));
-            contents.push({role:'user',parts:[{text:prompt}]});
-            const url=`https://generativelanguage.googleapis.com/v1beta/models/${ST.model}:generateContent?key=${ST.apiKey}`;
-            const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents,systemInstruction:{parts:[{text:systemOverride||SYSTEM_PROMPT}]},generationConfig:{temperature:0.8,maxOutputTokens:8192,topP:0.95}})});
-            if(!r.ok){const err=await r.json().catch(()=>({}));if(r.status===403||r.status===400)return 'Clé API invalide ou quota dépassé. Vérifiez dans les paramètres.';return 'Erreur : '+(err.error?.message||r.status)}
-            const d=await r.json();
-            return d.candidates?.[0]?.content?.parts?.[0]?.text||'Aucune réponse générée.';
-        }catch(e){return 'Connexion impossible. Vérifiez votre Internet et votre clé.'}
+// ─── AUTH ───
+const Auth = {
+    switchTab(t) {
+        document.querySelectorAll('.auth-tab').forEach((e, i) => e.classList.toggle('on', t === 'login' ? i === 0 : i === 1));
+        document.getElementById('fLogin').classList.toggle('on', t === 'login');
+        document.getElementById('fReg').classList.toggle('on', t === 'register');
     },
-    _local(prompt){
-        const lo=prompt.toLowerCase();
-        if(/salut|bonjour|hello/.test(lo))return 'Bonjour. Pour que je réponde intelligemment à toutes vos questions, ajoutez votre clé API Gemini dans les paramètres. C\'est gratuit.';
-        if(/qui es.tu|darwin/.test(lo))return 'Je suis Darwin, votre assistant intelligent créé par DESSOUASSI Oboube Anael David. Pour mes pleines capacités, ajoutez une clé Gemini gratuite dans les paramètres.';
-        if(/api|clé/.test(lo))return 'Rendez-vous sur aistudio.google.com/apikey, créez une clé gratuite, et collez-la dans les paramètres.';
-        return 'J\'ai besoin d\'une clé API Gemini pour vous répondre intelligemment. Configurez-la dans les paramètres, c\'est gratuit et rapide.';
+    login(e) {
+        e.preventDefault();
+        const em = document.getElementById('lEmail').value.trim();
+        const pw = document.getElementById('lPass').value;
+        const users = LS.get('users', []);
+        const u = users.find(x => x.email === em);
+        if (u && u.pw === btoa(pw)) {
+            ST.user = { name: u.name, email: u.email }; ST.authed = true;
+            LS.set('user', ST.user); enterApp(); toast('Bienvenue ' + u.name, 'ok');
+        } else toast(u ? 'Mot de passe incorrect' : 'Compte introuvable', 'er');
+        return false;
+    },
+    register(e) {
+        e.preventDefault();
+        const nm = document.getElementById('rName').value.trim();
+        const em = document.getElementById('rEmail').value.trim();
+        const pw = document.getElementById('rPass').value;
+        const pw2 = document.getElementById('rPass2').value;
+        if (pw !== pw2) { toast('Mots de passe différents', 'er'); return false; }
+        if (pw.length < 6) { toast('6 caractères minimum', 'er'); return false; }
+        const users = LS.get('users', []);
+        if (users.find(x => x.email === em)) { toast('Email déjà utilisé', 'er'); return false; }
+        users.push({ name: nm, email: em, pw: btoa(pw) });
+        LS.set('users', users);
+        ST.user = { name: nm, email: em }; ST.authed = true;
+        LS.set('user', ST.user); enterApp(); toast('Compte créé', 'ok');
+        return false;
+    },
+    async biometric() {
+        const btn = document.getElementById('bioBtn');
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+        try {
+            if (window.PublicKeyCredential) {
+                await navigator.credentials.create({
+                    publicKey: {
+                        challenge: crypto.getRandomValues(new Uint8Array(32)),
+                        rp: { name: 'Darwin AI' },
+                        user: { id: crypto.getRandomValues(new Uint8Array(16)), name: 'user@darwin', displayName: 'User' },
+                        pubKeyCredParams: [{ alg: -7, type: 'public-key' }, { alg: -257, type: 'public-key' }],
+                        authenticatorSelection: { authenticatorAttachment: 'platform', userVerification: 'required' },
+                        timeout: 60000, attestation: 'none'
+                    }
+                });
+            }
+        } catch(e) { /* fallback */ }
+        const u = LS.get('user');
+        if (u) { ST.user = u; ST.authed = true; enterApp(); toast('Accès autorisé', 'ok'); }
+        else toast('Créez d\'abord un compte', 'wr');
+        btn.innerHTML = '<i class="fas fa-fingerprint"></i>';
+    },
+    logout() {
+        LS.rm('user'); ST.user = null; ST.authed = false; ST.convos = [];
+        document.getElementById('app').classList.remove('on');
+        document.getElementById('auth').classList.add('on');
+        document.getElementById('chatMsgs').innerHTML = '';
+        Voice.stopAll();
+        toast('Déconnecté', 'ok');
     }
 };
 
-/* ═══ VOICE ═══ */
-const DarwinVoice={
-    initRecog(){
-        const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-        if(!SR)return;
-        ST.recog=new SR();ST.recog.continuous=false;ST.recog.interimResults=true;ST.recog.lang='fr-FR';
-        ST.recog.onstart=()=>{ST.listening=true;this._setState('listening','Écoute...');this._waveOn(true)};
-        ST.recog.onresult=(e)=>{
-            let tr='';for(let i=e.resultIndex;i<e.results.length;i++)tr+=e.results[i][0].transcript;
-            document.getElementById('voiceTx').textContent=tr;document.getElementById('voiceTx').className='voice-transcript user';
-            if(e.results[e.results.length-1].isFinal)this._processVoice(tr.trim());
-        };
-        ST.recog.onerror=(e)=>{if(e.error!=='no-speech'&&e.error!=='aborted')toast('Erreur : '+e.error,'wr');this._setState('idle','Prêt');this._waveOn(false);ST.listening=false;if(ST.handsFree&&e.error==='no-speech')setTimeout(()=>{if(ST.handsFree)this.startMic()},800)};
-        ST.recog.onend=()=>{ST.listening=false;if(ST.recogRestart){ST.recogRestart=false;setTimeout(()=>this.startMic(),200);return}if(ST.handsFree&&!ST.speaking&&!ST.thinking)setTimeout(()=>{if(ST.handsFree&&!ST.speaking)this.startMic()},600);else{this._setState('idle','Prêt');this._waveOn(false)}};
+// ─── UI ───
+const UI = {
+    nav(pg) {
+        ST.page = pg;
+        document.querySelectorAll('.pg').forEach(p => p.classList.remove('on'));
+        document.querySelectorAll('.ni').forEach(n => n.classList.remove('on'));
+        document.getElementById('pg-' + pg).classList.add('on');
+        const idx = ['voice','chat','create','settings'].indexOf(pg);
+        if (idx >= 0) document.querySelectorAll('.ni')[idx].classList.add('on');
     },
-    initVoices(){const load=()=>{ST.voices=ST.synth.getVoices();this._renderVoices()};if(ST.synth.onvoiceschanged!==undefined)ST.synth.onvoiceschanged=load;load();setTimeout(load,500);setTimeout(load,1500)},
-    _renderVoices(){const l=document.getElementById('voiceList');if(!l)return;l.innerHTML='';const fr=ST.voices.filter(v=>/fr/i.test(v.lang));const en=ST.voices.filter(v=>/en/i.test(v.lang));const show=[...fr,...en.slice(0,5)];const saved=S.get('selVoice');show.forEach((v,i)=>{const sel=saved?v.name===saved:i===0;if(sel&&!ST.selVoice)ST.selVoice=v;const d=document.createElement('div');d.className='vi'+(sel?' on':'');d.onclick=()=>this.selectVoice(v.name,d);d.innerHTML=`<div class="vi-i"><span>${v.name.substring(0,30)}</span><small>${v.lang}</small></div><button class="vp-btn" onclick="event.stopPropagation();DarwinVoice.preview('${v.name}')"><i class="fas fa-play"></i></button>`;l.appendChild(d)});if(!show.length)l.innerHTML='<p style="color:var(--tx4);font-size:11px;padding:8px">Aucune voix disponible</p>'},
-    selectVoice(name,el){document.querySelectorAll('.vi').forEach(v=>v.classList.remove('on'));if(el)el.classList.add('on');ST.selVoice=ST.voices.find(v=>v.name===name);S.set('selVoice',name);toast('Voix sélectionnée','ok')},
-    preview(name){const v=ST.voices.find(x=>x.name===name);if(!v)return;ST.synth.cancel();const u=new SpeechSynthesisUtterance('Bonjour, je suis Darwin, votre assistant.');u.voice=v;u.rate=ST.rate;u.pitch=ST.pitch;ST.synth.speak(u)},
-    setRate(v){ST.rate=parseFloat(v);saveCfg()},setPitch(v){ST.pitch=parseFloat(v);saveCfg()},
-
-    speak(text,onEnd){if(!ST.voiceOn){if(onEnd)onEnd();return}ST.synth.cancel();const clean=this._clean(text);if(!clean){if(onEnd)onEnd();return}this._setState('speaking','Réponse...');ST.speaking=true;const u=new SpeechSynthesisUtterance(clean);if(ST.selVoice)u.voice=ST.selVoice;u.rate=ST.rate;u.pitch=ST.pitch;u.lang='fr-FR';u.onend=()=>{ST.speaking=false;this._setState('idle','Prêt');if(onEnd)onEnd();if(ST.handsFree)setTimeout(()=>{if(ST.handsFree&&!ST.listening&&!ST.thinking)this.startMic()},400)};u.onerror=()=>{ST.speaking=false;this._setState('idle','Prêt');if(onEnd)onEnd()};ST.synth.speak(u)},
-    _clean(t){return t.replace(/```[\s\S]*?```/g,' bloc de code ').replace(/`[^`]+`/g,'').replace(/\*\*([^*]+)\*\*/g,'$1').replace(/\*([^*]+)\*/g,'$1').replace(/#{1,6}\s/g,'').replace(/\[([^\]]+)\]\([^)]+\)/g,'$1').replace(/<[^>]+>/g,'').replace(/[\u{1F000}-\u{1FFFF}]|[\u{2600}-\u{27BF}]|[\u{FE00}-\u{FE0F}]|[\u{1F1E0}-\u{1F1FF}]|[\u{200D}]|[\u{20E3}]/gu,'').replace(/[·•→←↑↓★☆✓✗]/g,'').replace(/\n+/g,'. ').replace(/\s+/g,' ').trim()},
-
-    tap(){if(ST.speaking){ST.synth.cancel();ST.speaking=false;this._setState('idle','Prêt');return}if(ST.listening){this.stopMic();return}this.startMic()},
-    startMic(){if(!ST.recog){toast('Micro indisponible','wr');return}if(ST.speaking){ST.synth.cancel();ST.speaking=false}try{ST.recog.start()}catch(e){ST.recogRestart=true;try{ST.recog.stop()}catch(_){}}},
-    stopMic(){try{ST.recog.stop()}catch(e){}ST.listening=false;this._setState('idle','Prêt');this._waveOn(false)},
-    stopAll(){ST.handsFree=false;document.getElementById('hfToggle').classList.remove('on');ST.synth.cancel();this.stopMic();ST.speaking=false;this._setState('idle','Prêt');toast('Arrêt','info')},
-    toggleHandsFree(){ST.handsFree=!ST.handsFree;const el=document.getElementById('hfToggle');el.classList.toggle('on',ST.handsFree);if(ST.handsFree){toast('Mains-libres activé','ok');this.startMic()}else{toast('Mains-libres désactivé','info');this.stopMic()}},
-
-    async _processVoice(text){if(!text){if(ST.handsFree)setTimeout(()=>this.startMic(),500);return}document.getElementById('voiceTx').textContent=text;DarwinChat.addMsg('user',text);this._setState('thinking','Réflexion...');ST.thinking=true;const response=await DarwinAI.ask(text,ST.convos);ST.thinking=false;DarwinChat.addMsg('ai',response);document.getElementById('voiceTx').textContent=response;document.getElementById('voiceTx').className='voice-transcript';this.speak(response)},
-
-    _setState(state,label){const core=document.getElementById('voiceCore'),status=document.getElementById('voiceStatus'),micL=document.getElementById('micLarge'),micB=document.getElementById('micBtn');core.classList.remove('listening','speaking','thinking');status.classList.remove('listening','speaking','thinking');if(state!=='idle'){core.classList.add(state);status.classList.add(state)}status.textContent=label;if(micL)micL.classList.toggle('on',state==='listening');if(micB)micB.classList.toggle('on',state==='listening')},
-    _waveOn(on){document.getElementById('waveViz').classList.toggle('on',on);if(on)this._animWave();else if(waveInt){clearInterval(waveInt);waveInt=null}}
+    tog(el, key) {
+        el.classList.toggle('on');
+        if (key === 'voice') ST.voiceOn = el.classList.contains('on');
+        saveCfg();
+    },
+    editProfile() {
+        showModal('Profil', `<div class="fg"><label>Nom</label><input type="text" class="fi" id="edName" value="${ST.user?.name || ''}"></div><button class="auth-btn" onclick="UI._saveProfile()">Enregistrer</button>`);
+    },
+    _saveProfile() {
+        const nm = document.getElementById('edName').value.trim();
+        if (nm) {
+            ST.user.name = nm; LS.set('user', ST.user);
+            document.getElementById('pName').textContent = nm;
+            const u = LS.get('users', []);
+            const usr = u.find(x => x.email === ST.user.email);
+            if (usr) { usr.name = nm; LS.set('users', u); }
+            hideModal(); toast('Mis à jour', 'ok');
+        }
+    }
 };
 
-let waveInt;
-function initWaveBars(){const w=document.getElementById('waveViz');w.innerHTML='';for(let i=0;i<24;i++){const b=document.createElement('div');b.className='wave-bar';w.appendChild(b)}}
-DarwinVoice._animWave=function(){if(waveInt)clearInterval(waveInt);const bars=document.querySelectorAll('.wave-bar');waveInt=setInterval(()=>{bars.forEach(b=>{b.style.height=(6+Math.random()*30)+'px'})},80)};
+// ─── AI ENGINE ───
+const AI = {
+    saveKey(k) { ST.apiKey = k.trim(); saveCfg(); updateStatus(); if (k) toast('Clé enregistrée', 'ok'); },
 
-/* ═══ CHAT ═══ */
-const DarwinChat={
-    addMsg(role,text,extra){
-        const m={id:Date.now(),role,text,extra:extra||null,ts:new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})};
-        ST.convos.push(m);if(ST.convos.length>50)ST.convos=ST.convos.slice(-50);S.set('convos',ST.convos);this._render(m);this._scroll();
+    async ask(prompt, history = [], sysOverride = null) {
+        if (!ST.apiKey) return 'Pour me répondre intelligemment, ajoutez votre clé API Gemini gratuite dans les paramètres. Rendez-vous sur aistudio.google.com/apikey pour en obtenir une.';
+        try {
+            const contents = [];
+            history.slice(-10).forEach(m => {
+                contents.push({ role: m.role === 'ai' ? 'model' : 'user', parts: [{ text: m.text }] });
+            });
+            contents.push({ role: 'user', parts: [{ text: prompt }] });
+
+            const r = await fetch(
+                `https://generativelanguage.googleapis.com/v1beta/models/${ST.model}:generateContent?key=${ST.apiKey}`,
+                {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents,
+                        systemInstruction: { parts: [{ text: sysOverride || SYS_PROMPT }] },
+                        generationConfig: { temperature: 0.8, maxOutputTokens: 8192, topP: 0.95 }
+                    })
+                }
+            );
+
+            if (!r.ok) {
+                const err = await r.json().catch(() => ({}));
+                if (r.status === 400 || r.status === 403) return 'La clé API semble invalide. Vérifiez-la dans les paramètres.';
+                return 'Erreur temporaire. ' + (err.error?.message || '');
+            }
+
+            const d = await r.json();
+            return d.candidates?.[0]?.content?.parts?.[0]?.text || 'Aucune réponse.';
+        } catch(e) {
+            return 'Connexion impossible. Vérifiez votre Internet.';
+        }
+    }
+};
+
+// ─── VOICE ───
+const Voice = {
+    initRecog() {
+        const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SR) { console.warn('SpeechRecognition non disponible'); return; }
+
+        const recog = new SR();
+        recog.continuous = false;
+        recog.interimResults = true;
+        recog.lang = 'fr-FR';
+        recog.maxAlternatives = 1;
+
+        recog.onstart = () => {
+            ST.listening = true;
+            this._state('listening', 'Écoute...');
+            this._waveOn(true);
+        };
+
+        recog.onresult = (e) => {
+            let transcript = '';
+            let isFinal = false;
+            for (let i = e.resultIndex; i < e.results.length; i++) {
+                transcript += e.results[i][0].transcript;
+                if (e.results[i].isFinal) isFinal = true;
+            }
+            const tx = document.getElementById('vTx');
+            tx.textContent = transcript;
+            tx.className = 'voice-transcript user-tx';
+
+            if (isFinal && transcript.trim()) {
+                this._process(transcript.trim());
+            }
+        };
+
+        recog.onerror = (e) => {
+            console.log('Speech error:', e.error);
+            if (e.error !== 'no-speech' && e.error !== 'aborted') {
+                toast('Erreur micro : ' + e.error, 'wr');
+            }
+            ST.listening = false;
+            this._state('idle', 'Prêt');
+            this._waveOn(false);
+            if (ST.handsFree && e.error === 'no-speech') {
+                setTimeout(() => { if (ST.handsFree && !ST.speaking) this._startRecog(); }, 1000);
+            }
+        };
+
+        recog.onend = () => {
+            ST.listening = false;
+            if (ST.handsFree && !ST.speaking && !ST.thinking) {
+                setTimeout(() => {
+                    if (ST.handsFree && !ST.speaking && !ST.thinking) this._startRecog();
+                }, 600);
+            } else {
+                this._state('idle', 'Prêt');
+                this._waveOn(false);
+            }
+        };
+
+        ST.recog = recog;
     },
-    _render(m){
-        const c=document.getElementById('chatMsgs');
-        const d=document.createElement('div');d.className='msg '+(m.role==='ai'?'ai':'u')+' fadeUp';
-        const av=m.role==='ai'?'DA':(ST.user?.name?.substring(0,2).toUpperCase()||'U');
-        let extras='';
-        if(m.extra?.img)extras=`<img src="${m.extra.img}" alt="Généré">`;
-        const acts=m.role==='ai'?`<div class="msg-acts"><button class="msg-act" onclick="DarwinUtil.copyMsg(this)"><i class="fas fa-copy"></i></button><button class="msg-act" onclick="DarwinVoice.speak(this.closest('.msg').querySelector('.msg-bub').innerText)"><i class="fas fa-volume-up"></i></button></div>`:'';
-        d.innerHTML=`<div class="msg-av">${av}</div><div class="msg-body"><div class="msg-bub">${this._fmt(m.text)}${extras}</div>${acts}<div class="msg-t">${m.ts}</div></div>`;
+
+    initVoices() {
+        const load = () => {
+            ST.voices = ST.synth.getVoices();
+            this._renderVoices();
+        };
+        if (ST.synth.onvoiceschanged !== undefined) ST.synth.onvoiceschanged = load;
+        load();
+        setTimeout(load, 500);
+        setTimeout(load, 1500);
+    },
+
+    _renderVoices() {
+        const list = document.getElementById('voiceList');
+        if (!list) return;
+        list.innerHTML = '';
+        const fr = ST.voices.filter(v => /fr/i.test(v.lang));
+        const en = ST.voices.filter(v => /en/i.test(v.lang));
+        const show = [...fr, ...en.slice(0, 5)];
+        const saved = LS.get('selVoice');
+
+        if (!show.length) {
+            list.innerHTML = '<p style="color:var(--tx4);font-size:11px;padding:8px">Aucune voix disponible</p>';
+            return;
+        }
+
+        show.forEach((v, i) => {
+            const sel = saved ? v.name === saved : i === 0;
+            if (sel && !ST.selVoice) ST.selVoice = v;
+            const d = document.createElement('div');
+            d.className = 'vi' + (sel ? ' on' : '');
+            d.onclick = () => {
+                document.querySelectorAll('.vi').forEach(x => x.classList.remove('on'));
+                d.classList.add('on');
+                ST.selVoice = v;
+                LS.set('selVoice', v.name);
+                toast('Voix sélectionnée', 'ok');
+            };
+            d.innerHTML = `<div class="vi-i"><span>${v.name.substring(0, 28)}</span> <small>${v.lang}</small></div><button class="vp-btn" onclick="event.stopPropagation();Voice._preview('${v.name}')"><i class="fas fa-play"></i></button>`;
+            list.appendChild(d);
+        });
+    },
+
+    _preview(name) {
+        const v = ST.voices.find(x => x.name === name);
+        if (!v) return;
+        ST.synth.cancel();
+        const u = new SpeechSynthesisUtterance('Bonjour, je suis Darwin, votre assistant.');
+        u.voice = v; u.rate = ST.rate; u.pitch = ST.pitch;
+        ST.synth.speak(u);
+    },
+
+    setRate(v) { ST.rate = parseFloat(v); saveCfg(); },
+    setPitch(v) { ST.pitch = parseFloat(v); saveCfg(); },
+
+    speak(text, onDone) {
+        if (!ST.voiceOn) { if (onDone) onDone(); return; }
+        ST.synth.cancel();
+        const clean = text
+            .replace(/```[\s\S]*?```/g, ' bloc de code ')
+            .replace(/`[^`]+`/g, '')
+            .replace(/\*\*([^*]+)\*\*/g, '$1')
+            .replace(/\*([^*]+)\*/g, '$1')
+            .replace(/#{1,6}\s/g, '')
+            .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+            .replace(/<[^>]+>/g, '')
+            .replace(/[\u{1F000}-\u{1FFFF}]|[\u{2600}-\u{27BF}]|[\u{FE00}-\u{FE0F}]|[\u{200D}]/gu, '')
+            .replace(/[·•→←↑↓★☆✓✗]/g, '')
+            .replace(/\n+/g, '. ')
+            .replace(/\s+/g, ' ')
+            .trim();
+
+        if (!clean) { if (onDone) onDone(); return; }
+
+        this._state('speaking', 'Réponse...');
+        ST.speaking = true;
+
+        const u = new SpeechSynthesisUtterance(clean);
+        if (ST.selVoice) u.voice = ST.selVoice;
+        u.rate = ST.rate;
+        u.pitch = ST.pitch;
+        u.lang = 'fr-FR';
+
+        u.onend = () => {
+            ST.speaking = false;
+            this._state('idle', 'Prêt');
+            if (onDone) onDone();
+            if (ST.handsFree) {
+                setTimeout(() => {
+                    if (ST.handsFree && !ST.listening && !ST.thinking) this._startRecog();
+                }, 500);
+            }
+        };
+
+        u.onerror = () => {
+            ST.speaking = false;
+            this._state('idle', 'Prêt');
+            if (onDone) onDone();
+        };
+
+        ST.synth.speak(u);
+    },
+
+    tap() {
+        if (ST.speaking) { ST.synth.cancel(); ST.speaking = false; this._state('idle', 'Prêt'); return; }
+        if (ST.listening) { this._stopRecog(); return; }
+        this._startRecog();
+    },
+
+    _startRecog() {
+        if (!ST.recog) { toast('Reconnaissance vocale non disponible sur ce navigateur', 'wr'); return; }
+        if (ST.speaking) { ST.synth.cancel(); ST.speaking = false; }
+        try {
+            ST.recog.abort();
+        } catch(e) {}
+        setTimeout(() => {
+            try {
+                ST.recog.start();
+            } catch(e) {
+                console.warn('Recognition start failed:', e);
+                setTimeout(() => {
+                    try { ST.recog.start(); } catch(e2) { toast('Impossible de démarrer le micro', 'er'); }
+                }, 300);
+            }
+        }, 100);
+    },
+
+    _stopRecog() {
+        try { ST.recog.stop(); } catch(e) {}
+        ST.listening = false;
+        this._state('idle', 'Prêt');
+        this._waveOn(false);
+    },
+
+    stopAll() {
+        ST.handsFree = false;
+        document.getElementById('hfBtn').classList.remove('on');
+        ST.synth.cancel();
+        ST.speaking = false;
+        this._stopRecog();
+        ST.thinking = false;
+        this._state('idle', 'Prêt');
+        toast('Arrêté', 'info');
+    },
+
+    toggleHF() {
+        ST.handsFree = !ST.handsFree;
+        document.getElementById('hfBtn').classList.toggle('on', ST.handsFree);
+        if (ST.handsFree) {
+            toast('Mains-libres activé', 'ok');
+            this._startRecog();
+        } else {
+            toast('Mains-libres désactivé', 'info');
+            this._stopRecog();
+        }
+    },
+
+    async _process(text) {
+        if (!text) {
+            if (ST.handsFree) setTimeout(() => this._startRecog(), 500);
+            return;
+        }
+
+        document.getElementById('vTx').textContent = text;
+        Chat.addMsg('user', text);
+
+        this._state('thinking', 'Réflexion...');
+        this._waveOn(false);
+        ST.thinking = true;
+
+        // Detect image requests
+        if (/(génère|genere|crée|cree|dessine|fais|montre).{0,20}(image|photo|illustration|dessin|logo)/i.test(text)) {
+            ST.thinking = false;
+            const tx = document.getElementById('vTx');
+            tx.textContent = 'Je crée votre image...';
+            tx.className = 'voice-transcript';
+            try {
+                const url = await ImgGen.make(text);
+                Chat.addMsg('ai', 'Voici votre image :', { img: url });
+                this.speak('Votre image est prête.');
+            } catch(e) {
+                Chat.addMsg('ai', 'Impossible de générer l\'image.');
+                this.speak('Je n\'ai pas pu créer cette image.');
+            }
+            return;
+        }
+
+        const resp = await AI.ask(text, ST.convos.slice(0, -1));
+        ST.thinking = false;
+
+        Chat.addMsg('ai', resp);
+        const tx = document.getElementById('vTx');
+        tx.textContent = resp;
+        tx.className = 'voice-transcript';
+
+        this.speak(resp);
+    },
+
+    _state(state, label) {
+        const core = document.getElementById('vCore');
+        const status = document.getElementById('vStatus');
+        const micM = document.getElementById('micMain');
+        const micC = document.getElementById('micChat');
+
+        core.classList.remove('listening', 'speaking', 'thinking');
+        status.classList.remove('listening', 'speaking', 'thinking');
+
+        if (state !== 'idle') {
+            core.classList.add(state);
+            status.classList.add(state);
+        }
+        status.textContent = label;
+
+        const isListen = state === 'listening';
+        if (micM) micM.classList.toggle('on', isListen);
+        if (micC) micC.classList.toggle('on', isListen);
+    },
+
+    _waveOn(on) {
+        document.getElementById('waveViz').classList.toggle('on', on);
+        if (on) this._animWave();
+        else if (waveTimer) { clearInterval(waveTimer); waveTimer = null; }
+    },
+
+    _animWave() {
+        if (waveTimer) clearInterval(waveTimer);
+        const bars = document.querySelectorAll('.wave-bar');
+        waveTimer = setInterval(() => {
+            bars.forEach(b => { b.style.height = (6 + Math.random() * 30) + 'px'; });
+        }, 80);
+    }
+};
+
+let waveTimer;
+function initWaveBars() {
+    const w = document.getElementById('waveViz');
+    w.innerHTML = '';
+    for (let i = 0; i < 24; i++) {
+        const b = document.createElement('div');
+        b.className = 'wave-bar';
+        w.appendChild(b);
+    }
+}
+
+// ─── CHAT ───
+const Chat = {
+    addMsg(role, text, extra) {
+        const m = {
+            id: Date.now(), role, text,
+            extra: extra || null,
+            ts: new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
+        };
+        ST.convos.push(m);
+        if (ST.convos.length > 60) ST.convos = ST.convos.slice(-60);
+        LS.set('convos', ST.convos);
+        this._render(m);
+        this._scroll();
+    },
+
+    _render(m) {
+        const c = document.getElementById('chatMsgs');
+        const d = document.createElement('div');
+        d.className = 'msg ' + (m.role === 'ai' ? 'ai' : 'u') + ' fadeUp';
+        const av = m.role === 'ai' ? 'DA' : (ST.user?.name?.substring(0, 2).toUpperCase() || 'U');
+
+        let extras = '';
+        if (m.extra?.img) extras = `<img src="${m.extra.img}" alt="Image IA" loading="lazy">`;
+
+        const acts = m.role === 'ai' ? `<div class="msg-acts">
+            <button class="msg-act" onclick="Util.copyEl(this)"><i class="fas fa-copy"></i> Copier</button>
+            <button class="msg-act" onclick="Voice.speak(this.closest('.msg').querySelector('.msg-bub').innerText)"><i class="fas fa-volume-up"></i></button>
+        </div>` : '';
+
+        d.innerHTML = `<div class="msg-av">${av}</div><div class="msg-body"><div class="msg-bub">${this._fmt(m.text)}${extras}</div>${acts}<div class="msg-t">${m.ts}</div></div>`;
         c.appendChild(d);
     },
-    _fmt(t){t=this._esc(t);t=t.replace(/```(\w+)?\n?([\s\S]*?)```/g,(_,l,c)=>`<pre><code>${c.trim()}</code></pre>`);t=t.replace(/`([^`]+)`/g,'<code>$1</code>');t=t.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');t=t.replace(/(?<!\*)\*([^*\n]+)\*(?!\*)/g,'<em>$1</em>');t=t.replace(/\n/g,'<br>');return t},
-    _esc(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')},
-    _scroll(){const c=document.getElementById('chatMsgs');setTimeout(()=>c.scrollTop=c.scrollHeight,40)},
-    _typing(on){document.getElementById('typInd').classList.toggle('on',on);if(on)this._scroll()},
 
-    async send(){
-        const inp=document.getElementById('chatIn');
-        const t=inp.value.trim();if(!t)return;
-        inp.value='';this.resize(inp);
-        this.addMsg('user',t);
-        // Detect image request
-        if(/(génère|generer|crée|creer|dessine|fais|fais moi|montre).{0,30}(image|photo|illustration|dessin|logo|portrait)/i.test(t)||/^image[: ]/i.test(t)){
-            await this._imageInChat(t);return;
+    _fmt(t) {
+        t = t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        t = t.replace(/```(\w+)?\n?([\s\S]*?)```/g, (_, l, c) => `<pre><code>${c.trim()}</code></pre>`);
+        t = t.replace(/`([^`]+)`/g, '<code>$1</code>');
+        t = t.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+        t = t.replace(/(?<!\*)\*([^*\n]+)\*(?!\*)/g, '<em>$1</em>');
+        t = t.replace(/\n/g, '<br>');
+        return t;
+    },
+
+    _scroll() {
+        const c = document.getElementById('chatMsgs');
+        setTimeout(() => c.scrollTop = c.scrollHeight, 50);
+    },
+
+    _typing(on) {
+        document.getElementById('typInd').classList.toggle('on', on);
+        if (on) this._scroll();
+    },
+
+    async send() {
+        const inp = document.getElementById('chatIn');
+        const t = inp.value.trim();
+        if (!t) return;
+        inp.value = '';
+        this.rs(inp);
+        this.addMsg('user', t);
+
+        // Detect image
+        if (/(génère|genere|crée|cree|dessine|fais|montre).{0,25}(image|photo|illustration|dessin|logo|portrait)/i.test(t) || /^image[: ]/i.test(t)) {
+            this._typing(true);
+            try {
+                const url = await ImgGen.make(t);
+                this._typing(false);
+                this.addMsg('ai', 'Voici votre image :', { img: url });
+                if (ST.voiceOn) Voice.speak('Votre image est prête.');
+            } catch(e) {
+                this._typing(false);
+                this.addMsg('ai', 'Impossible de générer l\'image.');
+            }
+            return;
         }
+
         this._typing(true);
-        const r=await DarwinAI.ask(t,ST.convos.slice(0,-1));
+        const r = await AI.ask(t, ST.convos.slice(0, -1));
         this._typing(false);
-        this.addMsg('ai',r);
-        if(ST.voiceOn)DarwinVoice.speak(r);
+        this.addMsg('ai', r);
+        if (ST.voiceOn) Voice.speak(r);
     },
-    async _imageInChat(prompt){
-        this._typing(true);
-        this.addMsg('ai','Je crée cette image pour vous...');
-        try{
-            const url=await DarwinImg.generate(prompt);
-            this._typing(false);
-            ST.convos.pop();S.set('convos',ST.convos);
-            const c=document.getElementById('chatMsgs');c.removeChild(c.lastChild);
-            this.addMsg('ai','Voici votre image :',{img:url});
-            if(ST.voiceOn)DarwinVoice.speak('Voilà. Votre image est prête.');
-        }catch(e){this._typing(false);this.addMsg('ai','Impossible de générer l\'image. Réessayez.')}
-    },
-    quick(t){document.getElementById('chatIn').value=t;this.send()},
-    keydown(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();this.send()}},
-    resize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,100)+'px'},
-    async files(e){
-        const f=e.target.files[0];if(!f)return;
-        if(f.type.startsWith('text/')||/\.(json|js|py|html|css|md|txt|xml|ts|jsx|tsx)$/i.test(f.name)){
-            const r=new FileReader();
-            r.onload=async ev=>{
-                const content=ev.target.result.substring(0,4000);
-                this.addMsg('user','Fichier : '+f.name+'\n\n```\n'+content+'\n```');
+
+    quick(t) { document.getElementById('chatIn').value = t; this.send(); },
+    kd(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); this.send(); } },
+    rs(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 100) + 'px'; },
+
+    async files(e) {
+        const f = e.target.files[0];
+        if (!f) return;
+        if (f.type.startsWith('text/') || /\.(json|js|py|html|css|md|txt|ts|jsx|tsx)$/i.test(f.name)) {
+            const reader = new FileReader();
+            reader.onload = async ev => {
+                const content = ev.target.result.substring(0, 4000);
+                this.addMsg('user', 'Fichier : ' + f.name);
                 this._typing(true);
-                const resp=await DarwinAI.ask('Analyse ce fichier '+f.name+' :\n\n'+content,ST.convos.slice(0,-1));
-                this._typing(false);this.addMsg('ai',resp);if(ST.voiceOn)DarwinVoice.speak(resp);
+                const resp = await AI.ask('Analyse ce fichier ' + f.name + ' :\n\n```\n' + content + '\n```', ST.convos.slice(0, -1));
+                this._typing(false);
+                this.addMsg('ai', resp);
+                if (ST.voiceOn) Voice.speak(resp);
             };
-            r.readAsText(f);
-        }else toast('Type de fichier non supporté','wr');
-        e.target.value='';
-    }
-};
-function renderAllMsgs(){document.getElementById('chatMsgs').innerHTML='';ST.convos.forEach(m=>DarwinChat._render(m));DarwinChat._scroll()}
-
-/* ═══ IMAGE GENERATION (Pollinations - free, no key) ═══ */
-const DarwinImg={
-    async generate(prompt,opts={}){
-        const style=opts.style||ST.createOpts.style;
-        const ratio=opts.ratio||ST.createOpts.ratio;
-        const enhanced=await this._enhancePrompt(prompt,style);
-        const sizes={Carré:[1024,1024],Portrait:[768,1024],Paysage:[1024,768]};
-        const [w,h]=sizes[ratio]||[1024,1024];
-        const seed=Math.floor(Math.random()*100000);
-        const url=`https://image.pollinations.ai/prompt/${encodeURIComponent(enhanced)}?width=${w}&height=${h}&seed=${seed}&model=flux&nologo=true`;
-        // Preload
-        await new Promise((res,rej)=>{const img=new Image();img.onload=res;img.onerror=rej;img.src=url;setTimeout(res,25000)});
-        return url;
-    },
-    async _enhancePrompt(prompt,style){
-        const styleMap={Photoréaliste:'photorealistic, 8k, highly detailed, professional photography',
-        'Art numérique':'digital art, vibrant colors, artistic',
-        Anime:'anime style, manga, cel shading',
-        '3D':'3d render, octane render, ultra detailed',
-        Cyberpunk:'cyberpunk, neon lights, futuristic, blade runner style',
-        Fantasy:'fantasy art, magical, ethereal, detailed'};
-        const suffix=styleMap[style]||'';
-        return prompt+(suffix?', '+suffix:'');
+            reader.readAsText(f);
+        } else {
+            toast('Type non supporté', 'wr');
+        }
+        e.target.value = '';
     }
 };
 
-/* ═══ GITHUB PUBLISHER ═══ */
-const DarwinGH={
-    saveToken(t){ST.ghToken=t.trim();saveCfg();if(t)toast('Token GitHub enregistré','ok')},
-    saveUser(u){ST.ghUser=u.trim();saveCfg();if(u)toast('Username enregistré','ok')},
+function renderAllMsgs() {
+    document.getElementById('chatMsgs').innerHTML = '';
+    ST.convos.forEach(m => Chat._render(m));
+    Chat._scroll();
+}
 
-    async _api(endpoint,method='GET',body=null){
-        if(!ST.ghToken)throw new Error('Token GitHub manquant');
-        const r=await fetch('https://api.github.com'+endpoint,{
-            method,
-            headers:{'Authorization':'token '+ST.ghToken,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
-            body:body?JSON.stringify(body):null
+// ─── IMAGE GENERATION (Pollinations.ai - gratuit) ───
+const ImgGen = {
+    async make(prompt, style) {
+        const s = style || ST.selOpt;
+        const styles = {
+            'Photoréaliste': 'photorealistic, 8k, detailed, professional photography',
+            'Art numérique': 'digital art, vibrant colors, artistic illustration',
+            'Anime': 'anime style, manga, detailed cel shading',
+            '3D': '3d render, octane render, ultra detailed',
+            'Cyberpunk': 'cyberpunk, neon lights, futuristic city, blade runner'
+        };
+        const suffix = styles[s] || '';
+        const fullPrompt = prompt + (suffix ? ', ' + suffix : '');
+        const seed = Math.floor(Math.random() * 999999);
+        const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(fullPrompt)}?width=1024&height=1024&seed=${seed}&model=flux&nologo=true`;
+
+        // Preload image
+        await new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = resolve;
+            img.onerror = reject;
+            img.src = url;
+            setTimeout(resolve, 30000); // timeout 30s
         });
-        if(!r.ok){const e=await r.json().catch(()=>({}));throw new Error(e.message||'HTTP '+r.status)}
+
+        return url;
+    }
+};
+
+// ─── GITHUB ───
+const GH = {
+    saveToken(t) { ST.ghToken = t.trim(); saveCfg(); if (t) toast('Token GitHub sauvé', 'ok'); },
+    saveUser(u) { ST.ghUser = u.trim(); saveCfg(); if (u) toast('Username sauvé', 'ok'); },
+
+    async _api(endpoint, method = 'GET', body = null) {
+        if (!ST.ghToken) throw new Error('Token GitHub manquant');
+        const r = await fetch('https://api.github.com' + endpoint, {
+            method,
+            headers: { 'Authorization': 'token ' + ST.ghToken, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+            body: body ? JSON.stringify(body) : null
+        });
+        if (!r.ok) { const e = await r.json().catch(() => ({})); throw new Error(e.message || 'HTTP ' + r.status); }
         return r.json();
     },
 
-    async createRepo(name,description=''){
-        return this._api('/user/repos','POST',{name,description,private:false,auto_init:true});
-    },
+    async publish(name, html, desc = '') {
+        if (!ST.ghToken || !ST.ghUser) throw new Error('Configurez GitHub dans paramètres');
+        const repo = name.toLowerCase().replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-').substring(0, 60) + '-' + Date.now().toString(36);
 
-    async uploadFile(repo,path,content,message='Add file via Darwin AI'){
-        const encoded=btoa(unescape(encodeURIComponent(content)));
-        let sha=null;
-        try{const existing=await this._api(`/repos/${ST.ghUser}/${repo}/contents/${path}`);sha=existing.sha}catch(e){}
-        return this._api(`/repos/${ST.ghUser}/${repo}/contents/${path}`,'PUT',{message,content:encoded,sha});
-    },
-
-    async enablePages(repo){
-        try{return await this._api(`/repos/${ST.ghUser}/${repo}/pages`,'POST',{source:{branch:'main',path:'/'}})}
-        catch(e){if(e.message.includes('already'))return true;throw e}
-    },
-
-    async publish(name,htmlContent,description=''){
-        if(!ST.ghToken||!ST.ghUser)throw new Error('Configurez token GitHub et username dans paramètres');
-        const repoName=name.toLowerCase().replace(/[^a-z0-9-]/g,'-').replace(/-+/g,'-').replace(/^-|-$/g,'').substring(0,80)+'-'+Date.now().toString(36);
-        toast('Création du repository...','info');
-        await this.createRepo(repoName,description);
+        await this._api('/user/repos', 'POST', { name: repo, description: desc || 'Créé par Darwin AI', private: false, auto_init: true });
         await wait(1500);
-        toast('Upload du fichier...','info');
-        await this.uploadFile(repoName,'index.html',htmlContent,'Initial publish via Darwin AI');
+
+        const encoded = btoa(unescape(encodeURIComponent(html)));
+        await this._api(`/repos/${ST.ghUser}/${repo}/contents/index.html`, 'PUT', {
+            message: 'Deploy via Darwin AI',
+            content: encoded
+        });
         await wait(1000);
-        toast('Activation de GitHub Pages...','info');
-        try{await this.enablePages(repoName)}catch(e){console.warn(e)}
-        const url=`https://${ST.ghUser}.github.io/${repoName}/`;
-        const repoUrl=`https://github.com/${ST.ghUser}/${repoName}`;
-        return {url,repoUrl,repoName};
+
+        try {
+            await this._api(`/repos/${ST.ghUser}/${repo}/pages`, 'POST', { source: { branch: 'main', path: '/' } });
+        } catch(e) { /* pages might auto-enable */ }
+
+        return {
+            url: `https://${ST.ghUser}.github.io/${repo}/`,
+            repoUrl: `https://github.com/${ST.ghUser}/${repo}`,
+            repo
+        };
     }
 };
 
-/* ═══ CREATE STUDIO ═══ */
-const DarwinCreate={
-    setMode(m,el){
-        ST.createMode=m;
-        document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('on'));
+// ─── CREATE STUDIO ───
+const Create = {
+    setMode(m, el) {
+        ST.createMode = m;
+        document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('on'));
         el.classList.add('on');
-        document.querySelectorAll('[id^="opts-"]').forEach(o=>o.style.display='none');
-        document.getElementById('opts-'+m).style.display='block';
-        const titles={image:'Génération d\'image',code:'Génération de code',website:'Création de site web',app:'Création d\'application',video:'Génération vidéo'};
-        document.getElementById('createTitle').textContent=titles[m];
-        const phs={image:'Décrivez l\'image souhaitée en détail...',code:'Décrivez ce que doit faire le code...',website:'Décrivez le site web (contenu, sections, style)...',app:'Décrivez l\'application (fonctionnalités, écrans)...',video:'Décrivez la scène ou l\'animation...'};
-        document.getElementById('createPrompt').placeholder=phs[m];
+        document.querySelectorAll('[id^="opts-"]').forEach(o => o.style.display = 'none');
+        const optsEl = document.getElementById('opts-' + m);
+        if (optsEl) optsEl.style.display = 'block';
+        const titles = { image: "Génération d'image", code: 'Génération de code', website: 'Création de site web', app: "Création d'application" };
+        document.getElementById('createTitle').textContent = titles[m] || '';
+        const phs = { image: 'Décrivez l\'image...', code: 'Décrivez le programme...', website: 'Décrivez le site...', app: 'Décrivez l\'application...' };
+        document.getElementById('createPrompt').placeholder = phs[m] || '';
     },
-    opt(el,group){el.parentElement.querySelectorAll('.go-i').forEach(o=>o.classList.remove('on'));el.classList.add('on');ST.createOpts[group]=el.textContent},
 
-    async generate(){
-        const p=document.getElementById('createPrompt').value.trim();
-        if(!p){toast('Décrivez ce que vous voulez créer','wr');return}
-        const btn=document.getElementById('createBtn');
-        btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Génération...';
-        try{
-            switch(ST.createMode){
-                case 'image':await this._genImage(p);break;
-                case 'code':await this._genCode(p);break;
-                case 'website':await this._genWebsite(p);break;
-                case 'app':await this._genApp(p);break;
-                case 'video':await this._genVideo(p);break;
+    opt(el) {
+        el.parentElement.querySelectorAll('.go-i').forEach(o => o.classList.remove('on'));
+        el.classList.add('on');
+        ST.selOpt = el.textContent;
+    },
+
+    async run() {
+        const p = document.getElementById('createPrompt').value.trim();
+        if (!p) { toast('Décrivez ce que vous voulez', 'wr'); return; }
+        const btn = document.getElementById('createBtn');
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> En cours...';
+
+        try {
+            switch (ST.createMode) {
+                case 'image': await this._image(p); break;
+                case 'code': await this._code(p); break;
+                case 'website': await this._website(p); break;
+                case 'app': await this._app(p); break;
             }
-        }catch(e){toast('Erreur : '+e.message,'er')}
-        btn.disabled=false;btn.innerHTML='<i class="fas fa-bolt"></i> Générer';
+        } catch(e) { toast('Erreur : ' + e.message, 'er'); }
+
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-bolt"></i> Générer';
     },
 
-    async _genImage(prompt){
-        const r=document.getElementById('createResult');
-        const c=document.getElementById('resultContent');
+    async _image(prompt) {
+        const r = document.getElementById('createResult');
+        const c = document.getElementById('resContent');
         r.classList.add('on');
-        document.getElementById('resultTitle').textContent='Image';
-        c.innerHTML='<div class="loading-shimmer">Création en cours...</div>';
-        document.getElementById('resultActions').innerHTML='';
-        try{
-            const url=await DarwinImg.generate(prompt);
-            c.innerHTML=`<img src="${url}" class="gen-img" alt="Généré">`;
-            ST.lastGenerated={type:'image',url,prompt};
-            document.getElementById('resultActions').innerHTML=`
-                <a href="${url}" download="darwin-${Date.now()}.png" class="msg-act primary"><i class="fas fa-download"></i> Télécharger</a>
-                <button class="msg-act" onclick="window.open('${url}','_blank')"><i class="fas fa-external-link-alt"></i> Ouvrir</button>
-            `;
-            toast('Image générée','ok');
-        }catch(e){c.innerHTML='<div class="deploy-status err">Impossible de générer l\'image. Réessayez.</div>'}
-    },
+        document.getElementById('resTitle').textContent = 'Image';
+        c.innerHTML = '<div class="loading-shimmer">Génération en cours...</div>';
+        document.getElementById('resActs').innerHTML = '';
 
-    async _genCode(prompt){
-        const lang=ST.createOpts.lang;
-        const r=document.getElementById('createResult');
-        const c=document.getElementById('resultContent');
-        r.classList.add('on');document.getElementById('resultTitle').textContent='Code · '+lang;
-        c.innerHTML='<div class="loading-shimmer">Génération du code...</div>';
-        const sysP=`Tu es un expert développeur ${lang}. Génère UNIQUEMENT du code ${lang} de qualité production, sans explications ni commentaires excessifs. Le code doit être complet, fonctionnel et prêt à l'emploi. Utilise les meilleures pratiques modernes.`;
-        const response=await DarwinAI.ask(`Génère du code ${lang} pour : ${prompt}`,[],sysP);
-        const codeMatch=response.match(/```(?:\w+)?\n?([\s\S]*?)```/);
-        const code=codeMatch?codeMatch[1].trim():response;
-        c.innerHTML=`<div class="gr-c"><pre><code>${DarwinChat._esc(code)}</code></pre></div>`;
-        ST.lastGenerated={type:'code',content:code,lang,prompt};
-        const exts={Python:'py',JavaScript:'js',TypeScript:'ts',Java:'java','C++':'cpp',Rust:'rs',Go:'go',PHP:'php',SQL:'sql'};
-        const ext=exts[lang]||'txt';
-        document.getElementById('resultActions').innerHTML=`
-            <button class="msg-act primary" onclick="DarwinUtil.copyText(\`${code.replace(/`/g,'\\`').replace(/\\/g,'\\\\')}\`)"><i class="fas fa-copy"></i> Copier</button>
-            <button class="msg-act" onclick="DarwinUtil.download('darwin-code.${ext}',\`${code.replace(/`/g,'\\`').replace(/\\/g,'\\\\')}\`)"><i class="fas fa-download"></i> Télécharger</button>
+        const url = await ImgGen.make(prompt, ST.selOpt);
+        c.innerHTML = `<img src="${url}" class="gen-img" alt="Image IA">`;
+        ST.lastGen = { type: 'image', url };
+        document.getElementById('resActs').innerHTML = `
+            <a href="${url}" download="darwin-${Date.now()}.png" class="msg-act primary"><i class="fas fa-download"></i> Télécharger</a>
+            <button class="msg-act" onclick="window.open('${url}','_blank')"><i class="fas fa-external-link-alt"></i></button>
         `;
-        toast('Code généré','ok');
+        toast('Image générée', 'ok');
     },
 
-    async _genWebsite(prompt){
-        const type=ST.createOpts.wtype;
-        const r=document.getElementById('createResult');const c=document.getElementById('resultContent');
-        r.classList.add('on');document.getElementById('resultTitle').textContent='Site web · '+type;
-        c.innerHTML='<div class="loading-shimmer">Création du site web...</div>';
-        const sysP=`Tu es un expert web designer et développeur front-end. Génère UNIQUEMENT le code HTML complet d'une page web moderne, professionnelle et responsive avec CSS intégré dans <style> et JavaScript intégré dans <script>. Le design doit être ultra moderne (glassmorphism, animations subtiles, dégradés, typographie soignée). Pas d'explications, juste le code HTML complet commençant par <!DOCTYPE html>.`;
-        const response=await DarwinAI.ask(`Crée un site web de type "${type}" : ${prompt}. Le site doit être moderne, responsive, avec animations et interactions. Une seule page HTML complète.`,[],sysP);
-        let html=response.match(/```(?:html)?\n?([\s\S]*?)```/)?.[1]?.trim()||response;
-        if(!html.includes('<!DOCTYPE'))html='<!DOCTYPE html>\n<html>'+html.substring(html.indexOf('<'))+'</html>';
-        ST.lastGenerated={type:'website',content:html,prompt,name:type};
-        c.innerHTML=`<iframe class="preview-frame" srcdoc="${html.replace(/"/g,'&quot;')}"></iframe>`;
-        document.getElementById('resultActions').innerHTML=`
-            <button class="msg-act primary" onclick="DarwinCreate.publishToGitHub()"><i class="fab fa-github"></i> Publier en ligne</button>
-            <button class="msg-act" onclick="DarwinCreate.previewFullscreen()"><i class="fas fa-expand"></i> Plein écran</button>
-            <button class="msg-act" onclick="DarwinCreate.viewCode()"><i class="fas fa-code"></i> Voir code</button>
-            <button class="msg-act" onclick="DarwinUtil.download('darwin-site.html',ST.lastGenerated.content)"><i class="fas fa-download"></i> HTML</button>
+    async _code(prompt) {
+        const lang = ST.selOpt;
+        const r = document.getElementById('createResult');
+        const c = document.getElementById('resContent');
+        r.classList.add('on');
+        document.getElementById('resTitle').textContent = 'Code · ' + lang;
+        c.innerHTML = '<div class="loading-shimmer">Génération...</div>';
+
+        const sysP = `Expert ${lang}. Code de production uniquement, sans explications. Complet et fonctionnel.`;
+        const resp = await AI.ask(`Code ${lang} : ${prompt}`, [], sysP);
+        const match = resp.match(/```(?:\w+)?\n?([\s\S]*?)```/);
+        const code = match ? match[1].trim() : resp;
+
+        ST.lastGen = { type: 'code', content: code, lang };
+        c.innerHTML = `<div class="gr-c"><pre><code>${code.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</code></pre></div>`;
+        const exts = { Python: 'py', JavaScript: 'js', TypeScript: 'ts', Java: 'java', 'C++': 'cpp', PHP: 'php' };
+        document.getElementById('resActs').innerHTML = `
+            <button class="msg-act primary" onclick="Util.copy(ST.lastGen.content)"><i class="fas fa-copy"></i> Copier</button>
+            <button class="msg-act" onclick="Util.dl('darwin.${exts[lang]||'txt'}',ST.lastGen.content)"><i class="fas fa-download"></i></button>
         `;
-        toast('Site créé','ok');
+        toast('Code généré', 'ok');
     },
 
-    async _genApp(prompt){
-        const type=ST.createOpts.apptype;
-        const r=document.getElementById('createResult');const c=document.getElementById('resultContent');
-        r.classList.add('on');document.getElementById('resultTitle').textContent='App · '+type;
-        c.innerHTML='<div class="loading-shimmer">Création de l\'application...</div>';
-        if(type==='PWA'){
-            const sysP=`Tu es expert PWA. Génère une application web progressive complète en une seule page HTML avec manifest PWA intégré, service worker inline, design ultra moderne responsive, fonctionnalités interactives. Pas d'explications, juste le code HTML.`;
-            const response=await DarwinAI.ask(`Crée une PWA : ${prompt}`,[],sysP);
-            let html=response.match(/```(?:html)?\n?([\s\S]*?)```/)?.[1]?.trim()||response;
-            ST.lastGenerated={type:'website',content:html,prompt,name:'PWA'};
-            c.innerHTML=`<iframe class="preview-frame" srcdoc="${html.replace(/"/g,'&quot;')}"></iframe>`;
-            document.getElementById('resultActions').innerHTML=`
-                <button class="msg-act primary" onclick="DarwinCreate.publishToGitHub()"><i class="fab fa-github"></i> Publier</button>
-                <button class="msg-act" onclick="DarwinCreate.previewFullscreen()"><i class="fas fa-expand"></i> Plein écran</button>
-                <button class="msg-act" onclick="DarwinCreate.viewCode()"><i class="fas fa-code"></i> Code</button>
-                <button class="msg-act" onclick="DarwinUtil.download('darwin-app.html',ST.lastGenerated.content)"><i class="fas fa-download"></i></button>
-            `;
-        }else{
-            const sysP=`Tu es expert ${type}. Génère uniquement le code ${type} complet et fonctionnel. Pas d'explications, juste le code.`;
-            const response=await DarwinAI.ask(`Crée une app ${type} : ${prompt}`,[],sysP);
-            const code=response.match(/```(?:\w+)?\n?([\s\S]*?)```/)?.[1]?.trim()||response;
-            ST.lastGenerated={type:'code',content:code,lang:type,prompt};
-            c.innerHTML=`<div class="gr-c"><pre><code>${DarwinChat._esc(code)}</code></pre></div>`;
-            const ext=type==='Flutter'?'dart':'jsx';
-            document.getElementById('resultActions').innerHTML=`
-                <button class="msg-act primary" onclick="DarwinUtil.copyText(\`${code.replace(/`/g,'\\`').replace(/\\/g,'\\\\')}\`)"><i class="fas fa-copy"></i> Copier</button>
-                <button class="msg-act" onclick="DarwinUtil.download('darwin-app.${ext}',\`${code.replace(/`/g,'\\`').replace(/\\/g,'\\\\')}\`)"><i class="fas fa-download"></i></button>
-            `;
+    async _website(prompt) {
+        const type = ST.selOpt;
+        const r = document.getElementById('createResult');
+        const c = document.getElementById('resContent');
+        r.classList.add('on');
+        document.getElementById('resTitle').textContent = 'Site · ' + type;
+        c.innerHTML = '<div class="loading-shimmer">Création...</div>';
+
+        const sysP = `Expert web. Génère UNIQUEMENT le code HTML complet (<!DOCTYPE html>...) avec CSS et JS intégrés. Design ultra-moderne, responsive, animations. Pas d'explications.`;
+        const resp = await AI.ask(`Site ${type} : ${prompt}`, [], sysP);
+        let html = resp.match(/```(?:html)?\n?([\s\S]*?)```/)?.[1]?.trim() || resp;
+        if (!html.startsWith('<!DOCTYPE') && !html.startsWith('<!doctype')) {
+            html = '<!DOCTYPE html>\n<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + type + '</title></head><body>' + html + '</body></html>';
         }
-        toast('Application créée','ok');
+
+        ST.lastGen = { type: 'website', content: html, name: type };
+        c.innerHTML = `<iframe class="preview-frame" srcdoc="${html.replace(/"/g, '&quot;')}"></iframe>`;
+        document.getElementById('resActs').innerHTML = `
+            <button class="msg-act primary" onclick="Create.publish()"><i class="fab fa-github"></i> Publier en ligne</button>
+            <button class="msg-act" onclick="Create.fullscreen()"><i class="fas fa-expand"></i></button>
+            <button class="msg-act" onclick="Create.showCode()"><i class="fas fa-code"></i> Code</button>
+            <button class="msg-act" onclick="Util.dl('site.html',ST.lastGen.content)"><i class="fas fa-download"></i></button>
+        `;
+        toast('Site créé', 'ok');
     },
 
-    async _genVideo(prompt){
-        const r=document.getElementById('createResult');const c=document.getElementById('resultContent');
-        r.classList.add('on');document.getElementById('resultTitle').textContent='Vidéo animée';
-        c.innerHTML='<div class="loading-shimmer">Création de la séquence...</div>';
-        // Generate multiple images and combine as GIF-like slideshow
-        try{
-            const frames=4;
-            const urls=[];
-            for(let i=0;i<frames;i++){
-                const framePrompt=prompt+`, cinematic frame ${i+1} of ${frames}`;
-                const url=await DarwinImg.generate(framePrompt);
-                urls.push(url);
-                c.innerHTML=`<div class="loading-shimmer">Frame ${i+1}/${frames}...</div>`;
-            }
-            // Display as animated slideshow
-            let idx=0;
-            c.innerHTML=`<img id="videoFrame" src="${urls[0]}" class="gen-img" alt="Vidéo">`;
-            const interval=setInterval(()=>{idx=(idx+1)%urls.length;const el=document.getElementById('videoFrame');if(el)el.src=urls[idx];else clearInterval(interval)},800);
-            ST.lastGenerated={type:'video',urls,prompt};
-            document.getElementById('resultActions').innerHTML=urls.map((u,i)=>`<a href="${u}" download="frame-${i+1}.png" class="msg-act"><i class="fas fa-download"></i> ${i+1}</a>`).join('')+`
-                <div class="deploy-status" style="width:100%;margin-top:8px">
-                    <strong>Note :</strong> Pour de vraies vidéos IA (comme Sora, Runway, Kling), utilisez :<br>
-                    <a href="https://runwayml.com" target="_blank">Runway ML</a> · 
-                    <a href="https://klingai.com" target="_blank">Kling AI</a> · 
-                    <a href="https://lumalabs.ai" target="_blank">Luma Dream Machine</a>
-                </div>
-            `;
-        }catch(e){c.innerHTML='<div class="deploy-status err">Erreur de génération.</div>'}
-        toast('Vidéo créée','ok');
+    async _app(prompt) {
+        const type = ST.selOpt;
+        if (type === 'PWA') {
+            await this._website(prompt + ' (PWA avec manifest et service worker)');
+            return;
+        }
+        const r = document.getElementById('createResult');
+        const c = document.getElementById('resContent');
+        r.classList.add('on');
+        document.getElementById('resTitle').textContent = 'App · ' + type;
+        c.innerHTML = '<div class="loading-shimmer">Création...</div>';
+
+        const sysP = `Expert ${type}. Code complet uniquement, prêt à l'emploi.`;
+        const resp = await AI.ask(`App ${type} : ${prompt}`, [], sysP);
+        const code = resp.match(/```(?:\w+)?\n?([\s\S]*?)```/)?.[1]?.trim() || resp;
+
+        ST.lastGen = { type: 'code', content: code, lang: type };
+        c.innerHTML = `<div class="gr-c"><pre><code>${code.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</code></pre></div>`;
+        const ext = type === 'Flutter' ? 'dart' : 'jsx';
+        document.getElementById('resActs').innerHTML = `
+            <button class="msg-act primary" onclick="Util.copy(ST.lastGen.content)"><i class="fas fa-copy"></i> Copier</button>
+            <button class="msg-act" onclick="Util.dl('app.${ext}',ST.lastGen.content)"><i class="fas fa-download"></i></button>
+        `;
+        toast('Application créée', 'ok');
     },
 
-    async publishToGitHub(){
-        if(!ST.ghToken||!ST.ghUser){showModal('GitHub requis',`<div class="deploy-status err">Vous devez configurer votre token GitHub et username dans les paramètres.</div><button class="auth-btn" onclick="hideModal();DarwinUI.nav('settings')">Aller aux paramètres</button>`);return}
-        if(!ST.lastGenerated||ST.lastGenerated.type!=='website'){toast('Rien à publier','wr');return}
-        const name=prompt('Nom du projet (sera utilisé pour l\'URL):',ST.lastGenerated.name||'darwin-site');
-        if(!name)return;
-        const c=document.getElementById('resultContent');
-        c.innerHTML='<div class="loading-shimmer">Publication en cours sur GitHub...</div>';
-        try{
-            const result=await DarwinGH.publish(name,ST.lastGenerated.content,'Site généré par Darwin AI');
-            c.innerHTML=`
-                <div class="deploy-status">
-                    <strong>Publication réussie !</strong><br><br>
-                    <strong>Repository :</strong> <a href="${result.repoUrl}" target="_blank">${result.repoName}</a><br>
-                    <strong>URL du site :</strong> <a href="${result.url}" target="_blank">${result.url}</a><br><br>
-                    <em>GitHub Pages prend 1 à 3 minutes pour activer votre site.</em><br>
-                    <a href="${result.url}" target="_blank" class="deploy-link"><i class="fas fa-external-link-alt"></i> Ouvrir le site</a>
-                </div>
-                <iframe class="preview-frame" srcdoc="${ST.lastGenerated.content.replace(/"/g,'&quot;')}" style="margin-top:12px"></iframe>
-            `;
-            toast('Publié sur GitHub Pages','ok');
-            if(ST.voiceOn)DarwinVoice.speak('Votre site est publié. L\'adresse est disponible dans les paramètres.');
-        }catch(e){c.innerHTML=`<div class="deploy-status err"><strong>Erreur :</strong> ${e.message}<br><br>Vérifiez votre token GitHub et username dans les paramètres.</div>`;toast('Erreur : '+e.message,'er')}
+    async publish() {
+        if (!ST.ghToken || !ST.ghUser) {
+            showModal('GitHub requis', `<div class="deploy-status err">Configurez votre token et username GitHub dans les paramètres.</div><button class="auth-btn" onclick="hideModal();UI.nav('settings')">Paramètres</button>`);
+            return;
+        }
+        if (!ST.lastGen?.content) { toast('Rien à publier', 'wr'); return; }
+
+        const name = prompt('Nom du projet :', ST.lastGen.name || 'darwin-site');
+        if (!name) return;
+
+        const c = document.getElementById('resContent');
+        c.innerHTML = '<div class="loading-shimmer">Publication GitHub...</div>';
+
+        try {
+            const result = await GH.publish(name, ST.lastGen.content, 'Créé par Darwin AI');
+            c.innerHTML = `<div class="deploy-status">
+                <strong>Publié avec succès !</strong><br><br>
+                Repository : <a href="${result.repoUrl}" target="_blank">${result.repo}</a><br>
+                Site : <a href="${result.url}" target="_blank">${result.url}</a><br><br>
+                <em>GitHub Pages prend 1 à 3 min pour activer.</em><br>
+                <a href="${result.url}" target="_blank" class="deploy-link"><i class="fas fa-external-link-alt"></i> Ouvrir le site</a>
+            </div>`;
+            toast('Publié sur GitHub', 'ok');
+        } catch(e) {
+            c.innerHTML = `<div class="deploy-status err"><strong>Erreur :</strong> ${e.message}</div>`;
+            toast('Erreur : ' + e.message, 'er');
+        }
     },
 
-    previewFullscreen(){if(!ST.lastGenerated?.content)return;const w=window.open('','_blank');w.document.write(ST.lastGenerated.content);w.document.close()},
-    viewCode(){if(!ST.lastGenerated?.content)return;const c=document.getElementById('resultContent');c.innerHTML=`<div class="gr-c"><pre><code>${DarwinChat._esc(ST.lastGenerated.content)}</code></pre></div>`;document.getElementById('resultActions').innerHTML=`<button class="msg-act primary" onclick="DarwinCreate.publishToGitHub()"><i class="fab fa-github"></i> Publier</button><button class="msg-act" onclick="DarwinUtil.copyText(ST.lastGenerated.content)"><i class="fas fa-copy"></i> Copier</button><button class="msg-act" onclick="DarwinUtil.download('darwin-site.html',ST.lastGenerated.content)"><i class="fas fa-download"></i></button><button class="msg-act" onclick="DarwinCreate.viewPreview()"><i class="fas fa-eye"></i> Aperçu</button>`},
-    viewPreview(){if(!ST.lastGenerated?.content)return;document.getElementById('resultContent').innerHTML=`<iframe class="preview-frame" srcdoc="${ST.lastGenerated.content.replace(/"/g,'&quot;')}"></iframe>`;document.getElementById('resultActions').innerHTML=`<button class="msg-act primary" onclick="DarwinCreate.publishToGitHub()"><i class="fab fa-github"></i> Publier</button><button class="msg-act" onclick="DarwinCreate.previewFullscreen()"><i class="fas fa-expand"></i> Plein écran</button><button class="msg-act" onclick="DarwinCreate.viewCode()"><i class="fas fa-code"></i> Code</button><button class="msg-act" onclick="DarwinUtil.download('darwin-site.html',ST.lastGenerated.content)"><i class="fas fa-download"></i></button>`}
+    fullscreen() {
+        if (!ST.lastGen?.content) return;
+        const w = window.open('', '_blank');
+        w.document.write(ST.lastGen.content);
+        w.document.close();
+    },
+
+    showCode() {
+        if (!ST.lastGen?.content) return;
+        const c = document.getElementById('resContent');
+        c.innerHTML = `<div class="gr-c"><pre><code>${ST.lastGen.content.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</code></pre></div>`;
+        document.getElementById('resActs').innerHTML = `
+            <button class="msg-act primary" onclick="Create.publish()"><i class="fab fa-github"></i> Publier</button>
+            <button class="msg-act" onclick="Util.copy(ST.lastGen.content)"><i class="fas fa-copy"></i></button>
+            <button class="msg-act" onclick="Util.dl('site.html',ST.lastGen.content)"><i class="fas fa-download"></i></button>
+            <button class="msg-act" onclick="Create.showPreview()"><i class="fas fa-eye"></i> Aperçu</button>
+        `;
+    },
+
+    showPreview() {
+        if (!ST.lastGen?.content) return;
+        document.getElementById('resContent').innerHTML = `<iframe class="preview-frame" srcdoc="${ST.lastGen.content.replace(/"/g, '&quot;')}"></iframe>`;
+        document.getElementById('resActs').innerHTML = `
+            <button class="msg-act primary" onclick="Create.publish()"><i class="fab fa-github"></i> Publier</button>
+            <button class="msg-act" onclick="Create.fullscreen()"><i class="fas fa-expand"></i></button>
+            <button class="msg-act" onclick="Create.showCode()"><i class="fas fa-code"></i></button>
+            <button class="msg-act" onclick="Util.dl('site.html',ST.lastGen.content)"><i class="fas fa-download"></i></button>
+        `;
+    }
 };
 
-/* ═══ UTIL ═══ */
-const DarwinUtil={
-    copyMsg(btn){const t=btn.closest('.msg').querySelector('.msg-bub').innerText;this.copyText(t)},
-    copyText(t){if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(t).then(()=>toast('Copié','ok')).catch(()=>this._fallback(t));else this._fallback(t)},
-    _fallback(t){const ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast('Copié','ok')}catch(e){toast('Erreur copie','er')}document.body.removeChild(ta)},
-    download(name,content){const b=new Blob([content],{type:'text/plain'});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download=name;a.click();URL.revokeObjectURL(u);toast('Téléchargé','ok')}
+// ─── UTIL ───
+const Util = {
+    copyEl(btn) {
+        const t = btn.closest('.msg').querySelector('.msg-bub').innerText;
+        this.copy(t);
+    },
+    copy(t) {
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(t).then(() => toast('Copié', 'ok')).catch(() => this._fb(t));
+        } else this._fb(t);
+    },
+    _fb(t) {
+        const ta = document.createElement('textarea');
+        ta.value = t; ta.style.cssText = 'position:fixed;opacity:0';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); toast('Copié', 'ok'); } catch(e) { toast('Erreur', 'er'); }
+        document.body.removeChild(ta);
+    },
+    dl(name, content) {
+        const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url; a.download = name; a.click();
+        URL.revokeObjectURL(url);
+        toast('Téléchargé', 'ok');
+    }
 };
 
-function showModal(t,b){document.getElementById('moT').textContent=t;document.getElementById('moB').innerHTML=b;document.getElementById('moBg').classList.add('on')}
-function hideModal(){document.getElementById('moBg').classList.remove('on')}
-function toast(msg,type='info'){const c=document.getElementById('toastC');const ic={ok:'check-circle',er:'exclamation-circle',wr:'exclamation-triangle',info:'info-circle'};const d=document.createElement('div');d.className='toast '+type;d.innerHTML=`<i class="fas fa-${ic[type]||'info-circle'}"></i> ${msg}`;c.appendChild(d);setTimeout(()=>{d.style.opacity='0';d.style.transform='translateX(80px)';d.style.transition='.3s';setTimeout(()=>d.remove(),300)},3500)}
+// ─── MODAL / TOAST ───
+function showModal(t, b) {
+    document.getElementById('moT').textContent = t;
+    document.getElementById('moB').innerHTML = b;
+    document.getElementById('moBg').classList.add('on');
+}
 
-function setupPWA(){
-    const m={name:'Darwin AI',short_name:'Darwin',description:'Neural Intelligence Studio',start_url:'.',display:'standalone',background_color:'#000814',theme_color:'#000814',orientation:'any',
-    icons:[{src:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00e5ff"/><stop offset="100%" stop-color="#7c4dff"/></linearGradient></defs><rect width="192" height="192" rx="42" fill="#000814"/><circle cx="96" cy="96" r="60" fill="none" stroke="url(#g)" stroke-width="2" stroke-dasharray="8 4"/><circle cx="96" cy="96" r="28" fill="url(#g)"/></svg>'),sizes:'192x192',type:'image/svg+xml',purpose:'any maskable'}]};
-    const b=new Blob([JSON.stringify(m)],{type:'application/json'});
-    document.getElementById('pwaMan').href=URL.createObjectURL(b);
-    if('serviceWorker' in navigator){
-        const sw=`const C='dw4';self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(['/'])));self.skipWaiting()});self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>new Response('Offline'))))});`;
-        navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw],{type:'application/javascript'}))).catch(()=>{});
+function hideModal() {
+    document.getElementById('moBg').classList.remove('on');
+}
+
+function toast(msg, type = 'info') {
+    const c = document.getElementById('toastC');
+    const icons = { ok: 'check-circle', er: 'exclamation-circle', wr: 'exclamation-triangle', info: 'info-circle' };
+    const d = document.createElement('div');
+    d.className = 'toast ' + type;
+    d.innerHTML = `<i class="fas fa-${icons[type] || 'info-circle'}"></i> ${msg}`;
+    c.appendChild(d);
+    setTimeout(() => {
+        d.style.opacity = '0';
+        d.style.transform = 'translateX(80px)';
+        d.style.transition = '.3s';
+        setTimeout(() => d.remove(), 300);
+    }, 3500);
+}
+
+// ─── PWA ───
+function setupPWA() {
+    const m = {
+        name: 'Darwin AI', short_name: 'Darwin',
+        description: 'Assistant IA', start_url: '.', display: 'standalone',
+        background_color: '#000814', theme_color: '#000814', orientation: 'any',
+        icons: [{
+            src: 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00e5ff"/><stop offset="100%" stop-color="#7c4dff"/></linearGradient></defs><rect width="192" height="192" rx="42" fill="#000814"/><circle cx="96" cy="96" r="60" fill="none" stroke="url(#g)" stroke-width="2" stroke-dasharray="8 4"/><circle cx="96" cy="96" r="28" fill="url(#g)"/></svg>'),
+            sizes: '192x192', type: 'image/svg+xml', purpose: 'any maskable'
+        }]
+    };
+    document.getElementById('pwaMan').href = URL.createObjectURL(new Blob([JSON.stringify(m)], { type: 'application/json' }));
+
+    if ('serviceWorker' in navigator) {
+        const sw = `const C='dw4';self.addEventListener('install',e=>{self.skipWaiting()});self.addEventListener('fetch',e=>{e.respondWith(fetch(e.request).catch(()=>new Response('Offline')))});`;
+        navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw], { type: 'application/javascript' }))).catch(() => {});
     }
 }
 
-console.log('%cDARWIN AI v4.0','font-size:20px;font-weight:900;background:linear-gradient(135deg,#00e5ff,#7c4dff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;padding:8px');
-console.log('%cNeural Studio · © 2025 DESSOUASSI Oboube Anael David','color:#00e5ff;font-size:11px;letter-spacing:2px');
+console.log('%cDARWIN AI v4', 'font-size:18px;font-weight:900;background:linear-gradient(135deg,#00e5ff,#7c4dff);-webkit-background-clip:text;-webkit-text-fill-color:transparent');
+console.log('%c© 2025 DESSOUASSI Oboube Anael David', 'color:#00e5ff;font-size:10px');
 </script>
 </body>
 </html>
