@@ -24,16 +24,8 @@
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{overscroll-behavior:none}
 body{font-family:'Space Grotesk',system-ui,sans-serif;background:var(--bg);color:var(--tx);min-height:100dvh;overflow-x:hidden;line-height:1.5;-webkit-font-smoothing:antialiased}
-body::before{content:'';position:fixed;inset:0;background-image:
-radial-gradient(circle at 20% 20%,rgba(0,229,255,.08),transparent 40%),
-radial-gradient(circle at 80% 60%,rgba(124,77,255,.08),transparent 40%),
-radial-gradient(circle at 50% 100%,rgba(255,64,129,.05),transparent 50%);
-pointer-events:none;z-index:0}
-body::after{content:'';position:fixed;inset:0;
-background-image:linear-gradient(rgba(0,229,255,.03) 1px,transparent 1px),
-linear-gradient(90deg,rgba(0,229,255,.03) 1px,transparent 1px);
-background-size:40px 40px;pointer-events:none;z-index:0;
-mask-image:radial-gradient(ellipse at center,black 30%,transparent 70%)}
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle at 20% 20%,rgba(0,229,255,.08),transparent 40%),radial-gradient(circle at 80% 60%,rgba(124,77,255,.08),transparent 40%),radial-gradient(circle at 50% 100%,rgba(255,64,129,.05),transparent 50%);pointer-events:none;z-index:0}
+body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,229,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;mask-image:radial-gradient(ellipse at center,black 30%,transparent 70%)}
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--cy2);border-radius:2px}
 ::selection{background:var(--cy);color:var(--bg)}
 input,textarea,select,button{font-family:inherit}
@@ -48,12 +40,10 @@ a{color:var(--cy);text-decoration:none}
 @keyframes orbitSpin{to{transform:rotate(360deg)}}
 @keyframes coreRipple{0%{transform:scale(1);opacity:1}100%{transform:scale(3);opacity:0}}
 @keyframes typing{0%,100%{opacity:.3;transform:scale(.7)}50%{opacity:1;transform:scale(1)}}
-@keyframes borderGlow{0%,100%{box-shadow:0 0 20px rgba(0,229,255,.2)}50%{box-shadow:0 0 40px rgba(0,229,255,.5),0 0 60px rgba(124,77,255,.2)}}
+@keyframes borderGlow{0%,100%{box-shadow:0 0 20px rgba(0,229,255,.2)}50%{box-shadow:0 0 40px rgba(0,229,255,.5)}}
 @keyframes voiceOrbit{from{transform:rotate(0deg) translateX(80px) rotate(0deg)}to{transform:rotate(360deg) translateX(80px) rotate(-360deg)}}
 @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
-@keyframes soundWave{0%,100%{height:8px}50%{height:30px}}
 
-/* ─── SPLASH ─── */
 #splash{position:fixed;inset:0;background:radial-gradient(ellipse at center,var(--bg2),var(--bg) 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:10000;transition:opacity .6s,visibility .6s}
 #splash.done{opacity:0;visibility:hidden;pointer-events:none}
 .splash-logo{width:140px;height:140px;margin-bottom:32px;animation:breath 3s ease infinite}
@@ -63,7 +53,6 @@ a{color:var(--cy);text-decoration:none}
 .splash-fill{height:100%;background:var(--gd);border-radius:1px;transition:width .3s;width:0%;box-shadow:var(--glow)}
 .splash-st{color:var(--tx4);font-size:10px;margin-top:14px;letter-spacing:1.5px;text-transform:uppercase;font-family:'JetBrains Mono',monospace}
 
-/* ─── AUTH ─── */
 #auth{position:fixed;inset:0;background:var(--bg);display:none;align-items:center;justify-content:center;z-index:9000;padding:24px}
 #auth.on{display:flex}
 .auth-w{width:100%;max-width:400px;position:relative;z-index:1}
@@ -81,15 +70,13 @@ a{color:var(--cy);text-decoration:none}
 .fi:focus{border-color:var(--cy);box-shadow:0 0 0 3px rgba(0,229,255,.1)}
 .fi::placeholder{color:var(--tx4)}
 .auth-btn{width:100%;padding:14px;background:var(--gd);border:none;border-radius:10px;color:var(--bg);font-size:12px;font-weight:700;cursor:pointer;transition:.3s;margin-top:8px;letter-spacing:2px;text-transform:uppercase;box-shadow:var(--glow)}
-.auth-btn:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(0,229,255,.7)}
+.auth-btn:hover{transform:translateY(-2px)}
 .auth-btn:active{transform:scale(.98)}
-.auth-btn:disabled{opacity:.5;cursor:not-allowed}
 .bio-s{text-align:center;margin-top:28px;padding-top:24px;border-top:1px solid var(--border)}
 .bio-btn{width:62px;height:62px;border-radius:50%;background:var(--surf);border:2px solid var(--cy);color:var(--cy);font-size:24px;cursor:pointer;transition:.3s;display:inline-flex;align-items:center;justify-content:center;animation:borderGlow 3s infinite;backdrop-filter:blur(20px)}
 .bio-btn:hover{background:var(--cy);color:var(--bg)}
 .bio-label{display:block;color:var(--tx4);font-size:10px;margin-top:10px;letter-spacing:1.5px;text-transform:uppercase}
 
-/* ─── APP ─── */
 #app{display:none;min-height:100dvh;padding-bottom:76px;position:relative;z-index:1}
 #app.on{display:block}
 
@@ -99,17 +86,14 @@ a{color:var(--cy);text-decoration:none}
 .hdr-info h1{font-size:14px;font-weight:700;letter-spacing:3px;background:var(--gd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .hdr-st{font-size:9px;color:var(--ok);display:flex;align-items:center;gap:5px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;margin-top:1px}
 .hdr-st::before{content:'';width:5px;height:5px;background:var(--ok);border-radius:50%;box-shadow:0 0 8px var(--ok);animation:pulse 2s infinite}
-.hdr-st.off{color:var(--wr)}.hdr-st.off::before{background:var(--wr);box-shadow:0 0 8px var(--wr)}
 .hdr-r{display:flex;gap:6px}
 .hdr-btn{width:36px;height:36px;border-radius:10px;background:var(--surf);border:1px solid var(--border);color:var(--tx3);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.25s;backdrop-filter:blur(20px)}
 .hdr-btn:hover{color:var(--cy);border-color:var(--cy)}
 
-/* ─── PAGES ─── */
 .pg{display:none;padding:16px;animation:fadeUp .35s both}
 .pg.on{display:block}
 .pg-t{text-align:center;margin-bottom:20px;font-size:12px;font-weight:700;letter-spacing:4px;text-transform:uppercase;background:var(--gd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
-/* ─── VOICE MODE ─── */
 .voice-mode{display:flex;flex-direction:column;align-items:center;justify-content:space-between;min-height:calc(100dvh - 130px);padding:20px 16px;text-align:center}
 .voice-status{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--tx4);font-weight:600;margin-top:8px;min-height:16px}
 .voice-status.listening{color:var(--cy);animation:pulse 1.5s infinite}
@@ -146,7 +130,6 @@ a{color:var(--cy);text-decoration:none}
 .hf-label{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx2)}
 .hf-toggle.on .hf-label{color:var(--cy)}
 
-/* ─── CHAT ─── */
 .chat-c{max-width:800px;margin:0 auto;display:flex;flex-direction:column;height:calc(100dvh - 140px)}
 .chat-msgs{flex:1;overflow-y:auto;padding:8px 0;scroll-behavior:smooth}
 .msg{display:flex;gap:10px;margin-bottom:16px;animation:fadeUp .3s both}
@@ -160,7 +143,7 @@ a{color:var(--cy);text-decoration:none}
 .msg.u .msg-bub{background:linear-gradient(135deg,rgba(0,229,255,.15),rgba(124,77,255,.15));border:1px solid var(--border2);border-bottom-right-radius:4px}
 .msg-t{font-size:9px;color:var(--tx4);margin-top:4px;padding:0 2px}
 .msg.u .msg-t{text-align:right}
-.msg-bub pre{background:rgba(0,0,0,.4);padding:12px;border-radius:8px;overflow-x:auto;margin:8px 0;font-family:'JetBrains Mono',monospace;font-size:12px;border:1px solid var(--border);position:relative}
+.msg-bub pre{background:rgba(0,0,0,.4);padding:12px;border-radius:8px;overflow-x:auto;margin:8px 0;font-family:'JetBrains Mono',monospace;font-size:12px;border:1px solid var(--border)}
 .msg-bub code{font-family:'JetBrains Mono',monospace;background:rgba(0,229,255,.1);padding:2px 5px;border-radius:4px;font-size:12px;color:var(--cy)}
 .msg-bub pre code{background:transparent;padding:0;color:var(--tx2)}
 .msg-bub img{max-width:100%;border-radius:10px;margin:8px 0;box-shadow:0 0 20px rgba(0,229,255,.2)}
@@ -175,11 +158,11 @@ a{color:var(--cy);text-decoration:none}
 .typing span:nth-child(3){animation-delay:.3s}
 .chat-in{padding:12px 0 4px;border-top:1px solid var(--border)}
 .chat-wrap{display:flex;gap:6px;align-items:flex-end;background:var(--surf);border-radius:14px;padding:6px;border:1px solid var(--border);transition:.3s;backdrop-filter:blur(20px)}
-.chat-wrap:focus-within{border-color:var(--cy);box-shadow:0 0 0 3px rgba(0,229,255,.1)}
+.chat-wrap:focus-within{border-color:var(--cy)}
 .chat-tl{display:flex;gap:2px}
 .ct-btn{width:34px;height:34px;border-radius:9px;background:transparent;border:none;color:var(--tx3);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s}
 .ct-btn:hover{color:var(--cy);background:rgba(0,229,255,.08)}
-.ct-btn.on{color:var(--cy);background:rgba(0,229,255,.15);box-shadow:inset 0 0 10px rgba(0,229,255,.2)}
+.ct-btn.on{color:var(--cy);background:rgba(0,229,255,.15)}
 #chatIn{flex:1;background:transparent;border:none;color:var(--tx);font-size:14px;resize:none;outline:none;max-height:100px;min-height:34px;line-height:1.45;padding:7px 4px}
 #chatIn::placeholder{color:var(--tx4)}
 .send-btn{width:36px;height:36px;border-radius:10px;background:var(--gd);border:none;color:var(--bg);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s;flex-shrink:0;box-shadow:0 0 12px rgba(0,229,255,.4)}
@@ -189,7 +172,6 @@ a{color:var(--cy);text-decoration:none}
 .qp-i{padding:7px 14px;background:var(--surf);border:1px solid var(--border);border-radius:18px;color:var(--tx3);font-size:11px;cursor:pointer;white-space:nowrap;transition:.25s;display:flex;align-items:center;gap:5px;font-weight:500;backdrop-filter:blur(20px)}
 .qp-i:hover{border-color:var(--cy);color:var(--cy)}
 
-/* ─── CREATE ─── */
 .mode-sel{display:flex;gap:6px;max-width:800px;margin:0 auto 16px;overflow-x:auto;scrollbar-width:none}
 .mode-sel::-webkit-scrollbar{display:none}
 .mode-btn{padding:10px 16px;background:var(--surf);border:1px solid var(--border);border-radius:10px;color:var(--tx3);font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;transition:.25s;display:flex;align-items:center;gap:6px;letter-spacing:1px;text-transform:uppercase;backdrop-filter:blur(20px)}
@@ -218,7 +200,6 @@ a{color:var(--cy);text-decoration:none}
 .deploy-status.err{background:rgba(255,82,82,.05);border-color:rgba(255,82,82,.3)}
 .deploy-link{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--gd);color:var(--bg);border-radius:8px;font-weight:700;font-size:11px;letter-spacing:1px;text-transform:uppercase;margin-top:8px}
 
-/* ─── SETTINGS ─── */
 .set-c{max-width:600px;margin:0 auto}
 .set-s{background:var(--surf);border-radius:14px;padding:18px;margin-bottom:12px;border:1px solid var(--border);backdrop-filter:blur(20px)}
 .set-st{font-size:11px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;letter-spacing:2px;text-transform:uppercase;color:var(--tx2)}
@@ -232,7 +213,6 @@ a{color:var(--cy);text-decoration:none}
 .tog.on::after{transform:translateX(20px);background:var(--bg)}
 .set-inp{padding:9px 12px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--tx);font-size:12px;outline:none;width:100%;font-family:'JetBrains Mono',monospace}
 .set-inp:focus{border-color:var(--cy)}
-.set-sel{padding:7px 10px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--tx);font-size:12px;outline:none}
 .vl{display:grid;gap:6px;margin-top:8px;max-height:250px;overflow-y:auto}
 .vi{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--bg2);border-radius:10px;cursor:pointer;border:1px solid transparent;transition:.25s}
 .vi:hover{border-color:var(--border2)}
@@ -247,14 +227,12 @@ a{color:var(--cy);text-decoration:none}
 .dev-info{text-align:center;padding:20px;margin-top:16px;border-top:1px solid var(--border)}
 .dev-info p{font-size:10px;color:var(--tx4);line-height:1.7}
 
-/* ─── NAV ─── */
 .bnav{position:fixed;bottom:0;left:0;right:0;background:rgba(0,8,20,.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);display:flex;padding:8px 12px;padding-bottom:max(8px,env(safe-area-inset-bottom));border-top:1px solid var(--border);z-index:100}
 .ni{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;cursor:pointer;color:var(--tx4);transition:.25s;background:none;border:none}
 .ni.on{color:var(--cy)}
 .ni.on i{filter:drop-shadow(0 0 8px var(--cy))}
 .ni i{font-size:16px}.ni span{font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase}
 
-/* ─── MODAL ─── */
 .mo-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:7000;padding:20px;backdrop-filter:blur(6px)}
 .mo-bg.on{display:flex}
 .mo{background:var(--bg2);border-radius:16px;padding:24px;max-width:520px;width:100%;max-height:85vh;overflow-y:auto;animation:scaleIn .3s;border:1px solid var(--border2)}
@@ -262,10 +240,13 @@ a{color:var(--cy);text-decoration:none}
 .mo-t{font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--tx2)}
 .mo-x{width:30px;height:30px;border-radius:8px;background:var(--surf);border:1px solid var(--border);color:var(--tx);font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 
-/* ─── TOAST ─── */
 .toast-c{position:fixed;top:16px;right:16px;z-index:9999;display:flex;flex-direction:column;gap:6px;pointer-events:none;max-width:calc(100vw - 32px)}
 .toast{background:var(--bg2);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;animation:fadeUp .3s;border:1px solid var(--border);box-shadow:0 4px 20px rgba(0,0,0,.4);min-width:200px;pointer-events:auto;backdrop-filter:blur(20px)}
 .toast.ok{border-left:3px solid var(--ok)}.toast.er{border-left:3px solid var(--er)}.toast.wr{border-left:3px solid var(--wr)}.toast.info{border-left:3px solid var(--cy)}
+
+.mic-permission{background:rgba(255,196,0,.05);border:1px solid rgba(255,196,0,.3);border-radius:10px;padding:14px;margin:12px 0;font-size:12px;color:var(--tx2);line-height:1.6;display:none}
+.mic-permission.on{display:block}
+.mic-permission strong{color:var(--wr)}
 
 @media(max-width:480px){
 .msg-body{max-width:85%}
@@ -299,7 +280,6 @@ a{color:var(--cy);text-decoration:none}
 </svg>
 </template>
 
-<!-- SPLASH -->
 <div id="splash">
 <div class="splash-logo" id="splashLogo"></div>
 <div class="splash-t">DARWIN</div>
@@ -308,7 +288,6 @@ a{color:var(--cy);text-decoration:none}
 <div class="splash-st" id="sSt">Initialisation</div>
 </div>
 
-<!-- AUTH -->
 <div id="auth">
 <div class="auth-w" style="animation:fadeUp .5s both">
 <div class="auth-hd">
@@ -339,22 +318,20 @@ a{color:var(--cy);text-decoration:none}
 </div>
 </div>
 
-<!-- APP -->
 <div id="app">
 <header class="hdr">
 <div class="hdr-l">
 <div class="hdr-logo" id="hdrLogo"></div>
-<div class="hdr-info"><h1>DARWIN</h1><div class="hdr-st" id="hdrStatus">En ligne</div></div>
+<div class="hdr-info"><h1>DARWIN</h1><div class="hdr-st">Opérationnel</div></div>
 </div>
 <div class="hdr-r">
 <button class="hdr-btn" onclick="UI.nav('settings')"><i class="fas fa-sliders-h"></i></button>
 </div>
 </header>
 
-<!-- VOICE -->
 <div class="pg on" id="pg-voice">
 <div class="voice-mode">
-<div class="voice-status" id="vStatus">Prêt</div>
+<div class="voice-status" id="vStatus">Prêt · Touchez la sphère</div>
 <div class="voice-core" id="vCore" onclick="Voice.tap()">
 <svg class="core-svg" viewBox="0 0 280 280">
 <circle cx="140" cy="140" r="130" fill="none" stroke="url(#g1)" stroke-width="1" stroke-dasharray="6 4" opacity=".3" style="animation:orbitSpin 20s linear infinite;transform-origin:center"/>
@@ -366,7 +343,10 @@ a{color:var(--cy);text-decoration:none}
 <div class="core-orb"></div>
 </div>
 <div class="wave-viz" id="waveViz"></div>
-<div class="voice-transcript empty" id="vTx">Touchez la sphère pour parler</div>
+<div class="voice-transcript empty" id="vTx">Bonjour, je suis Darwin. Touchez la sphère pour commencer.</div>
+<div class="mic-permission" id="micPerm">
+<strong>Autorisation requise :</strong> Cliquez sur "Autoriser" quand votre navigateur vous demande l'accès au microphone.
+</div>
 <div class="voice-controls">
 <button class="vc-btn" onclick="UI.nav('chat')"><i class="fas fa-keyboard"></i></button>
 <button class="vc-btn large" onclick="Voice.tap()" id="micMain"><i class="fas fa-microphone"></i></button>
@@ -379,15 +359,14 @@ a{color:var(--cy);text-decoration:none}
 </div>
 </div>
 
-<!-- CHAT -->
 <div class="pg" id="pg-chat">
 <div class="chat-c">
 <div class="qp">
 <div class="qp-i" onclick="Chat.quick('Explique la relativité simplement')"><i class="fas fa-brain"></i> Expliquer</div>
-<div class="qp-i" onclick="Chat.quick('Génère une image d\'un paysage futuriste')"><i class="fas fa-image"></i> Image IA</div>
+<div class="qp-i" onclick="Chat.quick('Génère une image d\'un dragon cyberpunk')"><i class="fas fa-image"></i> Image</div>
 <div class="qp-i" onclick="Chat.quick('Écris du code Python pour trier une liste')"><i class="fas fa-code"></i> Code</div>
-<div class="qp-i" onclick="Chat.quick('Traduis en anglais : bonjour')"><i class="fas fa-language"></i> Traduire</div>
-<div class="qp-i" onclick="Chat.quick('Crée un site web portfolio')"><i class="fas fa-globe"></i> Site</div>
+<div class="qp-i" onclick="Chat.quick('Traduis en anglais : bonjour comment vas-tu')"><i class="fas fa-language"></i> Traduire</div>
+<div class="qp-i" onclick="Chat.quick('Aide-moi à préparer un entretien d\'embauche')"><i class="fas fa-briefcase"></i> Coach</div>
 </div>
 <div class="chat-msgs" id="chatMsgs"></div>
 <div class="typing" id="typInd"><span></span><span></span><span></span></div>
@@ -404,7 +383,6 @@ a{color:var(--cy);text-decoration:none}
 </div>
 </div>
 
-<!-- CREATE -->
 <div class="pg" id="pg-create">
 <div class="pg-t">Studio de création</div>
 <div class="mode-sel">
@@ -450,20 +428,17 @@ a{color:var(--cy);text-decoration:none}
 </div>
 </div>
 
-<!-- SETTINGS -->
 <div class="pg" id="pg-settings">
 <div class="set-c">
 <div class="pg-t">Configuration</div>
-<div class="set-s"><div class="set-st"><i class="fas fa-brain"></i> Intelligence</div>
+<div class="set-s"><div class="set-st"><i class="fas fa-brain"></i> Intelligence IA</div>
+<div class="si"><div class="si-info"><h4>Service IA</h4><p>Pollinations · Gratuit · Aucune clé requise</p></div><span style="color:var(--ok);font-size:11px;font-weight:600">ACTIF</span></div>
+<div class="api-info"><strong>Darwin utilise Pollinations AI</strong>, service gratuit et sans clé pour :<br>- Chat intelligent (texte)<br>- Génération d'images<br>- Génération de code et sites<br><br>Tout fonctionne directement.</div>
+</div>
+<div class="set-s"><div class="set-st"><i class="fab fa-github"></i> Publication (optionnelle)</div>
 <div class="si" style="flex-direction:column;align-items:stretch;gap:8px">
-<div class="si-info"><h4>Clé API Gemini</h4><p>Nécessaire pour les réponses intelligentes</p></div>
-<input type="password" class="set-inp" id="apiKeyInp" placeholder="AIzaSy..." onchange="AI.saveKey(this.value)">
-<div class="api-info"><strong>1.</strong> <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a><br><strong>2.</strong> Create API Key → copier<br><strong>3.</strong> Coller ci-dessus (gratuit)</div>
-</div></div>
-<div class="set-s"><div class="set-st"><i class="fab fa-github"></i> GitHub</div>
-<div class="si" style="flex-direction:column;align-items:stretch;gap:8px">
-<div class="si-info"><h4>Token et username</h4><p>Pour publier sites et code en ligne</p></div>
-<input type="password" class="set-inp" id="ghTokenInp" placeholder="ghp_..." onchange="GH.saveToken(this.value)">
+<div class="si-info"><h4>GitHub</h4><p>Pour publier vos sites en ligne</p></div>
+<input type="password" class="set-inp" id="ghTokenInp" placeholder="ghp_... (optionnel)" onchange="GH.saveToken(this.value)">
 <input type="text" class="set-inp" id="ghUserInp" placeholder="Username GitHub" onchange="GH.saveUser(this.value)" style="margin-top:6px">
 <div class="api-info"><a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a> → Generate → cocher <strong>repo</strong></div>
 </div></div>
@@ -476,9 +451,9 @@ a{color:var(--cy);text-decoration:none}
 <div class="si" style="flex-direction:column;align-items:stretch;gap:6px"><h4 style="font-size:12px">Tonalité</h4><input type="range" min="0.5" max="2" step="0.1" value="1" id="sPitch" style="width:100%;accent-color:var(--cy)" onchange="Voice.setPitch(this.value)"></div>
 </div>
 <div class="set-s"><div class="set-st"><i class="fas fa-info-circle"></i> Système</div>
-<div class="si"><div class="si-info"><h4>Darwin AI v4</h4><p>DESSOUASSI Oboube Anael David</p></div></div></div>
+<div class="si"><div class="si-info"><h4>Darwin AI v5</h4><p>DESSOUASSI Oboube Anael David</p></div></div></div>
 <button class="auth-btn" style="background:linear-gradient(135deg,#ff5252,#ff4081);box-shadow:none;margin-top:8px" onclick="Auth.logout()">Déconnexion</button>
-<div class="dev-info"><p>© 2025 DESSOUASSI Oboube Anael David</p></div>
+<div class="dev-info"><p>© 2025 DESSOUASSI Oboube Anael David<br>Assistant IA sans clé requise</p></div>
 </div>
 </div>
 
@@ -495,60 +470,50 @@ a{color:var(--cy);text-decoration:none}
 <input type="file" id="fUp" style="display:none" onchange="Chat.files(event)">
 
 <script>
-/* ═══════════════════════════════════════════════
-   DARWIN AI v4 — FINAL
+/* ═══════════════════════════════════════════════════
+   DARWIN AI v5 - Sans clé API
    © 2025 DESSOUASSI Oboube Anael David
-   ═══════════════════════════════════════════════ */
+   ═══════════════════════════════════════════════════ */
 
-// ─── Storage ───
 const LS = {
-    _p: 'dw4_',
-    set(k, v) { try { localStorage.setItem(this._p + k, JSON.stringify(v)) } catch(e) {} },
-    get(k, d = null) { try { const v = localStorage.getItem(this._p + k); return v ? JSON.parse(v) : d } catch(e) { return d } },
-    rm(k) { localStorage.removeItem(this._p + k) }
+    _p: 'dw5_',
+    set(k,v){try{localStorage.setItem(this._p+k,JSON.stringify(v))}catch(e){}},
+    get(k,d=null){try{const v=localStorage.getItem(this._p+k);return v?JSON.parse(v):d}catch(e){return d}},
+    rm(k){localStorage.removeItem(this._p+k)}
 };
 
-// ─── State ───
 const ST = {
-    user: null, authed: false, page: 'voice',
-    voiceOn: true, selVoice: null, rate: 1, pitch: 1, voices: [],
-    listening: false, recog: null, synth: window.speechSynthesis,
-    handsFree: false, speaking: false, thinking: false,
-    convos: [],
-    apiKey: '', model: 'gemini-2.0-flash-exp',
-    ghToken: '', ghUser: '',
-    createMode: 'image', selOpt: 'Photoréaliste',
-    lastGen: null
+    user:null, authed:false, page:'voice',
+    voiceOn:true, selVoice:null, rate:1, pitch:1, voices:[],
+    listening:false, recog:null, synth:window.speechSynthesis,
+    handsFree:false, speaking:false, thinking:false,
+    micPermission:null,
+    convos:[],
+    ghToken:'', ghUser:'',
+    createMode:'image', selOpt:'Photoréaliste',
+    lastGen:null
 };
 
-const SYS_PROMPT = `Tu es Darwin, un assistant vocal créé par DESSOUASSI Oboube Anael David. Tu es expert en tout.
+const SYS_PROMPT = "Tu es Darwin, un assistant vocal francais cree par DESSOUASSI Oboube Anael David. Tu es expert en tout domaine. Reponds en francais de facon naturelle, concise et professionnelle comme dans une conversation orale. N'utilise JAMAIS d'emojis ni de symboles decoratifs car tes reponses sont lues a voix haute. Pour le code, utilise des blocs markdown. Ne dis jamais 'en tant qu'IA'. Tu es Darwin.";
 
-RÈGLES :
-- Français par défaut
-- JAMAIS d'emojis ni symboles (lu à voix haute)
-- Concis et naturel
-- Code en blocs markdown
-- Ne dis jamais "en tant qu'IA"
-- Tu es Darwin, tu aides sur absolument tout`;
-
-// ─── Init ───
 document.addEventListener('DOMContentLoaded', async () => {
     injectLogos();
     const fill = document.getElementById('sFill');
     const st = document.getElementById('sSt');
-    for (const [t, p] of [['Neural core','15'],['Voice','40'],['Generators','65'],['Systems','90'],['Ready','100']]) {
-        st.textContent = t; fill.style.width = p + '%'; await wait(280);
+    for (const [t,p] of [['Neural core','20'],['Voice engine','45'],['Generators','70'],['Ready','100']]) {
+        st.textContent = t; fill.style.width = p+'%'; await wait(300);
     }
     await wait(300);
     document.getElementById('splash').classList.add('done');
-    loadCfg();
     const u = LS.get('user');
     if (u) { ST.user = u; ST.authed = true; enterApp(); }
     else document.getElementById('auth').classList.add('on');
+    loadCfg();
     Voice.initRecog();
     Voice.initVoices();
     initWaveBars();
     setupPWA();
+    checkMicPermission();
 });
 
 function wait(ms) { return new Promise(r => setTimeout(r, ms)) }
@@ -568,10 +533,8 @@ function enterApp() {
         document.getElementById('pName').textContent = ST.user.name;
         document.getElementById('pEmail').textContent = ST.user.email;
     }
-    document.getElementById('apiKeyInp').value = ST.apiKey || '';
     document.getElementById('ghTokenInp').value = ST.ghToken || '';
     document.getElementById('ghUserInp').value = ST.ghUser || '';
-    updateStatus();
     const cv = LS.get('convos', []);
     if (cv.length) { ST.convos = cv; renderAllMsgs(); }
 }
@@ -581,8 +544,6 @@ function loadCfg() {
     ST.voiceOn = c.voiceOn ?? true;
     ST.rate = c.rate ?? 1;
     ST.pitch = c.pitch ?? 1;
-    ST.apiKey = c.apiKey || '';
-    ST.model = c.model || 'gemini-2.0-flash-exp';
     ST.ghToken = c.ghToken || '';
     ST.ghUser = c.ghUser || '';
     setTimeout(() => {
@@ -596,21 +557,23 @@ function loadCfg() {
 function saveCfg() {
     LS.set('cfg', {
         voiceOn: ST.voiceOn, rate: ST.rate, pitch: ST.pitch,
-        apiKey: ST.apiKey, model: ST.model,
         ghToken: ST.ghToken, ghUser: ST.ghUser
     });
 }
 
-function updateStatus() {
-    const el = document.getElementById('hdrStatus');
-    if (ST.apiKey) { el.textContent = 'Neural actif'; el.className = 'hdr-st'; }
-    else { el.textContent = 'Clé API requise'; el.className = 'hdr-st off'; }
+async function checkMicPermission() {
+    if (!navigator.permissions) return;
+    try {
+        const status = await navigator.permissions.query({ name: 'microphone' });
+        ST.micPermission = status.state;
+        status.onchange = () => { ST.micPermission = status.state; };
+    } catch(e) {}
 }
 
-// ─── AUTH ───
+/* ═══ AUTH ═══ */
 const Auth = {
     switchTab(t) {
-        document.querySelectorAll('.auth-tab').forEach((e, i) => e.classList.toggle('on', t === 'login' ? i === 0 : i === 1));
+        document.querySelectorAll('.auth-tab').forEach((e,i) => e.classList.toggle('on', t === 'login' ? i === 0 : i === 1));
         document.getElementById('fLogin').classList.toggle('on', t === 'login');
         document.getElementById('fReg').classList.toggle('on', t === 'register');
     },
@@ -621,9 +584,14 @@ const Auth = {
         const users = LS.get('users', []);
         const u = users.find(x => x.email === em);
         if (u && u.pw === btoa(pw)) {
-            ST.user = { name: u.name, email: u.email }; ST.authed = true;
-            LS.set('user', ST.user); enterApp(); toast('Bienvenue ' + u.name, 'ok');
-        } else toast(u ? 'Mot de passe incorrect' : 'Compte introuvable', 'er');
+            ST.user = { name: u.name, email: u.email };
+            ST.authed = true;
+            LS.set('user', ST.user);
+            enterApp();
+            toast('Bienvenue ' + u.name, 'ok');
+        } else {
+            toast(u ? 'Mot de passe incorrect' : 'Compte introuvable', 'er');
+        }
         return false;
     },
     register(e) {
@@ -638,8 +606,11 @@ const Auth = {
         if (users.find(x => x.email === em)) { toast('Email déjà utilisé', 'er'); return false; }
         users.push({ name: nm, email: em, pw: btoa(pw) });
         LS.set('users', users);
-        ST.user = { name: nm, email: em }; ST.authed = true;
-        LS.set('user', ST.user); enterApp(); toast('Compte créé', 'ok');
+        ST.user = { name: nm, email: em };
+        ST.authed = true;
+        LS.set('user', ST.user);
+        enterApp();
+        toast('Compte créé', 'ok');
         return false;
     },
     async biometric() {
@@ -658,10 +629,12 @@ const Auth = {
                     }
                 });
             }
-        } catch(e) { /* fallback */ }
+        } catch(e) {}
         const u = LS.get('user');
-        if (u) { ST.user = u; ST.authed = true; enterApp(); toast('Accès autorisé', 'ok'); }
-        else toast('Créez d\'abord un compte', 'wr');
+        if (u) {
+            ST.user = u; ST.authed = true; enterApp();
+            toast('Accès autorisé', 'ok');
+        } else toast('Créez d\'abord un compte', 'wr');
         btn.innerHTML = '<i class="fas fa-fingerprint"></i>';
     },
     logout() {
@@ -674,7 +647,7 @@ const Auth = {
     }
 };
 
-// ─── UI ───
+/* ═══ UI ═══ */
 const UI = {
     nav(pg) {
         ST.page = pg;
@@ -695,61 +668,88 @@ const UI = {
     _saveProfile() {
         const nm = document.getElementById('edName').value.trim();
         if (nm) {
-            ST.user.name = nm; LS.set('user', ST.user);
+            ST.user.name = nm;
+            LS.set('user', ST.user);
             document.getElementById('pName').textContent = nm;
             const u = LS.get('users', []);
             const usr = u.find(x => x.email === ST.user.email);
             if (usr) { usr.name = nm; LS.set('users', u); }
-            hideModal(); toast('Mis à jour', 'ok');
+            hideModal();
+            toast('Mis à jour', 'ok');
         }
     }
 };
 
-// ─── AI ENGINE ───
+/* ═══ AI ENGINE (Pollinations - Free, No API Key) ═══ */
 const AI = {
-    saveKey(k) { ST.apiKey = k.trim(); saveCfg(); updateStatus(); if (k) toast('Clé enregistrée', 'ok'); },
-
     async ask(prompt, history = [], sysOverride = null) {
-        if (!ST.apiKey) return 'Pour me répondre intelligemment, ajoutez votre clé API Gemini gratuite dans les paramètres. Rendez-vous sur aistudio.google.com/apikey pour en obtenir une.';
         try {
-            const contents = [];
+            const messages = [
+                { role: 'system', content: sysOverride || SYS_PROMPT }
+            ];
             history.slice(-10).forEach(m => {
-                contents.push({ role: m.role === 'ai' ? 'model' : 'user', parts: [{ text: m.text }] });
+                messages.push({ role: m.role === 'ai' ? 'assistant' : 'user', content: m.text });
             });
-            contents.push({ role: 'user', parts: [{ text: prompt }] });
+            messages.push({ role: 'user', content: prompt });
 
-            const r = await fetch(
-                `https://generativelanguage.googleapis.com/v1beta/models/${ST.model}:generateContent?key=${ST.apiKey}`,
-                {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents,
-                        systemInstruction: { parts: [{ text: sysOverride || SYS_PROMPT }] },
-                        generationConfig: { temperature: 0.8, maxOutputTokens: 8192, topP: 0.95 }
-                    })
-                }
-            );
+            const r = await fetch('https://text.pollinations.ai/openai', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    model: 'openai',
+                    messages: messages,
+                    seed: Math.floor(Math.random() * 999999),
+                    jsonMode: false
+                })
+            });
 
             if (!r.ok) {
-                const err = await r.json().catch(() => ({}));
-                if (r.status === 400 || r.status === 403) return 'La clé API semble invalide. Vérifiez-la dans les paramètres.';
-                return 'Erreur temporaire. ' + (err.error?.message || '');
+                // Fallback: GET method
+                return await this._fallbackGet(prompt);
             }
 
-            const d = await r.json();
-            return d.candidates?.[0]?.content?.parts?.[0]?.text || 'Aucune réponse.';
+            const data = await r.json();
+            const content = data.choices?.[0]?.message?.content || data.content || '';
+            if (content) return content;
+            return await this._fallbackGet(prompt);
         } catch(e) {
-            return 'Connexion impossible. Vérifiez votre Internet.';
+            console.warn('AI error:', e);
+            return await this._fallbackGet(prompt);
         }
+    },
+
+    async _fallbackGet(prompt) {
+        try {
+            const r = await fetch('https://text.pollinations.ai/' + encodeURIComponent(prompt) + '?seed=' + Math.floor(Math.random() * 99999));
+            if (r.ok) {
+                const text = await r.text();
+                if (text && text.length > 5) return text;
+            }
+        } catch(e) {}
+        return this._local(prompt);
+    },
+
+    _local(prompt) {
+        const lo = prompt.toLowerCase();
+        if (/salut|bonjour|hello|hey/.test(lo)) return "Bonjour. Comment puis-je vous aider aujourd'hui ?";
+        if (/qui es.tu|darwin/.test(lo)) return "Je suis Darwin, votre assistant intelligent créé par DESSOUASSI Oboube Anael David.";
+        if (/merci/.test(lo)) return "Je vous en prie.";
+        if (/heure/.test(lo)) return "Il est " + new Date().toLocaleTimeString('fr-FR');
+        if (/date|jour/.test(lo)) return "Nous sommes le " + new Date().toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        return "Je rencontre des difficultés de connexion. Vérifiez votre connexion Internet et réessayez.";
     }
 };
 
-// ─── VOICE ───
+/* ═══ VOICE - MICRO FONCTIONNEL ═══ */
 const Voice = {
     initRecog() {
         const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-        if (!SR) { console.warn('SpeechRecognition non disponible'); return; }
+        if (!SR) {
+            console.warn('SpeechRecognition non disponible');
+            document.getElementById('micPerm').classList.add('on');
+            document.getElementById('micPerm').innerHTML = '<strong>Non supporté :</strong> Votre navigateur ne supporte pas la reconnaissance vocale. Utilisez Chrome, Edge ou Safari.';
+            return;
+        }
 
         const recog = new SR();
         recog.continuous = false;
@@ -758,8 +758,9 @@ const Voice = {
         recog.maxAlternatives = 1;
 
         recog.onstart = () => {
+            console.log('[Voice] Recognition started');
             ST.listening = true;
-            this._state('listening', 'Écoute...');
+            this._state('listening', 'À l\'écoute...');
             this._waveOn(true);
         };
 
@@ -774,31 +775,52 @@ const Voice = {
             tx.textContent = transcript;
             tx.className = 'voice-transcript user-tx';
 
-            if (isFinal && transcript.trim()) {
+            if (isFinal && transcript.trim().length > 1) {
+                console.log('[Voice] Final:', transcript);
                 this._process(transcript.trim());
             }
         };
 
         recog.onerror = (e) => {
-            console.log('Speech error:', e.error);
-            if (e.error !== 'no-speech' && e.error !== 'aborted') {
-                toast('Erreur micro : ' + e.error, 'wr');
-            }
+            console.warn('[Voice] Error:', e.error);
             ST.listening = false;
-            this._state('idle', 'Prêt');
             this._waveOn(false);
-            if (ST.handsFree && e.error === 'no-speech') {
-                setTimeout(() => { if (ST.handsFree && !ST.speaking) this._startRecog(); }, 1000);
+
+            if (e.error === 'not-allowed' || e.error === 'permission-denied') {
+                document.getElementById('micPerm').classList.add('on');
+                document.getElementById('micPerm').innerHTML = '<strong>Micro bloqué :</strong> Autorisez l\'accès au microphone dans les paramètres du navigateur (icône cadenas dans la barre d\'adresse).';
+                this._state('idle', 'Autorisation refusée');
+                toast('Micro bloqué - Autorisez l\'accès', 'er');
+                ST.handsFree = false;
+                document.getElementById('hfBtn').classList.remove('on');
+                return;
             }
+
+            if (e.error === 'no-speech') {
+                this._state('idle', 'Aucune parole détectée');
+                if (ST.handsFree) {
+                    setTimeout(() => { if (ST.handsFree && !ST.speaking && !ST.thinking) this._startRecog(); }, 800);
+                }
+                return;
+            }
+
+            if (e.error === 'aborted' || e.error === 'network') {
+                this._state('idle', 'Prêt');
+                return;
+            }
+
+            this._state('idle', 'Prêt');
+            toast('Erreur micro : ' + e.error, 'wr');
         };
 
         recog.onend = () => {
+            console.log('[Voice] Recognition ended');
             ST.listening = false;
             if (ST.handsFree && !ST.speaking && !ST.thinking) {
                 setTimeout(() => {
                     if (ST.handsFree && !ST.speaking && !ST.thinking) this._startRecog();
                 }, 600);
-            } else {
+            } else if (!ST.thinking && !ST.speaking) {
                 this._state('idle', 'Prêt');
                 this._waveOn(false);
             }
@@ -826,12 +848,10 @@ const Voice = {
         const en = ST.voices.filter(v => /en/i.test(v.lang));
         const show = [...fr, ...en.slice(0, 5)];
         const saved = LS.get('selVoice');
-
         if (!show.length) {
-            list.innerHTML = '<p style="color:var(--tx4);font-size:11px;padding:8px">Aucune voix disponible</p>';
+            list.innerHTML = '<p style="color:var(--tx4);font-size:11px;padding:8px">Chargement des voix...</p>';
             return;
         }
-
         show.forEach((v, i) => {
             const sel = saved ? v.name === saved : i === 0;
             if (sel && !ST.selVoice) ST.selVoice = v;
@@ -864,7 +884,59 @@ const Voice = {
     speak(text, onDone) {
         if (!ST.voiceOn) { if (onDone) onDone(); return; }
         ST.synth.cancel();
-        const clean = text
+        const clean = this._clean(text);
+        if (!clean) { if (onDone) onDone(); return; }
+
+        this._state('speaking', 'Réponse...');
+        ST.speaking = true;
+
+        // Split long text into chunks for better speech
+        const chunks = this._splitText(clean, 200);
+        let idx = 0;
+
+        const speakNext = () => {
+            if (idx >= chunks.length) {
+                ST.speaking = false;
+                this._state('idle', 'Prêt');
+                if (onDone) onDone();
+                if (ST.handsFree) {
+                    setTimeout(() => {
+                        if (ST.handsFree && !ST.listening && !ST.thinking) this._startRecog();
+                    }, 500);
+                }
+                return;
+            }
+            const u = new SpeechSynthesisUtterance(chunks[idx]);
+            if (ST.selVoice) u.voice = ST.selVoice;
+            u.rate = ST.rate;
+            u.pitch = ST.pitch;
+            u.lang = 'fr-FR';
+            u.onend = () => { idx++; speakNext(); };
+            u.onerror = () => { idx++; speakNext(); };
+            ST.synth.speak(u);
+        };
+        speakNext();
+    },
+
+    _splitText(text, maxLen) {
+        if (text.length <= maxLen) return [text];
+        const parts = [];
+        const sentences = text.split(/(?<=[.!?])\s+/);
+        let current = '';
+        for (const s of sentences) {
+            if ((current + s).length > maxLen && current) {
+                parts.push(current.trim());
+                current = s + ' ';
+            } else {
+                current += s + ' ';
+            }
+        }
+        if (current.trim()) parts.push(current.trim());
+        return parts;
+    },
+
+    _clean(text) {
+        return text
             .replace(/```[\s\S]*?```/g, ' bloc de code ')
             .replace(/`[^`]+`/g, '')
             .replace(/\*\*([^*]+)\*\*/g, '$1')
@@ -877,60 +949,66 @@ const Voice = {
             .replace(/\n+/g, '. ')
             .replace(/\s+/g, ' ')
             .trim();
-
-        if (!clean) { if (onDone) onDone(); return; }
-
-        this._state('speaking', 'Réponse...');
-        ST.speaking = true;
-
-        const u = new SpeechSynthesisUtterance(clean);
-        if (ST.selVoice) u.voice = ST.selVoice;
-        u.rate = ST.rate;
-        u.pitch = ST.pitch;
-        u.lang = 'fr-FR';
-
-        u.onend = () => {
-            ST.speaking = false;
-            this._state('idle', 'Prêt');
-            if (onDone) onDone();
-            if (ST.handsFree) {
-                setTimeout(() => {
-                    if (ST.handsFree && !ST.listening && !ST.thinking) this._startRecog();
-                }, 500);
-            }
-        };
-
-        u.onerror = () => {
-            ST.speaking = false;
-            this._state('idle', 'Prêt');
-            if (onDone) onDone();
-        };
-
-        ST.synth.speak(u);
     },
 
-    tap() {
-        if (ST.speaking) { ST.synth.cancel(); ST.speaking = false; this._state('idle', 'Prêt'); return; }
-        if (ST.listening) { this._stopRecog(); return; }
+    async tap() {
+        if (ST.speaking) {
+            ST.synth.cancel();
+            ST.speaking = false;
+            this._state('idle', 'Prêt');
+            return;
+        }
+        if (ST.listening) {
+            this._stopRecog();
+            return;
+        }
+        await this._requestMicAndStart();
+    },
+
+    async _requestMicAndStart() {
+        // Request mic permission explicitly first
+        if (navigator.mediaDevices?.getUserMedia) {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                // Immediately release the stream, we just wanted the permission
+                stream.getTracks().forEach(t => t.stop());
+                document.getElementById('micPerm').classList.remove('on');
+            } catch(e) {
+                console.warn('Mic permission denied:', e);
+                document.getElementById('micPerm').classList.add('on');
+                document.getElementById('micPerm').innerHTML = '<strong>Micro refusé :</strong> Autorisez l\'accès dans les paramètres du navigateur (icône cadenas). Puis rechargez la page.';
+                toast('Micro refusé - Autorisez l\'accès', 'er');
+                return;
+            }
+        }
         this._startRecog();
     },
 
     _startRecog() {
-        if (!ST.recog) { toast('Reconnaissance vocale non disponible sur ce navigateur', 'wr'); return; }
-        if (ST.speaking) { ST.synth.cancel(); ST.speaking = false; }
-        try {
-            ST.recog.abort();
-        } catch(e) {}
+        if (!ST.recog) {
+            toast('Reconnaissance vocale non disponible', 'wr');
+            return;
+        }
+        if (ST.speaking) {
+            ST.synth.cancel();
+            ST.speaking = false;
+        }
+        try { ST.recog.abort(); } catch(e) {}
         setTimeout(() => {
             try {
                 ST.recog.start();
+                console.log('[Voice] Started');
             } catch(e) {
-                console.warn('Recognition start failed:', e);
+                console.warn('[Voice] Start failed, retrying:', e.message);
                 setTimeout(() => {
-                    try { ST.recog.start(); } catch(e2) { toast('Impossible de démarrer le micro', 'er'); }
-                }, 300);
+                    try { ST.recog.start(); } catch(e2) {
+                        console.error('[Voice] Second attempt failed:', e2);
+                        toast('Impossible de démarrer le micro', 'er');
+                        this._state('idle', 'Prêt');
+                    }
+                }, 500);
             }
-        }, 100);
+        }, 150);
     },
 
     _stopRecog() {
@@ -951,13 +1029,15 @@ const Voice = {
         toast('Arrêté', 'info');
     },
 
-    toggleHF() {
-        ST.handsFree = !ST.handsFree;
-        document.getElementById('hfBtn').classList.toggle('on', ST.handsFree);
-        if (ST.handsFree) {
+    async toggleHF() {
+        if (!ST.handsFree) {
+            ST.handsFree = true;
+            document.getElementById('hfBtn').classList.add('on');
             toast('Mains-libres activé', 'ok');
-            this._startRecog();
+            await this._requestMicAndStart();
         } else {
+            ST.handsFree = false;
+            document.getElementById('hfBtn').classList.remove('on');
             toast('Mains-libres désactivé', 'info');
             this._stopRecog();
         }
@@ -977,7 +1057,7 @@ const Voice = {
         ST.thinking = true;
 
         // Detect image requests
-        if (/(génère|genere|crée|cree|dessine|fais|montre).{0,20}(image|photo|illustration|dessin|logo)/i.test(text)) {
+        if (/(g[eé]n[eè]re|cr[eé]e|dessine|fais|montre).{0,25}(image|photo|illustration|dessin|logo)/i.test(text)) {
             ST.thinking = false;
             const tx = document.getElementById('vTx');
             tx.textContent = 'Je crée votre image...';
@@ -985,6 +1065,7 @@ const Voice = {
             try {
                 const url = await ImgGen.make(text);
                 Chat.addMsg('ai', 'Voici votre image :', { img: url });
+                tx.textContent = 'Image générée avec succès';
                 this.speak('Votre image est prête.');
             } catch(e) {
                 Chat.addMsg('ai', 'Impossible de générer l\'image.');
@@ -1050,7 +1131,7 @@ function initWaveBars() {
     }
 }
 
-// ─── CHAT ───
+/* ═══ CHAT ═══ */
 const Chat = {
     addMsg(role, text, extra) {
         const m = {
@@ -1064,25 +1145,20 @@ const Chat = {
         this._render(m);
         this._scroll();
     },
-
     _render(m) {
         const c = document.getElementById('chatMsgs');
         const d = document.createElement('div');
         d.className = 'msg ' + (m.role === 'ai' ? 'ai' : 'u') + ' fadeUp';
         const av = m.role === 'ai' ? 'DA' : (ST.user?.name?.substring(0, 2).toUpperCase() || 'U');
-
         let extras = '';
         if (m.extra?.img) extras = `<img src="${m.extra.img}" alt="Image IA" loading="lazy">`;
-
         const acts = m.role === 'ai' ? `<div class="msg-acts">
             <button class="msg-act" onclick="Util.copyEl(this)"><i class="fas fa-copy"></i> Copier</button>
             <button class="msg-act" onclick="Voice.speak(this.closest('.msg').querySelector('.msg-bub').innerText)"><i class="fas fa-volume-up"></i></button>
         </div>` : '';
-
         d.innerHTML = `<div class="msg-av">${av}</div><div class="msg-body"><div class="msg-bub">${this._fmt(m.text)}${extras}</div>${acts}<div class="msg-t">${m.ts}</div></div>`;
         c.appendChild(d);
     },
-
     _fmt(t) {
         t = t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
         t = t.replace(/```(\w+)?\n?([\s\S]*?)```/g, (_, l, c) => `<pre><code>${c.trim()}</code></pre>`);
@@ -1092,17 +1168,14 @@ const Chat = {
         t = t.replace(/\n/g, '<br>');
         return t;
     },
-
     _scroll() {
         const c = document.getElementById('chatMsgs');
         setTimeout(() => c.scrollTop = c.scrollHeight, 50);
     },
-
     _typing(on) {
         document.getElementById('typInd').classList.toggle('on', on);
         if (on) this._scroll();
     },
-
     async send() {
         const inp = document.getElementById('chatIn');
         const t = inp.value.trim();
@@ -1111,8 +1184,7 @@ const Chat = {
         this.rs(inp);
         this.addMsg('user', t);
 
-        // Detect image
-        if (/(génère|genere|crée|cree|dessine|fais|montre).{0,25}(image|photo|illustration|dessin|logo|portrait)/i.test(t) || /^image[: ]/i.test(t)) {
+        if (/(g[eé]n[eè]re|cr[eé]e|dessine|fais|montre).{0,25}(image|photo|illustration|dessin|logo|portrait)/i.test(t) || /^image[: ]/i.test(t)) {
             this._typing(true);
             try {
                 const url = await ImgGen.make(t);
@@ -1132,11 +1204,9 @@ const Chat = {
         this.addMsg('ai', r);
         if (ST.voiceOn) Voice.speak(r);
     },
-
     quick(t) { document.getElementById('chatIn').value = t; this.send(); },
     kd(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); this.send(); } },
     rs(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 100) + 'px'; },
-
     async files(e) {
         const f = e.target.files[0];
         if (!f) return;
@@ -1165,7 +1235,7 @@ function renderAllMsgs() {
     Chat._scroll();
 }
 
-// ─── IMAGE GENERATION (Pollinations.ai - gratuit) ───
+/* ═══ IMAGE (Pollinations - Free, No Key) ═══ */
 const ImgGen = {
     async make(prompt, style) {
         const s = style || ST.selOpt;
@@ -1174,31 +1244,29 @@ const ImgGen = {
             'Art numérique': 'digital art, vibrant colors, artistic illustration',
             'Anime': 'anime style, manga, detailed cel shading',
             '3D': '3d render, octane render, ultra detailed',
-            'Cyberpunk': 'cyberpunk, neon lights, futuristic city, blade runner'
+            'Cyberpunk': 'cyberpunk, neon lights, futuristic city, blade runner style'
         };
         const suffix = styles[s] || '';
         const fullPrompt = prompt + (suffix ? ', ' + suffix : '');
         const seed = Math.floor(Math.random() * 999999);
         const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(fullPrompt)}?width=1024&height=1024&seed=${seed}&model=flux&nologo=true`;
 
-        // Preload image
         await new Promise((resolve, reject) => {
             const img = new Image();
             img.onload = resolve;
             img.onerror = reject;
             img.src = url;
-            setTimeout(resolve, 30000); // timeout 30s
+            setTimeout(resolve, 30000);
         });
 
         return url;
     }
 };
 
-// ─── GITHUB ───
+/* ═══ GITHUB ═══ */
 const GH = {
     saveToken(t) { ST.ghToken = t.trim(); saveCfg(); if (t) toast('Token GitHub sauvé', 'ok'); },
     saveUser(u) { ST.ghUser = u.trim(); saveCfg(); if (u) toast('Username sauvé', 'ok'); },
-
     async _api(endpoint, method = 'GET', body = null) {
         if (!ST.ghToken) throw new Error('Token GitHub manquant');
         const r = await fetch('https://api.github.com' + endpoint, {
@@ -1209,34 +1277,20 @@ const GH = {
         if (!r.ok) { const e = await r.json().catch(() => ({})); throw new Error(e.message || 'HTTP ' + r.status); }
         return r.json();
     },
-
     async publish(name, html, desc = '') {
         if (!ST.ghToken || !ST.ghUser) throw new Error('Configurez GitHub dans paramètres');
         const repo = name.toLowerCase().replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-').substring(0, 60) + '-' + Date.now().toString(36);
-
         await this._api('/user/repos', 'POST', { name: repo, description: desc || 'Créé par Darwin AI', private: false, auto_init: true });
         await wait(1500);
-
         const encoded = btoa(unescape(encodeURIComponent(html)));
-        await this._api(`/repos/${ST.ghUser}/${repo}/contents/index.html`, 'PUT', {
-            message: 'Deploy via Darwin AI',
-            content: encoded
-        });
+        await this._api(`/repos/${ST.ghUser}/${repo}/contents/index.html`, 'PUT', { message: 'Deploy via Darwin AI', content: encoded });
         await wait(1000);
-
-        try {
-            await this._api(`/repos/${ST.ghUser}/${repo}/pages`, 'POST', { source: { branch: 'main', path: '/' } });
-        } catch(e) { /* pages might auto-enable */ }
-
-        return {
-            url: `https://${ST.ghUser}.github.io/${repo}/`,
-            repoUrl: `https://github.com/${ST.ghUser}/${repo}`,
-            repo
-        };
+        try { await this._api(`/repos/${ST.ghUser}/${repo}/pages`, 'POST', { source: { branch: 'main', path: '/' } }); } catch(e) {}
+        return { url: `https://${ST.ghUser}.github.io/${repo}/`, repoUrl: `https://github.com/${ST.ghUser}/${repo}`, repo };
     }
 };
 
-// ─── CREATE STUDIO ───
+/* ═══ CREATE ═══ */
 const Create = {
     setMode(m, el) {
         ST.createMode = m;
@@ -1249,21 +1303,20 @@ const Create = {
         document.getElementById('createTitle').textContent = titles[m] || '';
         const phs = { image: 'Décrivez l\'image...', code: 'Décrivez le programme...', website: 'Décrivez le site...', app: 'Décrivez l\'application...' };
         document.getElementById('createPrompt').placeholder = phs[m] || '';
+        const first = optsEl?.querySelector('.go-i.on');
+        if (first) ST.selOpt = first.textContent;
     },
-
     opt(el) {
         el.parentElement.querySelectorAll('.go-i').forEach(o => o.classList.remove('on'));
         el.classList.add('on');
         ST.selOpt = el.textContent;
     },
-
     async run() {
         const p = document.getElementById('createPrompt').value.trim();
         if (!p) { toast('Décrivez ce que vous voulez', 'wr'); return; }
         const btn = document.getElementById('createBtn');
         btn.disabled = true;
         btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> En cours...';
-
         try {
             switch (ST.createMode) {
                 case 'image': await this._image(p); break;
@@ -1272,11 +1325,9 @@ const Create = {
                 case 'app': await this._app(p); break;
             }
         } catch(e) { toast('Erreur : ' + e.message, 'er'); }
-
         btn.disabled = false;
         btn.innerHTML = '<i class="fas fa-bolt"></i> Générer';
     },
-
     async _image(prompt) {
         const r = document.getElementById('createResult');
         const c = document.getElementById('resContent');
@@ -1284,7 +1335,6 @@ const Create = {
         document.getElementById('resTitle').textContent = 'Image';
         c.innerHTML = '<div class="loading-shimmer">Génération en cours...</div>';
         document.getElementById('resActs').innerHTML = '';
-
         const url = await ImgGen.make(prompt, ST.selOpt);
         c.innerHTML = `<img src="${url}" class="gen-img" alt="Image IA">`;
         ST.lastGen = { type: 'image', url };
@@ -1294,7 +1344,6 @@ const Create = {
         `;
         toast('Image générée', 'ok');
     },
-
     async _code(prompt) {
         const lang = ST.selOpt;
         const r = document.getElementById('createResult');
@@ -1302,12 +1351,10 @@ const Create = {
         r.classList.add('on');
         document.getElementById('resTitle').textContent = 'Code · ' + lang;
         c.innerHTML = '<div class="loading-shimmer">Génération...</div>';
-
-        const sysP = `Expert ${lang}. Code de production uniquement, sans explications. Complet et fonctionnel.`;
+        const sysP = `Tu es expert ${lang}. Genere UNIQUEMENT du code ${lang} complet et fonctionnel, sans explications. Format markdown avec bloc de code.`;
         const resp = await AI.ask(`Code ${lang} : ${prompt}`, [], sysP);
         const match = resp.match(/```(?:\w+)?\n?([\s\S]*?)```/);
         const code = match ? match[1].trim() : resp;
-
         ST.lastGen = { type: 'code', content: code, lang };
         c.innerHTML = `<div class="gr-c"><pre><code>${code.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</code></pre></div>`;
         const exts = { Python: 'py', JavaScript: 'js', TypeScript: 'ts', Java: 'java', 'C++': 'cpp', PHP: 'php' };
@@ -1317,7 +1364,6 @@ const Create = {
         `;
         toast('Code généré', 'ok');
     },
-
     async _website(prompt) {
         const type = ST.selOpt;
         const r = document.getElementById('createResult');
@@ -1325,41 +1371,33 @@ const Create = {
         r.classList.add('on');
         document.getElementById('resTitle').textContent = 'Site · ' + type;
         c.innerHTML = '<div class="loading-shimmer">Création...</div>';
-
-        const sysP = `Expert web. Génère UNIQUEMENT le code HTML complet (<!DOCTYPE html>...) avec CSS et JS intégrés. Design ultra-moderne, responsive, animations. Pas d'explications.`;
-        const resp = await AI.ask(`Site ${type} : ${prompt}`, [], sysP);
+        const sysP = `Tu es expert web designer. Genere UNIQUEMENT le code HTML complet commencant par <!DOCTYPE html>, avec CSS integre dans style et JavaScript dans script. Design ultra moderne, responsive, animations. Pas d'explications, juste le code brut sans markdown.`;
+        const resp = await AI.ask(`Site web moderne type ${type} : ${prompt}`, [], sysP);
         let html = resp.match(/```(?:html)?\n?([\s\S]*?)```/)?.[1]?.trim() || resp;
-        if (!html.startsWith('<!DOCTYPE') && !html.startsWith('<!doctype')) {
+        if (!html.toLowerCase().startsWith('<!doctype')) {
             html = '<!DOCTYPE html>\n<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + type + '</title></head><body>' + html + '</body></html>';
         }
-
         ST.lastGen = { type: 'website', content: html, name: type };
         c.innerHTML = `<iframe class="preview-frame" srcdoc="${html.replace(/"/g, '&quot;')}"></iframe>`;
         document.getElementById('resActs').innerHTML = `
-            <button class="msg-act primary" onclick="Create.publish()"><i class="fab fa-github"></i> Publier en ligne</button>
+            <button class="msg-act primary" onclick="Create.publish()"><i class="fab fa-github"></i> Publier</button>
             <button class="msg-act" onclick="Create.fullscreen()"><i class="fas fa-expand"></i></button>
             <button class="msg-act" onclick="Create.showCode()"><i class="fas fa-code"></i> Code</button>
             <button class="msg-act" onclick="Util.dl('site.html',ST.lastGen.content)"><i class="fas fa-download"></i></button>
         `;
         toast('Site créé', 'ok');
     },
-
     async _app(prompt) {
         const type = ST.selOpt;
-        if (type === 'PWA') {
-            await this._website(prompt + ' (PWA avec manifest et service worker)');
-            return;
-        }
+        if (type === 'PWA') { await this._website(prompt + ' (PWA avec manifest et service worker)'); return; }
         const r = document.getElementById('createResult');
         const c = document.getElementById('resContent');
         r.classList.add('on');
         document.getElementById('resTitle').textContent = 'App · ' + type;
         c.innerHTML = '<div class="loading-shimmer">Création...</div>';
-
-        const sysP = `Expert ${type}. Code complet uniquement, prêt à l'emploi.`;
-        const resp = await AI.ask(`App ${type} : ${prompt}`, [], sysP);
+        const sysP = `Expert ${type}. Code complet prêt à l'emploi. Uniquement le code, pas d'explications.`;
+        const resp = await AI.ask(`Application ${type} : ${prompt}`, [], sysP);
         const code = resp.match(/```(?:\w+)?\n?([\s\S]*?)```/)?.[1]?.trim() || resp;
-
         ST.lastGen = { type: 'code', content: code, lang: type };
         c.innerHTML = `<div class="gr-c"><pre><code>${code.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</code></pre></div>`;
         const ext = type === 'Flutter' ? 'dart' : 'jsx';
@@ -1369,28 +1407,24 @@ const Create = {
         `;
         toast('Application créée', 'ok');
     },
-
     async publish() {
         if (!ST.ghToken || !ST.ghUser) {
-            showModal('GitHub requis', `<div class="deploy-status err">Configurez votre token et username GitHub dans les paramètres.</div><button class="auth-btn" onclick="hideModal();UI.nav('settings')">Paramètres</button>`);
+            showModal('GitHub requis', `<div class="deploy-status err">Pour publier en ligne, configurez votre token et username GitHub dans les paramètres.</div><button class="auth-btn" onclick="hideModal();UI.nav('settings')">Paramètres</button>`);
             return;
         }
         if (!ST.lastGen?.content) { toast('Rien à publier', 'wr'); return; }
-
         const name = prompt('Nom du projet :', ST.lastGen.name || 'darwin-site');
         if (!name) return;
-
         const c = document.getElementById('resContent');
-        c.innerHTML = '<div class="loading-shimmer">Publication GitHub...</div>';
-
+        c.innerHTML = '<div class="loading-shimmer">Publication...</div>';
         try {
             const result = await GH.publish(name, ST.lastGen.content, 'Créé par Darwin AI');
             c.innerHTML = `<div class="deploy-status">
-                <strong>Publié avec succès !</strong><br><br>
+                <strong>Publié !</strong><br><br>
                 Repository : <a href="${result.repoUrl}" target="_blank">${result.repo}</a><br>
-                Site : <a href="${result.url}" target="_blank">${result.url}</a><br><br>
-                <em>GitHub Pages prend 1 à 3 min pour activer.</em><br>
-                <a href="${result.url}" target="_blank" class="deploy-link"><i class="fas fa-external-link-alt"></i> Ouvrir le site</a>
+                URL : <a href="${result.url}" target="_blank">${result.url}</a><br><br>
+                <em>GitHub Pages prend 1-3 min pour s'activer.</em><br>
+                <a href="${result.url}" target="_blank" class="deploy-link"><i class="fas fa-external-link-alt"></i> Ouvrir</a>
             </div>`;
             toast('Publié sur GitHub', 'ok');
         } catch(e) {
@@ -1398,14 +1432,12 @@ const Create = {
             toast('Erreur : ' + e.message, 'er');
         }
     },
-
     fullscreen() {
         if (!ST.lastGen?.content) return;
         const w = window.open('', '_blank');
         w.document.write(ST.lastGen.content);
         w.document.close();
     },
-
     showCode() {
         if (!ST.lastGen?.content) return;
         const c = document.getElementById('resContent');
@@ -1417,7 +1449,6 @@ const Create = {
             <button class="msg-act" onclick="Create.showPreview()"><i class="fas fa-eye"></i> Aperçu</button>
         `;
     },
-
     showPreview() {
         if (!ST.lastGen?.content) return;
         document.getElementById('resContent').innerHTML = `<iframe class="preview-frame" srcdoc="${ST.lastGen.content.replace(/"/g, '&quot;')}"></iframe>`;
@@ -1430,12 +1461,9 @@ const Create = {
     }
 };
 
-// ─── UTIL ───
+/* ═══ UTIL ═══ */
 const Util = {
-    copyEl(btn) {
-        const t = btn.closest('.msg').querySelector('.msg-bub').innerText;
-        this.copy(t);
-    },
+    copyEl(btn) { const t = btn.closest('.msg').querySelector('.msg-bub').innerText; this.copy(t); },
     copy(t) {
         if (navigator.clipboard && window.isSecureContext) {
             navigator.clipboard.writeText(t).then(() => toast('Copié', 'ok')).catch(() => this._fb(t));
@@ -1458,17 +1486,12 @@ const Util = {
     }
 };
 
-// ─── MODAL / TOAST ───
 function showModal(t, b) {
     document.getElementById('moT').textContent = t;
     document.getElementById('moB').innerHTML = b;
     document.getElementById('moBg').classList.add('on');
 }
-
-function hideModal() {
-    document.getElementById('moBg').classList.remove('on');
-}
-
+function hideModal() { document.getElementById('moBg').classList.remove('on'); }
 function toast(msg, type = 'info') {
     const c = document.getElementById('toastC');
     const icons = { ok: 'check-circle', er: 'exclamation-circle', wr: 'exclamation-triangle', info: 'info-circle' };
@@ -1477,18 +1500,15 @@ function toast(msg, type = 'info') {
     d.innerHTML = `<i class="fas fa-${icons[type] || 'info-circle'}"></i> ${msg}`;
     c.appendChild(d);
     setTimeout(() => {
-        d.style.opacity = '0';
-        d.style.transform = 'translateX(80px)';
-        d.style.transition = '.3s';
+        d.style.opacity = '0'; d.style.transform = 'translateX(80px)'; d.style.transition = '.3s';
         setTimeout(() => d.remove(), 300);
     }, 3500);
 }
 
-// ─── PWA ───
 function setupPWA() {
     const m = {
         name: 'Darwin AI', short_name: 'Darwin',
-        description: 'Assistant IA', start_url: '.', display: 'standalone',
+        description: 'Assistant IA sans clé', start_url: '.', display: 'standalone',
         background_color: '#000814', theme_color: '#000814', orientation: 'any',
         icons: [{
             src: 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00e5ff"/><stop offset="100%" stop-color="#7c4dff"/></linearGradient></defs><rect width="192" height="192" rx="42" fill="#000814"/><circle cx="96" cy="96" r="60" fill="none" stroke="url(#g)" stroke-width="2" stroke-dasharray="8 4"/><circle cx="96" cy="96" r="28" fill="url(#g)"/></svg>'),
@@ -1496,14 +1516,13 @@ function setupPWA() {
         }]
     };
     document.getElementById('pwaMan').href = URL.createObjectURL(new Blob([JSON.stringify(m)], { type: 'application/json' }));
-
     if ('serviceWorker' in navigator) {
-        const sw = `const C='dw4';self.addEventListener('install',e=>{self.skipWaiting()});self.addEventListener('fetch',e=>{e.respondWith(fetch(e.request).catch(()=>new Response('Offline')))});`;
+        const sw = `self.addEventListener('install',e=>{self.skipWaiting()});self.addEventListener('fetch',e=>{e.respondWith(fetch(e.request).catch(()=>new Response('Offline')))});`;
         navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw], { type: 'application/javascript' }))).catch(() => {});
     }
 }
 
-console.log('%cDARWIN AI v4', 'font-size:18px;font-weight:900;background:linear-gradient(135deg,#00e5ff,#7c4dff);-webkit-background-clip:text;-webkit-text-fill-color:transparent');
+console.log('%cDARWIN AI v5 - No API Key Required', 'font-size:18px;font-weight:900;background:linear-gradient(135deg,#00e5ff,#7c4dff);-webkit-background-clip:text;-webkit-text-fill-color:transparent');
 console.log('%c© 2025 DESSOUASSI Oboube Anael David', 'color:#00e5ff;font-size:10px');
 </script>
 </body>
