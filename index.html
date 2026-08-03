@@ -30,14 +30,15 @@ a{color:var(--cy);text-decoration:none}
 @keyframes voiceOrbit{from{transform:rotate(0deg) translateX(80px) rotate(0deg)}to{transform:rotate(360deg) translateX(80px) rotate(-360deg)}}
 @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
 @keyframes scaleIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 
-#splash{position:fixed;inset:0;background:radial-gradient(ellipse at center,var(--bg2),var(--bg) 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:10000;transition:opacity .6s,visibility .6s}
+#splash{position:fixed;inset:0;background:radial-gradient(ellipse at center,var(--bg2),var(--bg) 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:10000;transition:opacity .5s,visibility .5s}
 #splash.done{opacity:0;visibility:hidden;pointer-events:none}
 .slogo{width:140px;height:140px;margin-bottom:32px;animation:breath 3s infinite}
 .st1{font-size:32px;font-weight:700;letter-spacing:8px;background:var(--gd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .st2{color:var(--tx4);font-size:11px;margin-top:8px;letter-spacing:4px;text-transform:uppercase}
 .sbar{width:220px;height:2px;background:var(--surf);border-radius:1px;margin-top:36px;overflow:hidden}
-.sfill{height:100%;background:var(--gd);border-radius:1px;transition:width .3s;width:0%}
+.sfill{height:100%;background:var(--gd);border-radius:1px;transition:width .2s;width:0%}
 .sst{color:var(--tx4);font-size:10px;margin-top:14px;letter-spacing:1.5px;text-transform:uppercase;font-family:'JetBrains Mono',monospace}
 
 #auth{position:fixed;inset:0;background:var(--bg);display:none;align-items:center;justify-content:center;z-index:9000;padding:24px}
@@ -125,8 +126,8 @@ a{color:var(--cy);text-decoration:none}
 .cmds strong{color:var(--cy)}
 
 .cc{max-width:800px;margin:0 auto;display:flex;flex-direction:column;height:calc(100dvh - 140px)}
-.cms{flex:1;overflow-y:auto;padding:8px 0}
-.msg{display:flex;gap:10px;margin-bottom:16px;animation:fadeUp .3s both}
+.cms{flex:1;overflow-y:auto;padding:8px 0;scroll-behavior:smooth}
+.msg{display:flex;gap:10px;margin-bottom:16px;animation:fadeUp .25s both}
 .msg.u{flex-direction:row-reverse}
 .mav{width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;font-weight:700}
 .msg.ai .mav{background:var(--surf);color:var(--cy);border:1px solid var(--border2)}
@@ -135,8 +136,10 @@ a{color:var(--cy);text-decoration:none}
 .mb{padding:12px 15px;border-radius:14px;font-size:14px;line-height:1.65;word-wrap:break-word;backdrop-filter:blur(20px)}
 .msg.ai .mb{background:var(--surf);border:1px solid var(--border);border-bottom-left-radius:4px}
 .msg.u .mb{background:linear-gradient(135deg,rgba(0,229,255,.15),rgba(124,77,255,.15));border:1px solid var(--border2);border-bottom-right-radius:4px}
+.mb.streaming::after{content:'▊';color:var(--cy);animation:blink 1s infinite;margin-left:2px}
 .mt{font-size:9px;color:var(--tx4);margin-top:4px;padding:0 2px}
 .msg.u .mt{text-align:right}
+.mt.speed{color:var(--ok)}
 .mb pre{background:rgba(0,0,0,.4);padding:12px;border-radius:8px;overflow-x:auto;margin:8px 0;font-family:'JetBrains Mono',monospace;font-size:12px;border:1px solid var(--border)}
 .mb code{font-family:'JetBrains Mono',monospace;background:rgba(0,229,255,.1);padding:2px 5px;border-radius:4px;font-size:12px;color:var(--cy)}
 .mb pre code{background:transparent;padding:0;color:var(--tx2)}
@@ -145,9 +148,9 @@ a{color:var(--cy);text-decoration:none}
 .mac{padding:5px 10px;background:var(--surf);border:1px solid var(--border);border-radius:6px;color:var(--tx3);font-size:10px;cursor:pointer;display:flex;align-items:center;gap:4px;transition:.2s;font-weight:500}
 .mac:hover{border-color:var(--cy);color:var(--cy)}
 .mac.p{background:var(--gd);color:var(--bg);border-color:var(--cy)}
-.typi{display:none;padding:12px 15px;background:var(--surf);border:1px solid var(--border);border-radius:14px;border-bottom-left-radius:4px;width:fit-content;gap:5px;align-items:center;margin-bottom:14px}
+.typi{display:none;padding:10px 14px;background:var(--surf);border:1px solid var(--border);border-radius:14px;border-bottom-left-radius:4px;width:fit-content;gap:5px;align-items:center;margin-bottom:14px}
 .typi.on{display:flex}
-.typi span{width:6px;height:6px;background:var(--cy);border-radius:50%;animation:typing 1.2s infinite;box-shadow:0 0 8px var(--cy)}
+.typi span{width:5px;height:5px;background:var(--cy);border-radius:50%;animation:typing 1s infinite;box-shadow:0 0 6px var(--cy)}
 .typi span:nth-child(2){animation-delay:.15s}
 .typi span:nth-child(3){animation-delay:.3s}
 .cin{padding:12px 0 4px;border-top:1px solid var(--border)}
@@ -341,7 +344,14 @@ a{color:var(--cy);text-decoration:none}
 
 <div class="pg" id="pg-settings"><div class="sc"><div class="pgt">Configuration</div>
 
-<div class="ss"><div class="sst"><i class="fas fa-microchip"></i> Diagnostic système</div>
+<div class="ss"><div class="sst"><i class="fas fa-tachometer-alt"></i> Performance</div>
+<div class="si"><div><h4>Mode Turbo</h4><p>Réponses ultra-rapides (concises)</p></div><button class="tog on" id="tT" onclick="this.classList.toggle('on');ST.turbo=this.classList.contains('on');sC()"></button></div>
+<div class="si"><div><h4>Streaming</h4><p>Affichage mot par mot en temps réel</p></div><button class="tog on" id="tSt" onclick="this.classList.toggle('on');ST.stream=this.classList.contains('on');sC()"></button></div>
+<div class="si"><div><h4>Cache</h4><p>Réutilise les réponses similaires</p></div><button class="tog on" id="tCa" onclick="this.classList.toggle('on');ST.cache=this.classList.contains('on');sC();if(!ST.cache)AI.cache.clear()"></button></div>
+<div class="si"><div><h4>Voix instantanée</h4><p>Parle dès la 1ère phrase</p></div><button class="tog on" id="tVi" onclick="this.classList.toggle('on');ST.instantVoice=this.classList.contains('on');sC()"></button></div>
+</div>
+
+<div class="ss"><div class="sst"><i class="fas fa-microchip"></i> Diagnostic</div>
 <div id="diagList"></div>
 <button class="gbtn" onclick="D.run()" style="margin-top:10px;width:100%;justify-content:center"><i class="fas fa-sync"></i> Relancer</button>
 </div>
@@ -355,7 +365,7 @@ a{color:var(--cy);text-decoration:none}
 <div class="ss"><div class="sst"><i class="fas fa-volume-up"></i> Voix</div>
 <div class="si"><div><h4>Réponses vocales</h4></div><button class="tog on" id="tV" onclick="this.classList.toggle('on');ST.voiceOn=this.classList.contains('on');sC()"></button></div>
 <div class="vl" id="vL"></div>
-<div class="si" style="flex-direction:column;align-items:stretch;gap:6px"><h4 style="font-size:12px">Vitesse</h4><input type="range" min="0.5" max="2" step="0.1" value="1" id="sR" style="width:100%;accent-color:var(--cy)" onchange="ST.rate=+this.value;sC()"></div>
+<div class="si" style="flex-direction:column;align-items:stretch;gap:6px"><h4 style="font-size:12px">Vitesse</h4><input type="range" min="0.5" max="2" step="0.1" value="1.05" id="sR" style="width:100%;accent-color:var(--cy)" onchange="ST.rate=+this.value;sC()"></div>
 <div class="si" style="flex-direction:column;align-items:stretch;gap:6px"><h4 style="font-size:12px">Tonalité</h4><input type="range" min="0.5" max="2" step="0.1" value="1" id="sP" style="width:100%;accent-color:var(--cy)" onchange="ST.pitch=+this.value;sC()"></div>
 </div>
 
@@ -364,24 +374,22 @@ a{color:var(--cy);text-decoration:none}
 <div><h4>Token</h4><p>Pour publier vos sites en ligne</p></div>
 <input type="password" class="sinp" id="gT" placeholder="ghp_..." onchange="ST.ghToken=this.value.trim();sC()">
 <input type="text" class="sinp" id="gU" placeholder="Username GitHub" onchange="ST.ghUser=this.value.trim();sC()">
-<div class="ainfo">Créer un token : <a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a><br>Cocher <strong>repo</strong> et <strong>workflow</strong></div>
+<div class="ainfo">Créer un token : <a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a><br>Cocher <strong>repo</strong></div>
 </div></div>
 
 <div class="ss"><div class="sst"><i class="fas fa-info-circle"></i> Système</div>
-<div class="si"><div><h4>Darwin AI PRO v8</h4><p>DESSOUASSI Oboube Anael David</p></div></div>
+<div class="si"><div><h4>Darwin AI PRO v9</h4><p>DESSOUASSI Oboube Anael David</p></div></div>
 <div class="ainfo">
-<strong>Info :</strong> Cette application doit être servie en <strong>HTTPS</strong> ou depuis <code>localhost</code> pour que le micro fonctionne.<br><br>
-<strong>Sur Windows :</strong><br>
-1. Sauvegardez ce fichier<br>
-2. Ouvrez PowerShell dans le dossier (Shift + Clic droit)<br>
-3. Tapez : <code>python -m http.server 8000</code><br>
-4. Ouvrez Chrome/Edge : <code>http://localhost:8000</code><br><br>
-<strong>Ou déployez sur :</strong> <a href="https://pages.github.com" target="_blank">GitHub Pages</a> (HTTPS gratuit)
+<strong>Info :</strong> Sur Windows, servez via HTTPS ou localhost.<br>
+<strong>1.</strong> Sauvegardez ce fichier<br>
+<strong>2.</strong> PowerShell dans le dossier<br>
+<strong>3.</strong> <code>python -m http.server 8000</code><br>
+<strong>4.</strong> Chrome/Edge : <code>http://localhost:8000</code>
 </div>
 </div>
 
 <button class="abtn" style="background:linear-gradient(135deg,#ff5252,#ff4081);box-shadow:none;margin-top:8px" onclick="A.lo()">Déconnexion</button>
-<div class="dinfo"><p>© 2025 DESSOUASSI Oboube Anael David<br>Darwin AI PRO — Universal Assistant</p></div>
+<div class="dinfo"><p>© 2025 DESSOUASSI Oboube Anael David<br>Darwin AI PRO v9 — Ultra Speed</p></div>
 </div></div>
 
 <nav class="bnav">
@@ -397,57 +405,57 @@ a{color:var(--cy);text-decoration:none}
 
 <script>
 /* ═══════════════════════════════════════════════════════════════
-   DARWIN AI PRO v8 - Universal AI System
+   DARWIN AI PRO v9 - Ultra Speed Edition
    © 2025 DESSOUASSI Oboube Anael David
    ═══════════════════════════════════════════════════════════════ */
 
-const L={_p:'dw8_',s(k,v){try{localStorage.setItem(this._p+k,JSON.stringify(v))}catch(e){}},g(k,d=null){try{const v=localStorage.getItem(this._p+k);return v?JSON.parse(v):d}catch(e){return d}},r(k){localStorage.removeItem(this._p+k)}};
+const L={_p:'dw9_',s(k,v){try{localStorage.setItem(this._p+k,JSON.stringify(v))}catch(e){}},g(k,d=null){try{const v=localStorage.getItem(this._p+k);return v?JSON.parse(v):d}catch(e){return d}},r(k){localStorage.removeItem(this._p+k)}};
 
-const ST={user:null,page:'voice',voiceOn:true,selVoice:null,rate:1,pitch:1,voices:[],listening:false,recog:null,synth:window.speechSynthesis,handsFree:false,speaking:false,thinking:false,convos:[],ghToken:'',ghUser:'',cMode:'image',opt:'Photoréaliste',last:null,micReady:false};
+const ST={
+    user:null,page:'voice',
+    voiceOn:true,selVoice:null,rate:1.05,pitch:1,voices:[],
+    listening:false,recog:null,synth:window.speechSynthesis,
+    handsFree:false,speaking:false,thinking:false,
+    convos:[],ghToken:'',ghUser:'',
+    cMode:'image',opt:'Photoréaliste',last:null,
+    turbo:true,stream:true,cache:true,instantVoice:true
+};
 
-const SYS="Tu es Darwin, un assistant vocal universel francais cree par DESSOUASSI Oboube Anael David. Tu es expert dans TOUS les domaines. Reponds TOUJOURS en francais, de facon naturelle et concise (2-4 phrases maximum pour l'oral). N'utilise JAMAIS d'emojis ni de symboles decoratifs. Pour le code utilise des blocs markdown. Ne dis jamais 'en tant qu'IA'. Tu es Darwin.";
+// Prompt optimisé pour vitesse + précision
+const SYS_TURBO="Tu es Darwin, assistant vocal francais expert. Reponds en francais de facon TRES CONCISE (1-3 phrases max), CLAIRE et PRECISE. Va droit au but. Pas d'introduction, pas d'emojis, pas de formules de politesse inutiles.";
+const SYS_NORMAL="Tu es Darwin, assistant vocal francais expert cree par DESSOUASSI Oboube Anael David. Reponds en francais de facon naturelle, claire et concise (max 4 phrases). Pas d'emojis. Pour le code, utilise des blocs markdown.";
 
 const W=ms=>new Promise(r=>setTimeout(r,ms));
 
 document.addEventListener('DOMContentLoaded',async()=>{
-    // Inject logos
     ['sL','aL','hL'].forEach(id=>{const e=document.getElementById(id);if(e){const t=document.getElementById('tL');if(t)e.appendChild(t.content.cloneNode(true))}});
-
-    // Splash
     const f=document.getElementById('sF'),s=document.getElementById('sS');
-    for(const[t,p]of[['Neural core','20'],['Voice engine','40'],['Generators','65'],['Diagnostics','85'],['System','100']]){s.textContent=t;f.style.width=p+'%';await W(250)}
-    await W(300);
+    for(const[t,p]of[['Neural','30'],['Voice','60'],['System','100']]){s.textContent=t;f.style.width=p+'%';await W(180)}
+    await W(200);
     document.getElementById('splash').classList.add('done');
 
-    // Load config
     const c=L.g('cfg',{});
-    ST.voiceOn=c.vo??true;ST.rate=c.r??1;ST.pitch=c.p??1;ST.ghToken=c.gt||'';ST.ghUser=c.gu||'';
+    ST.voiceOn=c.vo??true;ST.rate=c.r??1.05;ST.pitch=c.p??1;ST.ghToken=c.gt||'';ST.ghUser=c.gu||'';
+    ST.turbo=c.tu??true;ST.stream=c.st??true;ST.cache=c.ca??true;ST.instantVoice=c.iv??true;
 
     setTimeout(()=>{
-        const v=document.getElementById('tV');if(v)v.classList.toggle('on',ST.voiceOn);
+        const map={tV:ST.voiceOn,tT:ST.turbo,tSt:ST.stream,tCa:ST.cache,tVi:ST.instantVoice};
+        Object.entries(map).forEach(([id,v])=>{const el=document.getElementById(id);if(el)el.classList.toggle('on',v)});
         const r=document.getElementById('sR');if(r)r.value=ST.rate;
         const p=document.getElementById('sP');if(p)p.value=ST.pitch;
         document.getElementById('gT').value=ST.ghToken;
         document.getElementById('gU').value=ST.ghUser;
     },80);
 
-    // Enter app or auth
     const u=L.g('user');
     if(u){ST.user=u;EA()}else document.getElementById('auth').classList.add('on');
 
-    // Init subsystems
-    V.init();
-    V.loadVoices();
-
-    // Init audio visualizer bars
+    V.init();V.loadVoices();
     const av=document.getElementById('aV');
     av.innerHTML='';
     for(let i=0;i<40;i++){const b=document.createElement('div');b.className='abar';av.appendChild(b)}
-
-    // Run diagnostic
     D.run();
 
-    // PWA
     if('serviceWorker' in navigator){
         const sw="self.addEventListener('install',e=>{self.skipWaiting()});self.addEventListener('fetch',e=>{e.respondWith(fetch(e.request).catch(()=>new Response('Offline')))})";
         navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw],{type:'application/javascript'}))).catch(()=>{})
@@ -456,7 +464,7 @@ document.addEventListener('DOMContentLoaded',async()=>{
     document.getElementById('pwaMan').href=URL.createObjectURL(new Blob([JSON.stringify(man)],{type:'application/json'}));
 });
 
-function sC(){L.s('cfg',{vo:ST.voiceOn,r:ST.rate,p:ST.pitch,gt:ST.ghToken,gu:ST.ghUser})}
+function sC(){L.s('cfg',{vo:ST.voiceOn,r:ST.rate,p:ST.pitch,gt:ST.ghToken,gu:ST.ghUser,tu:ST.turbo,st:ST.stream,ca:ST.cache,iv:ST.instantVoice})}
 
 function EA(){
     document.getElementById('auth').classList.remove('on');
@@ -486,7 +494,7 @@ function T(msg,type='info'){
     d.className='tst '+type;
     d.innerHTML=`<i class="fas fa-${ic[type]||'info-circle'}"></i> ${msg}`;
     c.appendChild(d);
-    setTimeout(()=>{d.style.opacity='0';d.style.transform='translateX(80px)';d.style.transition='.3s';setTimeout(()=>d.remove(),300)},3500);
+    setTimeout(()=>{d.style.opacity='0';d.style.transform='translateX(80px)';d.style.transition='.3s';setTimeout(()=>d.remove(),300)},3000);
 }
 
 /* ═══ DIAGNOSTIC ═══ */
@@ -497,10 +505,9 @@ const D={
         list.innerHTML='';
         let allOk=true;
 
-        // 1. Protocol
         const proto=window.location.protocol;
         if(proto==='file:'){
-            this._add(list,'err','Protocole file://','Le micro NE FONCTIONNERA PAS. Servez le fichier via HTTP.');
+            this._add(list,'err','Protocole file://','Le micro ne fonctionnera pas. Utilisez http:// via un serveur local');
             allOk=false;
         }else if(proto==='https:'||location.hostname==='localhost'||location.hostname==='127.0.0.1'){
             this._add(list,'ok','Protocole '+proto,'Compatible avec le micro');
@@ -508,7 +515,6 @@ const D={
             this._add(list,'warn','Protocole '+proto,'Peut causer des problèmes');
         }
 
-        // 2. Browser
         const ua=navigator.userAgent;
         let br='Inconnu',brOk=false;
         if(ua.includes('Edg/')){br='Edge';brOk=true}
@@ -517,47 +523,40 @@ const D={
         else if(ua.includes('Safari/')&&!ua.includes('Chrome/')){br='Safari';brOk=true}
 
         if(brOk){this._add(list,'ok','Navigateur '+br,'Compatible')}
-        else{this._add(list,'err','Navigateur '+br,'Firefox ne supporte pas la reconnaissance vocale. Utilisez Chrome ou Edge');allOk=false}
+        else{this._add(list,'err','Navigateur '+br,'Utilisez Chrome ou Edge');allOk=false}
 
-        // 3. SpeechRecognition
         const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
         if(SR){this._add(list,'ok','API Speech','Disponible')}
         else{this._add(list,'err','API Speech','Non disponible');allOk=false}
 
-        // 4. MediaDevices
         if(navigator.mediaDevices?.getUserMedia){this._add(list,'ok','API Micro','Disponible')}
         else{this._add(list,'err','API Micro','Non disponible - vérifiez HTTPS');allOk=false}
 
-        // 5. Permission
         if(navigator.permissions){
             try{
                 const p=await navigator.permissions.query({name:'microphone'});
                 if(p.state==='granted'){this._add(list,'ok','Permission micro','Autorisée')}
-                else if(p.state==='denied'){this._add(list,'err','Permission micro','REFUSÉE - Cliquez sur le cadenas 🔒 dans la barre d\'adresse');allOk=false}
+                else if(p.state==='denied'){this._add(list,'err','Permission micro','REFUSÉE - Cliquez sur le cadenas 🔒');allOk=false}
                 else{this._add(list,'warn','Permission micro','Sera demandée')}
             }catch(e){}
         }
 
-        // 6. Test actual mic
         try{
             const stream=await navigator.mediaDevices.getUserMedia({audio:true});
             const track=stream.getAudioTracks()[0];
             this._add(list,'ok','Micro détecté',track?.label||'Micro par défaut');
             stream.getTracks().forEach(t=>t.stop());
         }catch(e){
-            if(e.name==='NotAllowedError'){this._add(list,'err','Accès micro refusé','Autorisez dans Chrome + Windows Paramètres > Confidentialité > Microphone');allOk=false}
+            if(e.name==='NotAllowedError'){this._add(list,'err','Accès micro refusé','Autorisez dans le navigateur + Windows');allOk=false}
             else if(e.name==='NotFoundError'){this._add(list,'err','Aucun micro','Branchez un micro');allOk=false}
             else{this._add(list,'err','Erreur micro',e.message);allOk=false}
         }
 
-        // Update header status
         const hSt=document.getElementById('hSt');
         if(hSt){
             if(allOk){hSt.textContent='Opérationnel';hSt.className='hdr-st'}
             else{hSt.textContent='Vérifiez config';hSt.className='hdr-st wr'}
         }
-
-        ST.micReady=allOk;
     },
     _add(list,status,title,detail){
         const d=document.createElement('div');
@@ -577,44 +576,127 @@ const A={
     lo(){L.r('user');ST.user=null;ST.convos=[];document.getElementById('app').classList.remove('on');document.getElementById('auth').classList.add('on');document.getElementById('cM').innerHTML='';V.stop();T('Déconnecté','ok')}
 };
 
-/* ═══ AI ENGINE ═══ */
+/* ═══ AI ENGINE — ULTRA FAST ═══ */
 const AI={
+    cache:new Map(),
+
     async ask(prompt,history=[],sys=null){
-        // Method 1: Direct GET (most reliable)
-        try{
-            const fullPrompt=(sys||SYS)+'\n\nUtilisateur: '+prompt+'\n\nDarwin:';
-            const r=await fetch('https://text.pollinations.ai/'+encodeURIComponent(fullPrompt)+'?model=openai&seed='+Math.floor(Math.random()*99999));
-            if(r.ok){const t=await r.text();if(t&&t.length>10&&!t.includes('<!DOCTYPE'))return t.trim()}
-        }catch(e){console.warn('AI m1:',e)}
+        const start=Date.now();
 
-        // Method 2: OpenAI-compatible endpoint
-        try{
-            const messages=[{role:'system',content:sys||SYS}];
-            history.slice(-8).forEach(m=>messages.push({role:m.role==='ai'?'assistant':'user',content:m.text}));
-            messages.push({role:'user',content:prompt});
-            const r=await fetch('https://text.pollinations.ai/openai',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'openai',messages,seed:Math.floor(Math.random()*99999)})});
-            if(r.ok){const d=await r.json();const c=d.choices?.[0]?.message?.content;if(c&&c.length>5)return c.trim()}
-        }catch(e){console.warn('AI m2:',e)}
+        // 1. Cache check
+        if(ST.cache){
+            const key=prompt.toLowerCase().trim();
+            if(this.cache.has(key)){
+                console.log('[AI] Cache hit');
+                return {text:this.cache.get(key),time:0,cached:true};
+            }
+        }
 
-        // Local fallback
+        // 2. Prompt optimisé
+        const system=sys||(ST.turbo?SYS_TURBO:SYS_NORMAL);
+
+        // 3. RACE : lance les 2 méthodes en parallèle, on garde la 1ère
+        try{
+            const result=await Promise.race([
+                this._methodGet(prompt,system),
+                this._methodPost(prompt,history,system)
+            ]);
+
+            const time=Date.now()-start;
+            console.log(`[AI] Response in ${time}ms`);
+
+            // Cache l'ancienne réponse
+            if(ST.cache&&result&&result.length>10&&result.length<2000){
+                if(this.cache.size>100)this.cache.clear();
+                this.cache.set(prompt.toLowerCase().trim(),result);
+            }
+
+            return {text:result,time,cached:false};
+        }catch(e){
+            console.warn('[AI] All methods failed:',e);
+            return {text:this._local(prompt),time:Date.now()-start,cached:false};
+        }
+    },
+
+    async _methodGet(prompt,system){
+        const fullPrompt=system+'\n\nQ: '+prompt+'\n\nR:';
+        const r=await fetch('https://text.pollinations.ai/'+encodeURIComponent(fullPrompt)+'?model=openai&seed='+Math.floor(Math.random()*99999));
+        if(!r.ok)throw new Error('GET failed');
+        const t=await r.text();
+        if(!t||t.length<5||t.includes('<!DOCTYPE'))throw new Error('Invalid response');
+        return t.trim();
+    },
+
+    async _methodPost(prompt,history,system){
+        const messages=[{role:'system',content:system}];
+        history.slice(-6).forEach(m=>messages.push({role:m.role==='ai'?'assistant':'user',content:m.text}));
+        messages.push({role:'user',content:prompt});
+        const r=await fetch('https://text.pollinations.ai/openai',{
+            method:'POST',
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({model:'openai',messages,temperature:0.3,max_tokens:ST.turbo?200:500,seed:Math.floor(Math.random()*99999)})
+        });
+        if(!r.ok)throw new Error('POST failed');
+        const d=await r.json();
+        const c=d.choices?.[0]?.message?.content;
+        if(!c||c.length<5)throw new Error('Empty response');
+        return c.trim();
+    },
+
+    // Streaming: split rapidement pour affichage progressif
+    async askStream(prompt,history=[],onChunk,sys=null){
+        const start=Date.now();
+
+        if(ST.cache){
+            const key=prompt.toLowerCase().trim();
+            if(this.cache.has(key)){
+                const cached=this.cache.get(key);
+                // Simule un streaming rapide du cache
+                const words=cached.split(' ');
+                for(let i=0;i<words.length;i+=3){
+                    await W(20);
+                    onChunk(words.slice(0,i+3).join(' '));
+                }
+                return {text:cached,time:Date.now()-start,cached:true};
+            }
+        }
+
+        // Fetch normal puis stream local des mots
+        const result=await this.ask(prompt,history,sys);
+        if(!ST.stream){onChunk(result.text);return result}
+
+        // Simule stream mot-par-mot
+        const words=result.text.split(/(\s+)/);
+        let acc='';
+        for(let i=0;i<words.length;i++){
+            acc+=words[i];
+            if(i%2===0||i===words.length-1){
+                onChunk(acc);
+                await W(15);
+            }
+        }
+        return result;
+    },
+
+    _local(prompt){
         const lo=prompt.toLowerCase();
         if(/salut|bonjour|hello/.test(lo))return"Bonjour. Comment puis-je vous aider ?";
-        if(/qui es.tu/.test(lo))return"Je suis Darwin, votre assistant universel créé par DESSOUASSI Oboube Anael David.";
+        if(/qui es.tu/.test(lo))return"Je suis Darwin, votre assistant universel.";
         if(/heure/.test(lo))return"Il est "+new Date().toLocaleTimeString('fr-FR');
-        if(/date|jour/.test(lo))return"Nous sommes le "+new Date().toLocaleDateString('fr-FR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+        if(/date|jour/.test(lo))return"Nous sommes le "+new Date().toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'});
         if(/merci/.test(lo))return"Je vous en prie.";
-        return"Je rencontre des difficultés de connexion. Vérifiez votre connexion Internet et réessayez.";
+        return"Connexion difficile. Réessayez.";
     }
 };
 
-/* ═══ VOICE - FULLY FIXED ═══ */
+/* ═══ VOICE ═══ */
 const V={
     _stream:null,_actx:null,_analyser:null,_vizF:null,
 
     init(){
         const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
         if(!SR){
-            this._showError('Reconnaissance vocale NON disponible dans ce navigateur.<br>Utilisez <strong>Chrome</strong> ou <strong>Edge</strong>.');
+            this._showError('Reconnaissance vocale NON disponible.<br>Utilisez <strong>Chrome</strong> ou <strong>Edge</strong>.');
             return;
         }
     },
@@ -629,9 +711,8 @@ const V={
         r.maxAlternatives=1;
 
         r.onstart=()=>{
-            console.log('[Voice] STARTED');
             ST.listening=true;
-            this._st('l','À l\'écoute... parlez maintenant');
+            this._st('l','À l\'écoute...');
             this._vizOn();
             this._hideError();
         };
@@ -642,68 +723,49 @@ const V={
                 tr+=e.results[i][0].transcript;
                 if(e.results[i].isFinal)fin=true;
             }
-            console.log('[Voice] Result:',tr,fin?'FINAL':'partial');
             document.getElementById('vT').textContent=tr;
             document.getElementById('vT').className='vtx u';
             if(fin&&tr.trim().length>1)this._proc(tr.trim());
         };
 
         r.onerror=(e)=>{
-            console.warn('[Voice] Error:',e.error);
             ST.listening=false;
             this._vizOff();
             if(e.error==='not-allowed'||e.error==='permission-denied'){
-                this._showError('<strong>Micro bloqué</strong><br>1. Cliquez sur le <strong>🔒 cadenas</strong> dans la barre d\'adresse<br>2. Micro → <strong>Autoriser</strong><br>3. Rechargez la page (F5)');
+                this._showError('<strong>Micro bloqué</strong><br>Cliquez sur le <strong>🔒 cadenas</strong> → Micro → Autoriser → F5');
                 this._st('er','Micro bloqué');
                 T('Autorisez le micro','er');
                 ST.handsFree=false;
                 document.getElementById('hF').classList.remove('on');
-                D.run();
                 return;
             }
             if(e.error==='no-speech'){
                 this._st('','Aucune parole détectée');
-                if(ST.handsFree)setTimeout(()=>{if(ST.handsFree&&!ST.speaking&&!ST.thinking)this._go()},800);
-                return;
-            }
-            if(e.error==='network'){
-                T('Erreur réseau','er');
-                this._st('er','Erreur réseau');
-                return;
-            }
-            if(e.error==='audio-capture'){
-                this._showError('<strong>Aucun micro détecté</strong><br>Vérifiez qu\'un micro est branché et fonctionnel.');
-                this._st('er','Pas de micro');
+                if(ST.handsFree)setTimeout(()=>{if(ST.handsFree&&!ST.speaking&&!ST.thinking)this._go()},600);
                 return;
             }
             this._st('','Prêt');
         };
 
         r.onend=()=>{
-            console.log('[Voice] ENDED');
             ST.listening=false;
             if(ST.handsFree&&!ST.speaking&&!ST.thinking){
-                setTimeout(()=>{if(ST.handsFree&&!ST.speaking&&!ST.thinking)this._go()},600);
+                setTimeout(()=>{if(ST.handsFree&&!ST.speaking&&!ST.thinking)this._go()},400);
             }else if(!ST.thinking&&!ST.speaking){
                 this._st('','Prêt');
                 this._vizOff();
             }
         };
-
         return r;
     },
 
-    _showError(html){
-        const el=document.getElementById('mP');
-        el.classList.add('on');
-        el.innerHTML=html;
-    },
+    _showError(html){const el=document.getElementById('mP');el.classList.add('on');el.innerHTML=html},
     _hideError(){document.getElementById('mP').classList.remove('on')},
 
     loadVoices(){
         const load=()=>{ST.voices=ST.synth.getVoices();this._rvl()};
         if(ST.synth.onvoiceschanged!==undefined)ST.synth.onvoiceschanged=load;
-        load();setTimeout(load,500);setTimeout(load,1500);
+        load();setTimeout(load,300);setTimeout(load,1000);
     },
 
     _rvl(){
@@ -727,13 +789,20 @@ const V={
     speak(text,cb){
         if(!ST.voiceOn){if(cb)cb();return}
         ST.synth.cancel();
-        let c=text.replace(/```[\s\S]*?```/g,' bloc de code ').replace(/`[^`]+`/g,'').replace(/\*\*([^*]+)\*\*/g,'$1').replace(/\*([^*]+)\*/g,'$1').replace(/#{1,6}\s/g,'').replace(/\[([^\]]+)\]\([^)]+\)/g,'$1').replace(/<[^>]+>/g,'').replace(/[\u{1F000}-\u{1FFFF}]|[\u{2600}-\u{27BF}]|[\u{FE00}-\u{FE0F}]|[\u{200D}]/gu,'').replace(/[·•→←↑↓★☆✓✗]/g,'').replace(/\n+/g,'. ').replace(/\s+/g,' ').trim();
+        const c=this._clean(text);
         if(!c){if(cb)cb();return}
         this._st('s','Réponse...');ST.speaking=true;
+        // Split par phrases pour démarrer plus vite
         const parts=c.match(/[^.!?]+[.!?]+|[^.!?]+$/g)||[c];
         let i=0;
         const next=()=>{
-            if(i>=parts.length){ST.speaking=false;this._st('','Prêt');if(cb)cb();if(ST.handsFree)setTimeout(()=>{if(ST.handsFree&&!ST.listening&&!ST.thinking)this._go()},500);return}
+            if(i>=parts.length){
+                ST.speaking=false;
+                this._st('','Prêt');
+                if(cb)cb();
+                if(ST.handsFree)setTimeout(()=>{if(ST.handsFree&&!ST.listening&&!ST.thinking)this._go()},300);
+                return;
+            }
             const u=new SpeechSynthesisUtterance(parts[i].trim());
             if(ST.selVoice)u.voice=ST.selVoice;
             u.rate=ST.rate;u.pitch=ST.pitch;u.lang='fr-FR';
@@ -744,89 +813,85 @@ const V={
         next();
     },
 
+    // Speak partial as it arrives (instant voice)
+    _spokenLen:0,
+    speakProgressive(fullText){
+        if(!ST.voiceOn||!ST.instantVoice)return;
+        // Extract new complete sentences
+        const remaining=fullText.substring(this._spokenLen);
+        const sentences=remaining.match(/[^.!?]+[.!?]+/g);
+        if(!sentences||sentences.length===0)return;
+        // Speak first complete sentence
+        const toSpeak=sentences[0];
+        const c=this._clean(toSpeak);
+        if(!c)return;
+        this._spokenLen+=toSpeak.length;
+        if(!ST.speaking){this._st('s','Réponse...');ST.speaking=true}
+        const u=new SpeechSynthesisUtterance(c);
+        if(ST.selVoice)u.voice=ST.selVoice;
+        u.rate=ST.rate;u.pitch=ST.pitch;u.lang='fr-FR';
+        u.onend=()=>{
+            // Check if there's more to speak
+            setTimeout(()=>{
+                if(!ST.synth.speaking&&!ST.synth.pending){
+                    ST.speaking=false;
+                    this._st('','Prêt');
+                    if(ST.handsFree)setTimeout(()=>{if(ST.handsFree&&!ST.listening&&!ST.thinking)this._go()},300);
+                }
+            },100);
+        };
+        ST.synth.speak(u);
+    },
+    resetSpoken(){this._spokenLen=0;ST.synth.cancel();ST.speaking=false},
+
+    _clean(text){
+        return text.replace(/```[\s\S]*?```/g,' bloc de code ').replace(/`[^`]+`/g,'').replace(/\*\*([^*]+)\*\*/g,'$1').replace(/\*([^*]+)\*/g,'$1').replace(/#{1,6}\s/g,'').replace(/\[([^\]]+)\]\([^)]+\)/g,'$1').replace(/<[^>]+>/g,'').replace(/[\u{1F000}-\u{1FFFF}]|[\u{2600}-\u{27BF}]|[\u{FE00}-\u{FE0F}]|[\u{200D}]/gu,'').replace(/[·•→←↑↓★☆✓✗]/g,'').replace(/\n+/g,'. ').replace(/\s+/g,' ').trim();
+    },
+
     async tap(){
-        console.log('[Voice] TAP - speaking:',ST.speaking,'listening:',ST.listening);
+        if(ST.speaking){ST.synth.cancel();ST.speaking=false;this._st('','Prêt');return}
+        if(ST.listening){try{ST.recog?.stop()}catch(e){}ST.listening=false;this._st('','Prêt');this._vizOff();return}
 
-        if(ST.speaking){
-            ST.synth.cancel();
-            ST.speaking=false;
-            this._st('','Prêt');
-            return;
-        }
-
-        if(ST.listening){
-            try{ST.recog?.stop()}catch(e){}
-            ST.listening=false;
-            this._st('','Prêt');
-            this._vizOff();
-            return;
-        }
-
-        // CRITICAL: Request mic permission via getUserMedia FIRST
         try{
-            console.log('[Voice] Requesting mic permission...');
-            if(!this._stream){
-                this._stream=await navigator.mediaDevices.getUserMedia({audio:true});
-                console.log('[Voice] Mic permission granted');
-            }
+            if(!this._stream)this._stream=await navigator.mediaDevices.getUserMedia({audio:true});
             this._hideError();
         }catch(err){
-            console.error('[Voice] Mic permission denied:',err);
             if(err.name==='NotAllowedError'||err.name==='PermissionDeniedError'){
-                this._showError('<strong>Micro refusé par le navigateur</strong><br>1. Cliquez sur le <strong>🔒 cadenas</strong> dans la barre d\'adresse<br>2. Autorisez le microphone<br>3. Rechargez la page (F5)<br><br>Sinon, vérifiez : <strong>Windows Paramètres → Confidentialité → Microphone → Activer</strong>');
+                this._showError('<strong>Micro refusé</strong><br>Cliquez sur le <strong>🔒 cadenas</strong> → Autoriser → F5');
                 T('Micro refusé','er');
                 D.run();
             }else if(err.name==='NotFoundError'){
-                this._showError('<strong>Aucun micro détecté</strong><br>Branchez un micro (casque, webcam) et rechargez.');
+                this._showError('<strong>Aucun micro détecté</strong>');
                 T('Pas de micro','er');
             }else{
-                this._showError('<strong>Erreur d\'accès micro:</strong> '+err.name+'<br>'+err.message);
+                this._showError('<strong>Erreur:</strong> '+err.name);
                 T('Erreur : '+err.name,'er');
             }
             return;
         }
-
         this._go();
     },
 
     _go(){
-        console.log('[Voice] Starting recognition...');
-
         if(ST.speaking){ST.synth.cancel();ST.speaking=false}
-
-        // Create fresh instance every time - prevents "already started" issues
         try{ST.recog?.abort()}catch(e){}
         ST.recog=this._createRecog();
-
-        if(!ST.recog){
-            T('Reconnaissance vocale non disponible','er');
-            return;
-        }
-
-        // Small delay to let previous instance clean up
+        if(!ST.recog){T('Reconnaissance vocale non disponible','er');return}
         setTimeout(()=>{
-            try{
-                ST.recog.start();
-                console.log('[Voice] start() called successfully');
-            }catch(e){
-                console.error('[Voice] Start failed:',e);
+            try{ST.recog.start()}
+            catch(e){
                 if(e.message?.includes('already started')){
-                    // Try one more time with fresh instance
                     setTimeout(()=>{
                         ST.recog=this._createRecog();
-                        try{ST.recog.start();console.log('[Voice] Retry OK')}
-                        catch(e2){T('Impossible de démarrer le micro','er');this._st('','Prêt')}
-                    },500);
-                }else{
-                    T('Erreur : '+e.message,'er');
-                    this._st('','Prêt');
-                }
+                        try{ST.recog.start()}
+                        catch(e2){T('Impossible de démarrer','er');this._st('','Prêt')}
+                    },400);
+                }else{T('Erreur : '+e.message,'er');this._st('','Prêt')}
             }
-        },100);
+        },80);
     },
 
     stop(){
-        console.log('[Voice] STOP ALL');
         ST.handsFree=false;
         document.getElementById('hF').classList.remove('on');
         ST.synth.cancel();ST.speaking=false;
@@ -856,7 +921,7 @@ const V={
     },
 
     async _proc(text){
-        if(!text){if(ST.handsFree)setTimeout(()=>this._go(),500);return}
+        if(!text){if(ST.handsFree)setTimeout(()=>this._go(),300);return}
         document.getElementById('vT').textContent=text;
         C.add('user',text);
         this._st('t','Réflexion...');this._vizOff();ST.thinking=true;
@@ -864,35 +929,45 @@ const V={
         // Image
         if(/(g[eé]n[eè]re|cr[eé]e|dessine|fais|montre).{0,25}(image|photo|dessin|logo|illustration|portrait)/i.test(text)){
             ST.thinking=false;
-            document.getElementById('vT').textContent='Création de votre image...';
+            document.getElementById('vT').textContent='Création de l\'image...';
             document.getElementById('vT').className='vtx';
-            try{const url=await IG.make(text);C.add('ai','Voici votre image :',{img:url});this.speak('Votre image est prête.')}
-            catch(e){C.add('ai','Impossible de générer l\'image.');this.speak('Erreur de génération.')}
+            try{const url=await IG.make(text);C.add('ai','Voici votre image :',{img:url});this.speak('Image prête.')}
+            catch(e){C.add('ai','Erreur de génération.');this.speak('Erreur.')}
             return;
         }
 
         // Video
         if(/(g[eé]n[eè]re|cr[eé]e|fais).{0,25}(vid[eé]o|animation|film|clip)/i.test(text)){
             ST.thinking=false;
-            document.getElementById('vT').textContent='Création de votre vidéo...';
+            document.getElementById('vT').textContent='Création de la vidéo...';
             document.getElementById('vT').className='vtx';
-            try{
-                const urls=await VG.makeSequence(text,4);
-                C.add('ai','Voici votre séquence animée :',{frames:urls});
-                this.speak('Votre séquence vidéo est prête.');
-            }catch(e){
-                C.add('ai','Impossible de générer la vidéo.');
-                this.speak('Erreur de génération vidéo.');
-            }
+            try{const urls=await VG.makeSequence(text,4);C.add('ai','Voici la séquence :',{frames:urls});this.speak('Séquence prête.')}
+            catch(e){C.add('ai','Erreur de génération.');this.speak('Erreur.')}
             return;
         }
 
-        const resp=await AI.ask(text,ST.convos.slice(0,-1));
-        ST.thinking=false;
-        C.add('ai',resp);
-        document.getElementById('vT').textContent=resp;
-        document.getElementById('vT').className='vtx';
-        this.speak(resp);
+        // TEXT with streaming + progressive voice
+        this.resetSpoken();
+        const msgId=C.addStreaming('ai');
+        try{
+            const result=await AI.askStream(text,ST.convos.slice(0,-1),(chunk)=>{
+                C.updateStreaming(msgId,chunk);
+                document.getElementById('vT').textContent=chunk;
+                document.getElementById('vT').className='vtx';
+                // Progressive voice
+                if(ST.instantVoice)this.speakProgressive(chunk);
+            });
+            ST.thinking=false;
+            C.finalizeStreaming(msgId,result.text,result.time,result.cached);
+
+            // Speak remaining if not already
+            if(!ST.instantVoice||!ST.speaking){
+                this.speak(result.text);
+            }
+        }catch(e){
+            ST.thinking=false;
+            C.finalizeStreaming(msgId,'Erreur de connexion.');
+        }
     },
 
     _st(s,l){
@@ -914,7 +989,7 @@ const V={
             this._analyser.fftSize=128;
             src.connect(this._analyser);
             this._animViz();
-        }catch(e){console.warn('Viz:',e)}
+        }catch(e){}
     },
     _animViz(){
         if(!this._analyser||!ST.listening)return;
@@ -935,15 +1010,64 @@ const V={
     }
 };
 
-/* ═══ CHAT ═══ */
+/* ═══ CHAT with STREAMING ═══ */
 const C={
     add(role,text,extra){
         const m={id:Date.now(),role,text,extra:extra||null,ts:new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})};
         ST.convos.push(m);
-        if(ST.convos.length>60)ST.convos=ST.convos.slice(-60);
+        if(ST.convos.length>50)ST.convos=ST.convos.slice(-50);
         L.s('convos',ST.convos);
-        this._r(m);this._sc();
+        this._r(m);
+        this._sc();
+        return m.id;
     },
+
+    addStreaming(role){
+        const id=Date.now();
+        const c=document.getElementById('cM');
+        const d=document.createElement('div');
+        d.className='msg '+(role==='ai'?'ai':'u')+' fadeUp';
+        d.id='msg-'+id;
+        const av=role==='ai'?'DA':(ST.user?.name?.substring(0,2).toUpperCase()||'U');
+        d.innerHTML=`<div class="mav">${av}</div><div class="mbd"><div class="mb streaming" id="mb-${id}"></div><div class="mt" id="mt-${id}">…</div></div>`;
+        c.appendChild(d);
+        this._sc();
+        return id;
+    },
+
+    updateStreaming(id,text){
+        const el=document.getElementById('mb-'+id);
+        if(el){el.innerHTML=this._f(text);this._sc()}
+    },
+
+    finalizeStreaming(id,finalText,time,cached){
+        const el=document.getElementById('mb-'+id);
+        const tEl=document.getElementById('mt-'+id);
+        if(el){
+            el.classList.remove('streaming');
+            el.innerHTML=this._f(finalText);
+            // Add actions
+            const acts=document.createElement('div');
+            acts.className='macts';
+            acts.innerHTML=`<button class="mac" onclick="navigator.clipboard?.writeText(this.closest('.msg').querySelector('.mb').innerText).then(()=>T('Copié','ok'))"><i class="fas fa-copy"></i></button><button class="mac" onclick="V.speak(this.closest('.msg').querySelector('.mb').innerText)"><i class="fas fa-volume-up"></i></button>`;
+            el.parentNode.insertBefore(acts,tEl);
+        }
+        if(tEl){
+            const ts=new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+            let extra='';
+            if(time!==undefined){
+                const speed=cached?'cache':(time<1000?time+'ms':(time/1000).toFixed(1)+'s');
+                extra=` · <span class="${time<1500||cached?'speed':''}" style="color:${cached?'var(--vi)':time<1500?'var(--ok)':'var(--wr)'}">${speed}</span>`;
+            }
+            tEl.innerHTML=ts+extra;
+        }
+        // Persist
+        const m={id,role:'ai',text:finalText,extra:null,ts:new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})};
+        ST.convos.push(m);
+        if(ST.convos.length>50)ST.convos=ST.convos.slice(-50);
+        L.s('convos',ST.convos);
+    },
+
     _r(m){
         const c=document.getElementById('cM');const d=document.createElement('div');
         d.className='msg '+(m.role==='ai'?'ai':'u')+' fadeUp';
@@ -958,17 +1082,14 @@ const C={
                 let idx=0;
                 const el=document.getElementById(id);
                 if(!el)return;
-                setInterval(()=>{
-                    idx=(idx+1)%m.extra.frames.length;
-                    const e=document.getElementById(id);
-                    if(e)e.src=m.extra.frames[idx];
-                },1000);
+                setInterval(()=>{idx=(idx+1)%m.extra.frames.length;const e=document.getElementById(id);if(e)e.src=m.extra.frames[idx]},1000);
             },100);
         }
         const acts=m.role==='ai'?`<div class="macts"><button class="mac" onclick="navigator.clipboard?.writeText(this.closest('.msg').querySelector('.mb').innerText).then(()=>T('Copié','ok'))"><i class="fas fa-copy"></i></button><button class="mac" onclick="V.speak(this.closest('.msg').querySelector('.mb').innerText)"><i class="fas fa-volume-up"></i></button></div>`:'';
         d.innerHTML=`<div class="mav">${av}</div><div class="mbd"><div class="mb">${this._f(m.text)}${ext}</div>${acts}<div class="mt">${m.ts}</div></div>`;
         c.appendChild(d);
     },
+
     _f(t){
         t=t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
         t=t.replace(/```(\w+)?\n?([\s\S]*?)```/g,(_,l,c)=>`<pre><code>${c.trim()}</code></pre>`);
@@ -978,7 +1099,7 @@ const C={
         t=t.replace(/\n/g,'<br>');
         return t;
     },
-    _sc(){const c=document.getElementById('cM');setTimeout(()=>c.scrollTop=c.scrollHeight,50)},
+    _sc(){const c=document.getElementById('cM');setTimeout(()=>c.scrollTop=c.scrollHeight,20)},
     _ty(on){document.getElementById('tI').classList.toggle('on',on);if(on)this._sc()},
 
     async send(){
@@ -994,27 +1115,30 @@ const C={
             catch(e){this._ty(false);this.add('ai','Impossible de générer.')}
             return;
         }
-
         if(/(g[eé]n[eè]re|cr[eé]e|fais).{0,25}(vid[eé]o|animation|film|clip)/i.test(t)){
             this._ty(true);
-            try{
-                const urls=await VG.makeSequence(t,4);
-                this._ty(false);
-                this.add('ai','Voici votre séquence animée :',{frames:urls});
-                if(ST.voiceOn)V.speak('Séquence vidéo prête.');
-            }catch(e){
-                this._ty(false);
-                this.add('ai','Impossible de générer la vidéo.');
-            }
+            try{const urls=await VG.makeSequence(t,4);this._ty(false);this.add('ai','Voici votre séquence :',{frames:urls});if(ST.voiceOn)V.speak('Séquence prête.')}
+            catch(e){this._ty(false);this.add('ai','Impossible de générer.')}
             return;
         }
 
-        this._ty(true);
-        const r=await AI.ask(t,ST.convos.slice(0,-1));
-        this._ty(false);
-        this.add('ai',r);
-        if(ST.voiceOn)V.speak(r);
+        // Streaming response
+        V.resetSpoken();
+        const msgId=this.addStreaming('ai');
+        try{
+            const result=await AI.askStream(t,ST.convos.slice(0,-1),(chunk)=>{
+                this.updateStreaming(msgId,chunk);
+                if(ST.voiceOn&&ST.instantVoice)V.speakProgressive(chunk);
+            });
+            this.finalizeStreaming(msgId,result.text,result.time,result.cached);
+            if(ST.voiceOn&&(!ST.instantVoice||!ST.speaking)){
+                V.speak(result.text);
+            }
+        }catch(e){
+            this.finalizeStreaming(msgId,'Erreur de connexion. Réessayez.');
+        }
     },
+
     q(t){document.getElementById('ci').value=t;this.send()},
     kd(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();this.send()}},
     rs(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,100)+'px'},
@@ -1023,13 +1147,14 @@ const C={
         if(f.type.startsWith('text/')||/\.(json|js|py|html|css|md|txt)$/i.test(f.name)){
             const r=new FileReader();
             r.onload=async ev=>{
-                const ct=ev.target.result.substring(0,4000);
+                const ct=ev.target.result.substring(0,3000);
                 this.add('user','Fichier : '+f.name);
-                this._ty(true);
-                const rsp=await AI.ask('Analyse ce fichier '+f.name+' :\n\n```\n'+ct+'\n```',ST.convos.slice(0,-1));
-                this._ty(false);
-                this.add('ai',rsp);
-                if(ST.voiceOn)V.speak(rsp);
+                const msgId=this.addStreaming('ai');
+                try{
+                    const result=await AI.askStream('Analyse ce fichier '+f.name+' :\n\n```\n'+ct+'\n```',ST.convos.slice(0,-1),(chunk)=>this.updateStreaming(msgId,chunk));
+                    this.finalizeStreaming(msgId,result.text,result.time,result.cached);
+                    if(ST.voiceOn)V.speak(result.text);
+                }catch(e){this.finalizeStreaming(msgId,'Erreur.')}
             };
             r.readAsText(f);
         }else T('Type non supporté','wr');
@@ -1037,77 +1162,45 @@ const C={
     }
 };
 
-/* ═══ IMAGE GENERATION ═══ */
+/* ═══ IMAGE ═══ */
 const IG={
     async make(prompt,style){
         const s=style||ST.opt;
-        const styles={
-            Photoréaliste:'photorealistic, 8k, detailed, professional photography',
-            'Art numérique':'digital art, vibrant colors, artistic',
-            Anime:'anime style, manga, cel shading',
-            Cyberpunk:'cyberpunk, neon lights, futuristic',
-            Fantasy:'fantasy art, magical, ethereal',
-            Cosmos:'deep space, nebula, stars',
-            Nature:'nature photography, stunning landscape',
-            Ville:'urban photography, city skyline',
-            Fantaisie:'dreamlike, surreal, magical world'
-        };
+        const styles={Photoréaliste:'photorealistic, 8k, detailed','Art numérique':'digital art, vibrant',Anime:'anime style',Cyberpunk:'cyberpunk, neon',Fantasy:'fantasy art',Cosmos:'deep space, nebula',Nature:'nature landscape',Ville:'urban city',Fantaisie:'surreal, magical'};
         const suffix=styles[s]||'';
         const full=prompt+(suffix?', '+suffix:'');
         const seed=Math.floor(Math.random()*999999);
         const url=`https://image.pollinations.ai/prompt/${encodeURIComponent(full)}?width=1024&height=1024&seed=${seed}&model=flux&nologo=true`;
-        await new Promise((res,rej)=>{
-            const img=new Image();
-            img.onload=res;
-            img.onerror=rej;
-            img.src=url;
-            setTimeout(res,30000);
-        });
+        await new Promise((res,rej)=>{const img=new Image();img.onload=res;img.onerror=rej;img.src=url;setTimeout(res,25000)});
         return url;
     }
 };
 
-/* ═══ VIDEO GENERATION (animated sequence) ═══ */
+/* ═══ VIDEO ═══ */
 const VG={
     async makeSequence(prompt,frames=4){
-        const styles={
-            Cinématique:'cinematic, dramatic lighting',
-            Animation:'3d animation, pixar style',
-            Nature:'nature documentary style',
-            Abstrait:'abstract motion graphics'
-        };
+        const styles={Cinématique:'cinematic',Animation:'3d animation',Nature:'nature',Abstrait:'abstract motion'};
         const suffix=styles[ST.opt]||'';
         const urls=[];
+        // Génération parallèle des frames
+        const promises=[];
         for(let i=0;i<frames;i++){
-            const framePrompt=prompt+`, cinematic frame ${i+1} of ${frames}`+(suffix?', '+suffix:'');
+            const framePrompt=prompt+`, frame ${i+1}/${frames}`+(suffix?', '+suffix:'');
             const seed=Math.floor(Math.random()*999999)+i;
             const url=`https://image.pollinations.ai/prompt/${encodeURIComponent(framePrompt)}?width=1024&height=576&seed=${seed}&model=flux&nologo=true`;
-            await new Promise((res,rej)=>{
-                const img=new Image();
-                img.onload=res;
-                img.onerror=rej;
-                img.src=url;
-                setTimeout(res,25000);
-            });
-            urls.push(url);
+            promises.push(new Promise((res)=>{const img=new Image();img.onload=()=>res(url);img.onerror=()=>res(url);img.src=url;setTimeout(()=>res(url),25000)}));
         }
-        return urls;
+        return await Promise.all(promises);
     }
 };
 
-/* ═══ PANORAMA 360° ═══ */
+/* ═══ PANORAMA ═══ */
 const PAN={
     async make(prompt){
         const full=prompt+', equirectangular panorama, 360 degree, seamless, '+ST.opt.toLowerCase();
         const seed=Math.floor(Math.random()*999999);
         const url=`https://image.pollinations.ai/prompt/${encodeURIComponent(full)}?width=2048&height=1024&seed=${seed}&model=flux&nologo=true`;
-        await new Promise((res,rej)=>{
-            const img=new Image();
-            img.onload=res;
-            img.onerror=rej;
-            img.src=url;
-            setTimeout(res,30000);
-        });
+        await new Promise((res,rej)=>{const img=new Image();img.onload=res;img.onerror=rej;img.src=url;setTimeout(res,30000)});
         return url;
     }
 };
@@ -1117,15 +1210,7 @@ const GH={
     async publish(name,html,desc=''){
         if(!ST.ghToken||!ST.ghUser)throw new Error('Configurez GitHub dans paramètres');
         const repo=name.toLowerCase().replace(/[^a-z0-9-]/g,'-').substring(0,60)+'-'+Date.now().toString(36);
-        const api=async(ep,m='GET',b=null)=>{
-            const r=await fetch('https://api.github.com'+ep,{
-                method:m,
-                headers:{Authorization:'token '+ST.ghToken,Accept:'application/vnd.github.v3+json','Content-Type':'application/json'},
-                body:b?JSON.stringify(b):null
-            });
-            if(!r.ok){const e=await r.json().catch(()=>({}));throw new Error(e.message||'HTTP '+r.status)}
-            return r.json();
-        };
+        const api=async(ep,m='GET',b=null)=>{const r=await fetch('https://api.github.com'+ep,{method:m,headers:{Authorization:'token '+ST.ghToken,Accept:'application/vnd.github.v3+json','Content-Type':'application/json'},body:b?JSON.stringify(b):null});if(!r.ok){const e=await r.json().catch(()=>({}));throw new Error(e.message||'HTTP '+r.status)}return r.json()};
         await api('/user/repos','POST',{name:repo,description:desc,private:false,auto_init:true});
         await W(1500);
         await api(`/repos/${ST.ghUser}/${repo}/contents/index.html`,'PUT',{message:'Deploy via Darwin',content:btoa(unescape(encodeURIComponent(html)))});
@@ -1135,7 +1220,7 @@ const GH={
     }
 };
 
-/* ═══ CREATE STUDIO ═══ */
+/* ═══ CREATE ═══ */
 const CR={
     mode(m,el){
         ST.cMode=m;
@@ -1146,16 +1231,12 @@ const CR={
         if(opts)opts.style.display='block';
         const titles={image:"Génération d'image",video:'Génération de vidéo',panorama:'Vue 360°',code:'Génération de code',website:'Création de site web',app:"Création d'application"};
         document.getElementById('cT').textContent=titles[m]||'';
-        const phs={image:'Décrivez l\'image...',video:'Décrivez la scène vidéo...',panorama:'Décrivez l\'environnement 360°...',code:'Décrivez le programme...',website:'Décrivez le site...',app:'Décrivez l\'app...'};
+        const phs={image:'Décrivez l\'image...',video:'Décrivez la scène...',panorama:'Décrivez l\'environnement...',code:'Décrivez le programme...',website:'Décrivez le site...',app:'Décrivez l\'app...'};
         document.getElementById('cP').placeholder=phs[m]||'';
         const first=opts?.querySelector('.goi.on');
         if(first)ST.opt=first.textContent;
     },
-    opt(el){
-        el.parentElement.querySelectorAll('.goi').forEach(o=>o.classList.remove('on'));
-        el.classList.add('on');
-        ST.opt=el.textContent;
-    },
+    opt(el){el.parentElement.querySelectorAll('.goi').forEach(o=>o.classList.remove('on'));el.classList.add('on');ST.opt=el.textContent},
 
     async run(){
         const p=document.getElementById('cP').value.trim();
@@ -1194,37 +1275,30 @@ const CR={
         const r=document.getElementById('cR'),c=document.getElementById('rC');
         r.classList.add('on');
         document.getElementById('rT').textContent='Séquence vidéo';
-        c.innerHTML='<div class="shim">Création des 4 frames (30-60s)...</div>';
+        c.innerHTML='<div class="shim">Création parallèle des 4 frames...</div>';
         document.getElementById('rA').innerHTML='';
         try{
             const urls=await VG.makeSequence(p,4);
             let idx=0;
             c.innerHTML=`<img id="vframe" src="${urls[0]}" class="gimg"><div style="text-align:center;color:var(--tx4);font-size:11px;margin-top:8px">Séquence animée · ${urls.length} frames</div>`;
-            const interval=setInterval(()=>{
-                idx=(idx+1)%urls.length;
-                const el=document.getElementById('vframe');
-                if(!el){clearInterval(interval);return}
-                el.src=urls[idx];
-            },1000);
+            const interval=setInterval(()=>{idx=(idx+1)%urls.length;const el=document.getElementById('vframe');if(!el){clearInterval(interval);return}el.src=urls[idx]},1000);
             ST.last={type:'video',urls};
             document.getElementById('rA').innerHTML=urls.map((u,i)=>`<a href="${u}" download="frame-${i+1}.png" class="mac"><i class="fas fa-download"></i> ${i+1}</a>`).join('');
             T('Séquence créée','ok');
-        }catch(e){
-            c.innerHTML='<div class="dstt err">Erreur de génération.</div>';
-        }
+        }catch(e){c.innerHTML='<div class="dstt err">Erreur.</div>'}
     },
 
     async _pan(p){
         const r=document.getElementById('cR'),c=document.getElementById('rC');
         r.classList.add('on');
         document.getElementById('rT').textContent='Vue 360°';
-        c.innerHTML='<div class="shim">Création panorama 360°...</div>';
+        c.innerHTML='<div class="shim">Création panorama...</div>';
         document.getElementById('rA').innerHTML='';
         const url=await PAN.make(p);
         c.innerHTML=`
             <div style="width:100%;height:400px;border-radius:10px;overflow:hidden;position:relative;cursor:grab;box-shadow:0 0 30px rgba(0,229,255,.2)" id="panView">
                 <div style="position:absolute;inset:0;background-image:url(${url});background-size:cover;background-position:center;transition:background-position .1s" id="panImg"></div>
-                <div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.6);padding:6px 14px;border-radius:20px;font-size:11px;color:#fff;backdrop-filter:blur(10px)">Glissez pour explorer</div>
+                <div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.6);padding:6px 14px;border-radius:20px;font-size:11px;color:#fff">Glissez pour explorer</div>
             </div>
         `;
         const view=document.getElementById('panView'),img=document.getElementById('panImg');
@@ -1234,7 +1308,7 @@ const CR={
         window.onpointerup=()=>{dragging=false;view.style.cursor='grab'};
         ST.last={type:'panorama',url};
         document.getElementById('rA').innerHTML=`<a href="${url}" download="darwin-360.png" class="mac p"><i class="fas fa-download"></i> Télécharger</a>`;
-        T('Panorama 360° créé','ok');
+        T('360° créé','ok');
     },
 
     async _code(p){
@@ -1243,9 +1317,9 @@ const CR={
         r.classList.add('on');
         document.getElementById('rT').textContent='Code · '+lang;
         c.innerHTML='<div class="shim">Génération...</div>';
-        const resp=await AI.ask(`Génère uniquement du code ${lang} pour: ${p}. Code complet, fonctionnel, dans un bloc markdown. Pas d'explications.`,[],`Expert ${lang}. Code de production uniquement.`);
-        const match=resp.match(/```(?:\w+)?\n?([\s\S]*?)```/);
-        const code=match?match[1].trim():resp;
+        const resp=await AI.ask(`Code ${lang} complet pour: ${p}. Uniquement le code dans un bloc markdown.`,[],`Expert ${lang}. Code production only.`);
+        const match=resp.text.match(/```(?:\w+)?\n?([\s\S]*?)```/);
+        const code=match?match[1].trim():resp.text;
         ST.last={type:'code',content:code,lang};
         c.innerHTML=`<div class="grc"><pre><code>${code.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</code></pre></div>`;
         const exts={Python:'py',JavaScript:'js',React:'jsx',Java:'java','C++':'cpp',PHP:'php'};
@@ -1259,8 +1333,8 @@ const CR={
         r.classList.add('on');
         document.getElementById('rT').textContent='Site · '+type;
         c.innerHTML='<div class="shim">Création...</div>';
-        const resp=await AI.ask(`Crée un site web ${type} : ${p}. Génère UNIQUEMENT le code HTML complet commençant par <!DOCTYPE html> avec CSS et JavaScript intégrés. Design ultra moderne, responsive, animations. Pas d'explications.`,[],'Expert web designer. HTML complet uniquement.');
-        let html=resp.match(/```(?:html)?\n?([\s\S]*?)```/)?.[1]?.trim()||resp;
+        const resp=await AI.ask(`Site ${type}: ${p}. HTML complet avec CSS+JS intégrés, moderne, responsive. Uniquement le code.`,[],'Expert web designer. HTML complet only.');
+        let html=resp.text.match(/```(?:html)?\n?([\s\S]*?)```/)?.[1]?.trim()||resp.text;
         if(!html.toLowerCase().startsWith('<!doctype'))html='<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+type+'</title></head><body>'+html+'</body></html>';
         ST.last={type:'website',content:html,name:type};
         c.innerHTML=`<iframe class="pf" srcdoc="${html.replace(/"/g,'&quot;')}"></iframe>`;
@@ -1270,13 +1344,13 @@ const CR={
 
     async _app(p){
         const type=ST.opt;
-        if(type==='PWA'){await this._web(p+' (PWA avec manifest et service worker)');return}
+        if(type==='PWA'){await this._web(p+' (PWA avec manifest)');return}
         const r=document.getElementById('cR'),c=document.getElementById('rC');
         r.classList.add('on');
         document.getElementById('rT').textContent='App · '+type;
         c.innerHTML='<div class="shim">Création...</div>';
-        const resp=await AI.ask(`Application ${type} complète : ${p}. Code uniquement.`,[],`Expert ${type}. Code complet.`);
-        const code=resp.match(/```(?:\w+)?\n?([\s\S]*?)```/)?.[1]?.trim()||resp;
+        const resp=await AI.ask(`App ${type} complète: ${p}. Code only.`,[],`Expert ${type}.`);
+        const code=resp.text.match(/```(?:\w+)?\n?([\s\S]*?)```/)?.[1]?.trim()||resp.text;
         ST.last={type:'code',content:code,lang:type};
         c.innerHTML=`<div class="grc"><pre><code>${code.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</code></pre></div>`;
         document.getElementById('rA').innerHTML=`<button class="mac p" onclick="navigator.clipboard?.writeText(ST.last.content).then(()=>T('Copié','ok'))"><i class="fas fa-copy"></i></button><button class="mac" onclick="U.dl('app.${type==='Flutter'?'dart':'jsx'}',ST.last.content)"><i class="fas fa-download"></i></button>`;
@@ -1284,7 +1358,7 @@ const CR={
     },
 
     async pub(){
-        if(!ST.ghToken||!ST.ghUser){sM('GitHub',`<div class="dstt err">Configurez GitHub dans les paramètres.</div><button class="abtn" onclick="hM();N('settings')">Paramètres</button>`);return}
+        if(!ST.ghToken||!ST.ghUser){sM('GitHub',`<div class="dstt err">Configurez GitHub dans paramètres.</div><button class="abtn" onclick="hM();N('settings')">Paramètres</button>`);return}
         if(!ST.last?.content){T('Rien à publier','wr');return}
         const name=prompt('Nom du projet :',ST.last.name||'darwin-site');
         if(!name)return;
@@ -1294,25 +1368,15 @@ const CR={
             const res=await GH.publish(name,ST.last.content,'Créé par Darwin AI');
             c.innerHTML=`<div class="dstt"><strong>Publié !</strong><br><br>Repo : <a href="${res.repoUrl}" target="_blank">${res.repo}</a><br>URL : <a href="${res.url}" target="_blank">${res.url}</a><br><br><em>Activé en 1-3 min.</em><br><a href="${res.url}" target="_blank" class="dlk"><i class="fas fa-external-link-alt"></i> Ouvrir</a></div>`;
             T('Publié','ok');
-        }catch(e){
-            c.innerHTML=`<div class="dstt err">Erreur : ${e.message}</div>`;
-            T(e.message,'er');
-        }
+        }catch(e){c.innerHTML=`<div class="dstt err">Erreur : ${e.message}</div>`;T(e.message,'er')}
     }
 };
 
 const U={
-    dl(name,content){
-        const blob=new Blob([content],{type:'text/plain;charset=utf-8'});
-        const url=URL.createObjectURL(blob);
-        const a=document.createElement('a');
-        a.href=url;a.download=name;a.click();
-        URL.revokeObjectURL(url);
-        T('Téléchargé','ok');
-    }
+    dl(name,content){const blob=new Blob([content],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;a.click();URL.revokeObjectURL(url);T('Téléchargé','ok')}
 };
 
-console.log('%cDARWIN AI PRO v8','font-size:20px;font-weight:900;background:linear-gradient(135deg,#00e5ff,#7c4dff);-webkit-background-clip:text;-webkit-text-fill-color:transparent');
+console.log('%cDARWIN AI PRO v9 - Ultra Speed','font-size:20px;font-weight:900;background:linear-gradient(135deg,#00e5ff,#7c4dff);-webkit-background-clip:text;-webkit-text-fill-color:transparent');
 console.log('%c© 2025 DESSOUASSI Oboube Anael David','color:#00e5ff;font-size:10px');
 </script>
 </body>
