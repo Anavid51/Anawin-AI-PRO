@@ -6,1997 +6,917 @@
 <title>Darwin AI PRO</title>
 <meta name="theme-color" content="#000814">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" id="pwaMan">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-:root{
---bg:#000814;--bg2:#001d3d;--bg3:#003566;
---surf:rgba(0,29,61,.55);
---cy:#00e5ff;--cy2:#00b8d4;--vi:#7c4dff;--pk:#ff4081;
---tx:#e0f7fa;--tx2:#80deea;--tx3:#4dd0e1;--tx4:#00838f;
---ok:#00e676;--wr:#ffc400;--er:#ff5252;
---gd:linear-gradient(135deg,#00e5ff,#7c4dff);
---gd2:linear-gradient(135deg,#7c4dff,#ff4081);
---gd3:linear-gradient(135deg,#00e676,#00e5ff);
---gd4:linear-gradient(135deg,#ffc400,#ff4081);
---glow:0 0 20px rgba(0,229,255,.5);
---border:rgba(0,229,255,.15);--border2:rgba(0,229,255,.3)
-}
+:root{--bg:#000814;--bg2:#001d3d;--bg3:#003566;--surf:rgba(0,29,61,.55);--cy:#00e5ff;--cy2:#00b8d4;--vi:#7c4dff;--pk:#ff4081;--tx:#e0f7fa;--tx2:#80deea;--tx3:#4dd0e1;--tx4:#00838f;--ok:#00e676;--wr:#ffc400;--er:#ff5252;--gd:linear-gradient(135deg,#00e5ff,#7c4dff);--gd2:linear-gradient(135deg,#7c4dff,#ff4081);--glow:0 0 20px rgba(0,229,255,.5);--border:rgba(0,229,255,.15);--border2:rgba(0,229,255,.3)}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{overscroll-behavior:none}
 body{font-family:'Space Grotesk',system-ui,sans-serif;background:var(--bg);color:var(--tx);min-height:100dvh;overflow-x:hidden;line-height:1.5;-webkit-font-smoothing:antialiased}
-body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle at 20% 20%,rgba(0,229,255,.08),transparent 40%),radial-gradient(circle at 80% 60%,rgba(124,77,255,.08),transparent 40%),radial-gradient(circle at 50% 100%,rgba(255,64,129,.05),transparent 50%);pointer-events:none;z-index:0}
-body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,229,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;mask-image:radial-gradient(ellipse at center,black 30%,transparent 70%)}
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle at 20% 20%,rgba(0,229,255,.08),transparent 40%),radial-gradient(circle at 80% 60%,rgba(124,77,255,.08),transparent 40%);pointer-events:none;z-index:0}
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--cy2);border-radius:2px}
-::selection{background:var(--cy);color:var(--bg)}
 input,textarea,select,button{font-family:inherit}
 a{color:var(--cy);text-decoration:none}
-
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes scaleIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.7;transform:scale(1.05)}}
 @keyframes spin{to{transform:rotate(360deg)}}
-@keyframes breath{0%,100%{transform:scale(1);filter:brightness(1)}50%{transform:scale(1.05);filter:brightness(1.2)}}
+@keyframes breath{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
 @keyframes orbitSpin{to{transform:rotate(360deg)}}
 @keyframes coreRipple{0%{transform:scale(1);opacity:1}100%{transform:scale(3);opacity:0}}
-@keyframes typing{0%,100%{opacity:.3;transform:scale(.7)}50%{opacity:1;transform:scale(1)}}
+@keyframes typing{0%,100%{opacity:.3}50%{opacity:1}}
 @keyframes borderGlow{0%,100%{box-shadow:0 0 20px rgba(0,229,255,.2)}50%{box-shadow:0 0 40px rgba(0,229,255,.5)}}
 @keyframes voiceOrbit{from{transform:rotate(0deg) translateX(80px) rotate(0deg)}to{transform:rotate(360deg) translateX(80px) rotate(-360deg)}}
 @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
-@keyframes glowPulse{0%,100%{box-shadow:0 0 10px rgba(0,229,255,.3)}50%{box-shadow:0 0 25px rgba(0,229,255,.6)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
 
+/* Splash */
 #splash{position:fixed;inset:0;background:radial-gradient(ellipse at center,var(--bg2),var(--bg) 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:10000;transition:opacity .6s,visibility .6s}
 #splash.done{opacity:0;visibility:hidden;pointer-events:none}
 .splash-logo{width:140px;height:140px;margin-bottom:32px;animation:breath 3s infinite}
 .splash-t{font-size:32px;font-weight:700;letter-spacing:8px;background:var(--gd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .splash-sub{color:var(--tx4);font-size:11px;margin-top:8px;letter-spacing:4px;text-transform:uppercase}
 .splash-bar{width:220px;height:2px;background:var(--surf);border-radius:1px;margin-top:36px;overflow:hidden}
-.splash-fill{height:100%;background:var(--gd);border-radius:1px;transition:width .3s;width:0%;box-shadow:var(--glow)}
-.splash-st{color:var(--tx4);font-size:10px;margin-top:14px;letter-spacing:1.5px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;min-height:14px}
+.splash-fill{height:100%;background:var(--gd);border-radius:1px;transition:width .3s;width:0%}
+.splash-st{color:var(--tx4);font-size:10px;margin-top:14px;letter-spacing:1.5px;text-transform:uppercase;font-family:'JetBrains Mono',monospace}
 
+/* Auth */
 #auth{position:fixed;inset:0;background:var(--bg);display:none;align-items:center;justify-content:center;z-index:9000;padding:24px}
 #auth.on{display:flex}
-.auth-w{width:100%;max-width:400px;position:relative;z-index:1}
-.auth-hd{text-align:center;margin-bottom:32px}
-.auth-logo{width:80px;height:80px;margin:0 auto 20px}
-.auth-t{font-size:26px;font-weight:700;letter-spacing:4px;background:var(--gd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.auth-d{color:var(--tx4);font-size:11px;margin-top:6px;letter-spacing:1.5px;text-transform:uppercase}
-.auth-tabs{display:flex;background:var(--surf);border-radius:14px;padding:4px;margin-bottom:24px;border:1px solid var(--border);backdrop-filter:blur(20px)}
-.auth-tab{flex:1;padding:11px;text-align:center;border-radius:10px;cursor:pointer;font-weight:600;font-size:12px;color:var(--tx3);transition:.3s;letter-spacing:1px;text-transform:uppercase}
-.auth-tab.on{background:var(--gd);color:var(--bg);box-shadow:var(--glow)}
-.auth-f{display:none}.auth-f.on{display:block;animation:fadeUp .35s}
+.aw{width:100%;max-width:400px;z-index:1}
+.ahd{text-align:center;margin-bottom:32px}
+.alogo{width:80px;height:80px;margin:0 auto 20px}
+.at{font-size:26px;font-weight:700;letter-spacing:4px;background:var(--gd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.ad{color:var(--tx4);font-size:11px;margin-top:6px;letter-spacing:1.5px;text-transform:uppercase}
+.atabs{display:flex;background:var(--surf);border-radius:14px;padding:4px;margin-bottom:24px;border:1px solid var(--border);backdrop-filter:blur(20px)}
+.atab{flex:1;padding:11px;text-align:center;border-radius:10px;cursor:pointer;font-weight:600;font-size:12px;color:var(--tx3);transition:.3s;letter-spacing:1px;text-transform:uppercase}
+.atab.on{background:var(--gd);color:var(--bg)}
+.af{display:none}.af.on{display:block;animation:fadeUp .35s}
 .fg{margin-bottom:16px}
 .fg label{display:block;font-size:10px;font-weight:600;color:var(--tx3);margin-bottom:6px;letter-spacing:1.5px;text-transform:uppercase}
-.fi{width:100%;padding:13px 14px;background:var(--surf);border:1px solid var(--border);border-radius:10px;color:var(--tx);font-size:14px;transition:.3s;outline:none;backdrop-filter:blur(20px)}
-.fi:focus{border-color:var(--cy);box-shadow:0 0 0 3px rgba(0,229,255,.1)}
+.fi{width:100%;padding:13px 14px;background:var(--surf);border:1px solid var(--border);border-radius:10px;color:var(--tx);font-size:14px;outline:none;backdrop-filter:blur(20px);transition:border .3s}
+.fi:focus{border-color:var(--cy)}
 .fi::placeholder{color:var(--tx4)}
-.auth-btn{width:100%;padding:14px;background:var(--gd);border:none;border-radius:10px;color:var(--bg);font-size:12px;font-weight:700;cursor:pointer;transition:.3s;margin-top:8px;letter-spacing:2px;text-transform:uppercase;box-shadow:var(--glow)}
-.auth-btn:hover{transform:translateY(-2px)}
-.auth-btn:active{transform:scale(.98)}
-.bio-s{text-align:center;margin-top:28px;padding-top:24px;border-top:1px solid var(--border)}
-.bio-btn{width:62px;height:62px;border-radius:50%;background:var(--surf);border:2px solid var(--cy);color:var(--cy);font-size:24px;cursor:pointer;transition:.3s;display:inline-flex;align-items:center;justify-content:center;animation:borderGlow 3s infinite;backdrop-filter:blur(20px)}
-.bio-btn:hover{background:var(--cy);color:var(--bg)}
-.bio-label{display:block;color:var(--tx4);font-size:10px;margin-top:10px;letter-spacing:1.5px;text-transform:uppercase}
+.abtn{width:100%;padding:14px;background:var(--gd);border:none;border-radius:10px;color:var(--bg);font-size:12px;font-weight:700;cursor:pointer;margin-top:8px;letter-spacing:2px;text-transform:uppercase;box-shadow:var(--glow);transition:.3s}
+.abtn:hover{transform:translateY(-2px)}
+.abtn:active{transform:scale(.98)}
+.bios{text-align:center;margin-top:28px;padding-top:24px;border-top:1px solid var(--border)}
+.biob{width:62px;height:62px;border-radius:50%;background:var(--surf);border:2px solid var(--cy);color:var(--cy);font-size:24px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;animation:borderGlow 3s infinite;backdrop-filter:blur(20px);transition:.3s}
+.biob:hover{background:var(--cy);color:var(--bg)}
+.biol{display:block;color:var(--tx4);font-size:10px;margin-top:10px;letter-spacing:1.5px;text-transform:uppercase}
 
+/* App */
 #app{display:none;min-height:100dvh;padding-bottom:76px;position:relative;z-index:1}
 #app.on{display:block}
-
-.hdr{position:sticky;top:0;background:rgba(0,8,20,.88);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;z-index:100;border-bottom:1px solid var(--border)}
+.hdr{position:sticky;top:0;background:rgba(0,8,20,.88);backdrop-filter:blur(24px);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;z-index:100;border-bottom:1px solid var(--border)}
 .hdr-l{display:flex;align-items:center;gap:12px}
 .hdr-logo{width:38px;height:38px}
-.hdr-info h1{font-size:14px;font-weight:700;letter-spacing:3px;background:var(--gd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hdr h1{font-size:14px;font-weight:700;letter-spacing:3px;background:var(--gd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .hdr-st{font-size:9px;color:var(--ok);display:flex;align-items:center;gap:5px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;margin-top:1px}
 .hdr-st::before{content:'';width:5px;height:5px;background:var(--ok);border-radius:50%;box-shadow:0 0 8px var(--ok);animation:pulse 2s infinite}
-.hdr-r{display:flex;gap:6px}
-.hdr-btn{width:36px;height:36px;border-radius:10px;background:var(--surf);border:1px solid var(--border);color:var(--tx3);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.25s;backdrop-filter:blur(20px);position:relative}
-.hdr-btn:hover{color:var(--cy);border-color:var(--cy)}
-.hdr-btn .bdg{position:absolute;top:-3px;right:-3px;min-width:15px;height:15px;background:var(--er);border-radius:8px;font-size:8px;font-weight:700;display:none;align-items:center;justify-content:center;padding:0 3px;border:2px solid var(--bg);color:#fff}
-.hdr-btn .bdg.on{display:flex}
+.hbtn{width:36px;height:36px;border-radius:10px;background:var(--surf);border:1px solid var(--border);color:var(--tx3);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(20px);transition:.25s}
+.hbtn:hover{color:var(--cy);border-color:var(--cy)}
 
 .pg{display:none;padding:16px;animation:fadeUp .35s both}
 .pg.on{display:block}
-.pg-t{text-align:center;margin-bottom:20px;font-size:12px;font-weight:700;letter-spacing:4px;text-transform:uppercase;background:var(--gd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.pg-sub{text-align:center;font-size:11px;color:var(--tx4);margin-top:-14px;margin-bottom:20px;letter-spacing:1px}
+.pgt{text-align:center;margin-bottom:20px;font-size:12px;font-weight:700;letter-spacing:4px;text-transform:uppercase;background:var(--gd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
-/* Voice */
-.voice-mode{display:flex;flex-direction:column;align-items:center;justify-content:space-between;min-height:calc(100dvh - 130px);padding:20px 16px;text-align:center}
-.voice-status{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--tx4);font-weight:600;margin-top:8px;min-height:16px}
-.voice-status.listening{color:var(--cy);animation:pulse 1.5s infinite}
-.voice-status.speaking{color:var(--vi)}
-.voice-status.thinking{color:var(--pk)}
-.voice-core{width:280px;height:280px;position:relative;display:flex;align-items:center;justify-content:center;margin:20px 0;cursor:pointer;-webkit-user-select:none;user-select:none}
-.core-svg{position:absolute;inset:0;filter:drop-shadow(0 0 30px rgba(0,229,255,.4))}
-.core-orb{width:100px;height:100px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--cy),var(--vi) 50%,var(--pk) 100%);position:relative;transition:.4s;animation:breath 3s infinite;box-shadow:0 0 60px rgba(0,229,255,.5),inset 0 0 40px rgba(255,255,255,.2);z-index:2}
-.voice-core.listening .core-orb{animation:pulse .8s infinite;background:radial-gradient(circle at 30% 30%,#fff,var(--cy) 50%,var(--vi) 100%);box-shadow:0 0 80px rgba(0,229,255,.7)}
-.voice-core.speaking .core-orb{animation:pulse .5s infinite;background:radial-gradient(circle at 30% 30%,#fff,var(--vi) 50%,var(--pk) 100%);box-shadow:0 0 80px rgba(124,77,255,.7)}
-.voice-core.thinking .core-orb{animation:spin 2s linear infinite;box-shadow:0 0 80px rgba(255,64,129,.5)}
-.core-ripple{position:absolute;width:100px;height:100px;border-radius:50%;border:2px solid var(--cy);opacity:0;pointer-events:none;z-index:1}
-.voice-core.listening .core-ripple{animation:coreRipple 2s infinite}
-.voice-core.listening .core-ripple:nth-child(2){animation-delay:.6s}
-.voice-core.listening .core-ripple:nth-child(3){animation-delay:1.2s}
-.orbit-dot{position:absolute;top:50%;left:50%;width:8px;height:8px;background:var(--cy);border-radius:50%;margin:-4px;box-shadow:0 0 12px var(--cy);animation:voiceOrbit 4s linear infinite;z-index:1}
-.orbit-dot:nth-child(5){background:var(--vi);box-shadow:0 0 12px var(--vi);animation-delay:-1.3s}
-.orbit-dot:nth-child(6){background:var(--pk);box-shadow:0 0 12px var(--pk);animation-delay:-2.6s}
+/* Voice page */
+.vm{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100dvh - 130px);padding:20px 16px;text-align:center}
+.vs{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--tx4);font-weight:600;margin-top:8px;min-height:16px;transition:color .3s}
+.vs.l{color:var(--cy);animation:pulse 1.5s infinite}
+.vs.s{color:var(--vi)}
+.vs.t{color:var(--pk)}
+.vc{width:280px;height:280px;position:relative;display:flex;align-items:center;justify-content:center;margin:20px 0;cursor:pointer;user-select:none}
+.vc svg{position:absolute;inset:0;filter:drop-shadow(0 0 30px rgba(0,229,255,.4))}
+.orb{width:100px;height:100px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--cy),var(--vi) 50%,var(--pk) 100%);transition:.4s;animation:breath 3s infinite;box-shadow:0 0 60px rgba(0,229,255,.5),inset 0 0 40px rgba(255,255,255,.2);z-index:2}
+.vc.l .orb{animation:pulse .8s infinite;background:radial-gradient(circle at 30% 30%,#fff,var(--cy) 50%,var(--vi) 100%);box-shadow:0 0 80px rgba(0,229,255,.7)}
+.vc.s .orb{animation:pulse .5s infinite;background:radial-gradient(circle at 30% 30%,#fff,var(--vi) 50%,var(--pk) 100%)}
+.vc.t .orb{animation:spin 2s linear infinite}
+.rip{position:absolute;width:100px;height:100px;border-radius:50%;border:2px solid var(--cy);opacity:0;pointer-events:none;z-index:1}
+.vc.l .rip{animation:coreRipple 2s infinite}
+.vc.l .rip:nth-child(2){animation-delay:.6s}
+.vc.l .rip:nth-child(3){animation-delay:1.2s}
+.od{position:absolute;top:50%;left:50%;width:8px;height:8px;background:var(--cy);border-radius:50%;margin:-4px;box-shadow:0 0 12px var(--cy);animation:voiceOrbit 4s linear infinite;z-index:1}
+.od:nth-child(5){background:var(--vi);box-shadow:0 0 12px var(--vi);animation-delay:-1.3s}
+.od:nth-child(6){background:var(--pk);box-shadow:0 0 12px var(--pk);animation-delay:-2.6s}
 
-/* Real-time audio visualizer */
-.audio-viz{display:flex;gap:2px;align-items:flex-end;justify-content:center;height:50px;margin-top:24px;opacity:0;transition:.3s;width:100%;max-width:400px}
-.audio-viz.on{opacity:1}
-.audio-bar{width:4px;background:var(--gd);border-radius:2px;transition:height .05s ease-out;height:4px;min-height:4px}
+.aviz{display:flex;gap:2px;align-items:flex-end;justify-content:center;height:50px;margin-top:24px;opacity:0;transition:.3s;width:100%;max-width:400px}
+.aviz.on{opacity:1}
+.abar{width:4px;background:var(--gd);border-radius:2px;height:4px;min-height:4px;transition:height .05s}
 
-.voice-transcript{min-height:60px;max-width:600px;font-size:16px;color:var(--tx);margin:20px 0;line-height:1.6;padding:0 20px}
-.voice-transcript.user-tx{color:var(--cy)}
-.voice-transcript.empty{color:var(--tx4);font-style:italic;font-size:13px}
-
-.voice-controls{display:flex;gap:12px;justify-content:center;margin-top:16px;flex-wrap:wrap}
-.vc-btn{width:52px;height:52px;border-radius:14px;background:var(--surf);border:1px solid var(--border);color:var(--tx2);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.25s;backdrop-filter:blur(20px)}
-.vc-btn:hover{border-color:var(--cy);color:var(--cy);box-shadow:var(--glow)}
-.vc-btn.on{background:var(--cy);color:var(--bg);border-color:var(--cy);box-shadow:var(--glow)}
-.vc-btn.large{width:64px;height:64px;font-size:22px;border-radius:16px}
-.hf-toggle{display:flex;align-items:center;gap:10px;padding:10px 18px;background:var(--surf);border:1px solid var(--border);border-radius:24px;cursor:pointer;transition:.25s;backdrop-filter:blur(20px);margin-top:12px}
-.hf-toggle.on{border-color:var(--cy);background:rgba(0,229,255,.1);box-shadow:var(--glow)}
-.hf-dot{width:8px;height:8px;border-radius:50%;background:var(--tx4);transition:.3s}
-.hf-toggle.on .hf-dot{background:var(--cy);box-shadow:0 0 8px var(--cy);animation:pulse 1.5s infinite}
-.hf-label{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx2)}
-.hf-toggle.on .hf-label{color:var(--cy)}
-
-.cmd-hint{margin-top:16px;padding:8px 14px;background:rgba(0,229,255,.05);border:1px solid var(--border);border-radius:20px;font-size:10px;color:var(--tx3);letter-spacing:.5px;max-width:400px}
-.cmd-hint strong{color:var(--cy)}
+.vtx{min-height:60px;max-width:600px;font-size:16px;color:var(--tx);margin:20px 0;line-height:1.6;padding:0 20px}
+.vtx.u{color:var(--cy)}
+.vtx.e{color:var(--tx4);font-style:italic;font-size:13px}
+.vctrl{display:flex;gap:12px;justify-content:center;margin-top:16px}
+.vb{width:52px;height:52px;border-radius:14px;background:var(--surf);border:1px solid var(--border);color:var(--tx2);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.25s;backdrop-filter:blur(20px)}
+.vb:hover{border-color:var(--cy);color:var(--cy);box-shadow:var(--glow)}
+.vb.on{background:var(--cy);color:var(--bg);border-color:var(--cy);box-shadow:var(--glow)}
+.vb.big{width:64px;height:64px;font-size:22px;border-radius:16px}
+.hft{display:flex;align-items:center;gap:10px;padding:10px 18px;background:var(--surf);border:1px solid var(--border);border-radius:24px;cursor:pointer;transition:.25s;backdrop-filter:blur(20px);margin-top:12px}
+.hft.on{border-color:var(--cy);background:rgba(0,229,255,.1);box-shadow:var(--glow)}
+.hfd{width:8px;height:8px;border-radius:50%;background:var(--tx4);transition:.3s}
+.hft.on .hfd{background:var(--cy);box-shadow:0 0 8px var(--cy);animation:pulse 1.5s infinite}
+.hfl{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx2)}
+.hft.on .hfl{color:var(--cy)}
+.micp{background:rgba(255,196,0,.05);border:1px solid rgba(255,196,0,.3);border-radius:10px;padding:14px;margin:12px 0;font-size:12px;color:var(--tx2);line-height:1.6;display:none;max-width:500px}
+.micp.on{display:block}
+.micp strong{color:var(--wr)}
+.cmds{margin-top:16px;padding:8px 14px;background:rgba(0,229,255,.05);border:1px solid var(--border);border-radius:20px;font-size:10px;color:var(--tx3);max-width:400px}
+.cmds strong{color:var(--cy)}
 
 /* Chat */
-.chat-c{max-width:800px;margin:0 auto;display:flex;flex-direction:column;height:calc(100dvh - 140px)}
-.chat-msgs{flex:1;overflow-y:auto;padding:8px 0}
+.cc{max-width:800px;margin:0 auto;display:flex;flex-direction:column;height:calc(100dvh - 140px)}
+.cms{flex:1;overflow-y:auto;padding:8px 0}
 .msg{display:flex;gap:10px;margin-bottom:16px;animation:fadeUp .3s both}
 .msg.u{flex-direction:row-reverse}
-.msg-av{width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;font-weight:700}
-.msg.ai .msg-av{background:var(--surf);color:var(--cy);border:1px solid var(--border2)}
-.msg.u .msg-av{background:var(--gd);color:var(--bg)}
-.msg-body{max-width:78%}
-.msg-bub{padding:12px 15px;border-radius:14px;font-size:14px;line-height:1.65;word-wrap:break-word;backdrop-filter:blur(20px)}
-.msg.ai .msg-bub{background:var(--surf);border:1px solid var(--border);border-bottom-left-radius:4px}
-.msg.u .msg-bub{background:linear-gradient(135deg,rgba(0,229,255,.15),rgba(124,77,255,.15));border:1px solid var(--border2);border-bottom-right-radius:4px}
-.msg-t{font-size:9px;color:var(--tx4);margin-top:4px;padding:0 2px}
-.msg.u .msg-t{text-align:right}
-.msg-bub pre{background:rgba(0,0,0,.4);padding:12px;border-radius:8px;overflow-x:auto;margin:8px 0;font-family:'JetBrains Mono',monospace;font-size:12px;border:1px solid var(--border)}
-.msg-bub code{font-family:'JetBrains Mono',monospace;background:rgba(0,229,255,.1);padding:2px 5px;border-radius:4px;font-size:12px;color:var(--cy)}
-.msg-bub pre code{background:transparent;padding:0;color:var(--tx2)}
-.msg-bub img{max-width:100%;border-radius:10px;margin:8px 0;box-shadow:0 0 20px rgba(0,229,255,.2)}
-.msg-acts{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}
-.msg-act{padding:5px 10px;background:var(--surf);border:1px solid var(--border);border-radius:6px;color:var(--tx3);font-size:10px;cursor:pointer;display:flex;align-items:center;gap:4px;transition:.2s;font-weight:500}
-.msg-act:hover{border-color:var(--cy);color:var(--cy)}
-.msg-act.primary{background:var(--gd);color:var(--bg);border-color:var(--cy)}
-.typing{display:none;padding:12px 15px;background:var(--surf);border:1px solid var(--border);border-radius:14px;border-bottom-left-radius:4px;width:fit-content;gap:5px;align-items:center;margin-bottom:14px;backdrop-filter:blur(20px)}
-.typing.on{display:flex}
-.typing span{width:6px;height:6px;background:var(--cy);border-radius:50%;animation:typing 1.2s infinite;box-shadow:0 0 8px var(--cy)}
-.typing span:nth-child(2){animation-delay:.15s}
-.typing span:nth-child(3){animation-delay:.3s}
-.chat-in{padding:12px 0 4px;border-top:1px solid var(--border)}
-.chat-wrap{display:flex;gap:6px;align-items:flex-end;background:var(--surf);border-radius:14px;padding:6px;border:1px solid var(--border);transition:.3s;backdrop-filter:blur(20px)}
-.chat-wrap:focus-within{border-color:var(--cy)}
-.chat-tl{display:flex;gap:2px}
-.ct-btn{width:34px;height:34px;border-radius:9px;background:transparent;border:none;color:var(--tx3);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s}
-.ct-btn:hover{color:var(--cy);background:rgba(0,229,255,.08)}
-.ct-btn.on{color:var(--cy);background:rgba(0,229,255,.15)}
-#chatIn{flex:1;background:transparent;border:none;color:var(--tx);font-size:14px;resize:none;outline:none;max-height:100px;min-height:34px;line-height:1.45;padding:7px 4px}
-#chatIn::placeholder{color:var(--tx4)}
-.send-btn{width:36px;height:36px;border-radius:10px;background:var(--gd);border:none;color:var(--bg);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s;flex-shrink:0;box-shadow:0 0 12px rgba(0,229,255,.4)}
-.send-btn:hover{transform:scale(1.05)}
+.mav{width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;font-weight:700}
+.msg.ai .mav{background:var(--surf);color:var(--cy);border:1px solid var(--border2)}
+.msg.u .mav{background:var(--gd);color:var(--bg)}
+.mbd{max-width:78%}
+.mb{padding:12px 15px;border-radius:14px;font-size:14px;line-height:1.65;word-wrap:break-word;backdrop-filter:blur(20px)}
+.msg.ai .mb{background:var(--surf);border:1px solid var(--border);border-bottom-left-radius:4px}
+.msg.u .mb{background:linear-gradient(135deg,rgba(0,229,255,.15),rgba(124,77,255,.15));border:1px solid var(--border2);border-bottom-right-radius:4px}
+.mt{font-size:9px;color:var(--tx4);margin-top:4px;padding:0 2px}
+.msg.u .mt{text-align:right}
+.mb pre{background:rgba(0,0,0,.4);padding:12px;border-radius:8px;overflow-x:auto;margin:8px 0;font-family:'JetBrains Mono',monospace;font-size:12px;border:1px solid var(--border)}
+.mb code{font-family:'JetBrains Mono',monospace;background:rgba(0,229,255,.1);padding:2px 5px;border-radius:4px;font-size:12px;color:var(--cy)}
+.mb pre code{background:transparent;padding:0;color:var(--tx2)}
+.mb img,.mb video{max-width:100%;border-radius:10px;margin:8px 0;box-shadow:0 0 20px rgba(0,229,255,.2)}
+.macts{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}
+.mac{padding:5px 10px;background:var(--surf);border:1px solid var(--border);border-radius:6px;color:var(--tx3);font-size:10px;cursor:pointer;display:flex;align-items:center;gap:4px;transition:.2s;font-weight:500}
+.mac:hover{border-color:var(--cy);color:var(--cy)}
+.typi{display:none;padding:12px 15px;background:var(--surf);border:1px solid var(--border);border-radius:14px;border-bottom-left-radius:4px;width:fit-content;gap:5px;align-items:center;margin-bottom:14px}
+.typi.on{display:flex}
+.typi span{width:6px;height:6px;background:var(--cy);border-radius:50%;animation:typing 1.2s infinite;box-shadow:0 0 8px var(--cy)}
+.typi span:nth-child(2){animation-delay:.15s}
+.typi span:nth-child(3){animation-delay:.3s}
+.cin{padding:12px 0 4px;border-top:1px solid var(--border)}
+.cw{display:flex;gap:6px;align-items:flex-end;background:var(--surf);border-radius:14px;padding:6px;border:1px solid var(--border);backdrop-filter:blur(20px);transition:border .3s}
+.cw:focus-within{border-color:var(--cy)}
+.ctl{display:flex;gap:2px}
+.cb{width:34px;height:34px;border-radius:9px;background:transparent;border:none;color:var(--tx3);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s}
+.cb:hover{color:var(--cy);background:rgba(0,229,255,.08)}
+.cb.on{color:var(--cy);background:rgba(0,229,255,.15)}
+#ci{flex:1;background:transparent;border:none;color:var(--tx);font-size:14px;resize:none;outline:none;max-height:100px;min-height:34px;line-height:1.45;padding:7px 4px}
+#ci::placeholder{color:var(--tx4)}
+.sb{width:36px;height:36px;border-radius:10px;background:var(--gd);border:none;color:var(--bg);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 12px rgba(0,229,255,.4);transition:.2s}
+.sb:hover{transform:scale(1.05)}
 .qp{display:flex;gap:6px;padding:8px 0;overflow-x:auto;scrollbar-width:none}
 .qp::-webkit-scrollbar{display:none}
-.qp-i{padding:7px 14px;background:var(--surf);border:1px solid var(--border);border-radius:18px;color:var(--tx3);font-size:11px;cursor:pointer;white-space:nowrap;transition:.25s;display:flex;align-items:center;gap:5px;font-weight:500;backdrop-filter:blur(20px)}
-.qp-i:hover{border-color:var(--cy);color:var(--cy)}
-
-/* Modules Grid */
-.mods-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;max-width:800px;margin:0 auto}
-.mod-c{background:var(--surf);border-radius:14px;padding:18px 14px;text-align:center;cursor:pointer;transition:.3s;border:1px solid var(--border);backdrop-filter:blur(20px);position:relative;overflow:hidden}
-.mod-c::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,229,255,.05),transparent);opacity:0;transition:.3s}
-.mod-c:hover{transform:translateY(-3px);border-color:var(--cy);box-shadow:var(--glow)}
-.mod-c:hover::before{opacity:1}
-.mod-ic{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:20px;margin:0 auto 10px;position:relative;z-index:1;color:#fff}
-.mod-n{font-size:12px;font-weight:700;margin-bottom:2px;letter-spacing:.5px;position:relative;z-index:1}
-.mod-d{font-size:10px;color:var(--tx4);font-weight:400;position:relative;z-index:1}
+.qi{padding:7px 14px;background:var(--surf);border:1px solid var(--border);border-radius:18px;color:var(--tx3);font-size:11px;cursor:pointer;white-space:nowrap;transition:.25s;display:flex;align-items:center;gap:5px;font-weight:500;backdrop-filter:blur(20px)}
+.qi:hover{border-color:var(--cy);color:var(--cy)}
 
 /* Create */
-.mode-sel{display:flex;gap:6px;max-width:800px;margin:0 auto 16px;overflow-x:auto;scrollbar-width:none}
-.mode-sel::-webkit-scrollbar{display:none}
-.mode-btn{padding:10px 16px;background:var(--surf);border:1px solid var(--border);border-radius:10px;color:var(--tx3);font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;transition:.25s;display:flex;align-items:center;gap:6px;letter-spacing:1px;text-transform:uppercase;backdrop-filter:blur(20px)}
-.mode-btn.on{background:var(--gd);color:var(--bg);border-color:var(--cy);box-shadow:var(--glow)}
-.gen-form{max-width:800px;margin:0 auto 16px;background:var(--surf);border-radius:14px;padding:20px;border:1px solid var(--border);backdrop-filter:blur(20px)}
-.gen-form h3{font-size:13px;font-weight:700;margin-bottom:14px;letter-spacing:2px;text-transform:uppercase;color:var(--tx2)}
-.gta{width:100%;min-height:100px;padding:12px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;color:var(--tx);font-size:13px;resize:vertical;outline:none;transition:.3s}
+.msel{display:flex;gap:6px;max-width:800px;margin:0 auto 16px;overflow-x:auto;scrollbar-width:none}
+.msel::-webkit-scrollbar{display:none}
+.mbtn{padding:10px 16px;background:var(--surf);border:1px solid var(--border);border-radius:10px;color:var(--tx3);font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;transition:.25s;display:flex;align-items:center;gap:6px;letter-spacing:1px;text-transform:uppercase;backdrop-filter:blur(20px)}
+.mbtn.on{background:var(--gd);color:var(--bg);border-color:var(--cy);box-shadow:var(--glow)}
+.gf{max-width:800px;margin:0 auto 16px;background:var(--surf);border-radius:14px;padding:20px;border:1px solid var(--border);backdrop-filter:blur(20px)}
+.gf h3{font-size:13px;font-weight:700;margin-bottom:14px;letter-spacing:2px;text-transform:uppercase;color:var(--tx2)}
+.gta{width:100%;min-height:100px;padding:12px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;color:var(--tx);font-size:13px;resize:vertical;outline:none;transition:border .3s}
 .gta:focus{border-color:var(--cy)}
 .go{display:flex;gap:8px;margin:12px 0;flex-wrap:wrap}
-.go-i{padding:7px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--tx3);font-size:11px;cursor:pointer;transition:.25s;font-weight:500}
-.go-i.on{border-color:var(--cy);color:var(--cy);background:rgba(0,229,255,.1)}
-.g-btn{padding:12px 24px;background:var(--gd);border:none;border-radius:10px;color:var(--bg);font-size:11px;font-weight:700;cursor:pointer;transition:.25s;display:inline-flex;align-items:center;gap:8px;letter-spacing:2px;text-transform:uppercase;box-shadow:var(--glow)}
-.g-btn:hover{transform:translateY(-1px)}
-.g-btn:disabled{opacity:.5;cursor:not-allowed}
-.gen-result{max-width:800px;margin:0 auto 16px;background:var(--surf);border-radius:14px;padding:16px;border:1px solid var(--border);backdrop-filter:blur(20px);display:none}
-.gen-result.on{display:block;animation:fadeUp .35s}
-.gr-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px}
-.gr-h span{font-weight:700;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--tx2)}
-.gr-actions{display:flex;gap:6px;flex-wrap:wrap}
-.gr-c{background:var(--bg);border-radius:10px;padding:14px;max-height:420px;overflow-y:auto;border:1px solid var(--border)}
-.gr-c pre{font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.65;white-space:pre-wrap;word-wrap:break-word;color:var(--tx2)}
-.preview-frame{width:100%;height:500px;border:1px solid var(--border);border-radius:10px;background:#fff}
-.gen-img{width:100%;border-radius:10px;box-shadow:0 0 30px rgba(0,229,255,.2)}
-.loading-shimmer{background:linear-gradient(90deg,var(--bg2) 25%,var(--surf) 50%,var(--bg2) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:10px;min-height:200px;display:flex;align-items:center;justify-content:center;color:var(--tx4);font-size:11px;letter-spacing:2px;text-transform:uppercase}
-.deploy-status{background:rgba(0,230,118,.05);border:1px solid rgba(0,230,118,.3);border-radius:10px;padding:14px;margin-top:12px;font-size:12px;color:var(--tx2);line-height:1.7}
-.deploy-status.err{background:rgba(255,82,82,.05);border-color:rgba(255,82,82,.3)}
-.deploy-link{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--gd);color:var(--bg);border-radius:8px;font-weight:700;font-size:11px;letter-spacing:1px;text-transform:uppercase;margin-top:8px}
+.goi{padding:7px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--tx3);font-size:11px;cursor:pointer;transition:.25s;font-weight:500}
+.goi.on{border-color:var(--cy);color:var(--cy);background:rgba(0,229,255,.1)}
+.gbtn{padding:12px 24px;background:var(--gd);border:none;border-radius:10px;color:var(--bg);font-size:11px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;letter-spacing:2px;text-transform:uppercase;box-shadow:var(--glow);transition:.25s}
+.gbtn:hover{transform:translateY(-1px)}
+.gbtn:disabled{opacity:.5;cursor:not-allowed}
+.gr{max-width:800px;margin:0 auto 16px;background:var(--surf);border-radius:14px;padding:16px;border:1px solid var(--border);backdrop-filter:blur(20px);display:none}
+.gr.on{display:block;animation:fadeUp .35s}
+.grh{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px}
+.grh span{font-weight:700;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--tx2)}
+.gra{display:flex;gap:6px;flex-wrap:wrap}
+.grc{background:var(--bg);border-radius:10px;padding:14px;max-height:420px;overflow-y:auto;border:1px solid var(--border)}
+.grc pre{font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.65;white-space:pre-wrap;word-wrap:break-word;color:var(--tx2)}
+.pf{width:100%;height:500px;border:1px solid var(--border);border-radius:10px;background:#fff}
+.gimg{width:100%;border-radius:10px;box-shadow:0 0 30px rgba(0,229,255,.2)}
+.shim{background:linear-gradient(90deg,var(--bg2) 25%,var(--surf) 50%,var(--bg2) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:10px;min-height:200px;display:flex;align-items:center;justify-content:center;color:var(--tx4);font-size:11px;letter-spacing:2px;text-transform:uppercase}
+.dstt{background:rgba(0,230,118,.05);border:1px solid rgba(0,230,118,.3);border-radius:10px;padding:14px;margin-top:12px;font-size:12px;color:var(--tx2);line-height:1.7}
+.dstt.err{background:rgba(255,82,82,.05);border-color:rgba(255,82,82,.3)}
+.dlk{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--gd);color:var(--bg);border-radius:8px;font-weight:700;font-size:11px;letter-spacing:1px;text-transform:uppercase;margin-top:8px}
 
 /* Settings */
-.set-c{max-width:600px;margin:0 auto}
-.set-s{background:var(--surf);border-radius:14px;padding:18px;margin-bottom:12px;border:1px solid var(--border);backdrop-filter:blur(20px)}
-.set-st{font-size:11px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;letter-spacing:2px;text-transform:uppercase;color:var(--tx2)}
-.set-st i{color:var(--cy);font-size:13px}
+.sc{max-width:600px;margin:0 auto}
+.ss{background:var(--surf);border-radius:14px;padding:18px;margin-bottom:12px;border:1px solid var(--border);backdrop-filter:blur(20px)}
+.sst{font-size:11px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;letter-spacing:2px;text-transform:uppercase;color:var(--tx2)}
+.sst i{color:var(--cy)}
 .si{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--border);gap:12px}
 .si:last-child{border-bottom:none}
-.si-info h4{font-size:13px;font-weight:600}.si-info p{font-size:11px;color:var(--tx4);margin-top:2px}
+.si h4{font-size:13px;font-weight:600}.si p{font-size:11px;color:var(--tx4);margin-top:2px}
 .tog{width:44px;height:24px;background:var(--bg2);border-radius:12px;cursor:pointer;position:relative;transition:.3s;border:1px solid var(--border);flex-shrink:0}
-.tog.on{background:var(--cy);border-color:var(--cy);box-shadow:0 0 12px rgba(0,229,255,.4)}
+.tog.on{background:var(--cy);border-color:var(--cy)}
 .tog::after{content:'';width:16px;height:16px;background:var(--tx2);border-radius:50%;position:absolute;top:3px;left:3px;transition:.3s}
 .tog.on::after{transform:translateX(20px);background:var(--bg)}
-.set-inp{padding:9px 12px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--tx);font-size:12px;outline:none;width:100%;font-family:'JetBrains Mono',monospace}
-.set-inp:focus{border-color:var(--cy)}
+.sinp{padding:9px 12px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--tx);font-size:12px;outline:none;width:100%;font-family:'JetBrains Mono',monospace}
+.sinp:focus{border-color:var(--cy)}
 .vl{display:grid;gap:6px;margin-top:8px;max-height:250px;overflow-y:auto}
 .vi{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--bg2);border-radius:10px;cursor:pointer;border:1px solid transparent;transition:.25s}
 .vi:hover{border-color:var(--border2)}
 .vi.on{border-color:var(--cy);background:rgba(0,229,255,.08)}
-.vi-i{display:flex;align-items:center;gap:8px;overflow:hidden;flex:1;min-width:0}
-.vi-i span{font-size:12px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.vi-i small{color:var(--tx4);font-size:10px}
-.vp-btn{width:28px;height:28px;border-radius:8px;background:var(--cy);border:none;color:var(--bg);font-size:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.api-info{background:rgba(0,229,255,.05);border:1px solid var(--border2);border-radius:10px;padding:12px;font-size:11px;color:var(--tx3);margin-top:10px;line-height:1.6}
-.api-info a{color:var(--cy);font-weight:600}
-.api-info strong{color:var(--cy)}
-.dev-info{text-align:center;padding:20px;margin-top:16px;border-top:1px solid var(--border)}
-.dev-info p{font-size:10px;color:var(--tx4);line-height:1.7}
+.vi span{font-size:12px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}
+.vi small{color:var(--tx4);font-size:10px;margin-left:8px}
+.vpb{width:28px;height:28px;border-radius:8px;background:var(--cy);border:none;color:var(--bg);font-size:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:8px}
+.ainfo{background:rgba(0,229,255,.05);border:1px solid var(--border2);border-radius:10px;padding:12px;font-size:11px;color:var(--tx3);margin-top:10px;line-height:1.6}
+.ainfo a{color:var(--cy);font-weight:600}
+.dinfo{text-align:center;padding:20px;margin-top:16px;border-top:1px solid var(--border)}
+.dinfo p{font-size:10px;color:var(--tx4);line-height:1.7}
 
-/* Bottom nav */
-.bnav{position:fixed;bottom:0;left:0;right:0;background:rgba(0,8,20,.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);display:flex;padding:8px 12px;padding-bottom:max(8px,env(safe-area-inset-bottom));border-top:1px solid var(--border);z-index:100}
+/* Nav */
+.bnav{position:fixed;bottom:0;left:0;right:0;background:rgba(0,8,20,.92);backdrop-filter:blur(24px);display:flex;padding:8px 12px;padding-bottom:max(8px,env(safe-area-inset-bottom));border-top:1px solid var(--border);z-index:100}
 .ni{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;cursor:pointer;color:var(--tx4);transition:.25s;background:none;border:none}
 .ni.on{color:var(--cy)}
 .ni.on i{filter:drop-shadow(0 0 8px var(--cy))}
 .ni i{font-size:16px}.ni span{font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase}
 
 /* Modal */
-.mo-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:7000;padding:20px;backdrop-filter:blur(6px)}
-.mo-bg.on{display:flex}
+.mobg{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:7000;padding:20px;backdrop-filter:blur(6px)}
+.mobg.on{display:flex}
 .mo{background:var(--bg2);border-radius:16px;padding:24px;max-width:520px;width:100%;max-height:85vh;overflow-y:auto;animation:scaleIn .3s;border:1px solid var(--border2)}
-.mo-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
-.mo-t{font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--tx2)}
-.mo-x{width:30px;height:30px;border-radius:8px;background:var(--surf);border:1px solid var(--border);color:var(--tx);font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.mohd{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.moT{font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--tx2)}
+.mox{width:30px;height:30px;border-radius:8px;background:var(--surf);border:1px solid var(--border);color:var(--tx);font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 
 /* Toast */
-.toast-c{position:fixed;top:16px;right:16px;z-index:9999;display:flex;flex-direction:column;gap:6px;pointer-events:none;max-width:calc(100vw - 32px)}
-.toast{background:var(--bg2);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;animation:fadeUp .3s;border:1px solid var(--border);box-shadow:0 4px 20px rgba(0,0,0,.4);min-width:200px;pointer-events:auto;backdrop-filter:blur(20px)}
-.toast.ok{border-left:3px solid var(--ok)}.toast.er{border-left:3px solid var(--er)}.toast.wr{border-left:3px solid var(--wr)}.toast.info{border-left:3px solid var(--cy)}
+.tc{position:fixed;top:16px;right:16px;z-index:9999;display:flex;flex-direction:column;gap:6px;pointer-events:none;max-width:calc(100vw - 32px)}
+.tst{background:var(--bg2);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;animation:fadeUp .3s;border:1px solid var(--border);box-shadow:0 4px 20px rgba(0,0,0,.4);min-width:200px;pointer-events:auto;backdrop-filter:blur(20px)}
+.tst.ok{border-left:3px solid var(--ok)}.tst.er{border-left:3px solid var(--er)}.tst.wr{border-left:3px solid var(--wr)}.tst.info{border-left:3px solid var(--cy)}
 
-.mic-permission{background:rgba(255,196,0,.05);border:1px solid rgba(255,196,0,.3);border-radius:10px;padding:14px;margin:12px 0;font-size:12px;color:var(--tx2);line-height:1.6;display:none;max-width:500px}
-.mic-permission.on{display:block}
-.mic-permission strong{color:var(--wr)}
-
-/* Health tracker */
-.hlth-c{background:var(--surf);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:12px;backdrop-filter:blur(20px)}
-.hlth-c h4{font-size:12px;font-weight:700;color:var(--tx2);margin-bottom:12px;letter-spacing:1.5px;text-transform:uppercase;display:flex;align-items:center;gap:8px}
-.hlth-c h4 i{color:var(--cy)}
-.hlth-row{display:flex;gap:8px;margin-bottom:10px}
-.hlth-row input{flex:1;padding:9px 12px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--tx);font-size:13px;outline:none}
-.hlth-row input:focus{border-color:var(--cy)}
-.hlth-btn{padding:9px 16px;background:var(--gd);border:none;border-radius:8px;color:var(--bg);font-size:11px;font-weight:700;cursor:pointer;letter-spacing:1px;text-transform:uppercase}
-.hlth-res{background:var(--bg2);border-radius:8px;padding:12px;margin-top:10px;font-size:13px;color:var(--tx2);border:1px solid var(--border)}
-.hlth-res strong{color:var(--cy);font-size:18px;font-weight:700}
-
-/* Notification panel */
-.np-bg{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:5999;display:none;backdrop-filter:blur(4px)}
-.np-bg.on{display:block}
-.np{position:fixed;top:0;right:-100%;width:100%;max-width:360px;height:100dvh;background:var(--bg);z-index:6000;transition:right .3s ease;padding:16px;overflow-y:auto;border-left:1px solid var(--border2)}
-.np.on{right:0}
-.np-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
-.np-hd h2{font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase}
-.np-x{width:32px;height:32px;border-radius:8px;background:var(--surf);border:1px solid var(--border);color:var(--tx);font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.ni-it{background:var(--surf);border-radius:10px;padding:12px;margin-bottom:8px;display:flex;gap:10px;border:1px solid var(--border);backdrop-filter:blur(20px)}
-.ni-ic{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;color:#fff}
-.ni-ct h4{font-size:12px;font-weight:600}.ni-ct p{font-size:11px;color:var(--tx4);margin-top:2px}.ni-tm{font-size:9px;color:var(--tx4);margin-top:4px}
-
-@media(max-width:480px){
-.msg-body{max-width:85%}
-.gen-form{padding:16px}
-.voice-core{width:240px;height:240px}
-.core-orb{width:80px;height:80px}
-.core-ripple{width:80px;height:80px}
-.mods-grid{grid-template-columns:repeat(2,1fr)}
-}
+@media(max-width:480px){.mbd{max-width:85%}.vc{width:240px;height:240px}.orb,.rip{width:80px;height:80px}}
 </style>
 </head>
 <body>
 
-<svg width="0" height="0" style="position:absolute">
-<defs>
+<svg width="0" height="0" style="position:absolute"><defs>
 <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00e5ff"/><stop offset="100%" stop-color="#7c4dff"/></linearGradient>
 <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#7c4dff"/><stop offset="100%" stop-color="#ff4081"/></linearGradient>
-<radialGradient id="gCore" cx="50%" cy="40%"><stop offset="0%" stop-color="#fff"/><stop offset="30%" stop-color="#00e5ff"/><stop offset="70%" stop-color="#7c4dff"/><stop offset="100%" stop-color="#ff4081"/></radialGradient>
+<radialGradient id="gC" cx="50%" cy="40%"><stop offset="0%" stop-color="#fff"/><stop offset="30%" stop-color="#00e5ff"/><stop offset="70%" stop-color="#7c4dff"/><stop offset="100%" stop-color="#ff4081"/></radialGradient>
 <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-</defs>
-</svg>
+</defs></svg>
 
-<template id="tmplLogo">
-<svg viewBox="0 0 100 100" style="width:100%;height:100%">
+<template id="tL"><svg viewBox="0 0 100 100" style="width:100%;height:100%">
 <circle cx="50" cy="50" r="46" fill="none" stroke="url(#g1)" stroke-width="2" stroke-dasharray="8 4" style="animation:orbitSpin 12s linear infinite;transform-origin:center"/>
 <circle cx="50" cy="50" r="38" fill="none" stroke="url(#g2)" stroke-width="1" stroke-dasharray="2 6" style="animation:orbitSpin 18s linear infinite reverse;transform-origin:center"/>
 <polygon points="50,15 78,32 78,68 50,85 22,68 22,32" fill="none" stroke="url(#g1)" stroke-width="1.5" opacity=".6"/>
-<circle cx="50" cy="50" r="14" fill="url(#gCore)" filter="url(#glow)"/>
-<circle cx="50" cy="15" r="1.5" fill="#00e5ff"/><circle cx="78" cy="32" r="1.5" fill="#00e5ff"/>
-<circle cx="78" cy="68" r="1.5" fill="#7c4dff"/><circle cx="50" cy="85" r="1.5" fill="#7c4dff"/>
-<circle cx="22" cy="68" r="1.5" fill="#ff4081"/><circle cx="22" cy="32" r="1.5" fill="#ff4081"/>
-</svg>
-</template>
+<circle cx="50" cy="50" r="14" fill="url(#gC)" filter="url(#glow)"/>
+<circle cx="50" cy="15" r="1.5" fill="#00e5ff"/><circle cx="78" cy="32" r="1.5" fill="#00e5ff"/><circle cx="78" cy="68" r="1.5" fill="#7c4dff"/><circle cx="50" cy="85" r="1.5" fill="#7c4dff"/><circle cx="22" cy="68" r="1.5" fill="#ff4081"/><circle cx="22" cy="32" r="1.5" fill="#ff4081"/>
+</svg></template>
 
-<div id="splash">
-<div class="splash-logo" id="splashLogo"></div>
-<div class="splash-t">DARWIN PRO</div>
-<div class="splash-sub">Universal AI System</div>
-<div class="splash-bar"><div class="splash-fill" id="sFill"></div></div>
-<div class="splash-st" id="sSt">Initialisation</div>
-</div>
+<div id="splash"><div class="splash-logo" id="sL"></div><div class="splash-t">DARWIN PRO</div><div class="splash-sub">Universal AI</div><div class="splash-bar"><div class="splash-fill" id="sF"></div></div><div class="splash-st" id="sS">Init</div></div>
 
-<div id="auth">
-<div class="auth-w" style="animation:fadeUp .5s both">
-<div class="auth-hd">
-<div class="auth-logo" id="authLogo"></div>
-<div class="auth-t">DARWIN PRO</div>
-<div class="auth-d">Universal AI System</div>
-</div>
-<div class="auth-tabs">
-<div class="auth-tab on" onclick="Auth.switchTab('login')">Connexion</div>
-<div class="auth-tab" onclick="Auth.switchTab('register')">Inscription</div>
-</div>
-<form class="auth-f on" id="fLogin" onsubmit="return Auth.login(event)">
-<div class="fg"><label>Email</label><input type="email" class="fi" id="lEmail" placeholder="votre@email.com" required></div>
-<div class="fg"><label>Mot de passe</label><input type="password" class="fi" id="lPass" placeholder="••••••••" required></div>
-<button type="submit" class="auth-btn">Se connecter</button>
-</form>
-<form class="auth-f" id="fReg" onsubmit="return Auth.register(event)">
-<div class="fg"><label>Nom</label><input type="text" class="fi" id="rName" placeholder="Votre nom" required></div>
-<div class="fg"><label>Email</label><input type="email" class="fi" id="rEmail" placeholder="votre@email.com" required></div>
-<div class="fg"><label>Mot de passe</label><input type="password" class="fi" id="rPass" placeholder="6 caractères min." required minlength="6"></div>
-<div class="fg"><label>Confirmation</label><input type="password" class="fi" id="rPass2" placeholder="Confirmez" required></div>
-<button type="submit" class="auth-btn">Créer mon compte</button>
-</form>
-<div class="bio-s">
-<button class="bio-btn" onclick="Auth.biometric()" id="bioBtn"><i class="fas fa-fingerprint"></i></button>
-<span class="bio-label">Biométrie</span>
-</div>
-</div>
-</div>
+<div id="auth"><div class="aw" style="animation:fadeUp .5s both">
+<div class="ahd"><div class="alogo" id="aL"></div><div class="at">DARWIN PRO</div><div class="ad">Accès au système</div></div>
+<div class="atabs"><div class="atab on" onclick="A.sw('l')">Connexion</div><div class="atab" onclick="A.sw('r')">Inscription</div></div>
+<form class="af on" id="fL" onsubmit="return A.li(event)"><div class="fg"><label>Email</label><input type="email" class="fi" id="le" required placeholder="votre@email.com"></div><div class="fg"><label>Mot de passe</label><input type="password" class="fi" id="lp" required placeholder="••••••"></div><button type="submit" class="abtn">Se connecter</button></form>
+<form class="af" id="fR" onsubmit="return A.re(event)"><div class="fg"><label>Nom</label><input type="text" class="fi" id="rn" required placeholder="Nom"></div><div class="fg"><label>Email</label><input type="email" class="fi" id="re2" required placeholder="email"></div><div class="fg"><label>Mot de passe</label><input type="password" class="fi" id="rp" required minlength="6" placeholder="6 car. min"></div><div class="fg"><label>Confirmation</label><input type="password" class="fi" id="rp2" required placeholder="Confirmer"></div><button type="submit" class="abtn">Créer</button></form>
+<div class="bios"><button class="biob" onclick="A.bio()" id="bb"><i class="fas fa-fingerprint"></i></button><span class="biol">Biométrie</span></div>
+</div></div>
 
-<div id="app">
-<header class="hdr">
-<div class="hdr-l">
-<div class="hdr-logo" id="hdrLogo"></div>
-<div class="hdr-info"><h1>DARWIN PRO</h1><div class="hdr-st">Opérationnel</div></div>
-</div>
-<div class="hdr-r">
-<button class="hdr-btn" onclick="Notif.togglePanel()"><i class="fas fa-bell"></i><span class="bdg" id="notifBdg">0</span></button>
-<button class="hdr-btn" onclick="UI.nav('settings')"><i class="fas fa-sliders-h"></i></button>
-</div>
-</header>
+<div id="app"><header class="hdr"><div class="hdr-l"><div class="hdr-logo" id="hL"></div><div><h1>DARWIN PRO</h1><div class="hdr-st">Opérationnel</div></div></div><div style="display:flex;gap:6px"><button class="hbtn" onclick="N('settings')"><i class="fas fa-sliders-h"></i></button></div></header>
 
-<!-- VOICE PAGE -->
-<div class="pg on" id="pg-voice">
-<div class="voice-mode">
-<div class="voice-status" id="vStatus">Prêt · Touchez la sphère</div>
-<div class="voice-core" id="vCore" onclick="Voice.tap()">
-<svg class="core-svg" viewBox="0 0 280 280">
-<circle cx="140" cy="140" r="130" fill="none" stroke="url(#g1)" stroke-width="1" stroke-dasharray="6 4" opacity=".3" style="animation:orbitSpin 20s linear infinite;transform-origin:center"/>
-<circle cx="140" cy="140" r="110" fill="none" stroke="url(#g2)" stroke-width="1" stroke-dasharray="2 8" opacity=".4" style="animation:orbitSpin 15s linear infinite reverse;transform-origin:center"/>
-<circle cx="140" cy="140" r="88" fill="none" stroke="url(#g1)" stroke-width=".5" opacity=".2"/>
-</svg>
-<div class="core-ripple"></div><div class="core-ripple"></div><div class="core-ripple"></div>
-<div class="orbit-dot"></div><div class="orbit-dot"></div><div class="orbit-dot"></div>
-<div class="core-orb"></div>
+<div class="pg on" id="pg-voice"><div class="vm">
+<div class="vs" id="vS">Touchez la sphère pour parler</div>
+<div class="vc" id="vC" onclick="V.tap()">
+<svg viewBox="0 0 280 280"><circle cx="140" cy="140" r="130" fill="none" stroke="url(#g1)" stroke-width="1" stroke-dasharray="6 4" opacity=".3" style="animation:orbitSpin 20s linear infinite;transform-origin:center"/><circle cx="140" cy="140" r="110" fill="none" stroke="url(#g2)" stroke-width="1" stroke-dasharray="2 8" opacity=".4" style="animation:orbitSpin 15s linear infinite reverse;transform-origin:center"/></svg>
+<div class="rip"></div><div class="rip"></div><div class="rip"></div>
+<div class="od"></div><div class="od"></div><div class="od"></div>
+<div class="orb"></div>
 </div>
-<div class="audio-viz" id="audioViz"></div>
-<div class="voice-transcript empty" id="vTx">Bonjour, je suis Darwin. Touchez la sphère et parlez-moi.</div>
-<div class="mic-permission" id="micPerm">
-<strong>Autorisation requise :</strong> Cliquez sur "Autoriser" quand votre navigateur demande l'accès au microphone.
+<div class="aviz" id="aV"></div>
+<div class="vtx e" id="vT">Bonjour, je suis Darwin. Touchez la sphère et posez-moi n'importe quelle question.</div>
+<div class="micp" id="mP"><strong>Autorisation requise :</strong> Cliquez "Autoriser" quand le navigateur demande l'accès au micro.</div>
+<div class="vctrl">
+<button class="vb" onclick="N('chat')"><i class="fas fa-keyboard"></i></button>
+<button class="vb big" onclick="V.tap()" id="mM"><i class="fas fa-microphone"></i></button>
+<button class="vb" onclick="V.stop()"><i class="fas fa-stop"></i></button>
 </div>
-<div class="voice-controls">
-<button class="vc-btn" onclick="UI.nav('chat')"><i class="fas fa-keyboard"></i></button>
-<button class="vc-btn large" onclick="Voice.tap()" id="micMain"><i class="fas fa-microphone"></i></button>
-<button class="vc-btn" onclick="Voice.stopAll()"><i class="fas fa-stop"></i></button>
-</div>
-<div class="hf-toggle" id="hfBtn" onclick="Voice.toggleHF()">
-<div class="hf-dot"></div>
-<div class="hf-label">Mode mains-libres</div>
-</div>
-<div class="cmd-hint">Essayez : <strong>"ouvre les modules"</strong>, <strong>"génère une image"</strong>, <strong>"quelle heure est-il"</strong>, <strong>"vibre"</strong></div>
-</div>
-</div>
+<div class="hft" id="hF" onclick="V.hf()"><div class="hfd"></div><div class="hfl">Mode mains-libres</div></div>
+<div class="cmds">Essayez : <strong>"quelle heure est-il"</strong>, <strong>"génère une image de dragon"</strong>, <strong>"crée une vidéo d'espace"</strong></div>
+</div></div>
 
-<!-- CHAT -->
-<div class="pg" id="pg-chat">
-<div class="chat-c">
+<div class="pg" id="pg-chat"><div class="cc">
 <div class="qp">
-<div class="qp-i" onclick="Chat.quick('Explique la théorie de la relativité')"><i class="fas fa-brain"></i> Expliquer</div>
-<div class="qp-i" onclick="Chat.quick('Génère une image de coucher de soleil')"><i class="fas fa-image"></i> Image</div>
-<div class="qp-i" onclick="Chat.quick('Écris du code Python pour trier une liste')"><i class="fas fa-code"></i> Code</div>
-<div class="qp-i" onclick="Chat.quick('Traduis en anglais : bonjour comment vas-tu')"><i class="fas fa-language"></i> Traduire</div>
-<div class="qp-i" onclick="Chat.quick('Aide-moi à préparer un entretien')"><i class="fas fa-briefcase"></i> Coach</div>
+<div class="qi" onclick="C.q('Explique la relativité en termes simples')"><i class="fas fa-brain"></i> Expliquer</div>
+<div class="qi" onclick="C.q('Génère une image de paysage futuriste')"><i class="fas fa-image"></i> Image</div>
+<div class="qi" onclick="C.q('Crée une vidéo d animation cosmique')"><i class="fas fa-film"></i> Vidéo</div>
+<div class="qi" onclick="C.q('Écris du code Python pour scraper une page web')"><i class="fas fa-code"></i> Code</div>
+<div class="qi" onclick="C.q('Crée un site web portfolio professionnel')"><i class="fas fa-globe"></i> Site</div>
 </div>
-<div class="chat-msgs" id="chatMsgs"></div>
-<div class="typing" id="typInd"><span></span><span></span><span></span></div>
-<div class="chat-in">
-<div class="chat-wrap">
-<div class="chat-tl">
-<button class="ct-btn" onclick="Voice.tap()" id="micChat"><i class="fas fa-microphone"></i></button>
-<button class="ct-btn" onclick="document.getElementById('fUp').click()"><i class="fas fa-paperclip"></i></button>
+<div class="cms" id="cM"></div>
+<div class="typi" id="tI"><span></span><span></span><span></span></div>
+<div class="cin"><div class="cw"><div class="ctl">
+<button class="cb" onclick="V.tap()" id="mC"><i class="fas fa-microphone"></i></button>
+<button class="cb" onclick="document.getElementById('fU').click()"><i class="fas fa-paperclip"></i></button>
+</div><textarea id="ci" placeholder="Message, image, vidéo, code..." rows="1" onkeydown="C.kd(event)" oninput="C.rs(this)"></textarea><button class="sb" onclick="C.send()"><i class="fas fa-paper-plane"></i></button></div></div>
+</div></div>
+
+<div class="pg" id="pg-create"><div class="pgt">Studio de création</div>
+<div class="msel">
+<div class="mbtn on" onclick="CR.mode('image',this)"><i class="fas fa-image"></i> Image</div>
+<div class="mbtn" onclick="CR.mode('video',this)"><i class="fas fa-film"></i> Vidéo</div>
+<div class="mbtn" onclick="CR.mode('panorama',this)"><i class="fas fa-vr-cardboard"></i> 360°</div>
+<div class="mbtn" onclick="CR.mode('code',this)"><i class="fas fa-code"></i> Code</div>
+<div class="mbtn" onclick="CR.mode('website',this)"><i class="fas fa-globe"></i> Site</div>
+<div class="mbtn" onclick="CR.mode('app',this)"><i class="fas fa-mobile-alt"></i> App</div>
 </div>
-<textarea id="chatIn" placeholder="Message ou commande vocale..." rows="1" onkeydown="Chat.kd(event)" oninput="Chat.rs(this)"></textarea>
-<button class="send-btn" onclick="Chat.send()"><i class="fas fa-paper-plane"></i></button>
+<div class="gf"><h3 id="cT">Génération d'image</h3>
+<textarea class="gta" id="cP" placeholder="Décrivez ce que vous voulez créer..."></textarea>
+<div id="o-image"><div class="go"><div class="goi on" onclick="CR.opt(this)">Photoréaliste</div><div class="goi" onclick="CR.opt(this)">Art numérique</div><div class="goi" onclick="CR.opt(this)">Anime</div><div class="goi" onclick="CR.opt(this)">Cyberpunk</div><div class="goi" onclick="CR.opt(this)">Fantasy</div></div></div>
+<div id="o-video" style="display:none"><div class="go"><div class="goi on" onclick="CR.opt(this)">Cinématique</div><div class="goi" onclick="CR.opt(this)">Animation</div><div class="goi" onclick="CR.opt(this)">Nature</div><div class="goi" onclick="CR.opt(this)">Abstrait</div></div></div>
+<div id="o-panorama" style="display:none"><div class="go"><div class="goi on" onclick="CR.opt(this)">Cosmos</div><div class="goi" onclick="CR.opt(this)">Nature</div><div class="goi" onclick="CR.opt(this)">Ville</div><div class="goi" onclick="CR.opt(this)">Fantaisie</div></div></div>
+<div id="o-code" style="display:none"><div class="go"><div class="goi on" onclick="CR.opt(this)">Python</div><div class="goi" onclick="CR.opt(this)">JavaScript</div><div class="goi" onclick="CR.opt(this)">React</div><div class="goi" onclick="CR.opt(this)">Java</div><div class="goi" onclick="CR.opt(this)">C++</div></div></div>
+<div id="o-website" style="display:none"><div class="go"><div class="goi on" onclick="CR.opt(this)">Portfolio</div><div class="goi" onclick="CR.opt(this)">Landing</div><div class="goi" onclick="CR.opt(this)">E-commerce</div><div class="goi" onclick="CR.opt(this)">Blog</div></div></div>
+<div id="o-app" style="display:none"><div class="go"><div class="goi on" onclick="CR.opt(this)">PWA</div><div class="goi" onclick="CR.opt(this)">React Native</div><div class="goi" onclick="CR.opt(this)">Flutter</div></div></div>
+<button class="gbtn" onclick="CR.run()" id="cB"><i class="fas fa-bolt"></i> Générer</button>
 </div>
-</div>
-</div>
+<div class="gr" id="cR"><div class="grh"><span id="rT">Résultat</span><div class="gra" id="rA"></div></div><div id="rC"></div></div>
 </div>
 
-<!-- MODULES -->
-<div class="pg" id="pg-modules">
-<div class="pg-t">Modules IA</div>
-<div class="pg-sub">Capacités universelles de Darwin</div>
-<div class="mods-grid">
-<div class="mod-c" onclick="Mods.open('health')"><div class="mod-ic" style="background:var(--gd3)"><i class="fas fa-heart-pulse"></i></div><div class="mod-n">Santé</div><div class="mod-d">Bien-être</div></div>
-<div class="mod-c" onclick="Mods.open('finance')"><div class="mod-ic" style="background:var(--gd4)"><i class="fas fa-coins"></i></div><div class="mod-n">Finance</div><div class="mod-d">Budget</div></div>
-<div class="mod-c" onclick="Mods.open('comm')"><div class="mod-ic" style="background:var(--gd)"><i class="fas fa-comments"></i></div><div class="mod-n">Comm</div><div class="mod-d">SMS · Appels</div></div>
-<div class="mod-c" onclick="Mods.open('creative')"><div class="mod-ic" style="background:var(--gd2)"><i class="fas fa-palette"></i></div><div class="mod-n">Créativité</div><div class="mod-d">Idées</div></div>
-<div class="mod-c" onclick="Mods.open('translator')"><div class="mod-ic" style="background:linear-gradient(135deg,#00e5ff,#00e676)"><i class="fas fa-language"></i></div><div class="mod-n">Traduction</div><div class="mod-d">100+ langues</div></div>
-<div class="mod-c" onclick="Mods.open('device')"><div class="mod-ic" style="background:linear-gradient(135deg,#7c4dff,#00e5ff)"><i class="fas fa-mobile-alt"></i></div><div class="mod-n">Appareil</div><div class="mod-d">Contrôles</div></div>
-<div class="mod-c" onclick="Mods.open('share')"><div class="mod-ic" style="background:linear-gradient(135deg,#ff4081,#7c4dff)"><i class="fas fa-share-alt"></i></div><div class="mod-n">Partage</div><div class="mod-d">Fichiers</div></div>
-<div class="mod-c" onclick="UI.nav('create')"><div class="mod-ic" style="background:linear-gradient(135deg,#ffc400,#00e5ff)"><i class="fas fa-bolt"></i></div><div class="mod-n">Studio</div><div class="mod-d">Créer</div></div>
+<div class="pg" id="pg-settings"><div class="sc"><div class="pgt">Configuration</div>
+<div class="ss"><div class="sst"><i class="fas fa-brain"></i> Intelligence</div>
+<div class="si"><div><h4>IA</h4><p>Pollinations · Gratuit · Sans clé</p></div><span style="color:var(--ok);font-size:11px;font-weight:600">ACTIF</span></div></div>
+<div class="ss"><div class="sst"><i class="fas fa-user"></i> Profil</div>
+<div class="si"><div><h4 id="pN">—</h4><p id="pE">—</p></div><button class="mac" onclick="EP()"><i class="fas fa-pen"></i></button></div></div>
+<div class="ss"><div class="sst"><i class="fas fa-volume-up"></i> Voix</div>
+<div class="si"><div><h4>Réponses vocales</h4></div><button class="tog on" id="tV" onclick="this.classList.toggle('on');ST.voiceOn=this.classList.contains('on');sC()"></button></div>
+<div class="vl" id="vL"></div>
+<div class="si" style="flex-direction:column;align-items:stretch;gap:6px"><h4 style="font-size:12px">Vitesse</h4><input type="range" min="0.5" max="2" step="0.1" value="1" id="sR" style="width:100%;accent-color:var(--cy)" onchange="ST.rate=+this.value;sC()"></div>
+<div class="si" style="flex-direction:column;align-items:stretch;gap:6px"><h4 style="font-size:12px">Tonalité</h4><input type="range" min="0.5" max="2" step="0.1" value="1" id="sP" style="width:100%;accent-color:var(--cy)" onchange="ST.pitch=+this.value;sC()"></div>
 </div>
-</div>
-
-<!-- CREATE -->
-<div class="pg" id="pg-create">
-<div class="pg-t">Studio de création</div>
-<div class="mode-sel">
-<div class="mode-btn on" onclick="Create.setMode('image',this)"><i class="fas fa-image"></i> Image</div>
-<div class="mode-btn" onclick="Create.setMode('code',this)"><i class="fas fa-code"></i> Code</div>
-<div class="mode-btn" onclick="Create.setMode('website',this)"><i class="fas fa-globe"></i> Site</div>
-<div class="mode-btn" onclick="Create.setMode('app',this)"><i class="fas fa-mobile-alt"></i> App</div>
-</div>
-<div class="gen-form">
-<h3 id="createTitle">Génération d'image</h3>
-<textarea class="gta" id="createPrompt" placeholder="Décrivez ce que vous voulez créer..."></textarea>
-<div id="opts-image"><div class="go">
-<div class="go-i on" onclick="Create.opt(this)">Photoréaliste</div>
-<div class="go-i" onclick="Create.opt(this)">Art numérique</div>
-<div class="go-i" onclick="Create.opt(this)">Anime</div>
-<div class="go-i" onclick="Create.opt(this)">3D</div>
-<div class="go-i" onclick="Create.opt(this)">Cyberpunk</div>
-</div></div>
-<div id="opts-code" style="display:none"><div class="go">
-<div class="go-i on" onclick="Create.opt(this)">Python</div>
-<div class="go-i" onclick="Create.opt(this)">JavaScript</div>
-<div class="go-i" onclick="Create.opt(this)">TypeScript</div>
-<div class="go-i" onclick="Create.opt(this)">React</div>
-<div class="go-i" onclick="Create.opt(this)">Java</div>
-<div class="go-i" onclick="Create.opt(this)">C++</div>
-<div class="go-i" onclick="Create.opt(this)">PHP</div>
-</div></div>
-<div id="opts-website" style="display:none"><div class="go">
-<div class="go-i on" onclick="Create.opt(this)">Portfolio</div>
-<div class="go-i" onclick="Create.opt(this)">Landing page</div>
-<div class="go-i" onclick="Create.opt(this)">E-commerce</div>
-<div class="go-i" onclick="Create.opt(this)">Blog</div>
-<div class="go-i" onclick="Create.opt(this)">Dashboard</div>
-</div></div>
-<div id="opts-app" style="display:none"><div class="go">
-<div class="go-i on" onclick="Create.opt(this)">PWA</div>
-<div class="go-i" onclick="Create.opt(this)">React Native</div>
-<div class="go-i" onclick="Create.opt(this)">Flutter</div>
-</div></div>
-<button class="g-btn" onclick="Create.run()" id="createBtn"><i class="fas fa-bolt"></i> Générer</button>
-</div>
-<div class="gen-result" id="createResult">
-<div class="gr-h"><span id="resTitle">Résultat</span><div class="gr-actions" id="resActs"></div></div>
-<div id="resContent"></div>
-</div>
-</div>
-
-<!-- SETTINGS -->
-<div class="pg" id="pg-settings">
-<div class="set-c">
-<div class="pg-t">Configuration</div>
-<div class="set-s"><div class="set-st"><i class="fas fa-brain"></i> Intelligence IA</div>
-<div class="si"><div class="si-info"><h4>Service IA</h4><p>Pollinations · Gratuit · Sans clé</p></div><span style="color:var(--ok);font-size:11px;font-weight:600">ACTIF</span></div>
-<div class="api-info">Darwin utilise <strong>Pollinations AI</strong> pour tout : chat, images, code. Aucune configuration requise.</div>
-</div>
-<div class="set-s"><div class="set-st"><i class="fab fa-github"></i> Publication (optionnel)</div>
+<div class="ss"><div class="sst"><i class="fab fa-github"></i> GitHub (optionnel)</div>
 <div class="si" style="flex-direction:column;align-items:stretch;gap:8px">
-<div class="si-info"><h4>GitHub</h4><p>Pour publier vos sites en ligne</p></div>
-<input type="password" class="set-inp" id="ghTokenInp" placeholder="ghp_..." onchange="GH.saveToken(this.value)">
-<input type="text" class="set-inp" id="ghUserInp" placeholder="Username GitHub" onchange="GH.saveUser(this.value)" style="margin-top:6px">
-<div class="api-info"><a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a> → Generate → cocher <strong>repo</strong></div>
+<input type="password" class="sinp" id="gT" placeholder="ghp_..." onchange="ST.ghToken=this.value.trim();sC()">
+<input type="text" class="sinp" id="gU" placeholder="Username" onchange="ST.ghUser=this.value.trim();sC()">
+<div class="ainfo"><a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a></div>
 </div></div>
-<div class="set-s"><div class="set-st"><i class="fas fa-user"></i> Profil</div>
-<div class="si"><div class="si-info"><h4 id="pName">—</h4><p id="pEmail">—</p></div><button class="msg-act" onclick="UI.editProfile()"><i class="fas fa-pen"></i></button></div></div>
-<div class="set-s"><div class="set-st"><i class="fas fa-volume-up"></i> Voix</div>
-<div class="si"><div class="si-info"><h4>Réponses vocales</h4></div><button class="tog on" id="togVoice" onclick="UI.tog(this,'voice')"></button></div>
-<div class="si"><div class="si-info"><h4>Langue reconnaissance</h4></div>
-<select class="set-inp" id="langSel" style="max-width:140px" onchange="Voice.setLang(this.value)">
-<option value="fr-FR">Français</option>
-<option value="en-US">English</option>
-<option value="es-ES">Español</option>
-<option value="de-DE">Deutsch</option>
-<option value="it-IT">Italiano</option>
-<option value="pt-BR">Português</option>
-</select>
-</div>
-<div class="vl" id="voiceList"></div>
-<div class="si" style="flex-direction:column;align-items:stretch;gap:6px"><h4 style="font-size:12px">Vitesse</h4><input type="range" min="0.5" max="2" step="0.1" value="1" id="sRate" style="width:100%;accent-color:var(--cy)" onchange="Voice.setRate(this.value)"></div>
-<div class="si" style="flex-direction:column;align-items:stretch;gap:6px"><h4 style="font-size:12px">Tonalité</h4><input type="range" min="0.5" max="2" step="0.1" value="1" id="sPitch" style="width:100%;accent-color:var(--cy)" onchange="Voice.setPitch(this.value)"></div>
-<div class="si" style="flex-direction:column;align-items:stretch;gap:6px"><h4 style="font-size:12px">Volume</h4><input type="range" min="0" max="1" step="0.1" value="1" id="sVol" style="width:100%;accent-color:var(--cy)" onchange="Voice.setVol(this.value)"></div>
-</div>
-<div class="set-s"><div class="set-st"><i class="fas fa-bell"></i> Notifications</div>
-<div class="si"><div class="si-info"><h4>Notifications système</h4><p>Rappels et alertes</p></div><button class="tog" id="togNotif" onclick="Notif.toggleNotif(this)"></button></div>
-</div>
-<div class="set-s"><div class="set-st"><i class="fas fa-mobile-alt"></i> Système</div>
-<div class="si"><div class="si-info"><h4>Wake Lock</h4><p>Empêcher l'écran de s'éteindre</p></div><button class="tog" id="togWake" onclick="Device.toggleWake(this)"></button></div>
-<div class="si"><div class="si-info"><h4>Vibrations</h4><p>Retour haptique</p></div><button class="tog on" id="togVib" onclick="UI.tog(this,'vib')"></button></div>
-</div>
-<div class="set-s"><div class="set-st"><i class="fas fa-info-circle"></i> À propos</div>
-<div class="si"><div class="si-info"><h4>Darwin AI PRO v6</h4><p>Universal AI System</p></div></div>
-<div class="si"><div class="si-info"><h4>Développeur</h4><p>DESSOUASSI Oboube Anael David</p></div></div>
-</div>
-<button class="auth-btn" style="background:linear-gradient(135deg,#ff5252,#ff4081);box-shadow:none;margin-top:8px" onclick="Auth.logout()">Déconnexion</button>
-<div class="dev-info"><p>© 2025 DESSOUASSI Oboube Anael David<br>Darwin AI PRO — Universal Assistant</p></div>
-</div>
-</div>
+<div class="ss"><div class="sst"><i class="fas fa-info-circle"></i> Système</div>
+<div class="si"><div><h4>Darwin AI PRO v7</h4><p>DESSOUASSI Oboube Anael David</p></div></div></div>
+<button class="abtn" style="background:linear-gradient(135deg,#ff5252,#ff4081);box-shadow:none;margin-top:8px" onclick="A.lo()">Déconnexion</button>
+<div class="dinfo"><p>© 2025 DESSOUASSI Oboube Anael David</p></div>
+</div></div>
 
 <nav class="bnav">
-<button class="ni on" onclick="UI.nav('voice')"><i class="fas fa-microphone"></i><span>Voix</span></button>
-<button class="ni" onclick="UI.nav('chat')"><i class="fas fa-comment-dots"></i><span>Chat</span></button>
-<button class="ni" onclick="UI.nav('modules')"><i class="fas fa-th-large"></i><span>Modules</span></button>
-<button class="ni" onclick="UI.nav('create')"><i class="fas fa-bolt"></i><span>Créer</span></button>
-<button class="ni" onclick="UI.nav('settings')"><i class="fas fa-sliders-h"></i><span>Config</span></button>
-</nav>
-</div>
+<button class="ni on" onclick="N('voice')"><i class="fas fa-microphone"></i><span>Voix</span></button>
+<button class="ni" onclick="N('chat')"><i class="fas fa-comment-dots"></i><span>Chat</span></button>
+<button class="ni" onclick="N('create')"><i class="fas fa-bolt"></i><span>Créer</span></button>
+<button class="ni" onclick="N('settings')"><i class="fas fa-sliders-h"></i><span>Config</span></button>
+</nav></div>
 
-<div class="np-bg" id="npBg" onclick="Notif.togglePanel()"></div>
-<div class="np" id="npPanel">
-<div class="np-hd"><h2>Notifications</h2><button class="np-x" onclick="Notif.togglePanel()"><i class="fas fa-times"></i></button></div>
-<div id="npList"></div>
-</div>
-
-<div class="mo-bg" id="moBg" onclick="if(event.target===this)hideModal()"><div class="mo" onclick="event.stopPropagation()"><div class="mo-hd"><span class="mo-t" id="moT"></span><button class="mo-x" onclick="hideModal()"><i class="fas fa-times"></i></button></div><div id="moB"></div></div></div>
-<div class="toast-c" id="toastC"></div>
-<input type="file" id="fUp" style="display:none" onchange="Chat.files(event)">
+<div class="mobg" id="moB" onclick="if(event.target===this)hM()"><div class="mo" onclick="event.stopPropagation()"><div class="mohd"><span class="moT" id="moT"></span><button class="mox" onclick="hM()"><i class="fas fa-times"></i></button></div><div id="moD"></div></div></div>
+<div class="tc" id="tC"></div>
+<input type="file" id="fU" style="display:none" onchange="C.fi(event)">
 
 <script>
-/* ═══════════════════════════════════════════════════
-   DARWIN AI PRO v6 - Universal AI System
-   © 2025 DESSOUASSI Oboube Anael David
-   ═══════════════════════════════════════════════════ */
+const L={_p:'dw7_',s(k,v){try{localStorage.setItem(this._p+k,JSON.stringify(v))}catch(e){}},g(k,d=null){try{const v=localStorage.getItem(this._p+k);return v?JSON.parse(v):d}catch(e){return d}},r(k){localStorage.removeItem(this._p+k)}};
+const ST={user:null,page:'voice',voiceOn:true,selVoice:null,rate:1,pitch:1,voices:[],listening:false,recog:null,synth:window.speechSynthesis,handsFree:false,speaking:false,thinking:false,convos:[],ghToken:'',ghUser:'',cMode:'image',opt:'Photoréaliste',last:null};
+const SYS="Tu es Darwin, un assistant vocal universel francais cree par DESSOUASSI Oboube Anael David. Tu es expert en TOUT. Reponds TOUJOURS en francais, de facon naturelle et concise (2-4 phrases maximum pour l'oral). N'utilise JAMAIS d'emojis ni de symboles. Pour le code utilise des blocs markdown. Ne dis jamais 'en tant qu'IA'. Tu es Darwin, un vrai assistant.";
 
-const LS = {
-    _p: 'dwpro_',
-    set(k,v){try{localStorage.setItem(this._p+k,JSON.stringify(v))}catch(e){}},
-    get(k,d=null){try{const v=localStorage.getItem(this._p+k);return v?JSON.parse(v):d}catch(e){return d}},
-    rm(k){localStorage.removeItem(this._p+k)}
-};
+const W=ms=>new Promise(r=>setTimeout(r,ms));
 
-const ST = {
-    user:null, authed:false, page:'voice',
-    voiceOn:true, selVoice:null, rate:1, pitch:1, vol:1, voices:[], lang:'fr-FR',
-    listening:false, recog:null, synth:window.speechSynthesis,
-    handsFree:false, speaking:false, thinking:false,
-    audioCtx:null, analyser:null, micStream:null, vizFrame:null,
-    convos:[], notifs:[],
-    ghToken:'', ghUser:'',
-    createMode:'image', selOpt:'Photoréaliste',
-    lastGen:null,
-    vibOn:true, notifOn:false, wakeLock:null,
-    healthData:{}
-};
-
-const SYS_PROMPT = "Tu es Darwin, un assistant vocal universel francais cree par DESSOUASSI Oboube Anael David. Tu es expert dans TOUS les domaines : sante, finance, technologie, science, culture, art, education. Reponds en francais de facon naturelle, concise (2-4 phrases pour l'oral) et professionnelle. N'utilise JAMAIS d'emojis ni de symboles decoratifs car tes reponses sont lues a voix haute. Pour le code, utilise des blocs markdown. Ne dis jamais 'en tant qu'IA' - tu es Darwin.";
-
-const CAPABILITIES = {
-    health: 'Suivi bien-etre, IMC, hydratation, sommeil, activite physique',
-    finance: 'Budget, epargne, calcul interets, conversion devises',
-    communication: 'SMS, appels, WhatsApp, email, partage',
-    creativity: 'Ecriture, images, code, sites web, brainstorming',
-    translator: 'Traduction 100+ langues',
-    device: 'Vibration, wake lock, orientation, batterie',
-    voice: '30+ commandes vocales, reconnaissance temps reel'
-};
-
-document.addEventListener('DOMContentLoaded', async () => {
-    injectLogos();
-    const fill = document.getElementById('sFill');
-    const st = document.getElementById('sSt');
-    for (const [t,p] of [['Neural core','15'],['Voice engine','30'],['Health module','45'],['Finance module','60'],['Comms module','75'],['Creativity module','90'],['Ready','100']]) {
-        st.textContent = t; fill.style.width = p+'%'; await wait(250);
-    }
-    await wait(300);
-    document.getElementById('splash').classList.add('done');
-    const u = LS.get('user');
-    if (u) { ST.user = u; ST.authed = true; enterApp(); }
-    else document.getElementById('auth').classList.add('on');
-    loadCfg();
-    Voice.initRecog();
-    Voice.initVoices();
-    initVizBars();
-    setupPWA();
-    initHealthData();
+document.addEventListener('DOMContentLoaded',async()=>{
+    ['sL','aL','hL'].forEach(id=>{const e=document.getElementById(id);if(e){const t=document.getElementById('tL');if(t)e.appendChild(t.content.cloneNode(true))}});
+    const f=document.getElementById('sF'),s=document.getElementById('sS');
+    for(const[t,p]of[['Neural core','20'],['Voice','45'],['Generators','70'],['System','100']]){s.textContent=t;f.style.width=p+'%';await W(280)}
+    await W(300);document.getElementById('splash').classList.add('done');
+    const c=L.g('cfg',{});ST.voiceOn=c.vo??true;ST.rate=c.r??1;ST.pitch=c.p??1;ST.ghToken=c.gt||'';ST.ghUser=c.gu||'';
+    setTimeout(()=>{const v=document.getElementById('tV');if(v)v.classList.toggle('on',ST.voiceOn);const r=document.getElementById('sR');if(r)r.value=ST.rate;const p=document.getElementById('sP');if(p)p.value=ST.pitch;document.getElementById('gT').value=ST.ghToken;document.getElementById('gU').value=ST.ghUser},80);
+    const u=L.g('user');
+    if(u){ST.user=u;EA()}else document.getElementById('auth').classList.add('on');
+    V.init();V.loadVoices();
+    const av=document.getElementById('aV');av.innerHTML='';for(let i=0;i<40;i++){const b=document.createElement('div');b.className='abar';av.appendChild(b)}
+    if('serviceWorker' in navigator){const sw="self.addEventListener('install',e=>{self.skipWaiting()});self.addEventListener('fetch',e=>{e.respondWith(fetch(e.request).catch(()=>new Response('Offline')))})";navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw],{type:'application/javascript'}))).catch(()=>{})}
+    const man={name:'Darwin AI PRO',short_name:'Darwin',start_url:'.',display:'standalone',background_color:'#000814',theme_color:'#000814',icons:[{src:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><rect width="192" height="192" rx="42" fill="#000814"/><circle cx="96" cy="96" r="60" fill="none" stroke="#00e5ff" stroke-width="2" stroke-dasharray="8 4"/><circle cx="96" cy="96" r="28" fill="#00e5ff"/></svg>'),sizes:'192x192',type:'image/svg+xml',purpose:'any maskable'}]};
+    document.getElementById('pwaMan').href=URL.createObjectURL(new Blob([JSON.stringify(man)],{type:'application/json'}));
 });
 
-function wait(ms) { return new Promise(r => setTimeout(r, ms)) }
+function sC(){L.s('cfg',{vo:ST.voiceOn,r:ST.rate,p:ST.pitch,gt:ST.ghToken,gu:ST.ghUser})}
+function EA(){document.getElementById('auth').classList.remove('on');document.getElementById('app').classList.add('on');if(ST.user){document.getElementById('pN').textContent=ST.user.name;document.getElementById('pE').textContent=ST.user.email}const cv=L.g('convos',[]);if(cv.length){ST.convos=cv;document.getElementById('cM').innerHTML='';ST.convos.forEach(m=>C._r(m));C._sc()}}
+function N(p){ST.page=p;document.querySelectorAll('.pg').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.ni').forEach(x=>x.classList.remove('on'));document.getElementById('pg-'+p).classList.add('on');const i=['voice','chat','create','settings'].indexOf(p);if(i>=0)document.querySelectorAll('.ni')[i].classList.add('on')}
+function sM(t,b){document.getElementById('moT').textContent=t;document.getElementById('moD').innerHTML=b;document.getElementById('moB').classList.add('on')}
+function hM(){document.getElementById('moB').classList.remove('on')}
+function EP(){sM('Profil',`<div class="fg"><label>Nom</label><input type="text" class="fi" id="eN" value="${ST.user?.name||''}"></div><button class="abtn" onclick="const n=document.getElementById('eN').value.trim();if(n){ST.user.name=n;L.s('user',ST.user);document.getElementById('pN').textContent=n;hM();T('Mis à jour','ok')}">Enregistrer</button>`)}
+function T(msg,type='info'){const c=document.getElementById('tC');const ic={ok:'check-circle',er:'exclamation-circle',wr:'exclamation-triangle',info:'info-circle'};const d=document.createElement('div');d.className='tst '+type;d.innerHTML=`<i class="fas fa-${ic[type]||'info-circle'}"></i> ${msg}`;c.appendChild(d);setTimeout(()=>{d.style.opacity='0';d.style.transform='translateX(80px)';d.style.transition='.3s';setTimeout(()=>d.remove(),300)},3500)}
 
-function injectLogos() {
-    const t = document.getElementById('tmplLogo');
-    ['splashLogo','authLogo','hdrLogo'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el && t) el.appendChild(t.content.cloneNode(true));
-    });
-}
+// AUTH
+const A={
+    sw(t){document.querySelectorAll('.atab').forEach((e,i)=>e.classList.toggle('on',t==='l'?i===0:i===1));document.getElementById('fL').classList.toggle('on',t==='l');document.getElementById('fR').classList.toggle('on',t==='r')},
+    li(e){e.preventDefault();const em=document.getElementById('le').value.trim(),pw=document.getElementById('lp').value;const us=L.g('users',[]);const u=us.find(x=>x.e===em);if(u&&u.p===btoa(pw)){ST.user={name:u.n,email:u.e};L.s('user',ST.user);EA();T('Bienvenue '+u.n,'ok')}else T(u?'Mot de passe incorrect':'Compte introuvable','er');return false},
+    re(e){e.preventDefault();const nm=document.getElementById('rn').value.trim(),em=document.getElementById('re2').value.trim(),pw=document.getElementById('rp').value,pw2=document.getElementById('rp2').value;if(pw!==pw2){T('Mots de passe différents','er');return false}if(pw.length<6){T('6 car. minimum','er');return false}const us=L.g('users',[]);if(us.find(x=>x.e===em)){T('Email déjà utilisé','er');return false}us.push({n:nm,e:em,p:btoa(pw)});L.s('users',us);ST.user={name:nm,email:em};L.s('user',ST.user);EA();T('Compte créé','ok');return false},
+    async bio(){const b=document.getElementById('bb');b.innerHTML='<i class="fas fa-spinner fa-spin"></i>';try{if(window.PublicKeyCredential)await navigator.credentials.create({publicKey:{challenge:crypto.getRandomValues(new Uint8Array(32)),rp:{name:'Darwin'},user:{id:crypto.getRandomValues(new Uint8Array(16)),name:'u@d',displayName:'U'},pubKeyCredParams:[{alg:-7,type:'public-key'}],authenticatorSelection:{userVerification:'required'},timeout:60000,attestation:'none'}})}catch(e){}const u=L.g('user');if(u){ST.user=u;EA();T('Accès autorisé','ok')}else T('Créez un compte','wr');b.innerHTML='<i class="fas fa-fingerprint"></i>'},
+    lo(){L.r('user');ST.user=null;ST.convos=[];document.getElementById('app').classList.remove('on');document.getElementById('auth').classList.add('on');document.getElementById('cM').innerHTML='';V.stop();T('Déconnecté','ok')}
+};
 
-function enterApp() {
-    document.getElementById('auth').classList.remove('on');
-    document.getElementById('app').classList.add('on');
-    if (ST.user) {
-        document.getElementById('pName').textContent = ST.user.name;
-        document.getElementById('pEmail').textContent = ST.user.email;
-    }
-    document.getElementById('ghTokenInp').value = ST.ghToken || '';
-    document.getElementById('ghUserInp').value = ST.ghUser || '';
-    const cv = LS.get('convos', []);
-    if (cv.length) { ST.convos = cv; renderAllMsgs(); }
-    Notif.updateBadge();
-}
+// AI - FIXED: better prompt handling, multiple fallbacks
+const AI={
+    async ask(prompt,history=[],sys=null){
+        // Method 1: Pollinations text endpoint (direct GET - most reliable)
+        try{
+            const fullPrompt=(sys||SYS)+'\n\nUtilisateur: '+prompt+'\n\nDarwin:';
+            const r=await fetch('https://text.pollinations.ai/'+encodeURIComponent(fullPrompt)+'?model=openai&seed='+Math.floor(Math.random()*99999));
+            if(r.ok){const t=await r.text();if(t&&t.length>10&&!t.includes('<!DOCTYPE'))return t.trim()}
+        }catch(e){console.warn('AI method 1 failed:',e)}
 
-function loadCfg() {
-    const c = LS.get('cfg', {});
-    ST.voiceOn = c.voiceOn ?? true;
-    ST.rate = c.rate ?? 1;
-    ST.pitch = c.pitch ?? 1;
-    ST.vol = c.vol ?? 1;
-    ST.lang = c.lang || 'fr-FR';
-    ST.ghToken = c.ghToken || '';
-    ST.ghUser = c.ghUser || '';
-    ST.vibOn = c.vibOn ?? true;
-    ST.notifOn = c.notifOn ?? false;
-    setTimeout(() => {
-        const v = document.getElementById('togVoice');
-        if (v) v.classList.toggle('on', ST.voiceOn);
-        const r = document.getElementById('sRate'); if (r) r.value = ST.rate;
-        const p = document.getElementById('sPitch'); if (p) p.value = ST.pitch;
-        const vo = document.getElementById('sVol'); if (vo) vo.value = ST.vol;
-        const l = document.getElementById('langSel'); if (l) l.value = ST.lang;
-        const tv = document.getElementById('togVib'); if (tv) tv.classList.toggle('on', ST.vibOn);
-        const tn = document.getElementById('togNotif'); if (tn && Notification.permission === 'granted' && ST.notifOn) tn.classList.add('on');
-    }, 80);
-}
+        // Method 2: Pollinations OpenAI-compatible endpoint
+        try{
+            const messages=[{role:'system',content:sys||SYS}];
+            history.slice(-8).forEach(m=>messages.push({role:m.role==='ai'?'assistant':'user',content:m.text}));
+            messages.push({role:'user',content:prompt});
+            const r=await fetch('https://text.pollinations.ai/openai',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'openai',messages,seed:Math.floor(Math.random()*99999)})});
+            if(r.ok){const d=await r.json();const c=d.choices?.[0]?.message?.content;if(c&&c.length>5)return c.trim()}
+        }catch(e){console.warn('AI method 2 failed:',e)}
 
-function saveCfg() {
-    LS.set('cfg', { voiceOn:ST.voiceOn, rate:ST.rate, pitch:ST.pitch, vol:ST.vol, lang:ST.lang, ghToken:ST.ghToken, ghUser:ST.ghUser, vibOn:ST.vibOn, notifOn:ST.notifOn });
-}
-
-function initHealthData() {
-    ST.healthData = LS.get('health', { water:0, steps:0, sleep:0, weight:0, height:0 });
-}
-
-/* ═══ AUTH ═══ */
-const Auth = {
-    switchTab(t) {
-        document.querySelectorAll('.auth-tab').forEach((e,i) => e.classList.toggle('on', t === 'login' ? i === 0 : i === 1));
-        document.getElementById('fLogin').classList.toggle('on', t === 'login');
-        document.getElementById('fReg').classList.toggle('on', t === 'register');
-    },
-    login(e) {
-        e.preventDefault();
-        const em = document.getElementById('lEmail').value.trim();
-        const pw = document.getElementById('lPass').value;
-        const users = LS.get('users', []);
-        const u = users.find(x => x.email === em);
-        if (u && u.pw === btoa(pw)) {
-            ST.user = { name: u.name, email: u.email };
-            ST.authed = true;
-            LS.set('user', ST.user);
-            enterApp();
-            toast('Bienvenue ' + u.name, 'ok');
-        } else toast(u ? 'Mot de passe incorrect' : 'Compte introuvable', 'er');
-        return false;
-    },
-    register(e) {
-        e.preventDefault();
-        const nm = document.getElementById('rName').value.trim();
-        const em = document.getElementById('rEmail').value.trim();
-        const pw = document.getElementById('rPass').value;
-        const pw2 = document.getElementById('rPass2').value;
-        if (pw !== pw2) { toast('Mots de passe différents', 'er'); return false; }
-        if (pw.length < 6) { toast('6 caractères minimum', 'er'); return false; }
-        const users = LS.get('users', []);
-        if (users.find(x => x.email === em)) { toast('Email déjà utilisé', 'er'); return false; }
-        users.push({ name: nm, email: em, pw: btoa(pw) });
-        LS.set('users', users);
-        ST.user = { name: nm, email: em };
-        ST.authed = true;
-        LS.set('user', ST.user);
-        enterApp();
-        toast('Compte créé', 'ok');
-        return false;
-    },
-    async biometric() {
-        const btn = document.getElementById('bioBtn');
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-        try {
-            if (window.PublicKeyCredential) {
-                await navigator.credentials.create({
-                    publicKey: {
-                        challenge: crypto.getRandomValues(new Uint8Array(32)),
-                        rp: { name: 'Darwin AI' },
-                        user: { id: crypto.getRandomValues(new Uint8Array(16)), name: 'u@d', displayName: 'User' },
-                        pubKeyCredParams: [{ alg: -7, type: 'public-key' }],
-                        authenticatorSelection: { userVerification: 'required' },
-                        timeout: 60000, attestation: 'none'
-                    }
-                });
-            }
-        } catch(e) {}
-        const u = LS.get('user');
-        if (u) { ST.user = u; ST.authed = true; enterApp(); toast('Accès autorisé', 'ok'); }
-        else toast('Créez d\'abord un compte', 'wr');
-        btn.innerHTML = '<i class="fas fa-fingerprint"></i>';
-    },
-    logout() {
-        LS.rm('user');
-        ST.user = null; ST.authed = false; ST.convos = [];
-        document.getElementById('app').classList.remove('on');
-        document.getElementById('auth').classList.add('on');
-        document.getElementById('chatMsgs').innerHTML = '';
-        Voice.stopAll();
-        toast('Déconnecté', 'ok');
+        // Local fallback
+        const lo=prompt.toLowerCase();
+        if(/salut|bonjour|hello/.test(lo))return"Bonjour. Comment puis-je vous aider ?";
+        if(/qui es.tu/.test(lo))return"Je suis Darwin, votre assistant universel créé par DESSOUASSI Oboube Anael David.";
+        if(/heure/.test(lo))return"Il est "+new Date().toLocaleTimeString('fr-FR');
+        if(/date|jour/.test(lo))return"Nous sommes le "+new Date().toLocaleDateString('fr-FR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+        if(/merci/.test(lo))return"Je vous en prie.";
+        return"Je rencontre des difficultés de connexion. Vérifiez votre connexion Internet et réessayez.";
     }
 };
 
-/* ═══ UI ═══ */
-const UI = {
-    nav(pg) {
-        ST.page = pg;
-        document.querySelectorAll('.pg').forEach(p => p.classList.remove('on'));
-        document.querySelectorAll('.ni').forEach(n => n.classList.remove('on'));
-        document.getElementById('pg-' + pg).classList.add('on');
-        const idx = ['voice','chat','modules','create','settings'].indexOf(pg);
-        if (idx >= 0) document.querySelectorAll('.ni')[idx].classList.add('on');
-        Device.vibrate(15);
-    },
-    tog(el, key) {
-        el.classList.toggle('on');
-        const on = el.classList.contains('on');
-        if (key === 'voice') ST.voiceOn = on;
-        if (key === 'vib') ST.vibOn = on;
-        saveCfg();
-    },
-    editProfile() {
-        showModal('Profil', `<div class="fg"><label>Nom</label><input type="text" class="fi" id="edName" value="${ST.user?.name || ''}"></div><button class="auth-btn" onclick="UI._saveProfile()">Enregistrer</button>`);
-    },
-    _saveProfile() {
-        const nm = document.getElementById('edName').value.trim();
-        if (nm) {
-            ST.user.name = nm; LS.set('user', ST.user);
-            document.getElementById('pName').textContent = nm;
-            const u = LS.get('users', []);
-            const usr = u.find(x => x.email === ST.user.email);
-            if (usr) { usr.name = nm; LS.set('users', u); }
-            hideModal(); toast('Mis à jour', 'ok');
-        }
-    }
-};
+// VOICE - COMPLETELY FIXED
+const V={
+    _stream:null,_actx:null,_analyser:null,_vizF:null,
 
-/* ═══ AI ENGINE (Free, No Key) ═══ */
-const AI = {
-    async ask(prompt, history = [], sysOverride = null) {
-        try {
-            const messages = [{ role: 'system', content: sysOverride || SYS_PROMPT }];
-            history.slice(-10).forEach(m => {
-                messages.push({ role: m.role === 'ai' ? 'assistant' : 'user', content: m.text });
-            });
-            messages.push({ role: 'user', content: prompt });
+    init(){
+        const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+        if(!SR){document.getElementById('mP').classList.add('on');document.getElementById('mP').innerHTML='<strong>Non supporté :</strong> Utilisez Chrome, Edge ou Safari.';return}
+        const r=new SR();
+        r.continuous=false;
+        r.interimResults=true;
+        r.lang='fr-FR';
 
-            const r = await fetch('https://text.pollinations.ai/openai', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    model: 'openai',
-                    messages: messages,
-                    seed: Math.floor(Math.random() * 999999)
-                })
-            });
-            if (r.ok) {
-                const data = await r.json();
-                const content = data.choices?.[0]?.message?.content || data.content || '';
-                if (content) return content;
-            }
-            return await this._fallback(prompt);
-        } catch(e) {
-            return await this._fallback(prompt);
-        }
-    },
-    async _fallback(prompt) {
-        try {
-            const r = await fetch('https://text.pollinations.ai/' + encodeURIComponent(prompt));
-            if (r.ok) {
-                const t = await r.text();
-                if (t && t.length > 5) return t;
-            }
-        } catch(e) {}
-        return this._local(prompt);
-    },
-    _local(prompt) {
-        const lo = prompt.toLowerCase();
-        if (/salut|bonjour|hello/.test(lo)) return "Bonjour. Comment puis-je vous aider aujourd'hui ?";
-        if (/qui es.tu|darwin/.test(lo)) return "Je suis Darwin, votre assistant universel créé par DESSOUASSI Oboube Anael David.";
-        if (/merci/.test(lo)) return "Je vous en prie.";
-        if (/heure/.test(lo)) return "Il est " + new Date().toLocaleTimeString('fr-FR');
-        if (/date|jour/.test(lo)) return "Nous sommes le " + new Date().toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-        return "Je rencontre des difficultés de connexion. Réessayez dans quelques instants.";
-    }
-};
+        r.onstart=()=>{ST.listening=true;this._st('l','À l\'écoute...');this._vizOn()};
 
-/* ═══ VOICE COMMANDS SYSTEM (30+ commands) ═══ */
-const VoiceCmds = {
-    commands: [
-        // Navigation
-        { p: /ouvre? (les? )?(chat|conversation)/i, a: () => UI.nav('chat') },
-        { p: /ouvre? (les? )?(modules?|outils?)/i, a: () => UI.nav('modules') },
-        { p: /ouvre? (les? )?(cr[eé]ation|studio|cr[eé]er)/i, a: () => UI.nav('create') },
-        { p: /ouvre? (les? )?(param[eè]tres?|config|r[eé]glages?)/i, a: () => UI.nav('settings') },
-        { p: /ouvre? (la )?voix|mode vocal/i, a: () => UI.nav('voice') },
-        // System
-        { p: /vibre?r?|vibration/i, a: () => { Device.vibrate([100,50,100]); return "Vibration activée."; } },
-        { p: /(quelle |c'est )?(l')?heure( est.il)?/i, a: () => "Il est " + new Date().toLocaleTimeString('fr-FR') },
-        { p: /(quel(le)?( est)? )?(la )?date|jour (sommes|est).?nous|aujourd'hui/i, a: () => "Nous sommes le " + new Date().toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) },
-        { p: /batterie|niveau (de )?batterie/i, a: async () => { const l = await Device.batteryLevel(); return l !== null ? `Batterie à ${Math.round(l * 100)} pour cent.` : "Info batterie indisponible."; } },
-        { p: /partag(er?|e)/i, a: () => { Mods.open('share'); return "Ouverture du partage."; } },
-        // Media
-        { p: /(g[eé]n[eè]re|cr[eé]e|dessine|fais).{0,25}(image|photo|dessin|logo|illustration)/i, a: null, isImage: true },
-        { p: /(cr[eé]e|fais).{0,20}(site|page)( web)?/i, a: () => { UI.nav('create'); return "Studio de création ouvert."; } },
-        { p: /(cr[eé]e|[eé]cris|g[eé]n[eè]re).{0,20}code/i, a: () => { UI.nav('create'); return "Studio de création ouvert."; } },
-        // Comms
-        { p: /(envoie|envoyer)( un)? sms/i, a: () => { Mods.open('comm'); return "Ouverture des communications."; } },
-        { p: /(appelle|passer un appel|t[eé]l[eé]phone)/i, a: () => { Mods.open('comm'); return "Ouverture des communications."; } },
-        { p: /(whats?app|watts?app)/i, a: () => { Mods.open('comm'); return "Ouverture WhatsApp."; } },
-        { p: /(mail|email|courriel)/i, a: () => { Mods.open('comm'); return "Ouverture email."; } },
-        // Health
-        { p: /(sant[eé]|imc|poids|hydratation|eau|sommeil)/i, a: () => { Mods.open('health'); return "Module santé ouvert."; } },
-        // Finance
-        { p: /(finance|budget|argent|[eé]pargne|conversion)/i, a: () => { Mods.open('finance'); return "Module finance ouvert."; } },
-        // Translate
-        { p: /(traduis|traduction|traduire)/i, a: () => { Mods.open('translator'); return "Traducteur ouvert."; } },
-        // Info
-        { p: /aide|help|que peux.tu faire|capacit[eé]s?/i, a: () => "Je peux vous aider avec la santé, la finance, la traduction, la génération d'images et de code, la création de sites web, les communications, et bien plus. Dites-moi ce dont vous avez besoin." },
-        // Stop
-        { p: /arr[eê]te|stop|silence|tais.toi/i, a: () => { Voice.stopAll(); return null; } },
-        { p: /(mode |)mains?.libres?/i, a: () => { Voice.toggleHF(); return null; } },
-        // Fun
-        { p: /(blague|humour|drole|drôle|fais.moi rire)/i, a: () => { const j = ["Pourquoi les développeurs préfèrent l'obscurité ? Parce que la lumière attire les bugs.", "Un SQL entre dans un bar, s'approche de deux tables et demande : Je peux vous joindre ?", "Il y a 10 sortes de personnes : celles qui comprennent le binaire et les autres."]; return j[Math.floor(Math.random() * j.length)]; } },
-        { p: /(comment (ça |)va|comment vas.tu)/i, a: () => "Je fonctionne parfaitement, merci. Et vous, comment allez-vous ?" },
-        { p: /(merci|thank)/i, a: () => "Je vous en prie." },
-        { p: /(salut|bonjour|hello|hey|coucou)/i, a: () => "Bonjour. Que puis-je faire pour vous ?" }
-    ],
-    match(text) {
-        for (const cmd of this.commands) {
-            if (cmd.p.test(text)) return cmd;
-        }
-        return null;
-    }
-};
-
-/* ═══ VOICE ═══ */
-const Voice = {
-    initRecog() {
-        const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-        if (!SR) {
-            document.getElementById('micPerm').classList.add('on');
-            document.getElementById('micPerm').innerHTML = '<strong>Non supporté :</strong> Utilisez Chrome, Edge ou Safari.';
-            return;
-        }
-        const recog = new SR();
-        recog.continuous = false;
-        recog.interimResults = true;
-        recog.lang = ST.lang;
-        recog.maxAlternatives = 1;
-
-        recog.onstart = () => {
-            ST.listening = true;
-            this._state('listening', 'À l\'écoute...');
-            this._startAudioViz();
+        r.onresult=(e)=>{
+            let tr='',fin=false;
+            for(let i=e.resultIndex;i<e.results.length;i++){tr+=e.results[i][0].transcript;if(e.results[i].isFinal)fin=true}
+            document.getElementById('vT').textContent=tr;
+            document.getElementById('vT').className='vtx u';
+            if(fin&&tr.trim().length>1)this._proc(tr.trim());
         };
-        recog.onresult = (e) => {
-            let transcript = '', isFinal = false;
-            for (let i = e.resultIndex; i < e.results.length; i++) {
-                transcript += e.results[i][0].transcript;
-                if (e.results[i].isFinal) isFinal = true;
-            }
-            const tx = document.getElementById('vTx');
-            tx.textContent = transcript;
-            tx.className = 'voice-transcript user-tx';
-            if (isFinal && transcript.trim().length > 1) this._process(transcript.trim());
-        };
-        recog.onerror = (e) => {
-            ST.listening = false;
-            this._stopAudioViz();
-            if (e.error === 'not-allowed' || e.error === 'permission-denied') {
-                document.getElementById('micPerm').classList.add('on');
-                document.getElementById('micPerm').innerHTML = '<strong>Micro bloqué :</strong> Autorisez l\'accès au microphone dans les paramètres du navigateur.';
-                this._state('idle', 'Autorisation refusée');
-                toast('Micro bloqué', 'er');
-                ST.handsFree = false;
-                document.getElementById('hfBtn').classList.remove('on');
+
+        r.onerror=(e)=>{
+            ST.listening=false;
+            this._vizOff();
+            if(e.error==='not-allowed'){
+                document.getElementById('mP').classList.add('on');
+                document.getElementById('mP').innerHTML='<strong>Micro bloqué :</strong> Autorisez le micro dans les paramètres du navigateur (cadenas dans la barre d\'adresse).';
+                this._st('','Micro bloqué');
+                T('Autorisez le micro','er');
+                ST.handsFree=false;document.getElementById('hF').classList.remove('on');
                 return;
             }
-            if (e.error === 'no-speech') {
-                this._state('idle', 'Aucune parole détectée');
-                if (ST.handsFree) setTimeout(() => { if (ST.handsFree && !ST.speaking && !ST.thinking) this._startRecog(); }, 800);
+            if(e.error==='no-speech'){
+                this._st('','Prêt');
+                if(ST.handsFree)setTimeout(()=>{if(ST.handsFree&&!ST.speaking&&!ST.thinking)this._go()},800);
                 return;
             }
-            this._state('idle', 'Prêt');
+            this._st('','Prêt');
         };
-        recog.onend = () => {
-            ST.listening = false;
-            if (ST.handsFree && !ST.speaking && !ST.thinking) {
-                setTimeout(() => { if (ST.handsFree && !ST.speaking && !ST.thinking) this._startRecog(); }, 600);
-            } else if (!ST.thinking && !ST.speaking) {
-                this._state('idle', 'Prêt');
-                this._stopAudioViz();
+
+        r.onend=()=>{
+            ST.listening=false;
+            if(ST.handsFree&&!ST.speaking&&!ST.thinking){
+                setTimeout(()=>{if(ST.handsFree&&!ST.speaking&&!ST.thinking)this._go()},600);
+            }else if(!ST.thinking&&!ST.speaking){
+                this._st('','Prêt');
+                this._vizOff();
             }
         };
-        ST.recog = recog;
+        ST.recog=r;
     },
-    setLang(l) {
-        ST.lang = l; saveCfg();
-        if (ST.recog) ST.recog.lang = l;
-        toast('Langue : ' + l, 'ok');
+
+    loadVoices(){
+        const load=()=>{ST.voices=ST.synth.getVoices();this._rvl()};
+        if(ST.synth.onvoiceschanged!==undefined)ST.synth.onvoiceschanged=load;
+        load();setTimeout(load,500);setTimeout(load,1500);
     },
-    initVoices() {
-        const load = () => { ST.voices = ST.synth.getVoices(); this._renderVoices(); };
-        if (ST.synth.onvoiceschanged !== undefined) ST.synth.onvoiceschanged = load;
-        load(); setTimeout(load, 500); setTimeout(load, 1500);
-    },
-    _renderVoices() {
-        const list = document.getElementById('voiceList');
-        if (!list) return;
-        list.innerHTML = '';
-        const fr = ST.voices.filter(v => /fr/i.test(v.lang));
-        const en = ST.voices.filter(v => /en/i.test(v.lang));
-        const show = [...fr, ...en.slice(0, 5)];
-        const saved = LS.get('selVoice');
-        if (!show.length) { list.innerHTML = '<p style="color:var(--tx4);font-size:11px;padding:8px">Chargement des voix...</p>'; return; }
-        show.forEach((v, i) => {
-            const sel = saved ? v.name === saved : i === 0;
-            if (sel && !ST.selVoice) ST.selVoice = v;
-            const d = document.createElement('div');
-            d.className = 'vi' + (sel ? ' on' : '');
-            d.onclick = () => {
-                document.querySelectorAll('.vi').forEach(x => x.classList.remove('on'));
-                d.classList.add('on');
-                ST.selVoice = v;
-                LS.set('selVoice', v.name);
-                toast('Voix sélectionnée', 'ok');
-            };
-            d.innerHTML = `<div class="vi-i"><span>${v.name.substring(0, 28)}</span> <small>${v.lang}</small></div><button class="vp-btn" onclick="event.stopPropagation();Voice._preview('${v.name}')"><i class="fas fa-play"></i></button>`;
-            list.appendChild(d);
+
+    _rvl(){
+        const l=document.getElementById('vL');if(!l)return;l.innerHTML='';
+        const fr=ST.voices.filter(v=>/fr/i.test(v.lang));
+        const en=ST.voices.filter(v=>/en/i.test(v.lang));
+        const show=[...fr,...en.slice(0,5)];
+        const saved=L.g('sv');
+        if(!show.length){l.innerHTML='<p style="color:var(--tx4);font-size:11px;padding:8px">Chargement...</p>';return}
+        show.forEach((v,i)=>{
+            const sel=saved?v.name===saved:i===0;
+            if(sel&&!ST.selVoice)ST.selVoice=v;
+            const d=document.createElement('div');d.className='vi'+(sel?' on':'');
+            d.onclick=()=>{document.querySelectorAll('.vi').forEach(x=>x.classList.remove('on'));d.classList.add('on');ST.selVoice=v;L.s('sv',v.name);T('Voix choisie','ok')};
+            d.innerHTML=`<span>${v.name.substring(0,28)}</span><small>${v.lang}</small><button class="vpb" onclick="event.stopPropagation();V._pv('${v.name}')"><i class="fas fa-play"></i></button>`;
+            l.appendChild(d);
         });
     },
-    _preview(name) {
-        const v = ST.voices.find(x => x.name === name);
-        if (!v) return;
+    _pv(n){const v=ST.voices.find(x=>x.name===n);if(!v)return;ST.synth.cancel();const u=new SpeechSynthesisUtterance('Bonjour, je suis Darwin.');u.voice=v;u.rate=ST.rate;u.pitch=ST.pitch;ST.synth.speak(u)},
+
+    speak(text,cb){
+        if(!ST.voiceOn){if(cb)cb();return}
         ST.synth.cancel();
-        const u = new SpeechSynthesisUtterance('Bonjour, je suis Darwin, votre assistant universel.');
-        u.voice = v; u.rate = ST.rate; u.pitch = ST.pitch; u.volume = ST.vol;
-        ST.synth.speak(u);
-    },
-    setRate(v) { ST.rate = parseFloat(v); saveCfg(); },
-    setPitch(v) { ST.pitch = parseFloat(v); saveCfg(); },
-    setVol(v) { ST.vol = parseFloat(v); saveCfg(); },
-    speak(text, onDone) {
-        if (!ST.voiceOn) { if (onDone) onDone(); return; }
-        ST.synth.cancel();
-        const clean = this._clean(text);
-        if (!clean) { if (onDone) onDone(); return; }
-        this._state('speaking', 'Réponse...');
-        ST.speaking = true;
-        const chunks = this._splitText(clean, 200);
-        let idx = 0;
-        const speakNext = () => {
-            if (idx >= chunks.length) {
-                ST.speaking = false;
-                this._state('idle', 'Prêt');
-                if (onDone) onDone();
-                if (ST.handsFree) setTimeout(() => { if (ST.handsFree && !ST.listening && !ST.thinking) this._startRecog(); }, 500);
-                return;
-            }
-            const u = new SpeechSynthesisUtterance(chunks[idx]);
-            if (ST.selVoice) u.voice = ST.selVoice;
-            u.rate = ST.rate; u.pitch = ST.pitch; u.volume = ST.vol; u.lang = ST.lang;
-            u.onend = () => { idx++; speakNext(); };
-            u.onerror = () => { idx++; speakNext(); };
+        let c=text.replace(/```[\s\S]*?```/g,' bloc de code ').replace(/`[^`]+`/g,'').replace(/\*\*([^*]+)\*\*/g,'$1').replace(/\*([^*]+)\*/g,'$1').replace(/#{1,6}\s/g,'').replace(/\[([^\]]+)\]\([^)]+\)/g,'$1').replace(/<[^>]+>/g,'').replace(/[\u{1F000}-\u{1FFFF}]|[\u{2600}-\u{27BF}]|[\u{FE00}-\u{FE0F}]|[\u{200D}]/gu,'').replace(/[·•→←↑↓★☆✓✗]/g,'').replace(/\n+/g,'. ').replace(/\s+/g,' ').trim();
+        if(!c){if(cb)cb();return}
+        this._st('s','Réponse...');ST.speaking=true;
+        // Split into sentences for reliability
+        const parts=c.match(/[^.!?]+[.!?]+|[^.!?]+$/g)||[c];
+        let i=0;
+        const next=()=>{
+            if(i>=parts.length){ST.speaking=false;this._st('','Prêt');if(cb)cb();if(ST.handsFree)setTimeout(()=>{if(ST.handsFree&&!ST.listening&&!ST.thinking)this._go()},500);return}
+            const u=new SpeechSynthesisUtterance(parts[i].trim());
+            if(ST.selVoice)u.voice=ST.selVoice;
+            u.rate=ST.rate;u.pitch=ST.pitch;u.lang='fr-FR';
+            u.onend=()=>{i++;next()};
+            u.onerror=()=>{i++;next()};
             ST.synth.speak(u);
         };
-        speakNext();
+        next();
     },
-    _splitText(text, maxLen) {
-        if (text.length <= maxLen) return [text];
-        const parts = [];
-        const sentences = text.split(/(?<=[.!?])\s+/);
-        let current = '';
-        for (const s of sentences) {
-            if ((current + s).length > maxLen && current) { parts.push(current.trim()); current = s + ' '; }
-            else current += s + ' ';
-        }
-        if (current.trim()) parts.push(current.trim());
-        return parts;
-    },
-    _clean(text) {
-        return text
-            .replace(/```[\s\S]*?```/g, ' bloc de code ')
-            .replace(/`[^`]+`/g, '')
-            .replace(/\*\*([^*]+)\*\*/g, '$1')
-            .replace(/\*([^*]+)\*/g, '$1')
-            .replace(/#{1,6}\s/g, '')
-            .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
-            .replace(/<[^>]+>/g, '')
-            .replace(/[\u{1F000}-\u{1FFFF}]|[\u{2600}-\u{27BF}]|[\u{FE00}-\u{FE0F}]|[\u{200D}]/gu, '')
-            .replace(/[·•→←↑↓★☆✓✗]/g, '')
-            .replace(/\n+/g, '. ').replace(/\s+/g, ' ').trim();
-    },
-    async tap() {
-        if (ST.speaking) { ST.synth.cancel(); ST.speaking = false; this._state('idle', 'Prêt'); return; }
-        if (ST.listening) { this._stopRecog(); return; }
-        Device.vibrate(20);
-        await this._requestMicAndStart();
-    },
-    async _requestMicAndStart() {
-        if (navigator.mediaDevices?.getUserMedia) {
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                ST.micStream = stream;
-                document.getElementById('micPerm').classList.remove('on');
-            } catch(e) {
-                document.getElementById('micPerm').classList.add('on');
-                document.getElementById('micPerm').innerHTML = '<strong>Micro refusé :</strong> Autorisez l\'accès dans les paramètres du navigateur (cadenas).';
-                toast('Micro refusé', 'er');
-                return;
-            }
-        }
-        this._startRecog();
-    },
-    _startRecog() {
-        if (!ST.recog) { toast('Reconnaissance vocale non disponible', 'wr'); return; }
-        if (ST.speaking) { ST.synth.cancel(); ST.speaking = false; }
-        try { ST.recog.abort(); } catch(e) {}
-        setTimeout(() => {
-            try { ST.recog.start(); }
-            catch(e) {
-                setTimeout(() => {
-                    try { ST.recog.start(); }
-                    catch(e2) { toast('Impossible de démarrer le micro', 'er'); this._state('idle', 'Prêt'); }
-                }, 500);
-            }
-        }, 150);
-    },
-    _stopRecog() {
-        try { ST.recog.stop(); } catch(e) {}
-        ST.listening = false;
-        this._state('idle', 'Prêt');
-        this._stopAudioViz();
-    },
-    stopAll() {
-        ST.handsFree = false;
-        document.getElementById('hfBtn').classList.remove('on');
-        ST.synth.cancel(); ST.speaking = false;
-        this._stopRecog();
-        ST.thinking = false;
-        this._state('idle', 'Prêt');
-        this._releaseMic();
-        toast('Arrêté', 'info');
-    },
-    _releaseMic() {
-        if (ST.micStream) {
-            ST.micStream.getTracks().forEach(t => t.stop());
-            ST.micStream = null;
-        }
-        this._stopAudioViz();
-    },
-    async toggleHF() {
-        if (!ST.handsFree) {
-            ST.handsFree = true;
-            document.getElementById('hfBtn').classList.add('on');
-            toast('Mains-libres activé', 'ok');
-            await this._requestMicAndStart();
-        } else {
-            ST.handsFree = false;
-            document.getElementById('hfBtn').classList.remove('on');
-            toast('Mains-libres désactivé', 'info');
-            this._stopRecog();
-        }
-    },
-    async _process(text) {
-        if (!text) { if (ST.handsFree) setTimeout(() => this._startRecog(), 500); return; }
-        document.getElementById('vTx').textContent = text;
-        Chat.addMsg('user', text);
-        this._state('thinking', 'Réflexion...');
-        this._stopAudioViz();
-        ST.thinking = true;
-        Device.vibrate(15);
 
-        // Check voice commands first
-        const cmd = VoiceCmds.match(text);
-        if (cmd) {
-            if (cmd.isImage) {
-                ST.thinking = false;
-                const tx = document.getElementById('vTx');
-                tx.textContent = 'Je crée votre image...';
-                tx.className = 'voice-transcript';
-                try {
-                    const url = await ImgGen.make(text);
-                    Chat.addMsg('ai', 'Voici votre image :', { img: url });
-                    this.speak('Votre image est prête.');
-                } catch(e) {
-                    Chat.addMsg('ai', 'Impossible de générer l\'image.');
-                    this.speak('Je n\'ai pas pu créer cette image.');
-                }
-                return;
+    async tap(){
+        if(ST.speaking){ST.synth.cancel();ST.speaking=false;this._st('','Prêt');return}
+        if(ST.listening){try{ST.recog.stop()}catch(e){}ST.listening=false;this._st('','Prêt');this._vizOff();return}
+        // FIXED: Request mic permission via getUserMedia FIRST, then start recognition
+        try{
+            if(!this._stream){
+                this._stream=await navigator.mediaDevices.getUserMedia({audio:true});
             }
-            const result = cmd.a();
-            ST.thinking = false;
-            if (result) {
-                Chat.addMsg('ai', result);
-                document.getElementById('vTx').textContent = result;
-                document.getElementById('vTx').className = 'voice-transcript';
-                this.speak(result);
-            } else {
-                this._state('idle', 'Prêt');
+            document.getElementById('mP').classList.remove('on');
+            this._go();
+        }catch(e){
+            document.getElementById('mP').classList.add('on');
+            document.getElementById('mP').innerHTML='<strong>Micro refusé :</strong> Cliquez sur le cadenas dans la barre d\'adresse → Autoriser le micro → Rechargez.';
+            T('Micro refusé','er');
+        }
+    },
+
+    // FIXED: Proper start with delay to avoid "already started" error
+    _go(){
+        if(!ST.recog){T('Micro non disponible','wr');return}
+        if(ST.speaking){ST.synth.cancel();ST.speaking=false}
+        // Make sure previous session is fully stopped
+        try{ST.recog.abort()}catch(e){}
+        // Wait for clean state then start
+        setTimeout(()=>{
+            try{
+                ST.recog.start();
+                console.log('[MIC] Started OK');
+            }catch(e){
+                console.warn('[MIC] Start failed, retry in 500ms:',e.message);
+                setTimeout(()=>{try{ST.recog.start();console.log('[MIC] Retry OK')}catch(e2){console.error('[MIC] Failed:',e2);T('Erreur micro','er');this._st('','Prêt')}},500);
             }
+        },200);
+    },
+
+    stop(){
+        ST.handsFree=false;document.getElementById('hF').classList.remove('on');
+        ST.synth.cancel();ST.speaking=false;
+        try{ST.recog?.stop()}catch(e){}
+        ST.listening=false;ST.thinking=false;
+        this._st('','Prêt');this._vizOff();
+        // Release mic stream
+        if(this._stream){this._stream.getTracks().forEach(t=>t.stop());this._stream=null}
+        T('Arrêté','info');
+    },
+
+    async hf(){
+        if(!ST.handsFree){ST.handsFree=true;document.getElementById('hF').classList.add('on');T('Mains-libres','ok');await this.tap()}
+        else{ST.handsFree=false;document.getElementById('hF').classList.remove('on');T('Désactivé','info');try{ST.recog?.stop()}catch(e){}ST.listening=false;this._st('','Prêt');this._vizOff()}
+    },
+
+    async _proc(text){
+        if(!text){if(ST.handsFree)setTimeout(()=>this._go(),500);return}
+        document.getElementById('vT').textContent=text;
+        C.add('user',text);
+        this._st('t','Réflexion...');this._vizOff();ST.thinking=true;
+
+        // Image detection
+        if(/(g[eé]n[eè]re|cr[eé]e|dessine|fais|montre).{0,25}(image|photo|dessin|logo|illustration|portrait)/i.test(text)){
+            ST.thinking=false;
+            document.getElementById('vT').textContent='Je crée votre image...';
+            document.getElementById('vT').className='vtx';
+            try{const url=await IG.make(text);C.add('ai','Voici votre image :',{img:url});this.speak('Votre image est prête.')}
+            catch(e){C.add('ai','Impossible de générer l\'image.');this.speak('Erreur de génération.')}
             return;
         }
 
-        // Otherwise ask AI
-        const resp = await AI.ask(text, ST.convos.slice(0, -1));
-        ST.thinking = false;
-        Chat.addMsg('ai', resp);
-        const tx = document.getElementById('vTx');
-        tx.textContent = resp;
-        tx.className = 'voice-transcript';
+        // Video detection
+        if(/(g[eé]n[eè]re|cr[eé]e|fais).{0,25}(vid[eé]o|animation|film|clip)/i.test(text)){
+            ST.thinking=false;
+            document.getElementById('vT').textContent='Je crée votre vidéo...';
+            document.getElementById('vT').className='vtx';
+            try{const url=await VG.make(text);C.add('ai','Voici votre vidéo :',{video:url});this.speak('Votre vidéo est prête.')}
+            catch(e){C.add('ai','Impossible de générer la vidéo.');this.speak('Erreur de génération vidéo.')}
+            return;
+        }
+
+        const resp=await AI.ask(text,ST.convos.slice(0,-1));
+        ST.thinking=false;
+        C.add('ai',resp);
+        document.getElementById('vT').textContent=resp;
+        document.getElementById('vT').className='vtx';
         this.speak(resp);
     },
-    _state(state, label) {
-        const core = document.getElementById('vCore');
-        const status = document.getElementById('vStatus');
-        const micM = document.getElementById('micMain');
-        const micC = document.getElementById('micChat');
-        core.classList.remove('listening', 'speaking', 'thinking');
-        status.classList.remove('listening', 'speaking', 'thinking');
-        if (state !== 'idle') { core.classList.add(state); status.classList.add(state); }
-        status.textContent = label;
-        const isListen = state === 'listening';
-        if (micM) micM.classList.toggle('on', isListen);
-        if (micC) micC.classList.toggle('on', isListen);
+
+    _st(s,l){
+        const c=document.getElementById('vC'),st=document.getElementById('vS'),mm=document.getElementById('mM'),mc=document.getElementById('mC');
+        c.classList.remove('l','s','t');st.classList.remove('l','s','t');
+        if(s){c.classList.add(s);st.classList.add(s)}
+        st.textContent=l;
+        const isL=s==='l';if(mm)mm.classList.toggle('on',isL);if(mc)mc.classList.toggle('on',isL);
     },
-    async _startAudioViz() {
-        try {
-            if (!ST.micStream) {
-                ST.micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-            }
-            document.getElementById('audioViz').classList.add('on');
-            if (!ST.audioCtx) ST.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            if (ST.audioCtx.state === 'suspended') await ST.audioCtx.resume();
-            const source = ST.audioCtx.createMediaStreamSource(ST.micStream);
-            ST.analyser = ST.audioCtx.createAnalyser();
-            ST.analyser.fftSize = 128;
-            source.connect(ST.analyser);
-            this._animAudio();
-        } catch(e) { console.warn('Audio viz error:', e); }
+
+    async _vizOn(){
+        try{
+            document.getElementById('aV').classList.add('on');
+            if(!this._actx)this._actx=new(window.AudioContext||window.webkitAudioContext)();
+            if(this._actx.state==='suspended')await this._actx.resume();
+            if(!this._stream)this._stream=await navigator.mediaDevices.getUserMedia({audio:true});
+            const src=this._actx.createMediaStreamSource(this._stream);
+            this._analyser=this._actx.createAnalyser();
+            this._analyser.fftSize=128;
+            src.connect(this._analyser);
+            this._animViz();
+        }catch(e){console.warn('Viz error:',e)}
     },
-    _animAudio() {
-        if (!ST.analyser) return;
-        const bufferLength = ST.analyser.frequencyBinCount;
-        const dataArray = new Uint8Array(bufferLength);
-        const bars = document.querySelectorAll('.audio-bar');
-        const draw = () => {
-            if (!ST.analyser || !ST.listening) return;
-            ST.analyser.getByteFrequencyData(dataArray);
-            bars.forEach((bar, i) => {
-                const idx = Math.floor(i * bufferLength / bars.length);
-                const value = dataArray[idx] || 0;
-                const height = Math.max(4, (value / 255) * 45);
-                bar.style.height = height + 'px';
-            });
-            ST.vizFrame = requestAnimationFrame(draw);
+    _animViz(){
+        if(!this._analyser||!ST.listening)return;
+        const buf=new Uint8Array(this._analyser.frequencyBinCount);
+        const bars=document.querySelectorAll('.abar');
+        const draw=()=>{
+            if(!this._analyser||!ST.listening){bars.forEach(b=>b.style.height='4px');return}
+            this._analyser.getByteFrequencyData(buf);
+            bars.forEach((b,i)=>{const idx=Math.floor(i*buf.length/bars.length);b.style.height=Math.max(4,(buf[idx]/255)*45)+'px'});
+            this._vizF=requestAnimationFrame(draw);
         };
         draw();
     },
-    _stopAudioViz() {
-        document.getElementById('audioViz').classList.remove('on');
-        if (ST.vizFrame) { cancelAnimationFrame(ST.vizFrame); ST.vizFrame = null; }
-        const bars = document.querySelectorAll('.audio-bar');
-        bars.forEach(b => b.style.height = '4px');
+    _vizOff(){
+        document.getElementById('aV').classList.remove('on');
+        if(this._vizF){cancelAnimationFrame(this._vizF);this._vizF=null}
+        document.querySelectorAll('.abar').forEach(b=>b.style.height='4px');
     }
 };
 
-function initVizBars() {
-    const w = document.getElementById('audioViz');
-    w.innerHTML = '';
-    for (let i = 0; i < 40; i++) {
-        const b = document.createElement('div');
-        b.className = 'audio-bar';
-        w.appendChild(b);
-    }
-}
-
-/* ═══ CHAT ═══ */
-const Chat = {
-    addMsg(role, text, extra) {
-        const m = { id: Date.now(), role, text, extra: extra || null, ts: new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }) };
-        ST.convos.push(m);
-        if (ST.convos.length > 60) ST.convos = ST.convos.slice(-60);
-        LS.set('convos', ST.convos);
-        this._render(m);
-        this._scroll();
+// CHAT
+const C={
+    add(role,text,extra){
+        const m={id:Date.now(),role,text,extra:extra||null,ts:new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})};
+        ST.convos.push(m);if(ST.convos.length>60)ST.convos=ST.convos.slice(-60);
+        L.s('convos',ST.convos);this._r(m);this._sc();
     },
-    _render(m) {
-        const c = document.getElementById('chatMsgs');
-        const d = document.createElement('div');
-        d.className = 'msg ' + (m.role === 'ai' ? 'ai' : 'u') + ' fadeUp';
-        const av = m.role === 'ai' ? 'DA' : (ST.user?.name?.substring(0, 2).toUpperCase() || 'U');
-        let extras = '';
-        if (m.extra?.img) extras = `<img src="${m.extra.img}" alt="IA" loading="lazy">`;
-        const acts = m.role === 'ai' ? `<div class="msg-acts">
-            <button class="msg-act" onclick="Util.copyEl(this)"><i class="fas fa-copy"></i> Copier</button>
-            <button class="msg-act" onclick="Voice.speak(this.closest('.msg').querySelector('.msg-bub').innerText)"><i class="fas fa-volume-up"></i></button>
-            <button class="msg-act" onclick="Mods.shareText(this.closest('.msg').querySelector('.msg-bub').innerText)"><i class="fas fa-share-alt"></i></button>
-        </div>` : '';
-        d.innerHTML = `<div class="msg-av">${av}</div><div class="msg-body"><div class="msg-bub">${this._fmt(m.text)}${extras}</div>${acts}<div class="msg-t">${m.ts}</div></div>`;
+    _r(m){
+        const c=document.getElementById('cM');const d=document.createElement('div');
+        d.className='msg '+(m.role==='ai'?'ai':'u')+' fadeUp';
+        const av=m.role==='ai'?'DA':(ST.user?.name?.substring(0,2).toUpperCase()||'U');
+        let ext='';
+        if(m.extra?.img)ext=`<img src="${m.extra.img}" alt="IA" loading="lazy">`;
+        if(m.extra?.video)ext=`<video src="${m.extra.video}" controls autoplay muted loop style="max-width:100%;border-radius:10px;margin:8px 0"></video>`;
+        const acts=m.role==='ai'?`<div class="macts"><button class="mac" onclick="navigator.clipboard?.writeText(this.closest('.msg').querySelector('.mb').innerText).then(()=>T('Copié','ok'))"><i class="fas fa-copy"></i></button><button class="mac" onclick="V.speak(this.closest('.msg').querySelector('.mb').innerText)"><i class="fas fa-volume-up"></i></button></div>`:'';
+        d.innerHTML=`<div class="mav">${av}</div><div class="mbd"><div class="mb">${this._f(m.text)}${ext}</div>${acts}<div class="mt">${m.ts}</div></div>`;
         c.appendChild(d);
     },
-    _fmt(t) {
-        t = t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-        t = t.replace(/```(\w+)?\n?([\s\S]*?)```/g, (_, l, c) => `<pre><code>${c.trim()}</code></pre>`);
-        t = t.replace(/`([^`]+)`/g, '<code>$1</code>');
-        t = t.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-        t = t.replace(/(?<!\*)\*([^*\n]+)\*(?!\*)/g, '<em>$1</em>');
-        t = t.replace(/\n/g, '<br>');
-        return t;
+    _f(t){
+        t=t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+        t=t.replace(/```(\w+)?\n?([\s\S]*?)```/g,(_,l,c)=>`<pre><code>${c.trim()}</code></pre>`);
+        t=t.replace(/`([^`]+)`/g,'<code>$1</code>');
+        t=t.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
+        t=t.replace(/(?<!\*)\*([^*\n]+)\*(?!\*)/g,'<em>$1</em>');
+        t=t.replace(/\n/g,'<br>');return t;
     },
-    _scroll() { const c = document.getElementById('chatMsgs'); setTimeout(() => c.scrollTop = c.scrollHeight, 50); },
-    _typing(on) { document.getElementById('typInd').classList.toggle('on', on); if (on) this._scroll(); },
-    async send() {
-        const inp = document.getElementById('chatIn');
-        const t = inp.value.trim();
-        if (!t) return;
-        inp.value = ''; this.rs(inp);
-        this.addMsg('user', t);
-        if (/(g[eé]n[eè]re|cr[eé]e|dessine|fais).{0,25}(image|photo|dessin|logo|illustration)/i.test(t)) {
-            this._typing(true);
-            try {
-                const url = await ImgGen.make(t);
-                this._typing(false);
-                this.addMsg('ai', 'Voici votre image :', { img: url });
-                if (ST.voiceOn) Voice.speak('Votre image est prête.');
-            } catch(e) { this._typing(false); this.addMsg('ai', 'Impossible de générer l\'image.'); }
-            return;
+    _sc(){const c=document.getElementById('cM');setTimeout(()=>c.scrollTop=c.scrollHeight,50)},
+    _ty(on){document.getElementById('tI').classList.toggle('on',on);if(on)this._sc()},
+    async send(){
+        const inp=document.getElementById('ci');const t=inp.value.trim();if(!t)return;
+        inp.value='';this.rs(inp);this.add('user',t);
+        // Image
+        if(/(g[eé]n[eè]re|cr[eé]e|dessine|fais).{0,25}(image|photo|dessin|logo|illustration)/i.test(t)){
+            this._ty(true);try{const url=await IG.make(t);this._ty(false);this.add('ai','Voici votre image :',{img:url});if(ST.voiceOn)V.speak('Image prête.')}catch(e){this._ty(false);this.add('ai','Impossible de générer.')}return;
         }
-        this._typing(true);
-        const r = await AI.ask(t, ST.convos.slice(0, -1));
-        this._typing(false);
-        this.addMsg('ai', r);
-        if (ST.voiceOn) Voice.speak(r);
+        // Video
+        if(/(g[eé]n[eè]re|cr[eé]e|fais).{0,25}(vid[eé]o|animation|film|clip)/i.test(t)){
+            this._ty(true);try{const url=await VG.make(t);this._ty(false);this.add('ai','Voici votre vidéo :',{video:url});if(ST.voiceOn)V.speak('Vidéo prête.')}catch(e){this._ty(false);this.add('ai','Impossible de générer la vidéo.')}return;
+        }
+        this._ty(true);const r=await AI.ask(t,ST.convos.slice(0,-1));this._ty(false);this.add('ai',r);if(ST.voiceOn)V.speak(r);
     },
-    quick(t) { document.getElementById('chatIn').value = t; this.send(); },
-    kd(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); this.send(); } },
-    rs(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 100) + 'px'; },
-    async files(e) {
-        const f = e.target.files[0];
-        if (!f) return;
-        if (f.type.startsWith('text/') || /\.(json|js|py|html|css|md|txt|ts|jsx|tsx)$/i.test(f.name)) {
-            const r = new FileReader();
-            r.onload = async ev => {
-                const content = ev.target.result.substring(0, 4000);
-                this.addMsg('user', 'Fichier : ' + f.name);
-                this._typing(true);
-                const resp = await AI.ask('Analyse ce fichier ' + f.name + ' :\n\n```\n' + content + '\n```', ST.convos.slice(0, -1));
-                this._typing(false);
-                this.addMsg('ai', resp);
-                if (ST.voiceOn) Voice.speak(resp);
-            };
-            r.readAsText(f);
-        } else toast('Type non supporté', 'wr');
-        e.target.value = '';
-    }
+    q(t){document.getElementById('ci').value=t;this.send()},
+    kd(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();this.send()}},
+    rs(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,100)+'px'},
+    async fi(e){const f=e.target.files[0];if(!f)return;if(f.type.startsWith('text/')||/\.(json|js|py|html|css|md|txt)$/i.test(f.name)){const r=new FileReader();r.onload=async ev=>{const ct=ev.target.result.substring(0,4000);this.add('user','Fichier : '+f.name);this._ty(true);const rsp=await AI.ask('Analyse ce fichier '+f.name+' :\n\n```\n'+ct+'\n```',ST.convos.slice(0,-1));this._ty(false);this.add('ai',rsp);if(ST.voiceOn)V.speak(rsp)};r.readAsText(f)}else T('Type non supporté','wr');e.target.value=''}
 };
-function renderAllMsgs() { document.getElementById('chatMsgs').innerHTML = ''; ST.convos.forEach(m => Chat._render(m)); Chat._scroll(); }
 
-/* ═══ IMAGE GENERATION ═══ */
-const ImgGen = {
-    async make(prompt, style) {
-        const s = style || ST.selOpt;
-        const styles = {
-            'Photoréaliste': 'photorealistic, 8k, detailed, professional photography',
-            'Art numérique': 'digital art, vibrant colors, artistic',
-            'Anime': 'anime style, manga, cel shading',
-            '3D': '3d render, octane render, ultra detailed',
-            'Cyberpunk': 'cyberpunk, neon lights, futuristic'
-        };
-        const suffix = styles[s] || '';
-        const fullPrompt = prompt + (suffix ? ', ' + suffix : '');
-        const seed = Math.floor(Math.random() * 999999);
-        const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(fullPrompt)}?width=1024&height=1024&seed=${seed}&model=flux&nologo=true`;
-        await new Promise((resolve, reject) => {
-            const img = new Image();
-            img.onload = resolve;
-            img.onerror = reject;
-            img.src = url;
-            setTimeout(resolve, 30000);
-        });
+// IMAGE GENERATION (Pollinations - free, no key)
+const IG={
+    async make(prompt,style){
+        const s=style||ST.opt;
+        const styles={Photoréaliste:'photorealistic, 8k, detailed','Art numérique':'digital art, vibrant colors',Anime:'anime style, manga',Cyberpunk:'cyberpunk, neon lights, futuristic',Fantasy:'fantasy art, magical, ethereal',Cosmos:'deep space, nebula, stars',Nature:'nature photography, stunning landscape',Ville:'urban photography, city skyline',Fantaisie:'dreamlike, surreal, magical world'};
+        const suffix=styles[s]||'';
+        const full=prompt+(suffix?', '+suffix:'');
+        const seed=Math.floor(Math.random()*999999);
+        const url=`https://image.pollinations.ai/prompt/${encodeURIComponent(full)}?width=1024&height=1024&seed=${seed}&model=flux&nologo=true`;
+        await new Promise((res,rej)=>{const img=new Image();img.onload=res;img.onerror=rej;img.src=url;setTimeout(res,30000)});
         return url;
     }
 };
 
-/* ═══ DEVICE CONTROLS (Hardware APIs) ═══ */
-const Device = {
-    vibrate(pattern) {
-        if (!ST.vibOn) return;
-        if (navigator.vibrate) navigator.vibrate(pattern);
+// VIDEO GENERATION (Pollinations - free, no key)
+const VG={
+    async make(prompt,style){
+        const s=style||ST.opt;
+        const styles={Cinématique:'cinematic, dramatic lighting',Animation:'3d animation, pixar style',Nature:'nature documentary, BBC Earth style',Abstrait:'abstract motion graphics'};
+        const suffix=styles[s]||'';
+        const full=prompt+(suffix?', '+suffix:'');
+        const seed=Math.floor(Math.random()*999999);
+        // Pollinations video endpoint
+        const url=`https://video.pollinations.ai/${encodeURIComponent(full)}?seed=${seed}`;
+
+        // Try to fetch and verify it returns a video
+        const r=await fetch(url,{method:'HEAD'}).catch(()=>null);
+        if(r&&r.ok)return url;
+
+        // Fallback: generate animated sequence of images as GIF-like
+        throw new Error('Video service temporarily unavailable');
+    }
+};
+
+// 360° PANORAMA (via image generation + CSS 3D viewer)
+const PAN={
+    async make(prompt,style){
+        const s=style||ST.opt;
+        const full=prompt+', equirectangular panorama, 360 degree, seamless, '+s.toLowerCase();
+        const seed=Math.floor(Math.random()*999999);
+        const url=`https://image.pollinations.ai/prompt/${encodeURIComponent(full)}?width=2048&height=1024&seed=${seed}&model=flux&nologo=true`;
+        await new Promise((res,rej)=>{const img=new Image();img.onload=res;img.onerror=rej;img.src=url;setTimeout(res,30000)});
+        return url;
+    }
+};
+
+// GITHUB
+const GH={
+    async publish(name,html,desc=''){
+        if(!ST.ghToken||!ST.ghUser)throw new Error('Configurez GitHub dans paramètres');
+        const repo=name.toLowerCase().replace(/[^a-z0-9-]/g,'-').substring(0,60)+'-'+Date.now().toString(36);
+        const api=async(ep,m='GET',b=null)=>{const r=await fetch('https://api.github.com'+ep,{method:m,headers:{Authorization:'token '+ST.ghToken,Accept:'application/vnd.github.v3+json','Content-Type':'application/json'},body:b?JSON.stringify(b):null});if(!r.ok){const e=await r.json().catch(()=>({}));throw new Error(e.message||'HTTP '+r.status)}return r.json()};
+        await api('/user/repos','POST',{name:repo,description:desc,private:false,auto_init:true});
+        await W(1500);
+        await api(`/repos/${ST.ghUser}/${repo}/contents/index.html`,'PUT',{message:'Deploy via Darwin',content:btoa(unescape(encodeURIComponent(html)))});
+        await W(1000);
+        try{await api(`/repos/${ST.ghUser}/${repo}/pages`,'POST',{source:{branch:'main',path:'/'}})}catch(e){}
+        return{url:`https://${ST.ghUser}.github.io/${repo}/`,repoUrl:`https://github.com/${ST.ghUser}/${repo}`,repo};
+    }
+};
+
+// CREATE STUDIO
+const CR={
+    mode(m,el){
+        ST.cMode=m;document.querySelectorAll('.mbtn').forEach(b=>b.classList.remove('on'));el.classList.add('on');
+        document.querySelectorAll('[id^="o-"]').forEach(o=>o.style.display='none');
+        const opts=document.getElementById('o-'+m);if(opts)opts.style.display='block';
+        const titles={image:"Génération d'image",video:'Génération de vidéo',panorama:'Vue 360° immersive',code:'Génération de code',website:'Création de site web',app:"Création d'application"};
+        document.getElementById('cT').textContent=titles[m]||'';
+        const phs={image:'Décrivez l\'image...',video:'Décrivez la scène vidéo...',panorama:'Décrivez l\'environnement 360°...',code:'Décrivez le programme...',website:'Décrivez le site...',app:'Décrivez l\'app...'};
+        document.getElementById('cP').placeholder=phs[m]||'';
+        const first=opts?.querySelector('.goi.on');if(first)ST.opt=first.textContent;
     },
-    async batteryLevel() {
-        try {
-            if (navigator.getBattery) {
-                const b = await navigator.getBattery();
-                return b.level;
+    opt(el){el.parentElement.querySelectorAll('.goi').forEach(o=>o.classList.remove('on'));el.classList.add('on');ST.opt=el.textContent},
+
+    async run(){
+        const p=document.getElementById('cP').value.trim();if(!p){T('Décrivez ce que vous voulez','wr');return}
+        const btn=document.getElementById('cB');btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> En cours...';
+        try{
+            switch(ST.cMode){
+                case 'image':await this._img(p);break;
+                case 'video':await this._vid(p);break;
+                case 'panorama':await this._pan(p);break;
+                case 'code':await this._code(p);break;
+                case 'website':await this._web(p);break;
+                case 'app':await this._app(p);break;
             }
-        } catch(e) {}
-        return null;
+        }catch(e){T('Erreur : '+e.message,'er')}
+        btn.disabled=false;btn.innerHTML='<i class="fas fa-bolt"></i> Générer';
     },
-    async toggleWake(el) {
-        el.classList.toggle('on');
-        if (el.classList.contains('on')) {
-            try {
-                if ('wakeLock' in navigator) {
-                    ST.wakeLock = await navigator.wakeLock.request('screen');
-                    toast('Écran maintenu allumé', 'ok');
-                } else { toast('Wake Lock non supporté', 'wr'); el.classList.remove('on'); }
-            } catch(e) { toast('Erreur : ' + e.message, 'er'); el.classList.remove('on'); }
-        } else {
-            if (ST.wakeLock) { await ST.wakeLock.release(); ST.wakeLock = null; toast('Wake Lock désactivé', 'info'); }
-        }
-    },
-    async getInfo() {
-        const info = { platform: navigator.platform, language: navigator.language, online: navigator.onLine, cores: navigator.hardwareConcurrency || '?', memory: navigator.deviceMemory || '?' };
-        const bat = await this.batteryLevel();
-        if (bat !== null) info.battery = Math.round(bat * 100) + '%';
-        if (navigator.connection) info.connection = navigator.connection.effectiveType;
-        return info;
-    }
-};
 
-/* ═══ MODULES (Health, Finance, Comm, etc.) ═══ */
-const Mods = {
-    open(mod) {
-        Device.vibrate(15);
-        switch (mod) {
-            case 'health': this._health(); break;
-            case 'finance': this._finance(); break;
-            case 'comm': this._comm(); break;
-            case 'creative': this._creative(); break;
-            case 'translator': this._translator(); break;
-            case 'device': this._device(); break;
-            case 'share': this._share(); break;
-        }
+    async _img(p){
+        const r=document.getElementById('cR'),c=document.getElementById('rC');r.classList.add('on');
+        document.getElementById('rT').textContent='Image';
+        c.innerHTML='<div class="shim">Génération...</div>';document.getElementById('rA').innerHTML='';
+        const url=await IG.make(p,ST.opt);
+        c.innerHTML=`<img src="${url}" class="gimg">`;
+        ST.last={type:'image',url};
+        document.getElementById('rA').innerHTML=`<a href="${url}" download="darwin-${Date.now()}.png" class="mac" style="background:var(--gd);color:var(--bg);border-color:var(--cy)"><i class="fas fa-download"></i> Télécharger</a>`;
+        T('Image générée','ok');
     },
-    _health() {
-        showModal('Module Santé', `
-            <div class="hlth-c"><h4><i class="fas fa-weight-scale"></i> IMC</h4>
-                <div class="hlth-row">
-                    <input type="number" id="hW" placeholder="Poids (kg)" value="${ST.healthData.weight || ''}">
-                    <input type="number" id="hH" placeholder="Taille (cm)" value="${ST.healthData.height || ''}">
-                </div>
-                <button class="hlth-btn" onclick="Mods._calcBMI()">Calculer</button>
-                <div id="bmiRes"></div>
-            </div>
-            <div class="hlth-c"><h4><i class="fas fa-glass-water"></i> Hydratation</h4>
-                <div class="hlth-res">Verres bus aujourd'hui : <strong id="waterCnt">${ST.healthData.water || 0}</strong></div>
-                <div class="hlth-row" style="margin-top:10px">
-                    <button class="hlth-btn" onclick="Mods._water(1)">+1 verre</button>
-                    <button class="hlth-btn" onclick="Mods._water(-1)" style="background:var(--surf);color:var(--tx)">-1</button>
-                    <button class="hlth-btn" onclick="Mods._water(0)" style="background:var(--surf);color:var(--tx)">Reset</button>
-                </div>
-            </div>
-            <div class="hlth-c"><h4><i class="fas fa-moon"></i> Sommeil</h4>
-                <div class="hlth-row">
-                    <input type="number" id="hSleep" placeholder="Heures dormies" step="0.5" value="${ST.healthData.sleep || ''}">
-                </div>
-                <button class="hlth-btn" onclick="Mods._sleep()">Enregistrer</button>
-                <div id="sleepRes"></div>
-            </div>
-        `);
-    },
-    _calcBMI() {
-        const w = parseFloat(document.getElementById('hW').value);
-        const h = parseFloat(document.getElementById('hH').value);
-        if (!w || !h) { toast('Remplissez poids et taille', 'wr'); return; }
-        const bmi = (w / Math.pow(h/100, 2)).toFixed(1);
-        let cat = '';
-        if (bmi < 18.5) cat = 'Insuffisant';
-        else if (bmi < 25) cat = 'Normal';
-        else if (bmi < 30) cat = 'Surpoids';
-        else cat = 'Obésité';
-        ST.healthData.weight = w; ST.healthData.height = h;
-        LS.set('health', ST.healthData);
-        document.getElementById('bmiRes').innerHTML = `<div class="hlth-res">IMC : <strong>${bmi}</strong><br>Catégorie : ${cat}</div>`;
-        toast('IMC calculé', 'ok');
-    },
-    _water(delta) {
-        if (delta === 0) ST.healthData.water = 0;
-        else ST.healthData.water = Math.max(0, (ST.healthData.water || 0) + delta);
-        LS.set('health', ST.healthData);
-        document.getElementById('waterCnt').textContent = ST.healthData.water;
-        if (ST.healthData.water === 8) { toast('Objectif quotidien atteint !', 'ok'); Device.vibrate([100,50,100]); }
-    },
-    _sleep() {
-        const s = parseFloat(document.getElementById('hSleep').value);
-        if (!s) { toast('Entrez une valeur', 'wr'); return; }
-        ST.healthData.sleep = s;
-        LS.set('health', ST.healthData);
-        let msg = '';
-        if (s < 6) msg = 'Sommeil insuffisant. Essayez de dormir plus.';
-        else if (s <= 9) msg = 'Excellent sommeil !';
-        else msg = 'Un peu trop de sommeil.';
-        document.getElementById('sleepRes').innerHTML = `<div class="hlth-res">${msg}</div>`;
-        toast('Enregistré', 'ok');
-    },
-    _finance() {
-        showModal('Module Finance', `
-            <div class="hlth-c"><h4><i class="fas fa-calculator"></i> Calcul de budget</h4>
-                <div class="hlth-row"><input type="number" id="fInc" placeholder="Revenu mensuel (€)"></div>
-                <div class="hlth-row"><input type="number" id="fExp" placeholder="Dépenses (€)"></div>
-                <button class="hlth-btn" onclick="Mods._calcBudget()">Calculer</button>
-                <div id="budRes"></div>
-            </div>
-            <div class="hlth-c"><h4><i class="fas fa-piggy-bank"></i> Épargne (intérêts composés)</h4>
-                <div class="hlth-row">
-                    <input type="number" id="fCap" placeholder="Capital initial (€)">
-                    <input type="number" id="fRate" placeholder="Taux annuel (%)" step="0.1">
-                </div>
-                <div class="hlth-row">
-                    <input type="number" id="fYrs" placeholder="Années">
-                </div>
-                <button class="hlth-btn" onclick="Mods._calcSaving()">Calculer</button>
-                <div id="savRes"></div>
-            </div>
-            <div class="hlth-c"><h4><i class="fas fa-exchange-alt"></i> Conversion devises</h4>
-                <div class="hlth-row">
-                    <input type="number" id="fAmt" placeholder="Montant" value="100">
-                    <select class="fi" id="fFrom" style="max-width:80px"><option>EUR</option><option>USD</option><option>GBP</option><option>JPY</option><option>CHF</option></select>
-                    <select class="fi" id="fTo" style="max-width:80px"><option>USD</option><option>EUR</option><option>GBP</option><option>JPY</option><option>CHF</option></select>
-                </div>
-                <button class="hlth-btn" onclick="Mods._convert()">Convertir</button>
-                <div id="convRes"></div>
-            </div>
-        `);
-    },
-    _calcBudget() {
-        const inc = parseFloat(document.getElementById('fInc').value);
-        const exp = parseFloat(document.getElementById('fExp').value);
-        if (!inc || !exp) { toast('Remplissez les champs', 'wr'); return; }
-        const bal = inc - exp;
-        const rate = ((bal / inc) * 100).toFixed(1);
-        document.getElementById('budRes').innerHTML = `<div class="hlth-res">Solde : <strong>${bal.toFixed(2)} €</strong><br>Taux épargne : ${rate}%</div>`;
-    },
-    _calcSaving() {
-        const cap = parseFloat(document.getElementById('fCap').value);
-        const rate = parseFloat(document.getElementById('fRate').value);
-        const yrs = parseFloat(document.getElementById('fYrs').value);
-        if (!cap || !rate || !yrs) { toast('Remplissez tous les champs', 'wr'); return; }
-        const final = cap * Math.pow(1 + rate/100, yrs);
-        const gain = final - cap;
-        document.getElementById('savRes').innerHTML = `<div class="hlth-res">Capital final : <strong>${final.toFixed(2)} €</strong><br>Gain : ${gain.toFixed(2)} €</div>`;
-    },
-    async _convert() {
-        const amt = parseFloat(document.getElementById('fAmt').value);
-        const from = document.getElementById('fFrom').value;
-        const to = document.getElementById('fTo').value;
-        if (!amt) { toast('Entrez un montant', 'wr'); return; }
-        document.getElementById('convRes').innerHTML = '<div class="hlth-res">Conversion en cours...</div>';
-        try {
-            const r = await fetch(`https://api.frankfurter.app/latest?amount=${amt}&from=${from}&to=${to}`);
-            const d = await r.json();
-            const result = d.rates?.[to];
-            if (result) document.getElementById('convRes').innerHTML = `<div class="hlth-res">${amt} ${from} = <strong>${result.toFixed(2)} ${to}</strong></div>`;
-            else document.getElementById('convRes').innerHTML = '<div class="hlth-res">Erreur de conversion</div>';
-        } catch(e) { document.getElementById('convRes').innerHTML = '<div class="hlth-res">Service indisponible</div>'; }
-    },
-    _comm() {
-        showModal('Communications', `
-            <div class="hlth-c"><h4><i class="fab fa-whatsapp"></i> WhatsApp</h4>
-                <div class="hlth-row"><input type="text" id="waN" placeholder="+33612345678"></div>
-                <div class="hlth-row"><input type="text" id="waM" placeholder="Message"></div>
-                <button class="hlth-btn" onclick="Mods._wa()">Ouvrir WhatsApp</button>
-            </div>
-            <div class="hlth-c"><h4><i class="fas fa-envelope"></i> Email</h4>
-                <div class="hlth-row"><input type="email" id="emT" placeholder="destinataire@mail.com"></div>
-                <div class="hlth-row"><input type="text" id="emS" placeholder="Sujet"></div>
-                <div class="hlth-row"><textarea class="fi" id="emB" placeholder="Message" rows="3"></textarea></div>
-                <button class="hlth-btn" onclick="Mods._email()">Envoyer</button>
-            </div>
-            <div class="hlth-c"><h4><i class="fas fa-sms"></i> SMS</h4>
-                <div class="hlth-row"><input type="text" id="smsN" placeholder="+33612345678"></div>
-                <div class="hlth-row"><input type="text" id="smsM" placeholder="Message"></div>
-                <button class="hlth-btn" onclick="Mods._sms()">Envoyer SMS</button>
-            </div>
-            <div class="hlth-c"><h4><i class="fas fa-phone"></i> Appel</h4>
-                <div class="hlth-row"><input type="text" id="callN" placeholder="+33612345678"></div>
-                <button class="hlth-btn" onclick="Mods._call()">Appeler</button>
-            </div>
-        `);
-    },
-    _wa() {
-        const n = document.getElementById('waN').value.replace(/\D/g, '');
-        const m = encodeURIComponent(document.getElementById('waM').value);
-        if (!n) { toast('Numéro requis', 'er'); return; }
-        window.open(`https://wa.me/${n}?text=${m}`, '_blank');
-        hideModal();
-    },
-    _email() {
-        const t = document.getElementById('emT').value;
-        if (!t) { toast('Destinataire requis', 'er'); return; }
-        const s = encodeURIComponent(document.getElementById('emS').value);
-        const b = encodeURIComponent(document.getElementById('emB').value);
-        window.location.href = `mailto:${t}?subject=${s}&body=${b}`;
-        hideModal();
-    },
-    _sms() {
-        const n = document.getElementById('smsN').value;
-        const m = encodeURIComponent(document.getElementById('smsM').value);
-        if (!n) { toast('Numéro requis', 'er'); return; }
-        window.location.href = `sms:${n}?body=${m}`;
-        hideModal();
-    },
-    _call() {
-        const n = document.getElementById('callN').value;
-        if (!n) { toast('Numéro requis', 'er'); return; }
-        window.location.href = `tel:${n}`;
-        hideModal();
-    },
-    _creative() {
-        showModal('Studio Créatif', `
-            <div class="hlth-c"><h4><i class="fas fa-lightbulb"></i> Brainstorming</h4>
-                <div class="hlth-row"><textarea class="fi" id="brSub" placeholder="Sujet : startup, projet, cadeau..." rows="2"></textarea></div>
-                <button class="hlth-btn" onclick="Mods._brainstorm()">Générer 5 idées</button>
-                <div id="brRes"></div>
-            </div>
-            <div class="hlth-c"><h4><i class="fas fa-pen-fancy"></i> Écriture créative</h4>
-                <div class="hlth-row"><textarea class="fi" id="wrSub" placeholder="Poème, histoire, discours..." rows="2"></textarea></div>
-                <button class="hlth-btn" onclick="Mods._write()">Écrire</button>
-                <div id="wrRes"></div>
-            </div>
-            <div class="hlth-c"><h4><i class="fas fa-magic"></i> Image IA</h4>
-                <div class="hlth-row"><textarea class="fi" id="crImg" placeholder="Décrivez l'image..." rows="2"></textarea></div>
-                <button class="hlth-btn" onclick="Mods._createImg()">Générer</button>
-                <div id="crImgRes"></div>
-            </div>
-        `);
-    },
-    async _brainstorm() {
-        const s = document.getElementById('brSub').value.trim();
-        if (!s) return;
-        document.getElementById('brRes').innerHTML = '<div class="hlth-res">Génération...</div>';
-        const r = await AI.ask(`Donne-moi 5 idées créatives et originales sur : ${s}. Format numéroté, concis.`);
-        document.getElementById('brRes').innerHTML = `<div class="hlth-res" style="font-size:13px;line-height:1.7">${Chat._fmt(r)}</div>`;
-    },
-    async _write() {
-        const s = document.getElementById('wrSub').value.trim();
-        if (!s) return;
-        document.getElementById('wrRes').innerHTML = '<div class="hlth-res">Écriture...</div>';
-        const r = await AI.ask(`Écris de façon créative et originale : ${s}`);
-        document.getElementById('wrRes').innerHTML = `<div class="hlth-res" style="font-size:13px;line-height:1.7">${Chat._fmt(r)}</div>`;
-    },
-    async _createImg() {
-        const s = document.getElementById('crImg').value.trim();
-        if (!s) return;
-        document.getElementById('crImgRes').innerHTML = '<div class="hlth-res">Création...</div>';
-        try {
-            const url = await ImgGen.make(s);
-            document.getElementById('crImgRes').innerHTML = `<img src="${url}" style="width:100%;border-radius:10px;margin-top:8px"><br><a href="${url}" download class="msg-act primary" style="margin-top:8px;display:inline-flex"><i class="fas fa-download"></i> Télécharger</a>`;
-        } catch(e) { document.getElementById('crImgRes').innerHTML = '<div class="hlth-res">Erreur</div>'; }
-    },
-    _translator() {
-        showModal('Traducteur', `
-            <div class="hlth-c">
-                <div class="hlth-row"><textarea class="fi" id="trTxt" placeholder="Texte à traduire..." rows="3"></textarea></div>
-                <div class="hlth-row">
-                    <select class="fi" id="trTo">
-                        <option value="anglais">Anglais</option>
-                        <option value="français">Français</option>
-                        <option value="espagnol">Espagnol</option>
-                        <option value="allemand">Allemand</option>
-                        <option value="italien">Italien</option>
-                        <option value="portugais">Portugais</option>
-                        <option value="chinois">Chinois</option>
-                        <option value="japonais">Japonais</option>
-                        <option value="arabe">Arabe</option>
-                        <option value="russe">Russe</option>
-                    </select>
-                </div>
-                <button class="hlth-btn" onclick="Mods._translate()">Traduire</button>
-                <div id="trRes"></div>
-            </div>
-        `);
-    },
-    async _translate() {
-        const t = document.getElementById('trTxt').value.trim();
-        const to = document.getElementById('trTo').value;
-        if (!t) return;
-        document.getElementById('trRes').innerHTML = '<div class="hlth-res">Traduction...</div>';
-        const r = await AI.ask(`Traduis ce texte en ${to}. Réponds UNIQUEMENT avec la traduction, sans explication : "${t}"`);
-        document.getElementById('trRes').innerHTML = `<div class="hlth-res">${r}</div>`;
-    },
-    async _device() {
-        const info = await Device.getInfo();
-        let html = '<div class="hlth-c"><h4><i class="fas fa-microchip"></i> Informations appareil</h4>';
-        for (const [k, v] of Object.entries(info)) {
-            html += `<div class="hlth-res" style="margin-top:6px;padding:8px 12px;font-size:12px"><strong style="font-size:12px;color:var(--tx2)">${k}</strong> : ${v}</div>`;
-        }
-        html += '</div>';
-        html += '<div class="hlth-c"><h4><i class="fas fa-bell"></i> Actions</h4>';
-        html += '<button class="hlth-btn" onclick="Device.vibrate([100,50,100,50,200])" style="width:100%;margin-bottom:6px">Test vibration</button>';
-        html += '<button class="hlth-btn" onclick="Notif.push(\'Darwin\',\'Test notification\')" style="width:100%">Test notification</button>';
-        html += '</div>';
-        showModal('Contrôles appareil', html);
-    },
-    async _share() {
-        showModal('Partage', `
-            <div class="hlth-c"><h4><i class="fas fa-share-alt"></i> Partage rapide</h4>
-                <div class="hlth-row"><input type="text" id="shT" placeholder="Titre"></div>
-                <div class="hlth-row"><textarea class="fi" id="shM" placeholder="Message" rows="3"></textarea></div>
-                <div class="hlth-row"><input type="url" id="shU" placeholder="URL (optionnel)"></div>
-                <button class="hlth-btn" onclick="Mods._doShare()">Partager</button>
-            </div>
-        `);
-    },
-    async _doShare() {
-        const title = document.getElementById('shT').value || 'Darwin AI';
-        const text = document.getElementById('shM').value;
-        const url = document.getElementById('shU').value;
-        if (navigator.share) {
-            try {
-                await navigator.share({ title, text, url });
-                toast('Partagé', 'ok');
-                hideModal();
-            } catch(e) { if (e.name !== 'AbortError') toast('Erreur : ' + e.message, 'er'); }
-        } else {
-            const full = title + '\n' + text + (url ? '\n' + url : '');
-            Util.copy(full);
-            toast('Copié (partage natif non supporté)', 'wr');
-        }
-    },
-    async shareText(text) {
-        if (navigator.share) {
-            try { await navigator.share({ text }); toast('Partagé', 'ok'); }
-            catch(e) {}
-        } else { Util.copy(text); }
-    }
-};
 
-/* ═══ NOTIFICATIONS ═══ */
-const Notif = {
-    async toggleNotif(el) {
-        if (!('Notification' in window)) { toast('Non supporté', 'er'); return; }
-        if (Notification.permission === 'granted') {
-            el.classList.toggle('on');
-            ST.notifOn = el.classList.contains('on');
-            saveCfg();
-        } else {
-            const p = await Notification.requestPermission();
-            if (p === 'granted') { el.classList.add('on'); ST.notifOn = true; saveCfg(); toast('Notifications activées', 'ok'); }
-            else toast('Permission refusée', 'wr');
-        }
-    },
-    push(title, body) {
-        this.add({ title, body });
-        if (ST.notifOn && Notification.permission === 'granted') {
-            new Notification(title, { body, icon: '/icon.png', vibrate: [100,50,100] });
-        }
-    },
-    add(notif) {
-        ST.notifs.unshift({ ...notif, id: Date.now(), tm: new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }) });
-        if (ST.notifs.length > 20) ST.notifs = ST.notifs.slice(0, 20);
-        LS.set('notifs', ST.notifs);
-        this.updateBadge();
-        this.render();
-    },
-    updateBadge() {
-        const b = document.getElementById('notifBdg');
-        if (!b) return;
-        b.textContent = ST.notifs.length > 9 ? '9+' : ST.notifs.length;
-        b.classList.toggle('on', ST.notifs.length > 0);
-    },
-    togglePanel() {
-        document.getElementById('npPanel').classList.toggle('on');
-        document.getElementById('npBg').classList.toggle('on');
-        this.render();
-    },
-    render() {
-        const l = document.getElementById('npList');
-        if (!l) return;
-        l.innerHTML = ST.notifs.length ? ST.notifs.map(n => `
-            <div class="ni-it fadeUp"><div class="ni-ic" style="background:var(--gd)"><i class="fas fa-bell"></i></div>
-            <div class="ni-ct"><h4>${n.title}</h4><p>${n.body}</p><div class="ni-tm">${n.tm}</div></div></div>
-        `).join('') : '<p style="text-align:center;color:var(--tx4);padding:32px;font-size:12px">Aucune notification</p>';
-    }
-};
-
-/* ═══ GITHUB ═══ */
-const GH = {
-    saveToken(t) { ST.ghToken = t.trim(); saveCfg(); if (t) toast('Token sauvé', 'ok'); },
-    saveUser(u) { ST.ghUser = u.trim(); saveCfg(); if (u) toast('Username sauvé', 'ok'); },
-    async _api(endpoint, method = 'GET', body = null) {
-        if (!ST.ghToken) throw new Error('Token manquant');
-        const r = await fetch('https://api.github.com' + endpoint, {
-            method, headers: { 'Authorization': 'token ' + ST.ghToken, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
-            body: body ? JSON.stringify(body) : null
-        });
-        if (!r.ok) { const e = await r.json().catch(() => ({})); throw new Error(e.message || 'HTTP ' + r.status); }
-        return r.json();
-    },
-    async publish(name, html, desc = '') {
-        if (!ST.ghToken || !ST.ghUser) throw new Error('Configurez GitHub dans paramètres');
-        const repo = name.toLowerCase().replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-').substring(0, 60) + '-' + Date.now().toString(36);
-        await this._api('/user/repos', 'POST', { name: repo, description: desc, private: false, auto_init: true });
-        await wait(1500);
-        const encoded = btoa(unescape(encodeURIComponent(html)));
-        await this._api(`/repos/${ST.ghUser}/${repo}/contents/index.html`, 'PUT', { message: 'Deploy via Darwin AI', content: encoded });
-        await wait(1000);
-        try { await this._api(`/repos/${ST.ghUser}/${repo}/pages`, 'POST', { source: { branch: 'main', path: '/' } }); } catch(e) {}
-        return { url: `https://${ST.ghUser}.github.io/${repo}/`, repoUrl: `https://github.com/${ST.ghUser}/${repo}`, repo };
-    }
-};
-
-/* ═══ CREATE ═══ */
-const Create = {
-    setMode(m, el) {
-        ST.createMode = m;
-        document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('on'));
-        el.classList.add('on');
-        document.querySelectorAll('[id^="opts-"]').forEach(o => o.style.display = 'none');
-        const opts = document.getElementById('opts-' + m);
-        if (opts) opts.style.display = 'block';
-        const titles = { image: "Génération d'image", code: 'Génération de code', website: 'Création de site web', app: "Création d'application" };
-        document.getElementById('createTitle').textContent = titles[m] || '';
-        const phs = { image: 'Décrivez l\'image...', code: 'Décrivez le programme...', website: 'Décrivez le site...', app: 'Décrivez l\'application...' };
-        document.getElementById('createPrompt').placeholder = phs[m] || '';
-        const first = opts?.querySelector('.go-i.on');
-        if (first) ST.selOpt = first.textContent;
-    },
-    opt(el) {
-        el.parentElement.querySelectorAll('.go-i').forEach(o => o.classList.remove('on'));
-        el.classList.add('on');
-        ST.selOpt = el.textContent;
-    },
-    async run() {
-        const p = document.getElementById('createPrompt').value.trim();
-        if (!p) { toast('Décrivez ce que vous voulez', 'wr'); return; }
-        const btn = document.getElementById('createBtn');
-        btn.disabled = true;
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> En cours...';
-        try {
-            switch (ST.createMode) {
-                case 'image': await this._image(p); break;
-                case 'code': await this._code(p); break;
-                case 'website': await this._website(p); break;
-                case 'app': await this._app(p); break;
+    async _vid(p){
+        const r=document.getElementById('cR'),c=document.getElementById('rC');r.classList.add('on');
+        document.getElementById('rT').textContent='Vidéo';
+        c.innerHTML='<div class="shim">Génération vidéo (peut prendre 30s)...</div>';document.getElementById('rA').innerHTML='';
+        try{
+            const url=await VG.make(p,ST.opt);
+            c.innerHTML=`<video src="${url}" controls autoplay muted loop style="width:100%;border-radius:10px;box-shadow:0 0 30px rgba(0,229,255,.2)"></video>`;
+            ST.last={type:'video',url};
+            document.getElementById('rA').innerHTML=`<a href="${url}" download="darwin-video.mp4" class="mac" style="background:var(--gd);color:var(--bg);border-color:var(--cy)"><i class="fas fa-download"></i></a>`;
+            T('Vidéo générée','ok');
+        }catch(e){
+            // Fallback: Generate 4 images as animated slideshow
+            c.innerHTML='<div class="shim">Création de la séquence animée...</div>';
+            const urls=[];
+            for(let i=0;i<4;i++){
+                try{urls.push(await IG.make(p+`, frame ${i+1}, ${ST.opt}`));}catch(e){}
             }
-        } catch(e) { toast('Erreur : ' + e.message, 'er'); }
-        btn.disabled = false;
-        btn.innerHTML = '<i class="fas fa-bolt"></i> Générer';
-    },
-    async _image(prompt) {
-        const r = document.getElementById('createResult');
-        const c = document.getElementById('resContent');
-        r.classList.add('on');
-        document.getElementById('resTitle').textContent = 'Image';
-        c.innerHTML = '<div class="loading-shimmer">Génération...</div>';
-        document.getElementById('resActs').innerHTML = '';
-        const url = await ImgGen.make(prompt, ST.selOpt);
-        c.innerHTML = `<img src="${url}" class="gen-img">`;
-        ST.lastGen = { type: 'image', url };
-        document.getElementById('resActs').innerHTML = `
-            <a href="${url}" download="darwin-${Date.now()}.png" class="msg-act primary"><i class="fas fa-download"></i> Télécharger</a>
-            <button class="msg-act" onclick="window.open('${url}','_blank')"><i class="fas fa-external-link-alt"></i></button>
-            <button class="msg-act" onclick="Mods.shareText('${url}')"><i class="fas fa-share-alt"></i></button>
-        `;
-        toast('Image générée', 'ok');
-    },
-    async _code(prompt) {
-        const lang = ST.selOpt;
-        const r = document.getElementById('createResult');
-        const c = document.getElementById('resContent');
-        r.classList.add('on');
-        document.getElementById('resTitle').textContent = 'Code · ' + lang;
-        c.innerHTML = '<div class="loading-shimmer">Génération...</div>';
-        const sysP = `Expert ${lang}. Genere UNIQUEMENT du code ${lang} complet et fonctionnel dans un bloc markdown. Pas d'explications.`;
-        const resp = await AI.ask(`Code ${lang} : ${prompt}`, [], sysP);
-        const match = resp.match(/```(?:\w+)?\n?([\s\S]*?)```/);
-        const code = match ? match[1].trim() : resp;
-        ST.lastGen = { type: 'code', content: code, lang };
-        c.innerHTML = `<div class="gr-c"><pre><code>${code.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</code></pre></div>`;
-        const exts = { Python:'py', JavaScript:'js', TypeScript:'ts', React:'jsx', Java:'java', 'C++':'cpp', PHP:'php' };
-        document.getElementById('resActs').innerHTML = `
-            <button class="msg-act primary" onclick="Util.copy(ST.lastGen.content)"><i class="fas fa-copy"></i> Copier</button>
-            <button class="msg-act" onclick="Util.dl('darwin.${exts[lang]||'txt'}',ST.lastGen.content)"><i class="fas fa-download"></i></button>
-        `;
-        toast('Code généré', 'ok');
-    },
-    async _website(prompt) {
-        const type = ST.selOpt;
-        const r = document.getElementById('createResult');
-        const c = document.getElementById('resContent');
-        r.classList.add('on');
-        document.getElementById('resTitle').textContent = 'Site · ' + type;
-        c.innerHTML = '<div class="loading-shimmer">Création...</div>';
-        const sysP = `Expert web designer. Genere UNIQUEMENT le code HTML complet commencant par <!DOCTYPE html> avec CSS et JS integres. Design ultra moderne, responsive, animations. Pas d'explications, juste le code brut.`;
-        const resp = await AI.ask(`Site web moderne type ${type} : ${prompt}`, [], sysP);
-        let html = resp.match(/```(?:html)?\n?([\s\S]*?)```/)?.[1]?.trim() || resp;
-        if (!html.toLowerCase().startsWith('<!doctype')) {
-            html = '<!DOCTYPE html>\n<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + type + '</title></head><body>' + html + '</body></html>';
-        }
-        ST.lastGen = { type: 'website', content: html, name: type };
-        c.innerHTML = `<iframe class="preview-frame" srcdoc="${html.replace(/"/g, '&quot;')}"></iframe>`;
-        document.getElementById('resActs').innerHTML = `
-            <button class="msg-act primary" onclick="Create.publish()"><i class="fab fa-github"></i> Publier</button>
-            <button class="msg-act" onclick="Create.fullscreen()"><i class="fas fa-expand"></i></button>
-            <button class="msg-act" onclick="Create.showCode()"><i class="fas fa-code"></i></button>
-            <button class="msg-act" onclick="Util.dl('site.html',ST.lastGen.content)"><i class="fas fa-download"></i></button>
-        `;
-        toast('Site créé', 'ok');
-    },
-    async _app(prompt) {
-        const type = ST.selOpt;
-        if (type === 'PWA') { await this._website(prompt + ' (PWA avec manifest et service worker)'); return; }
-        const r = document.getElementById('createResult');
-        const c = document.getElementById('resContent');
-        r.classList.add('on');
-        document.getElementById('resTitle').textContent = 'App · ' + type;
-        c.innerHTML = '<div class="loading-shimmer">Création...</div>';
-        const sysP = `Expert ${type}. Code complet prêt à l'emploi. Uniquement le code, pas d'explications.`;
-        const resp = await AI.ask(`Application ${type} : ${prompt}`, [], sysP);
-        const code = resp.match(/```(?:\w+)?\n?([\s\S]*?)```/)?.[1]?.trim() || resp;
-        ST.lastGen = { type: 'code', content: code, lang: type };
-        c.innerHTML = `<div class="gr-c"><pre><code>${code.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</code></pre></div>`;
-        const ext = type === 'Flutter' ? 'dart' : 'jsx';
-        document.getElementById('resActs').innerHTML = `
-            <button class="msg-act primary" onclick="Util.copy(ST.lastGen.content)"><i class="fas fa-copy"></i> Copier</button>
-            <button class="msg-act" onclick="Util.dl('app.${ext}',ST.lastGen.content)"><i class="fas fa-download"></i></button>
-        `;
-        toast('Application créée', 'ok');
-    },
-    async publish() {
-        if (!ST.ghToken || !ST.ghUser) {
-            showModal('GitHub requis', `<div class="deploy-status err">Configurez votre token et username GitHub dans les paramètres.</div><button class="auth-btn" onclick="hideModal();UI.nav('settings')">Paramètres</button>`);
-            return;
-        }
-        if (!ST.lastGen?.content) { toast('Rien à publier', 'wr'); return; }
-        const name = prompt('Nom du projet :', ST.lastGen.name || 'darwin-site');
-        if (!name) return;
-        const c = document.getElementById('resContent');
-        c.innerHTML = '<div class="loading-shimmer">Publication...</div>';
-        try {
-            const result = await GH.publish(name, ST.lastGen.content, 'Créé par Darwin AI');
-            c.innerHTML = `<div class="deploy-status">
-                <strong>Publié !</strong><br><br>
-                Repository : <a href="${result.repoUrl}" target="_blank">${result.repo}</a><br>
-                URL : <a href="${result.url}" target="_blank">${result.url}</a><br><br>
-                <em>GitHub Pages prend 1-3 min pour s'activer.</em><br>
-                <a href="${result.url}" target="_blank" class="deploy-link"><i class="fas fa-external-link-alt"></i> Ouvrir</a>
-            </div>`;
-            Notif.push('Publication réussie', 'Site déployé sur ' + result.url);
-            toast('Publié', 'ok');
-        } catch(e) {
-            c.innerHTML = `<div class="deploy-status err"><strong>Erreur :</strong> ${e.message}</div>`;
-            toast('Erreur : ' + e.message, 'er');
+            if(urls.length){
+                let idx=0;
+                c.innerHTML=`<img id="vframe" src="${urls[0]}" class="gimg">`;
+                setInterval(()=>{idx=(idx+1)%urls.length;const el=document.getElementById('vframe');if(el)el.src=urls[idx]},1000);
+                document.getElementById('rA').innerHTML=urls.map((u,i)=>`<a href="${u}" download="frame-${i+1}.png" class="mac"><i class="fas fa-download"></i> ${i+1}</a>`).join('');
+                T('Séquence créée','ok');
+            }else{c.innerHTML='<div class="dstt err">Impossible de générer la vidéo.</div>'}
         }
     },
-    fullscreen() { if (ST.lastGen?.content) { const w = window.open('', '_blank'); w.document.write(ST.lastGen.content); w.document.close(); } },
-    showCode() {
-        if (!ST.lastGen?.content) return;
-        document.getElementById('resContent').innerHTML = `<div class="gr-c"><pre><code>${ST.lastGen.content.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</code></pre></div>`;
-        document.getElementById('resActs').innerHTML = `
-            <button class="msg-act primary" onclick="Create.publish()"><i class="fab fa-github"></i> Publier</button>
-            <button class="msg-act" onclick="Util.copy(ST.lastGen.content)"><i class="fas fa-copy"></i></button>
-            <button class="msg-act" onclick="Util.dl('site.html',ST.lastGen.content)"><i class="fas fa-download"></i></button>
-            <button class="msg-act" onclick="Create.showPreview()"><i class="fas fa-eye"></i> Aperçu</button>
+
+    async _pan(p){
+        const r=document.getElementById('cR'),c=document.getElementById('rC');r.classList.add('on');
+        document.getElementById('rT').textContent='Vue 360°';
+        c.innerHTML='<div class="shim">Création panorama 360°...</div>';document.getElementById('rA').innerHTML='';
+        const url=await PAN.make(p,ST.opt);
+        // CSS 3D panorama viewer
+        c.innerHTML=`
+            <div style="width:100%;height:400px;border-radius:10px;overflow:hidden;position:relative;cursor:grab;box-shadow:0 0 30px rgba(0,229,255,.2)" id="panView">
+                <div style="position:absolute;inset:0;background-image:url(${url});background-size:cover;background-position:center;transition:background-position .1s" id="panImg"></div>
+                <div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.6);padding:6px 14px;border-radius:20px;font-size:11px;color:#fff;backdrop-filter:blur(10px)">Glissez pour explorer</div>
+            </div>
         `;
+        // Simple drag to pan
+        const view=document.getElementById('panView'),img=document.getElementById('panImg');
+        let dragging=false,startX=0,posX=50;
+        view.onpointerdown=(e)=>{dragging=true;startX=e.clientX;view.style.cursor='grabbing'};
+        window.onpointermove=(e)=>{if(!dragging)return;const dx=(e.clientX-startX)*0.3;posX+=dx;startX=e.clientX;img.style.backgroundPosition=posX+'% center'};
+        window.onpointerup=()=>{dragging=false;view.style.cursor='grab'};
+        ST.last={type:'panorama',url};
+        document.getElementById('rA').innerHTML=`<a href="${url}" download="darwin-360.png" class="mac" style="background:var(--gd);color:var(--bg);border-color:var(--cy)"><i class="fas fa-download"></i> Télécharger</a>`;
+        T('Panorama 360° créé','ok');
     },
-    showPreview() {
-        if (!ST.lastGen?.content) return;
-        document.getElementById('resContent').innerHTML = `<iframe class="preview-frame" srcdoc="${ST.lastGen.content.replace(/"/g, '&quot;')}"></iframe>`;
-        document.getElementById('resActs').innerHTML = `
-            <button class="msg-act primary" onclick="Create.publish()"><i class="fab fa-github"></i> Publier</button>
-            <button class="msg-act" onclick="Create.fullscreen()"><i class="fas fa-expand"></i></button>
-            <button class="msg-act" onclick="Create.showCode()"><i class="fas fa-code"></i></button>
-            <button class="msg-act" onclick="Util.dl('site.html',ST.lastGen.content)"><i class="fas fa-download"></i></button>
-        `;
+
+    async _code(p){
+        const lang=ST.opt;const r=document.getElementById('cR'),c=document.getElementById('rC');r.classList.add('on');
+        document.getElementById('rT').textContent='Code · '+lang;
+        c.innerHTML='<div class="shim">Génération...</div>';
+        const resp=await AI.ask(`Génère uniquement du code ${lang} pour: ${p}. Code complet, fonctionnel, dans un bloc markdown. Pas d'explications.`,[],`Expert ${lang}. Code de production uniquement.`);
+        const match=resp.match(/```(?:\w+)?\n?([\s\S]*?)```/);
+        const code=match?match[1].trim():resp;
+        ST.last={type:'code',content:code,lang};
+        c.innerHTML=`<div class="grc"><pre><code>${code.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</code></pre></div>`;
+        const exts={Python:'py',JavaScript:'js',TypeScript:'ts',React:'jsx',Java:'java','C++':'cpp',PHP:'php'};
+        document.getElementById('rA').innerHTML=`<button class="mac" style="background:var(--gd);color:var(--bg)" onclick="navigator.clipboard?.writeText(ST.last.content).then(()=>T('Copié','ok'))"><i class="fas fa-copy"></i> Copier</button><button class="mac" onclick="U.dl('darwin.${exts[lang]||'txt'}',ST.last.content)"><i class="fas fa-download"></i></button>`;
+        T('Code généré','ok');
+    },
+
+    async _web(p){
+        const type=ST.opt;const r=document.getElementById('cR'),c=document.getElementById('rC');r.classList.add('on');
+        document.getElementById('rT').textContent='Site · '+type;
+        c.innerHTML='<div class="shim">Création...</div>';
+        const resp=await AI.ask(`Crée un site web ${type} : ${p}. Génère UNIQUEMENT le code HTML complet commençant par <!DOCTYPE html> avec CSS et JavaScript intégrés. Design ultra moderne, responsive, animations. Pas d'explications.`,[],'Expert web designer. HTML complet uniquement.');
+        let html=resp.match(/```(?:html)?\n?([\s\S]*?)```/)?.[1]?.trim()||resp;
+        if(!html.toLowerCase().startsWith('<!doctype'))html='<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+type+'</title></head><body>'+html+'</body></html>';
+        ST.last={type:'website',content:html,name:type};
+        c.innerHTML=`<iframe class="pf" srcdoc="${html.replace(/"/g,'&quot;')}"></iframe>`;
+        document.getElementById('rA').innerHTML=`<button class="mac" style="background:var(--gd);color:var(--bg)" onclick="CR.pub()"><i class="fab fa-github"></i> Publier</button><button class="mac" onclick="const w=window.open('','_blank');w.document.write(ST.last.content);w.document.close()"><i class="fas fa-expand"></i></button><button class="mac" onclick="U.dl('site.html',ST.last.content)"><i class="fas fa-download"></i></button>`;
+        T('Site créé','ok');
+    },
+
+    async _app(p){
+        const type=ST.opt;
+        if(type==='PWA'){await this._web(p+' (PWA avec manifest)');return}
+        const r=document.getElementById('cR'),c=document.getElementById('rC');r.classList.add('on');
+        document.getElementById('rT').textContent='App · '+type;
+        c.innerHTML='<div class="shim">Création...</div>';
+        const resp=await AI.ask(`Application ${type} complète : ${p}. Code uniquement.`,[],`Expert ${type}. Code complet.`);
+        const code=resp.match(/```(?:\w+)?\n?([\s\S]*?)```/)?.[1]?.trim()||resp;
+        ST.last={type:'code',content:code,lang:type};
+        c.innerHTML=`<div class="grc"><pre><code>${code.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</code></pre></div>`;
+        document.getElementById('rA').innerHTML=`<button class="mac" style="background:var(--gd);color:var(--bg)" onclick="navigator.clipboard?.writeText(ST.last.content).then(()=>T('Copié','ok'))"><i class="fas fa-copy"></i></button><button class="mac" onclick="U.dl('app.${type==='Flutter'?'dart':'jsx'}',ST.last.content)"><i class="fas fa-download"></i></button>`;
+        T('App créée','ok');
+    },
+
+    async pub(){
+        if(!ST.ghToken||!ST.ghUser){sM('GitHub',`<div class="dstt err">Configurez GitHub dans les paramètres.</div><button class="abtn" onclick="hM();N('settings')">Paramètres</button>`);return}
+        if(!ST.last?.content){T('Rien à publier','wr');return}
+        const name=prompt('Nom du projet :',ST.last.name||'darwin-site');if(!name)return;
+        const c=document.getElementById('rC');c.innerHTML='<div class="shim">Publication...</div>';
+        try{
+            const res=await GH.publish(name,ST.last.content,'Créé par Darwin AI');
+            c.innerHTML=`<div class="dstt"><strong>Publié !</strong><br><br>Repo : <a href="${res.repoUrl}" target="_blank">${res.repo}</a><br>URL : <a href="${res.url}" target="_blank">${res.url}</a><br><br><em>Activé en 1-3 min.</em><br><a href="${res.url}" target="_blank" class="dlk"><i class="fas fa-external-link-alt"></i> Ouvrir</a></div>`;
+            T('Publié','ok');
+        }catch(e){c.innerHTML=`<div class="dstt err">Erreur : ${e.message}</div>`;T(e.message,'er')}
     }
 };
 
-/* ═══ UTIL ═══ */
-const Util = {
-    copyEl(btn) { const t = btn.closest('.msg').querySelector('.msg-bub').innerText; this.copy(t); },
-    copy(t) {
-        if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(t).then(() => toast('Copié', 'ok')).catch(() => this._fb(t));
-        else this._fb(t);
-    },
-    _fb(t) {
-        const ta = document.createElement('textarea');
-        ta.value = t; ta.style.cssText = 'position:fixed;opacity:0';
-        document.body.appendChild(ta); ta.select();
-        try { document.execCommand('copy'); toast('Copié', 'ok'); } catch(e) { toast('Erreur', 'er'); }
-        document.body.removeChild(ta);
-    },
-    dl(name, content) {
-        const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a'); a.href = url; a.download = name; a.click();
-        URL.revokeObjectURL(url);
-        toast('Téléchargé', 'ok');
-    }
+const U={
+    dl(name,content){const blob=new Blob([content],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;a.click();URL.revokeObjectURL(url);T('Téléchargé','ok')}
 };
 
-function showModal(t, b) {
-    document.getElementById('moT').textContent = t;
-    document.getElementById('moB').innerHTML = b;
-    document.getElementById('moBg').classList.add('on');
-}
-function hideModal() { document.getElementById('moBg').classList.remove('on'); }
-function toast(msg, type = 'info') {
-    const c = document.getElementById('toastC');
-    const icons = { ok: 'check-circle', er: 'exclamation-circle', wr: 'exclamation-triangle', info: 'info-circle' };
-    const d = document.createElement('div');
-    d.className = 'toast ' + type;
-    d.innerHTML = `<i class="fas fa-${icons[type] || 'info-circle'}"></i> ${msg}`;
-    c.appendChild(d);
-    setTimeout(() => { d.style.opacity = '0'; d.style.transform = 'translateX(80px)'; d.style.transition = '.3s'; setTimeout(() => d.remove(), 300); }, 3500);
-}
-
-function setupPWA() {
-    const m = {
-        name: 'Darwin AI PRO', short_name: 'Darwin', description: 'Universal AI Assistant',
-        start_url: '.', display: 'standalone', background_color: '#000814', theme_color: '#000814', orientation: 'any',
-        icons: [{
-            src: 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00e5ff"/><stop offset="100%" stop-color="#7c4dff"/></linearGradient></defs><rect width="192" height="192" rx="42" fill="#000814"/><circle cx="96" cy="96" r="60" fill="none" stroke="url(#g)" stroke-width="2" stroke-dasharray="8 4"/><circle cx="96" cy="96" r="28" fill="url(#g)"/></svg>'),
-            sizes: '192x192', type: 'image/svg+xml', purpose: 'any maskable'
-        }],
-        shortcuts: [
-            { name: 'Voice', url: '/?p=voice', description: 'Mode vocal' },
-            { name: 'Chat', url: '/?p=chat', description: 'Chat' },
-            { name: 'Create', url: '/?p=create', description: 'Créer' }
-        ]
-    };
-    document.getElementById('pwaMan').href = URL.createObjectURL(new Blob([JSON.stringify(m)], { type: 'application/json' }));
-    if ('serviceWorker' in navigator) {
-        const sw = `self.addEventListener('install',e=>{self.skipWaiting()});self.addEventListener('fetch',e=>{e.respondWith(fetch(e.request).catch(()=>new Response('Offline')))});`;
-        navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw], { type: 'application/javascript' }))).catch(() => {});
-    }
-}
-
-// Load persisted notifications
-ST.notifs = LS.get('notifs', []);
-
-console.log('%cDARWIN AI PRO v6', 'font-size:20px;font-weight:900;background:linear-gradient(135deg,#00e5ff,#7c4dff);-webkit-background-clip:text;-webkit-text-fill-color:transparent');
-console.log('%cUniversal AI System © 2025 DESSOUASSI Oboube Anael David', 'color:#00e5ff;font-size:11px');
+console.log('%cDARWIN AI PRO v7','font-size:20px;font-weight:900;background:linear-gradient(135deg,#00e5ff,#7c4dff);-webkit-background-clip:text;-webkit-text-fill-color:transparent');
+console.log('%c© 2025 DESSOUASSI Oboube Anael David','color:#00e5ff;font-size:10px');
 </script>
 </body>
 </html>
