@@ -2,314 +2,397 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>Darwin AI</title>
-<meta name="description" content="Darwin AI — Plateforme d'intelligence artificielle avancée">
-<meta name="theme-color" content="#06061a">
+<meta name="description" content="Darwin AI — Assistant vocal intelligent">
+<meta name="theme-color" content="#000814">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="manifest" id="pwaManifest">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="manifest" id="pwaMan">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
 :root{
---p:#7c6bf0;--p2:#a78bfa;--p3:#4f46e5;
---s:#22d3ee;--s2:#06b6d4;
---ac:#f472b6;
---bg:#06061a;--bg2:#0d0d2b;--bg3:#14143e;--bg4:#1c1c52;
---tx:#e8e8f0;--tx2:#9898b8;--tx3:#6868a0;
---ok:#34d399;--wr:#fbbf24;--er:#f87171;
---r:14px;--r2:20px;
---sh:0 4px 24px rgba(0,0,0,.4);
---sh2:0 8px 40px rgba(0,0,0,.5);
---gd:linear-gradient(135deg,var(--p),var(--s));
---gd2:linear-gradient(135deg,var(--p),var(--ac));
---glass:rgba(13,13,43,.85);
---border:rgba(255,255,255,.06);
+--bg:#000814;--bg2:#001d3d;--bg3:#003566;
+--surf:rgba(0,29,61,.5);--surf2:rgba(0,53,102,.4);
+--cy:#00e5ff;--cy2:#00b8d4;--cy3:#0091ea;
+--vi:#7c4dff;--vi2:#651fff;
+--pk:#ff4081;
+--tx:#e0f7fa;--tx2:#80deea;--tx3:#4dd0e1;--tx4:#00838f;
+--ok:#00e676;--wr:#ffc400;--er:#ff5252;
+--gd:linear-gradient(135deg,var(--cy) 0%,var(--vi) 100%);
+--gd2:linear-gradient(135deg,var(--cy) 0%,var(--pk) 100%);
+--gd3:linear-gradient(180deg,var(--cy) 0%,var(--vi) 50%,var(--pk) 100%);
+--glow-cy:0 0 20px rgba(0,229,255,.5),0 0 40px rgba(0,229,255,.2);
+--glow-vi:0 0 20px rgba(124,77,255,.5),0 0 40px rgba(124,77,255,.2);
+--border:rgba(0,229,255,.15);
+--border2:rgba(0,229,255,.3);
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{scroll-behavior:smooth}
-body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;min-height:100dvh;overflow-x:hidden;line-height:1.5;-webkit-font-smoothing:antialiased}
-::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--p3);border-radius:3px}
-::selection{background:var(--p);color:#fff}
+html,body{overscroll-behavior:none}
+body{font-family:'Space Grotesk',system-ui,sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;min-height:100dvh;overflow-x:hidden;line-height:1.5;-webkit-font-smoothing:antialiased}
+/* Futuristic grid background */
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle at 20% 20%,rgba(0,229,255,.08) 0%,transparent 40%),radial-gradient(circle at 80% 60%,rgba(124,77,255,.08) 0%,transparent 40%),radial-gradient(circle at 50% 100%,rgba(255,64,129,.05) 0%,transparent 50%);pointer-events:none;z-index:0}
+body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,229,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;mask-image:radial-gradient(ellipse at center,black 30%,transparent 70%)}
+::-webkit-scrollbar{width:4px;height:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--cy2);border-radius:2px}
+::selection{background:var(--cy);color:var(--bg)}
 input,textarea,select,button{font-family:inherit}
-a{color:var(--s);text-decoration:none}
+a{color:var(--cy);text-decoration:none}
 
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes scaleIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
-@keyframes slideR{from{transform:translateX(100%)}to{transform:translateX(0)}}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.7;transform:scale(1.05)}}
 @keyframes spin{to{transform:rotate(360deg)}}
-@keyframes breathe{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.08);opacity:1}}
-@keyframes wave{0%,100%{transform:scaleY(.4)}50%{transform:scaleY(1.6)}}
-@keyframes dotPulse{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1)}}
-@keyframes rippleOut{to{transform:scale(3);opacity:0}}
+@keyframes breath{0%,100%{transform:scale(1);filter:brightness(1)}50%{transform:scale(1.05);filter:brightness(1.2)}}
+@keyframes orbitSpin{to{transform:rotate(360deg)}}
+@keyframes dashMove{to{stroke-dashoffset:-100}}
+@keyframes glow{0%,100%{filter:drop-shadow(0 0 8px var(--cy))}50%{filter:drop-shadow(0 0 20px var(--cy)) drop-shadow(0 0 30px var(--vi))}}
+@keyframes float3d{0%,100%{transform:translateY(0) rotateX(0)}50%{transform:translateY(-8px) rotateX(5deg)}}
+@keyframes soundWave{0%,100%{height:8px}50%{height:32px}}
+@keyframes coreRipple{0%{transform:scale(1);opacity:1}100%{transform:scale(3);opacity:0}}
+@keyframes typing{0%,100%{opacity:.3;transform:scale(.7)}50%{opacity:1;transform:scale(1)}}
+@keyframes scanline{0%{transform:translateY(-100%)}100%{transform:translateY(100vh)}}
+@keyframes borderGlow{0%,100%{box-shadow:0 0 20px rgba(0,229,255,.2)}50%{box-shadow:0 0 40px rgba(0,229,255,.5),0 0 60px rgba(124,77,255,.2)}}
 @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
-@keyframes borderGlow{0%,100%{border-color:rgba(124,107,240,.3)}50%{border-color:rgba(124,107,240,.7)}}
+@keyframes voiceOrbit{from{transform:rotate(0deg) translateX(80px) rotate(0deg)}to{transform:rotate(360deg) translateX(80px) rotate(-360deg)}}
 
-.fadeUp{animation:fadeUp .5s ease both}
+.fadeUp{animation:fadeUp .4s ease both}
 .fadeIn{animation:fadeIn .4s ease both}
-.scaleIn{animation:scaleIn .35s ease both}
 
-/* ─── SPLASH ─── */
-#splash{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:10000;transition:opacity .6s ease,visibility .6s ease}
+/* ═══ SPLASH ═══ */
+#splash{position:fixed;inset:0;background:radial-gradient(ellipse at center,var(--bg2) 0%,var(--bg) 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:10000;transition:opacity .6s,visibility .6s}
 #splash.done{opacity:0;visibility:hidden;pointer-events:none}
-.splash-logo{width:100px;height:100px;border-radius:50%;border:2px solid rgba(124,107,240,.3);padding:8px;animation:breathe 2.5s ease infinite;margin-bottom:28px}
-.splash-logo img{width:100%;height:100%;border-radius:50%;object-fit:cover}
-.splash-t{font-size:28px;font-weight:800;letter-spacing:-.5px;background:var(--gd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.splash-sub{color:var(--tx3);font-size:13px;margin-top:4px;font-weight:400;letter-spacing:.5px}
-.splash-bar{width:180px;height:3px;background:var(--bg3);border-radius:2px;margin-top:32px;overflow:hidden}
-.splash-fill{height:100%;background:var(--gd);border-radius:2px;transition:width .3s ease;width:0%}
-.splash-st{color:var(--tx3);font-size:11px;margin-top:12px;min-height:16px}
+.splash-logo{width:140px;height:140px;position:relative;margin-bottom:32px;animation:breath 3s ease infinite}
+.splash-logo svg{width:100%;height:100%;filter:drop-shadow(0 0 25px rgba(0,229,255,.6))}
+.splash-t{font-size:32px;font-weight:700;letter-spacing:8px;background:var(--gd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.splash-sub{color:var(--tx4);font-size:11px;margin-top:8px;letter-spacing:4px;text-transform:uppercase;font-weight:500}
+.splash-bar{width:200px;height:2px;background:var(--surf);border-radius:1px;margin-top:36px;overflow:hidden;position:relative}
+.splash-fill{height:100%;background:var(--gd);border-radius:1px;transition:width .3s ease;width:0%;box-shadow:var(--glow-cy)}
+.splash-st{color:var(--tx4);font-size:10px;margin-top:14px;min-height:14px;letter-spacing:1.5px;text-transform:uppercase;font-family:'JetBrains Mono',monospace}
 
-/* ─── AUTH ─── */
+/* Logo SVG shared */
+.dw-logo{width:100%;height:100%}
+.dw-logo .ring-outer{fill:none;stroke:url(#g1);stroke-width:2;stroke-dasharray:8 4;animation:orbitSpin 12s linear infinite;transform-origin:center}
+.dw-logo .ring-mid{fill:none;stroke:url(#g2);stroke-width:1;stroke-dasharray:2 6;animation:orbitSpin 18s linear infinite reverse;transform-origin:center}
+.dw-logo .core{fill:url(#gCore);filter:url(#glow)}
+.dw-logo .hex{fill:none;stroke:url(#g1);stroke-width:1.5;opacity:.6}
+.dw-logo .dot{fill:var(--cy)}
+.dw-logo .neural{fill:none;stroke:url(#g1);stroke-width:.5;opacity:.4}
+
+/* ═══ AUTH ═══ */
 #auth{position:fixed;inset:0;background:var(--bg);display:none;align-items:center;justify-content:center;z-index:9000;padding:24px}
 #auth.on{display:flex}
-.auth-w{width:100%;max-width:400px}
+.auth-w{width:100%;max-width:400px;position:relative;z-index:1}
 .auth-hd{text-align:center;margin-bottom:32px}
-.auth-logo{width:64px;height:64px;border-radius:50%;margin:0 auto 16px;border:2px solid rgba(124,107,240,.2);padding:4px}
-.auth-logo img{width:100%;height:100%;border-radius:50%;object-fit:cover}
-.auth-t{font-size:24px;font-weight:800;letter-spacing:-.3px}
-.auth-d{color:var(--tx3);font-size:13px;margin-top:4px}
-.auth-tabs{display:flex;background:var(--bg2);border-radius:12px;padding:3px;margin-bottom:24px;border:1px solid var(--border)}
-.auth-tab{flex:1;padding:10px;text-align:center;border-radius:10px;cursor:pointer;font-weight:600;font-size:13px;color:var(--tx3);transition:.25s ease}
-.auth-tab.on{background:var(--p);color:#fff}
+.auth-logo{width:80px;height:80px;margin:0 auto 20px;position:relative}
+.auth-t{font-size:26px;font-weight:700;letter-spacing:4px;background:var(--gd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.auth-d{color:var(--tx4);font-size:11px;margin-top:6px;letter-spacing:1.5px;text-transform:uppercase}
+.auth-tabs{display:flex;background:var(--surf);border-radius:14px;padding:4px;margin-bottom:24px;border:1px solid var(--border);backdrop-filter:blur(20px)}
+.auth-tab{flex:1;padding:11px;text-align:center;border-radius:10px;cursor:pointer;font-weight:600;font-size:12px;color:var(--tx3);transition:.3s;letter-spacing:1px;text-transform:uppercase}
+.auth-tab.on{background:var(--gd);color:var(--bg);box-shadow:var(--glow-cy)}
 .auth-f{display:none}.auth-f.on{display:block;animation:fadeUp .35s ease}
 .fg{margin-bottom:16px}
-.fg label{display:block;font-size:12px;font-weight:600;color:var(--tx2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
-.fi{width:100%;padding:12px 14px;background:var(--bg2);border:1.5px solid var(--border);border-radius:10px;color:var(--tx);font-size:14px;transition:.25s ease;outline:none}
-.fi:focus{border-color:var(--p);background:var(--bg3)}
-.fi::placeholder{color:var(--tx3)}
-.auth-btn{width:100%;padding:13px;background:var(--gd);border:none;border-radius:10px;color:#fff;font-size:14px;font-weight:700;cursor:pointer;transition:.25s ease;margin-top:8px;letter-spacing:.3px}
-.auth-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(124,107,240,.35)}
+.fg label{display:block;font-size:10px;font-weight:600;color:var(--tx3);margin-bottom:6px;letter-spacing:1.5px;text-transform:uppercase}
+.fi{width:100%;padding:13px 14px;background:var(--surf);border:1px solid var(--border);border-radius:10px;color:var(--tx);font-size:14px;transition:.3s;outline:none;backdrop-filter:blur(20px)}
+.fi:focus{border-color:var(--cy);box-shadow:0 0 0 3px rgba(0,229,255,.1),var(--glow-cy)}
+.fi::placeholder{color:var(--tx4)}
+.auth-btn{width:100%;padding:14px;background:var(--gd);border:none;border-radius:10px;color:var(--bg);font-size:12px;font-weight:700;cursor:pointer;transition:.3s;margin-top:8px;letter-spacing:2px;text-transform:uppercase;box-shadow:var(--glow-cy)}
+.auth-btn:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(0,229,255,.7)}
 .auth-btn:active{transform:scale(.98)}
 .bio-s{text-align:center;margin-top:28px;padding-top:24px;border-top:1px solid var(--border)}
-.bio-btn{width:60px;height:60px;border-radius:50%;background:var(--bg2);border:2px solid var(--p);color:var(--p);font-size:24px;cursor:pointer;transition:.3s ease;display:inline-flex;align-items:center;justify-content:center;animation:borderGlow 3s ease infinite}
-.bio-btn:hover{background:var(--p);color:#fff}
-.bio-label{display:block;color:var(--tx3);font-size:11px;margin-top:8px;font-weight:500}
+.bio-btn{width:62px;height:62px;border-radius:50%;background:var(--surf);border:2px solid var(--cy);color:var(--cy);font-size:24px;cursor:pointer;transition:.3s;display:inline-flex;align-items:center;justify-content:center;animation:borderGlow 3s infinite;backdrop-filter:blur(20px)}
+.bio-btn:hover{background:var(--cy);color:var(--bg)}
+.bio-label{display:block;color:var(--tx4);font-size:10px;margin-top:10px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase}
 
-/* ─── MAIN APP ─── */
-#app{display:none;min-height:100vh;min-height:100dvh;padding-bottom:72px}
+/* ═══ APP ═══ */
+#app{display:none;min-height:100vh;min-height:100dvh;padding-bottom:76px;position:relative;z-index:1}
 #app.on{display:block}
 
 /* Header */
-.hdr{position:sticky;top:0;background:rgba(6,6,26,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;z-index:100;border-bottom:1px solid var(--border)}
-.hdr-l{display:flex;align-items:center;gap:10px}
-.hdr-logo{width:34px;height:34px;border-radius:50%;object-fit:cover;border:1.5px solid rgba(124,107,240,.3)}
-.hdr-info h1{font-size:16px;font-weight:800;letter-spacing:-.3px}
-.hdr-st{font-size:10px;color:var(--ok);display:flex;align-items:center;gap:4px;font-weight:500}
-.hdr-st::before{content:'';width:5px;height:5px;background:var(--ok);border-radius:50%;animation:pulse 2s infinite}
+.hdr{position:sticky;top:0;background:rgba(0,8,20,.85);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;z-index:100;border-bottom:1px solid var(--border)}
+.hdr-l{display:flex;align-items:center;gap:12px}
+.hdr-logo{width:38px;height:38px;position:relative}
+.hdr-info h1{font-size:14px;font-weight:700;letter-spacing:3px;background:var(--gd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hdr-st{font-size:9px;color:var(--ok);display:flex;align-items:center;gap:5px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;margin-top:1px}
+.hdr-st::before{content:'';width:5px;height:5px;background:var(--ok);border-radius:50%;box-shadow:0 0 8px var(--ok);animation:pulse 2s infinite}
 .hdr-r{display:flex;gap:6px}
-.hdr-btn{width:34px;height:34px;border-radius:10px;background:var(--bg2);border:1px solid var(--border);color:var(--tx2);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s;position:relative}
-.hdr-btn:hover{color:var(--p);border-color:var(--p)}
-.hdr-btn .bdg{position:absolute;top:-3px;right:-3px;min-width:15px;height:15px;background:var(--er);border-radius:8px;font-size:8px;font-weight:700;display:none;align-items:center;justify-content:center;padding:0 3px;border:2px solid var(--bg)}
+.hdr-btn{width:36px;height:36px;border-radius:10px;background:var(--surf);border:1px solid var(--border);color:var(--tx3);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.25s;position:relative;backdrop-filter:blur(20px)}
+.hdr-btn:hover{color:var(--cy);border-color:var(--cy);box-shadow:var(--glow-cy)}
+.hdr-btn .bdg{position:absolute;top:-3px;right:-3px;min-width:15px;height:15px;background:var(--er);border-radius:8px;font-size:8px;font-weight:700;display:none;align-items:center;justify-content:center;padding:0 3px;border:2px solid var(--bg);color:#fff}
 .hdr-btn .bdg.on{display:flex}
 
 /* Pages */
-.pg{display:none;padding:16px;animation:fadeUp .4s ease both}
+.pg{display:none;padding:16px;animation:fadeUp .35s ease both}
 .pg.on{display:block}
 
-/* ─── CHAT ─── */
+/* ═══ VOICE MODE (PRIMARY UI) ═══ */
+.voice-mode{display:flex;flex-direction:column;align-items:center;justify-content:space-between;min-height:calc(100vh - 130px);min-height:calc(100dvh - 130px);padding:20px 16px;text-align:center}
+.voice-status{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--tx4);font-weight:600;margin-top:8px}
+.voice-status.listening{color:var(--cy);animation:pulse 1.5s infinite}
+.voice-status.speaking{color:var(--vi)}
+.voice-status.thinking{color:var(--pk)}
+
+.voice-core{width:280px;height:280px;position:relative;display:flex;align-items:center;justify-content:center;margin:20px 0;cursor:pointer;-webkit-user-select:none;user-select:none}
+.core-svg{position:absolute;inset:0;filter:drop-shadow(0 0 30px rgba(0,229,255,.4))}
+.core-orb{width:100px;height:100px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--cy) 0%,var(--vi) 50%,var(--pk) 100%);position:relative;transition:.4s;animation:breath 3s infinite;box-shadow:0 0 60px rgba(0,229,255,.5),inset 0 0 40px rgba(255,255,255,.2)}
+.voice-core.listening .core-orb{animation:pulse .8s infinite;background:radial-gradient(circle at 30% 30%,#fff,var(--cy) 50%,var(--vi) 100%)}
+.voice-core.speaking .core-orb{animation:pulse .5s infinite;background:radial-gradient(circle at 30% 30%,#fff,var(--vi) 50%,var(--pk) 100%)}
+.voice-core.thinking .core-orb{animation:spin 2s linear infinite}
+.core-ripple{position:absolute;width:100px;height:100px;border-radius:50%;border:2px solid var(--cy);opacity:0;pointer-events:none}
+.voice-core.listening .core-ripple{animation:coreRipple 2s infinite}
+.voice-core.listening .core-ripple:nth-child(2){animation-delay:.6s}
+.voice-core.listening .core-ripple:nth-child(3){animation-delay:1.2s}
+
+.orbit-dot{position:absolute;top:50%;left:50%;width:8px;height:8px;background:var(--cy);border-radius:50%;margin:-4px 0 0 -4px;box-shadow:0 0 12px var(--cy);animation:voiceOrbit 4s linear infinite}
+.orbit-dot:nth-child(2){background:var(--vi);box-shadow:0 0 12px var(--vi);animation-delay:-1.3s}
+.orbit-dot:nth-child(3){background:var(--pk);box-shadow:0 0 12px var(--pk);animation-delay:-2.6s}
+
+.wave-viz{display:flex;gap:3px;align-items:center;height:40px;margin-top:24px;opacity:0;transition:.3s}
+.wave-viz.on{opacity:1}
+.wave-bar{width:3px;height:8px;background:var(--gd);border-radius:2px;transition:height .1s}
+
+.voice-transcript{min-height:60px;max-width:600px;font-size:16px;color:var(--tx);margin:20px 0;line-height:1.5;font-weight:400;padding:0 20px}
+.voice-transcript.user{color:var(--cy)}
+.voice-transcript.empty{color:var(--tx4);font-style:italic;font-size:13px}
+
+.voice-controls{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:16px}
+.vc-btn{width:52px;height:52px;border-radius:14px;background:var(--surf);border:1px solid var(--border);color:var(--tx2);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.25s;backdrop-filter:blur(20px)}
+.vc-btn:hover{border-color:var(--cy);color:var(--cy);box-shadow:var(--glow-cy)}
+.vc-btn.on{background:var(--cy);color:var(--bg);border-color:var(--cy);box-shadow:var(--glow-cy)}
+.vc-btn.danger{border-color:var(--er);color:var(--er)}
+.vc-btn.danger:hover{background:var(--er);color:#fff}
+.vc-btn.large{width:64px;height:64px;font-size:22px;border-radius:16px}
+
+.hands-free-toggle{display:flex;align-items:center;gap:10px;padding:10px 18px;background:var(--surf);border:1px solid var(--border);border-radius:24px;cursor:pointer;transition:.25s;backdrop-filter:blur(20px);margin-top:12px}
+.hands-free-toggle.on{border-color:var(--cy);background:rgba(0,229,255,.1);box-shadow:var(--glow-cy)}
+.hf-dot{width:8px;height:8px;border-radius:50%;background:var(--tx4);transition:.3s}
+.hands-free-toggle.on .hf-dot{background:var(--cy);box-shadow:0 0 8px var(--cy);animation:pulse 1.5s infinite}
+.hf-label{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx2)}
+.hands-free-toggle.on .hf-label{color:var(--cy)}
+
+/* ═══ CHAT VIEW ═══ */
 .chat-c{max-width:760px;margin:0 auto;display:flex;flex-direction:column;height:calc(100vh - 140px);height:calc(100dvh - 140px)}
 .chat-msgs{flex:1;overflow-y:auto;padding:8px 0;scroll-behavior:smooth}
-.msg{display:flex;gap:8px;margin-bottom:14px;animation:fadeUp .3s ease both}
+.msg{display:flex;gap:10px;margin-bottom:16px;animation:fadeUp .3s ease both}
 .msg.u{flex-direction:row-reverse}
-.msg-av{width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;font-weight:700}
-.msg.ai .msg-av{background:var(--bg3);color:var(--p);border:1px solid var(--border)}
-.msg.u .msg-av{background:var(--p3);color:#fff}
-.msg-body{max-width:72%}
-.msg-bub{padding:11px 14px;border-radius:14px;font-size:13.5px;line-height:1.65;word-wrap:break-word}
-.msg.ai .msg-bub{background:var(--bg2);border:1px solid var(--border);border-bottom-left-radius:4px}
-.msg.u .msg-bub{background:var(--p3);border-bottom-right-radius:4px}
-.msg-t{font-size:9px;color:var(--tx3);margin-top:3px;padding:0 2px;font-weight:500}
+.msg-av{width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;font-weight:700;letter-spacing:.5px}
+.msg.ai .msg-av{background:var(--surf);color:var(--cy);border:1px solid var(--border2)}
+.msg.u .msg-av{background:var(--gd);color:var(--bg)}
+.msg-body{max-width:75%}
+.msg-bub{padding:12px 15px;border-radius:14px;font-size:14px;line-height:1.65;word-wrap:break-word;backdrop-filter:blur(20px)}
+.msg.ai .msg-bub{background:var(--surf);border:1px solid var(--border);border-bottom-left-radius:4px}
+.msg.u .msg-bub{background:linear-gradient(135deg,rgba(0,229,255,.15),rgba(124,77,255,.15));border:1px solid var(--border2);border-bottom-right-radius:4px}
+.msg-t{font-size:9px;color:var(--tx4);margin-top:4px;padding:0 2px;font-weight:500;letter-spacing:.5px}
 .msg.u .msg-t{text-align:right}
-.msg-bub pre{background:rgba(0,0,0,.35);padding:10px;border-radius:8px;overflow-x:auto;margin:8px 0;font-family:'JetBrains Mono',monospace;font-size:12px;border:1px solid var(--border)}
-.msg-bub code{font-family:'JetBrains Mono',monospace;background:rgba(0,0,0,.25);padding:1px 5px;border-radius:4px;font-size:12px}
+.msg-bub pre{background:rgba(0,0,0,.4);padding:12px;border-radius:8px;overflow-x:auto;margin:8px 0;font-family:'JetBrains Mono',monospace;font-size:12px;border:1px solid var(--border)}
+.msg-bub code{font-family:'JetBrains Mono',monospace;background:rgba(0,229,255,.1);padding:2px 5px;border-radius:4px;font-size:12px;color:var(--cy)}
 .msg-acts{display:flex;gap:4px;margin-top:6px}
-.msg-act{padding:3px 8px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--tx3);font-size:10px;cursor:pointer;display:flex;align-items:center;gap:3px;transition:.2s;font-weight:500}
-.msg-act:hover{border-color:var(--p);color:var(--p)}
-.typing{display:none;padding:10px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:14px;border-bottom-left-radius:4px;width:fit-content;gap:5px;align-items:center;margin-bottom:14px}
+.msg-act{padding:4px 9px;background:var(--surf);border:1px solid var(--border);border-radius:6px;color:var(--tx3);font-size:10px;cursor:pointer;display:flex;align-items:center;gap:4px;transition:.2s;font-weight:500;backdrop-filter:blur(10px)}
+.msg-act:hover{border-color:var(--cy);color:var(--cy)}
+.typing{display:none;padding:12px 15px;background:var(--surf);border:1px solid var(--border);border-radius:14px;border-bottom-left-radius:4px;width:fit-content;gap:5px;align-items:center;margin-bottom:14px;backdrop-filter:blur(20px)}
 .typing.on{display:flex}
-.typing span{width:6px;height:6px;background:var(--p2);border-radius:50%;animation:dotPulse 1.2s infinite}
+.typing span{width:6px;height:6px;background:var(--cy);border-radius:50%;animation:typing 1.2s infinite;box-shadow:0 0 8px var(--cy)}
 .typing span:nth-child(2){animation-delay:.15s}
 .typing span:nth-child(3){animation-delay:.3s}
 
 /* Chat Input */
 .chat-in{padding:12px 0 4px;border-top:1px solid var(--border)}
-.chat-wrap{display:flex;gap:6px;align-items:flex-end;background:var(--bg2);border-radius:14px;padding:6px;border:1.5px solid var(--border);transition:border-color .3s}
-.chat-wrap:focus-within{border-color:var(--p)}
+.chat-wrap{display:flex;gap:6px;align-items:flex-end;background:var(--surf);border-radius:14px;padding:6px;border:1px solid var(--border);transition:.3s;backdrop-filter:blur(20px)}
+.chat-wrap:focus-within{border-color:var(--cy);box-shadow:0 0 0 3px rgba(0,229,255,.1)}
 .chat-tl{display:flex;gap:2px}
 .ct-btn{width:34px;height:34px;border-radius:9px;background:transparent;border:none;color:var(--tx3);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s}
-.ct-btn:hover{color:var(--p);background:rgba(124,107,240,.08)}
-.ct-btn.on{color:var(--s)}
+.ct-btn:hover{color:var(--cy);background:rgba(0,229,255,.08)}
+.ct-btn.on{color:var(--cy);background:rgba(0,229,255,.12);box-shadow:inset 0 0 8px rgba(0,229,255,.3)}
 #chatIn{flex:1;background:transparent;border:none;color:var(--tx);font-size:14px;resize:none;outline:none;max-height:100px;min-height:34px;line-height:1.45;padding:7px 4px}
-#chatIn::placeholder{color:var(--tx3)}
-.send-btn{width:36px;height:36px;border-radius:10px;background:var(--gd);border:none;color:#fff;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s;flex-shrink:0}
-.send-btn:hover{transform:scale(1.04)}
-.send-btn:active{transform:scale(.95)}
+#chatIn::placeholder{color:var(--tx4)}
+.send-btn{width:36px;height:36px;border-radius:10px;background:var(--gd);border:none;color:var(--bg);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s;flex-shrink:0;box-shadow:0 0 12px rgba(0,229,255,.4)}
+.send-btn:hover{transform:scale(1.05);box-shadow:0 0 20px rgba(0,229,255,.6)}
 
-/* Auto Mic Indicator */
-.auto-mic{display:flex;align-items:center;gap:6px;padding:6px 12px;background:rgba(124,107,240,.08);border:1px solid rgba(124,107,240,.15);border-radius:8px;margin-bottom:8px;font-size:11px;color:var(--p2);font-weight:500}
-.auto-mic.off{display:none}
-.auto-mic .bars{display:flex;gap:2px;align-items:center;height:14px}
-.auto-mic .bar{width:2px;background:var(--p);border-radius:1px;animation:wave .8s ease infinite}
-.auto-mic .bar:nth-child(1){height:6px;animation-delay:0s}
-.auto-mic .bar:nth-child(2){height:10px;animation-delay:.1s}
-.auto-mic .bar:nth-child(3){height:14px;animation-delay:.2s}
-.auto-mic .bar:nth-child(4){height:8px;animation-delay:.3s}
-
-/* Quick Prompts */
+/* Quick prompts */
 .qp{display:flex;gap:6px;padding:8px 0;overflow-x:auto;scrollbar-width:none}
 .qp::-webkit-scrollbar{display:none}
-.qp-i{padding:7px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:18px;color:var(--tx2);font-size:12px;cursor:pointer;white-space:nowrap;transition:.25s;display:flex;align-items:center;gap:5px;font-weight:500}
-.qp-i:hover{border-color:var(--p);color:var(--p)}
+.qp-i{padding:7px 14px;background:var(--surf);border:1px solid var(--border);border-radius:18px;color:var(--tx3);font-size:11px;cursor:pointer;white-space:nowrap;transition:.25s;display:flex;align-items:center;gap:5px;font-weight:500;letter-spacing:.5px;backdrop-filter:blur(20px)}
+.qp-i:hover{border-color:var(--cy);color:var(--cy)}
 
-/* ─── TOOLS ─── */
+/* ═══ TOOLS / GEN / SETTINGS ═══ */
+.pg-t{text-align:center;margin-bottom:20px;font-size:12px;font-weight:700;letter-spacing:4px;text-transform:uppercase;background:var(--gd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .tg{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;max-width:760px;margin:0 auto}
-.tc{background:var(--bg2);border-radius:var(--r);padding:18px 14px;text-align:center;cursor:pointer;transition:.3s ease;border:1px solid var(--border)}
-.tc:hover{transform:translateY(-3px);border-color:var(--p);box-shadow:0 8px 28px rgba(124,107,240,.12)}
-.tc-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;margin:0 auto 10px}
-.tc-n{font-size:12px;font-weight:700;margin-bottom:2px;letter-spacing:-.2px}
-.tc-d{font-size:10px;color:var(--tx3);font-weight:400}
+.tc{background:var(--surf);border-radius:14px;padding:20px 14px;text-align:center;cursor:pointer;transition:.3s;border:1px solid var(--border);backdrop-filter:blur(20px);position:relative;overflow:hidden}
+.tc::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,229,255,.05),transparent);opacity:0;transition:.3s}
+.tc:hover{transform:translateY(-3px);border-color:var(--cy);box-shadow:var(--glow-cy)}
+.tc:hover::before{opacity:1}
+.tc-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:19px;margin:0 auto 10px;position:relative;z-index:1}
+.tc-n{font-size:12px;font-weight:700;margin-bottom:2px;letter-spacing:.5px;position:relative;z-index:1}
+.tc-d{font-size:10px;color:var(--tx4);font-weight:400;letter-spacing:.3px;position:relative;z-index:1}
 
-/* ─── GENERATE ─── */
 .gen-c{max-width:760px;margin:0 auto}
 .gen-tabs{display:flex;gap:6px;margin-bottom:16px;overflow-x:auto;scrollbar-width:none}
 .gen-tabs::-webkit-scrollbar{display:none}
-.gt{padding:8px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;color:var(--tx3);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;transition:.25s;display:flex;align-items:center;gap:5px}
-.gt.on{background:var(--p);color:#fff;border-color:var(--p)}
+.gt{padding:9px 16px;background:var(--surf);border:1px solid var(--border);border-radius:10px;color:var(--tx3);font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;transition:.25s;display:flex;align-items:center;gap:5px;letter-spacing:1px;text-transform:uppercase;backdrop-filter:blur(20px)}
+.gt.on{background:var(--gd);color:var(--bg);border-color:var(--cy);box-shadow:var(--glow-cy)}
 .gp{display:none;animation:fadeUp .3s ease both}.gp.on{display:block}
-.gf{background:var(--bg2);border-radius:var(--r);padding:20px;margin-bottom:16px;border:1px solid var(--border)}
-.gf h3{font-size:16px;font-weight:700;margin-bottom:14px;letter-spacing:-.2px}
-.gta{width:100%;min-height:90px;padding:12px;background:var(--bg3);border:1.5px solid var(--border);border-radius:10px;color:var(--tx);font-size:13px;resize:vertical;outline:none;transition:border .3s}
-.gta:focus{border-color:var(--p)}
+.gf{background:var(--surf);border-radius:14px;padding:20px;margin-bottom:16px;border:1px solid var(--border);backdrop-filter:blur(20px)}
+.gf h3{font-size:14px;font-weight:700;margin-bottom:14px;letter-spacing:2px;text-transform:uppercase;color:var(--tx2)}
+.gta{width:100%;min-height:90px;padding:12px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;color:var(--tx);font-size:13px;resize:vertical;outline:none;transition:.3s;font-family:inherit}
+.gta:focus{border-color:var(--cy);box-shadow:0 0 0 3px rgba(0,229,255,.1)}
 .go{display:flex;gap:8px;margin:12px 0;flex-wrap:wrap}
-.go-i{padding:6px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--tx3);font-size:11px;cursor:pointer;transition:.25s;font-weight:500}
-.go-i.on{border-color:var(--p);color:var(--p);background:rgba(124,107,240,.1)}
-.g-btn{padding:12px 24px;background:var(--gd);border:none;border-radius:10px;color:#fff;font-size:13px;font-weight:700;cursor:pointer;transition:.25s;display:flex;align-items:center;gap:6px}
-.g-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(124,107,240,.3)}
-.gr{background:var(--bg2);border-radius:var(--r);padding:16px;display:none;border:1px solid var(--border)}
+.go-i{padding:7px 12px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--tx3);font-size:11px;cursor:pointer;transition:.25s;font-weight:500;letter-spacing:.5px}
+.go-i.on{border-color:var(--cy);color:var(--cy);background:rgba(0,229,255,.1);box-shadow:0 0 12px rgba(0,229,255,.2)}
+.g-btn{padding:12px 24px;background:var(--gd);border:none;border-radius:10px;color:var(--bg);font-size:11px;font-weight:700;cursor:pointer;transition:.25s;display:flex;align-items:center;gap:6px;letter-spacing:2px;text-transform:uppercase;box-shadow:var(--glow-cy)}
+.g-btn:hover{transform:translateY(-1px);box-shadow:0 0 25px rgba(0,229,255,.6)}
+.gr{background:var(--surf);border-radius:14px;padding:16px;display:none;border:1px solid var(--border);backdrop-filter:blur(20px)}
 .gr.on{display:block;animation:fadeUp .35s ease both}
 .gr-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-.gr-h span{font-weight:700;font-size:14px}
-.gr-c{background:var(--bg3);border-radius:10px;padding:14px;max-height:380px;overflow-y:auto;border:1px solid var(--border)}
-.gr-c pre{font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.6;white-space:pre-wrap;word-wrap:break-word}
+.gr-h span{font-weight:700;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--tx2)}
+.gr-c{background:var(--bg);border-radius:10px;padding:14px;max-height:400px;overflow-y:auto;border:1px solid var(--border)}
+.gr-c pre{font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.65;white-space:pre-wrap;word-wrap:break-word;color:var(--tx2)}
 
-/* ─── SETTINGS ─── */
 .set-c{max-width:560px;margin:0 auto}
-.set-s{background:var(--bg2);border-radius:var(--r);padding:18px;margin-bottom:12px;border:1px solid var(--border)}
-.set-st{font-size:14px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:7px;letter-spacing:-.2px}
-.set-st i{color:var(--p);font-size:13px}
-.si{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}
+.set-s{background:var(--surf);border-radius:14px;padding:18px;margin-bottom:12px;border:1px solid var(--border);backdrop-filter:blur(20px)}
+.set-st{font-size:11px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;letter-spacing:2px;text-transform:uppercase;color:var(--tx2)}
+.set-st i{color:var(--cy);font-size:13px}
+.si{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--border)}
 .si:last-child{border-bottom:none}
-.si-info h4{font-size:13px;font-weight:600}
-.si-info p{font-size:11px;color:var(--tx3);margin-top:1px}
-.tog{width:42px;height:22px;background:var(--bg3);border-radius:11px;cursor:pointer;position:relative;transition:.3s;border:none;flex-shrink:0}
-.tog.on{background:var(--p)}
-.tog::after{content:'';width:16px;height:16px;background:#fff;border-radius:50%;position:absolute;top:3px;left:3px;transition:.3s}
-.tog.on::after{transform:translateX(20px)}
-.set-sel{padding:6px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--tx);font-size:12px;outline:none}
-.vl{display:grid;gap:6px;margin-top:8px}
-.vi{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--bg3);border-radius:10px;cursor:pointer;border:1.5px solid transparent;transition:.25s}
-.vi:hover{border-color:rgba(124,107,240,.2)}
-.vi.on{border-color:var(--p);background:rgba(124,107,240,.06)}
-.vi-i{display:flex;align-items:center;gap:8px}
-.vi-i span{font-size:12px;font-weight:500}
-.vi-i small{color:var(--tx3);font-size:10px}
-.vp-btn{width:28px;height:28px;border-radius:50%;background:var(--p);border:none;color:#fff;font-size:10px;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.dev-info{text-align:center;padding:16px;margin-top:16px;border-top:1px solid var(--border)}
-.dev-info p{font-size:10px;color:var(--tx3);line-height:1.6}
+.si-info h4{font-size:13px;font-weight:600;color:var(--tx)}
+.si-info p{font-size:11px;color:var(--tx4);margin-top:2px}
+.tog{width:44px;height:24px;background:var(--bg2);border-radius:12px;cursor:pointer;position:relative;transition:.3s;border:1px solid var(--border);flex-shrink:0}
+.tog.on{background:var(--cy);border-color:var(--cy);box-shadow:0 0 12px rgba(0,229,255,.4)}
+.tog::after{content:'';width:16px;height:16px;background:var(--tx2);border-radius:50%;position:absolute;top:3px;left:3px;transition:.3s}
+.tog.on::after{transform:translateX(20px);background:var(--bg)}
+.set-sel{padding:7px 10px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--tx);font-size:12px;outline:none}
+.set-inp{padding:9px 12px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--tx);font-size:12px;outline:none;width:100%;font-family:'JetBrains Mono',monospace}
+.set-inp:focus{border-color:var(--cy)}
+.vl{display:grid;gap:6px;margin-top:8px;max-height:280px;overflow-y:auto}
+.vi{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--bg2);border-radius:10px;cursor:pointer;border:1px solid transparent;transition:.25s}
+.vi:hover{border-color:var(--border2)}
+.vi.on{border-color:var(--cy);background:rgba(0,229,255,.08);box-shadow:0 0 12px rgba(0,229,255,.15)}
+.vi-i{display:flex;align-items:center;gap:8px;overflow:hidden}
+.vi-i span{font-size:12px;font-weight:500;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vi-i small{color:var(--tx4);font-size:10px}
+.vp-btn{width:28px;height:28px;border-radius:8px;background:var(--cy);border:none;color:var(--bg);font-size:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 8px rgba(0,229,255,.4)}
+.dev-info{text-align:center;padding:20px;margin-top:16px;border-top:1px solid var(--border)}
+.dev-info p{font-size:10px;color:var(--tx4);line-height:1.7;letter-spacing:.5px}
+.api-info{background:rgba(0,229,255,.05);border:1px solid var(--border2);border-radius:10px;padding:12px;font-size:11px;color:var(--tx3);margin-top:10px;line-height:1.6}
+.api-info a{color:var(--cy);font-weight:600}
+.api-info strong{color:var(--cy)}
 
-/* ─── BOTTOM NAV ─── */
-.bnav{position:fixed;bottom:0;left:0;right:0;background:rgba(6,6,26,.94);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;padding:6px 12px;padding-bottom:max(6px,env(safe-area-inset-bottom));border-top:1px solid var(--border);z-index:100}
-.ni{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;cursor:pointer;color:var(--tx3);transition:.2s;background:none;border:none}
-.ni.on{color:var(--p)}
-.ni i{font-size:17px}.ni span{font-size:9px;font-weight:600;letter-spacing:.3px}
+/* Bottom Nav */
+.bnav{position:fixed;bottom:0;left:0;right:0;background:rgba(0,8,20,.9);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);display:flex;padding:8px 12px;padding-bottom:max(8px,env(safe-area-inset-bottom));border-top:1px solid var(--border);z-index:100}
+.ni{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;cursor:pointer;color:var(--tx4);transition:.25s;background:none;border:none}
+.ni.on{color:var(--cy)}
+.ni.on i{filter:drop-shadow(0 0 8px var(--cy))}
+.ni i{font-size:16px;transition:.25s}
+.ni span{font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase}
 
-/* ─── VOICE OVERLAY ─── */
-.vo{position:fixed;inset:0;background:rgba(6,6,26,.97);display:none;flex-direction:column;align-items:center;justify-content:center;z-index:5000}
-.vo.on{display:flex;animation:fadeIn .25s ease}
-.vo-viz{display:flex;gap:3px;align-items:center;height:70px;margin-bottom:24px}
-.vo-bar{width:3px;height:16px;background:var(--p);border-radius:2px;transition:height .08s}
-.vo-tx{font-size:16px;font-weight:500;color:var(--tx);margin-bottom:24px;min-height:24px;text-align:center;padding:0 20px;max-width:80%}
-.vo-stop{width:56px;height:56px;border-radius:50%;background:var(--er);border:none;color:#fff;font-size:20px;cursor:pointer;transition:.2s}
-.vo-stop:hover{transform:scale(1.06)}
-
-/* ─── NOTIF PANEL ─── */
-.np-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:5999;display:none}
+/* Notif Panel */
+.np-bg{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:5999;display:none;backdrop-filter:blur(4px)}
 .np-bg.on{display:block}
-.np{position:fixed;top:0;right:-100%;width:100%;max-width:360px;height:100vh;height:100dvh;background:var(--bg);z-index:6000;transition:right .3s ease;padding:16px;overflow-y:auto;border-left:1px solid var(--border)}
+.np{position:fixed;top:0;right:-100%;width:100%;max-width:360px;height:100vh;height:100dvh;background:var(--bg);z-index:6000;transition:right .3s ease;padding:16px;overflow-y:auto;border-left:1px solid var(--border2);box-shadow:-4px 0 30px rgba(0,229,255,.1)}
 .np.on{right:0}
 .np-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
-.np-hd h2{font-size:18px;font-weight:800}
-.np-x{width:32px;height:32px;border-radius:8px;background:var(--bg2);border:1px solid var(--border);color:var(--tx);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.ni-it{background:var(--bg2);border-radius:10px;padding:12px;margin-bottom:8px;display:flex;gap:10px;border:1px solid var(--border)}
-.ni-ic{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
-.ni-ct h4{font-size:12px;font-weight:600}.ni-ct p{font-size:11px;color:var(--tx3);margin-top:1px}.ni-tm{font-size:9px;color:var(--tx3);margin-top:3px}
+.np-hd h2{font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--tx2)}
+.np-x{width:32px;height:32px;border-radius:8px;background:var(--surf);border:1px solid var(--border);color:var(--tx);font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.ni-it{background:var(--surf);border-radius:10px;padding:12px;margin-bottom:8px;display:flex;gap:10px;border:1px solid var(--border);backdrop-filter:blur(20px)}
+.ni-ic{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;color:#fff}
+.ni-ct h4{font-size:12px;font-weight:600}.ni-ct p{font-size:11px;color:var(--tx4);margin-top:2px}.ni-tm{font-size:9px;color:var(--tx4);margin-top:4px;letter-spacing:.5px}
 
-/* ─── MODAL ─── */
-.mo-bg{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:7000;padding:20px}
+/* Modal */
+.mo-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:7000;padding:20px;backdrop-filter:blur(6px)}
 .mo-bg.on{display:flex}
-.mo{background:var(--bg);border-radius:var(--r2);padding:24px;max-width:460px;width:100%;max-height:80vh;overflow-y:auto;animation:scaleIn .3s ease;border:1px solid var(--border)}
+.mo{background:var(--bg2);border-radius:16px;padding:24px;max-width:460px;width:100%;max-height:80vh;overflow-y:auto;animation:scaleIn .3s ease;border:1px solid var(--border2);box-shadow:0 0 60px rgba(0,229,255,.15)}
 .mo-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
-.mo-t{font-size:18px;font-weight:800}
-.mo-x{width:30px;height:30px;border-radius:8px;background:var(--bg2);border:1px solid var(--border);color:var(--tx);font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.mo-t{font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--tx2)}
+.mo-x{width:30px;height:30px;border-radius:8px;background:var(--surf);border:1px solid var(--border);color:var(--tx);font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 
-/* ─── TOAST ─── */
-.toast-c{position:fixed;top:16px;right:16px;z-index:9999;display:flex;flex-direction:column;gap:6px;pointer-events:none}
-.toast{background:var(--bg2);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;animation:fadeUp .3s ease;border:1px solid var(--border);box-shadow:var(--sh);min-width:240px;pointer-events:auto}
-.toast.ok{border-left:3px solid var(--ok)}.toast.er{border-left:3px solid var(--er)}.toast.wr{border-left:3px solid var(--wr)}.toast.info{border-left:3px solid var(--p)}
+/* Toast */
+.toast-c{position:fixed;top:16px;right:16px;z-index:9999;display:flex;flex-direction:column;gap:6px;pointer-events:none;max-width:calc(100vw - 32px)}
+.toast{background:var(--bg2);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;animation:fadeUp .3s ease;border:1px solid var(--border);box-shadow:0 4px 20px rgba(0,0,0,.4);min-width:240px;pointer-events:auto;backdrop-filter:blur(20px)}
+.toast.ok{border-left:3px solid var(--ok)}.toast.er{border-left:3px solid var(--er)}.toast.wr{border-left:3px solid var(--wr)}.toast.info{border-left:3px solid var(--cy)}
+.toast i{color:var(--cy)}
+.toast.ok i{color:var(--ok)}.toast.er i{color:var(--er)}.toast.wr i{color:var(--wr)}
 
-/* ─── PAGE TITLE ─── */
-.pg-t{text-align:center;margin-bottom:18px;font-size:18px;font-weight:800;letter-spacing:-.3px}
-
-/* ─── RESPONSIVE ─── */
 @media(max-width:480px){
 .tg{grid-template-columns:repeat(2,1fr)}
-.msg-body{max-width:82%}
+.msg-body{max-width:84%}
 .gf{padding:16px}
+.voice-core{width:240px;height:240px}
+.core-orb{width:80px;height:80px}
 }
 </style>
 </head>
 <body>
 
+<!-- Shared SVG defs -->
+<svg width="0" height="0" style="position:absolute">
+<defs>
+<linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#00e5ff"/><stop offset="100%" stop-color="#7c4dff"/>
+</linearGradient>
+<linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#7c4dff"/><stop offset="100%" stop-color="#ff4081"/>
+</linearGradient>
+<radialGradient id="gCore" cx="50%" cy="40%">
+<stop offset="0%" stop-color="#ffffff"/><stop offset="30%" stop-color="#00e5ff"/><stop offset="70%" stop-color="#7c4dff"/><stop offset="100%" stop-color="#ff4081"/>
+</radialGradient>
+<filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+</svg>
+
+<!-- Reusable Logo Template -->
+<template id="tmplLogo">
+<svg class="dw-logo" viewBox="0 0 100 100">
+<circle class="ring-outer" cx="50" cy="50" r="46"/>
+<circle class="ring-mid" cx="50" cy="50" r="38"/>
+<polygon class="hex" points="50,15 78,32 78,68 50,85 22,68 22,32"/>
+<polygon class="hex" points="50,25 68,35 68,65 50,75 32,65 32,35" style="opacity:.4"/>
+<circle class="core" cx="50" cy="50" r="14"/>
+<path class="neural" d="M50 15 L50 25 M78 32 L68 35 M78 68 L68 65 M50 85 L50 75 M22 68 L32 65 M22 32 L32 35"/>
+<circle class="dot" cx="50" cy="15" r="1.5"/>
+<circle class="dot" cx="78" cy="32" r="1.5"/>
+<circle class="dot" cx="78" cy="68" r="1.5"/>
+<circle class="dot" cx="50" cy="85" r="1.5"/>
+<circle class="dot" cx="22" cy="68" r="1.5"/>
+<circle class="dot" cx="22" cy="32" r="1.5"/>
+</svg>
+</template>
+
 <!-- ═══ SPLASH ═══ -->
 <div id="splash">
-<div class="splash-logo"><img src="https://i.imgur.com/placeholder.png" id="splashImg" alt="Darwin AI"></div>
-<div class="splash-t">DARWIN AI</div>
-<div class="splash-sub">Intelligence Artificielle Avancée</div>
+<div class="splash-logo" id="splashLogo"></div>
+<div class="splash-t">DARWIN</div>
+<div class="splash-sub">Neural Intelligence</div>
 <div class="splash-bar"><div class="splash-fill" id="sFill"></div></div>
-<div class="splash-st" id="sSt">Initialisation du noyau...</div>
+<div class="splash-st" id="sSt">Initialisation</div>
 </div>
 
 <!-- ═══ AUTH ═══ -->
 <div id="auth">
 <div class="auth-w fadeUp">
 <div class="auth-hd">
-<div class="auth-logo"><img src="https://i.imgur.com/placeholder.png" class="logo-img" alt="D"></div>
-<div class="auth-t">Darwin AI</div>
-<div class="auth-d">Authentifiez-vous pour continuer</div>
+<div class="auth-logo" id="authLogo"></div>
+<div class="auth-t">DARWIN</div>
+<div class="auth-d">Système d'Intelligence</div>
 </div>
 <div class="auth-tabs">
-<div class="auth-tab on" onclick="DarwinAuth.switchTab('login')">Connexion</div>
-<div class="auth-tab" onclick="DarwinAuth.switchTab('register')">Inscription</div>
+<div class="auth-tab on" onclick="DarwinAuth.switchTab('login')">Accès</div>
+<div class="auth-tab" onclick="DarwinAuth.switchTab('register')">Créer</div>
 </div>
 <form class="auth-f on" id="fLogin" onsubmit="return DarwinAuth.login(event)">
-<div class="fg"><label>Adresse email</label><input type="email" class="fi" id="lEmail" placeholder="email@exemple.com" required></div>
-<div class="fg"><label>Mot de passe</label><input type="password" class="fi" id="lPass" placeholder="Votre mot de passe" required></div>
+<div class="fg"><label>Identifiant</label><input type="email" class="fi" id="lEmail" placeholder="email@exemple.com" required></div>
+<div class="fg"><label>Code d'accès</label><input type="password" class="fi" id="lPass" placeholder="••••••••" required></div>
 <button type="submit" class="auth-btn">Se connecter</button>
 </form>
 <form class="auth-f" id="fReg" onsubmit="return DarwinAuth.register(event)">
-<div class="fg"><label>Nom complet</label><input type="text" class="fi" id="rName" placeholder="Votre nom" required></div>
-<div class="fg"><label>Adresse email</label><input type="email" class="fi" id="rEmail" placeholder="email@exemple.com" required></div>
-<div class="fg"><label>Mot de passe</label><input type="password" class="fi" id="rPass" placeholder="Minimum 6 caractères" required minlength="6"></div>
-<div class="fg"><label>Confirmation</label><input type="password" class="fi" id="rPass2" placeholder="Confirmez le mot de passe" required></div>
-<button type="submit" class="auth-btn">Créer mon compte</button>
+<div class="fg"><label>Nom</label><input type="text" class="fi" id="rName" placeholder="Votre nom" required></div>
+<div class="fg"><label>Identifiant</label><input type="email" class="fi" id="rEmail" placeholder="email@exemple.com" required></div>
+<div class="fg"><label>Code d'accès</label><input type="password" class="fi" id="rPass" placeholder="Minimum 6 caractères" required minlength="6"></div>
+<div class="fg"><label>Confirmation</label><input type="password" class="fi" id="rPass2" placeholder="Confirmez le code" required></div>
+<button type="submit" class="auth-btn">Créer un accès</button>
 </form>
 <div class="bio-s">
 <button class="bio-btn" onclick="DarwinAuth.biometric()" id="bioBtn"><i class="fas fa-fingerprint"></i></button>
-<span class="bio-label">Empreinte digitale / Reconnaissance faciale</span>
+<span class="bio-label">Biométrie · Face · Empreinte</span>
 </div>
 </div>
 </div>
@@ -318,926 +401,734 @@ a{color:var(--s);text-decoration:none}
 <div id="app">
 <header class="hdr">
 <div class="hdr-l">
-<img src="https://i.imgur.com/placeholder.png" class="hdr-logo logo-img" alt="D">
+<div class="hdr-logo" id="hdrLogo"></div>
 <div class="hdr-info">
-<h1>Darwin AI</h1>
-<div class="hdr-st">Opérationnel</div>
+<h1>DARWIN</h1>
+<div class="hdr-st" id="hdrStatus">En ligne</div>
 </div>
 </div>
 <div class="hdr-r">
-<button class="hdr-btn" onclick="DarwinUI.toggleNotif()" title="Notifications"><i class="fas fa-bell"></i><span class="bdg" id="nBdg">0</span></button>
-<button class="hdr-btn" onclick="DarwinUI.nav('settings')" title="Paramètres"><i class="fas fa-cog"></i></button>
+<button class="hdr-btn" onclick="DarwinUI.toggleNotif()"><i class="fas fa-bell"></i><span class="bdg" id="nBdg">0</span></button>
+<button class="hdr-btn" onclick="DarwinUI.nav('settings')"><i class="fas fa-sliders-h"></i></button>
 </div>
 </header>
 
-<!-- Chat -->
-<div class="pg on" id="pg-chat">
+<!-- VOICE MODE (page principale) -->
+<div class="pg on" id="pg-voice">
+<div class="voice-mode">
+<div class="voice-status" id="voiceStatus">Prêt</div>
+<div class="voice-core" id="voiceCore" onclick="DarwinVoice.tap()">
+<svg class="core-svg" viewBox="0 0 280 280">
+<circle cx="140" cy="140" r="130" fill="none" stroke="url(#g1)" stroke-width="1" stroke-dasharray="6 4" opacity=".3" style="animation:orbitSpin 20s linear infinite;transform-origin:center"/>
+<circle cx="140" cy="140" r="110" fill="none" stroke="url(#g2)" stroke-width="1" stroke-dasharray="2 8" opacity=".4" style="animation:orbitSpin 15s linear infinite reverse;transform-origin:center"/>
+<circle cx="140" cy="140" r="88" fill="none" stroke="url(#g1)" stroke-width=".5" opacity=".2"/>
+<g style="animation:orbitSpin 30s linear infinite;transform-origin:center">
+<circle cx="140" cy="30" r="2" fill="#00e5ff"/>
+<circle cx="140" cy="250" r="2" fill="#7c4dff"/>
+<circle cx="30" cy="140" r="2" fill="#ff4081"/>
+<circle cx="250" cy="140" r="2" fill="#00e5ff"/>
+</g>
+</svg>
+<div class="core-ripple"></div>
+<div class="core-ripple"></div>
+<div class="core-ripple"></div>
+<div class="orbit-dot"></div>
+<div class="orbit-dot"></div>
+<div class="orbit-dot"></div>
+<div class="core-orb"></div>
+</div>
+<div class="wave-viz" id="waveViz"></div>
+<div class="voice-transcript empty" id="voiceTx">Touchez la sphère pour parler à Darwin</div>
+<div class="voice-controls">
+<button class="vc-btn" onclick="DarwinUI.nav('chat')" title="Chat texte"><i class="fas fa-keyboard"></i></button>
+<button class="vc-btn large" onclick="DarwinVoice.tap()" id="micLarge" title="Micro"><i class="fas fa-microphone"></i></button>
+<button class="vc-btn" onclick="DarwinVoice.stopAll()" title="Arrêter"><i class="fas fa-stop"></i></button>
+</div>
+<div class="hands-free-toggle" id="hfToggle" onclick="DarwinVoice.toggleHandsFree()">
+<div class="hf-dot"></div>
+<div class="hf-label">Mode mains-libres</div>
+</div>
+</div>
+</div>
+
+<!-- CHAT MODE -->
+<div class="pg" id="pg-chat">
 <div class="chat-c">
-<div class="qp" id="qp">
-<div class="qp-i" onclick="DarwinChat.quick('Génère du code Python')"><i class="fas fa-code"></i> Code</div>
-<div class="qp-i" onclick="DarwinChat.quick('Crée un site web')"><i class="fas fa-globe"></i> Site web</div>
-<div class="qp-i" onclick="DarwinChat.quick('Génère une image')"><i class="fas fa-image"></i> Image</div>
-<div class="qp-i" onclick="DarwinChat.quick('Traduis ce texte')"><i class="fas fa-language"></i> Traduire</div>
-<div class="qp-i" onclick="DarwinChat.quick('Analyse ce fichier')"><i class="fas fa-file-alt"></i> Analyser</div>
-<div class="qp-i" onclick="DarwinChat.quick('Crée une application mobile')"><i class="fas fa-mobile-alt"></i> App</div>
+<div class="qp">
+<div class="qp-i" onclick="DarwinChat.quick('Génère du code Python pour trier une liste')"><i class="fas fa-code"></i> Code</div>
+<div class="qp-i" onclick="DarwinChat.quick('Crée un site web moderne')"><i class="fas fa-globe"></i> Site</div>
+<div class="qp-i" onclick="DarwinChat.quick('Explique-moi la théorie de la relativité')"><i class="fas fa-brain"></i> Expliquer</div>
+<div class="qp-i" onclick="DarwinChat.quick('Traduis en anglais : bonjour comment vas-tu')"><i class="fas fa-language"></i> Traduire</div>
+<div class="qp-i" onclick="DarwinChat.quick('Écris un email professionnel')"><i class="fas fa-envelope"></i> Email</div>
+<div class="qp-i" onclick="DarwinChat.quick('Aide-moi à résoudre un problème')"><i class="fas fa-lightbulb"></i> Idée</div>
 </div>
 <div class="chat-msgs" id="chatMsgs"></div>
 <div class="typing" id="typInd"><span></span><span></span><span></span></div>
-<div class="auto-mic off" id="autoMicInd"><div class="bars"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div><span>Écoute active</span></div>
 <div class="chat-in">
 <div class="chat-wrap">
 <div class="chat-tl">
-<button class="ct-btn" onclick="DarwinVoice.toggle()" title="Micro" id="micBtn"><i class="fas fa-microphone"></i></button>
-<button class="ct-btn" onclick="DarwinChat.autoMicToggle()" title="Micro automatique" id="autoMicBtn"><i class="fas fa-headset"></i></button>
-<button class="ct-btn" onclick="document.getElementById('fUp').click()" title="Joindre un fichier"><i class="fas fa-paperclip"></i></button>
+<button class="ct-btn" onclick="DarwinVoice.tap()" title="Micro" id="micBtn"><i class="fas fa-microphone"></i></button>
+<button class="ct-btn" onclick="document.getElementById('fUp').click()"><i class="fas fa-paperclip"></i></button>
 </div>
 <textarea id="chatIn" placeholder="Écrivez un message..." rows="1" onkeydown="DarwinChat.keydown(event)" oninput="DarwinChat.resize(this)"></textarea>
-<button class="send-btn" onclick="DarwinChat.send()" id="sendBtn"><i class="fas fa-paper-plane"></i></button>
+<button class="send-btn" onclick="DarwinChat.send()"><i class="fas fa-paper-plane"></i></button>
 </div>
 </div>
 </div>
 </div>
 
-<!-- Tools -->
+<!-- TOOLS -->
 <div class="pg" id="pg-tools">
-<div class="pg-t">Outils</div>
+<div class="pg-t">Modules</div>
 <div class="tg">
-<div class="tc" onclick="DarwinUI.openTool('code')"><div class="tc-icon" style="background:linear-gradient(135deg,#7c6bf0,#a78bfa)"><i class="fas fa-code"></i></div><div class="tc-n">Génération de code</div><div class="tc-d">Multi-langages</div></div>
-<div class="tc" onclick="DarwinUI.openTool('website')"><div class="tc-icon" style="background:linear-gradient(135deg,#22d3ee,#06b6d4)"><i class="fas fa-globe"></i></div><div class="tc-n">Création web</div><div class="tc-d">Sites complets</div></div>
-<div class="tc" onclick="DarwinUI.openTool('image')"><div class="tc-icon" style="background:linear-gradient(135deg,#f472b6,#ec4899)"><i class="fas fa-image"></i></div><div class="tc-n">Images</div><div class="tc-d">Génération visuelle</div></div>
-<div class="tc" onclick="DarwinUI.openTool('app')"><div class="tc-icon" style="background:linear-gradient(135deg,#fbbf24,#f59e0b)"><i class="fas fa-mobile-alt"></i></div><div class="tc-n">Applications</div><div class="tc-d">Mobile et desktop</div></div>
-<div class="tc" onclick="DarwinUI.openTool('translate')"><div class="tc-icon" style="background:linear-gradient(135deg,#34d399,#10b981)"><i class="fas fa-language"></i></div><div class="tc-n">Traduction</div><div class="tc-d">100+ langues</div></div>
-<div class="tc" onclick="DarwinUI.openTool('automation')"><div class="tc-icon" style="background:linear-gradient(135deg,#94a3b8,#64748b)"><i class="fas fa-robot"></i></div><div class="tc-n">Automatisation</div><div class="tc-d">Tâches intelligentes</div></div>
+<div class="tc" onclick="DarwinChat.quick('Aide-moi à générer du code');DarwinUI.nav('chat')"><div class="tc-icon" style="background:linear-gradient(135deg,#00e5ff,#7c4dff)"><i class="fas fa-code"></i></div><div class="tc-n">Code</div><div class="tc-d">Génération</div></div>
+<div class="tc" onclick="DarwinChat.quick('Crée-moi un site web');DarwinUI.nav('chat')"><div class="tc-icon" style="background:linear-gradient(135deg,#7c4dff,#ff4081)"><i class="fas fa-globe"></i></div><div class="tc-n">Web</div><div class="tc-d">Design</div></div>
+<div class="tc" onclick="DarwinUI.nav('gen')"><div class="tc-icon" style="background:linear-gradient(135deg,#ff4081,#00e5ff)"><i class="fas fa-image"></i></div><div class="tc-n">Images</div><div class="tc-d">Création</div></div>
+<div class="tc" onclick="DarwinChat.quick('Aide-moi à créer une app mobile');DarwinUI.nav('chat')"><div class="tc-icon" style="background:linear-gradient(135deg,#00e5ff,#00e676)"><i class="fas fa-mobile-alt"></i></div><div class="tc-n">Apps</div><div class="tc-d">Mobile</div></div>
+<div class="tc" onclick="DarwinComms.openWhatsApp()"><div class="tc-icon" style="background:linear-gradient(135deg,#00e676,#00e5ff)"><i class="fab fa-whatsapp"></i></div><div class="tc-n">WhatsApp</div><div class="tc-d">Message</div></div>
+<div class="tc" onclick="DarwinComms.openEmail()"><div class="tc-icon" style="background:linear-gradient(135deg,#ff4081,#ffc400)"><i class="fas fa-envelope"></i></div><div class="tc-n">Email</div><div class="tc-d">Envoyer</div></div>
+<div class="tc" onclick="DarwinComms.openSMS()"><div class="tc-icon" style="background:linear-gradient(135deg,#ffc400,#ff4081)"><i class="fas fa-sms"></i></div><div class="tc-n">SMS</div><div class="tc-d">Envoyer</div></div>
+<div class="tc" onclick="DarwinComms.openCall()"><div class="tc-icon" style="background:linear-gradient(135deg,#00e5ff,#00e676)"><i class="fas fa-phone"></i></div><div class="tc-n">Appel</div><div class="tc-d">Composer</div></div>
 </div>
 </div>
 
-<!-- Generate -->
+<!-- GEN (image) -->
 <div class="pg" id="pg-gen">
 <div class="gen-c">
-<div class="gen-tabs">
-<div class="gt on" onclick="DarwinGen.tab('code',this)"><i class="fas fa-code"></i> Code</div>
-<div class="gt" onclick="DarwinGen.tab('img',this)"><i class="fas fa-image"></i> Image</div>
-<div class="gt" onclick="DarwinGen.tab('web',this)"><i class="fas fa-globe"></i> Site</div>
-<div class="gt" onclick="DarwinGen.tab('appg',this)"><i class="fas fa-mobile-alt"></i> App</div>
-</div>
-<div class="gp on" id="gp-code">
-<div class="gf"><h3>Générateur de code</h3>
-<textarea class="gta" id="codeP" placeholder="Décrivez le programme souhaité..."></textarea>
-<div class="go" id="codeLO">
-<div class="go-i on" onclick="DarwinGen.opt(this)">Python</div>
-<div class="go-i" onclick="DarwinGen.opt(this)">JavaScript</div>
-<div class="go-i" onclick="DarwinGen.opt(this)">HTML/CSS</div>
-<div class="go-i" onclick="DarwinGen.opt(this)">React</div>
-<div class="go-i" onclick="DarwinGen.opt(this)">Java</div>
-<div class="go-i" onclick="DarwinGen.opt(this)">C++</div>
-<div class="go-i" onclick="DarwinGen.opt(this)">PHP</div>
-<div class="go-i" onclick="DarwinGen.opt(this)">SQL</div>
-</div>
-<button class="g-btn" onclick="DarwinGen.code()"><i class="fas fa-bolt"></i> Générer</button>
-</div>
-<div class="gr" id="codeR"><div class="gr-h"><span>Résultat</span><div style="display:flex;gap:4px"><button class="msg-act" onclick="DarwinUtil.copy('codeO')"><i class="fas fa-copy"></i> Copier</button><button class="msg-act" onclick="DarwinUtil.dl('codeO')"><i class="fas fa-download"></i></button></div></div><div class="gr-c"><pre id="codeO"></pre></div></div>
-</div>
-<div class="gp" id="gp-img">
-<div class="gf"><h3>Génération d'images</h3>
-<textarea class="gta" id="imgP" placeholder="Décrivez l'image souhaitée..."></textarea>
+<div class="pg-t">Créer</div>
+<div class="gf"><h3>Générateur visuel</h3>
+<textarea class="gta" id="imgP" placeholder="Décrivez l'image que vous souhaitez..."></textarea>
 <div class="go" id="imgSO">
-<div class="go-i on" onclick="DarwinGen.opt(this)">Réaliste</div>
-<div class="go-i" onclick="DarwinGen.opt(this)">Artistique</div>
-<div class="go-i" onclick="DarwinGen.opt(this)">3D</div>
-<div class="go-i" onclick="DarwinGen.opt(this)">Abstrait</div>
-<div class="go-i" onclick="DarwinGen.opt(this)">Minimaliste</div>
+<div class="go-i on" onclick="DarwinGen.opt(this)">Cosmos</div>
+<div class="go-i" onclick="DarwinGen.opt(this)">Neon</div>
+<div class="go-i" onclick="DarwinGen.opt(this)">Nature</div>
+<div class="go-i" onclick="DarwinGen.opt(this)">Cyber</div>
+<div class="go-i" onclick="DarwinGen.opt(this)">Ocean</div>
 </div>
-<button class="g-btn" onclick="DarwinGen.img()"><i class="fas fa-palette"></i> Générer</button>
+<button class="g-btn" onclick="DarwinGen.img()"><i class="fas fa-bolt"></i> Générer</button>
 </div>
-<div class="gr" id="imgR"><div class="gr-h"><span>Image générée</span><button class="msg-act" onclick="DarwinGen.dlCanvas()"><i class="fas fa-download"></i> Télécharger</button></div><div style="text-align:center"><canvas id="aiCv" width="512" height="512" style="max-width:100%;border-radius:10px"></canvas></div></div>
-</div>
-<div class="gp" id="gp-web">
-<div class="gf"><h3>Création de site web</h3>
-<textarea class="gta" id="webP" placeholder="Décrivez votre site web..."></textarea>
-<div class="go" id="webTO">
-<div class="go-i on" onclick="DarwinGen.opt(this)">Portfolio</div>
-<div class="go-i" onclick="DarwinGen.opt(this)">E-commerce</div>
-<div class="go-i" onclick="DarwinGen.opt(this)">Blog</div>
-<div class="go-i" onclick="DarwinGen.opt(this)">Landing page</div>
-<div class="go-i" onclick="DarwinGen.opt(this)">Dashboard</div>
-</div>
-<button class="g-btn" onclick="DarwinGen.web()"><i class="fas fa-rocket"></i> Créer</button>
-</div>
-<div class="gr" id="webR"><div class="gr-h"><span>Site généré</span><div style="display:flex;gap:4px"><button class="msg-act" onclick="DarwinGen.preview()"><i class="fas fa-eye"></i> Aperçu</button><button class="msg-act" onclick="DarwinUtil.copy('webO')"><i class="fas fa-copy"></i></button><button class="msg-act" onclick="DarwinGen.dlWeb()"><i class="fas fa-download"></i></button></div></div><div class="gr-c"><pre id="webO"></pre></div></div>
-</div>
-<div class="gp" id="gp-appg">
-<div class="gf"><h3>Création d'application</h3>
-<textarea class="gta" id="appP" placeholder="Décrivez votre application..."></textarea>
-<div class="go" id="appTO">
-<div class="go-i on" onclick="DarwinGen.opt(this)">React Native</div>
-<div class="go-i" onclick="DarwinGen.opt(this)">Flutter</div>
-<div class="go-i" onclick="DarwinGen.opt(this)">PWA</div>
-</div>
-<button class="g-btn" onclick="DarwinGen.app()"><i class="fas fa-bolt"></i> Créer</button>
-</div>
-<div class="gr" id="appR"><div class="gr-h"><span>Application générée</span><button class="msg-act" onclick="DarwinUtil.copy('appO')"><i class="fas fa-copy"></i> Copier</button></div><div class="gr-c"><pre id="appO"></pre></div></div>
-</div>
+<div class="gr" id="imgR"><div class="gr-h"><span>Résultat</span><button class="msg-act" onclick="DarwinGen.dlCanvas()"><i class="fas fa-download"></i></button></div><div style="text-align:center"><canvas id="aiCv" width="512" height="512" style="max-width:100%;border-radius:10px;box-shadow:0 0 30px rgba(0,229,255,.2)"></canvas></div></div>
 </div>
 </div>
 
-<!-- Settings -->
+<!-- SETTINGS -->
 <div class="pg" id="pg-settings">
 <div class="set-c">
-<div class="pg-t">Paramètres</div>
-<div class="set-s"><div class="set-st"><i class="fas fa-user"></i> Profil</div><div class="si"><div class="si-info"><h4 id="pName">Utilisateur</h4><p id="pEmail">email@exemple.com</p></div><button class="msg-act" onclick="DarwinUI.editProfile()"><i class="fas fa-pen"></i> Modifier</button></div></div>
-<div class="set-s"><div class="set-st"><i class="fas fa-volume-up"></i> Synthèse vocale</div>
+<div class="pg-t">Configuration</div>
+
+<div class="set-s"><div class="set-st"><i class="fas fa-key"></i> Intelligence</div>
+<div class="si" style="flex-direction:column;align-items:stretch;gap:8px">
+<div class="si-info"><h4>Clé API Gemini</h4><p>Nécessaire pour l'intelligence réelle</p></div>
+<input type="password" class="set-inp" id="apiKeyInp" placeholder="AIza..." onchange="DarwinAI.saveKey(this.value)">
+<div class="api-info">
+Obtenez votre clé gratuite : <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a><br>
+<strong>Sans clé</strong> : Darwin utilise des réponses locales limitées.<br>
+<strong>Avec clé</strong> : Intelligence complète (Gemini 2.0 Flash — gratuit).
+</div>
+</div>
+<div class="si"><div class="si-info"><h4>Modèle</h4><p>Sélection du moteur IA</p></div><select class="set-sel" id="modelSel" onchange="DarwinAI.setModel(this.value)">
+<option value="gemini-2.0-flash-exp">Gemini 2.0 Flash</option>
+<option value="gemini-1.5-flash">Gemini 1.5 Flash</option>
+<option value="gemini-1.5-pro">Gemini 1.5 Pro</option>
+</select></div>
+</div>
+
+<div class="set-s"><div class="set-st"><i class="fas fa-user"></i> Identité</div>
+<div class="si"><div class="si-info"><h4 id="pName">—</h4><p id="pEmail">—</p></div><button class="msg-act" onclick="DarwinUI.editProfile()"><i class="fas fa-pen"></i></button></div>
+</div>
+
+<div class="set-s"><div class="set-st"><i class="fas fa-volume-up"></i> Voix</div>
 <div class="si"><div class="si-info"><h4>Réponses vocales</h4><p>Darwin parle ses réponses</p></div><button class="tog on" id="togVoice" onclick="DarwinUI.tog(this,'voice')"></button></div>
 <div class="vl" id="voiceList"></div>
-<div class="si" style="flex-direction:column;align-items:flex-start;gap:6px"><div class="si-info"><h4>Vitesse</h4></div><input type="range" min="0.5" max="2" step="0.1" value="1" id="sRate" style="width:100%;accent-color:var(--p)" onchange="DarwinVoice.setRate(this.value)"></div>
-<div class="si" style="flex-direction:column;align-items:flex-start;gap:6px"><div class="si-info"><h4>Tonalité</h4></div><input type="range" min="0.5" max="2" step="0.1" value="1" id="sPitch" style="width:100%;accent-color:var(--p)" onchange="DarwinVoice.setPitch(this.value)"></div>
+<div class="si" style="flex-direction:column;align-items:stretch;gap:6px"><div class="si-info"><h4>Vitesse</h4></div><input type="range" min="0.5" max="2" step="0.1" value="1" id="sRate" style="width:100%;accent-color:var(--cy)" onchange="DarwinVoice.setRate(this.value)"></div>
+<div class="si" style="flex-direction:column;align-items:stretch;gap:6px"><div class="si-info"><h4>Tonalité</h4></div><input type="range" min="0.5" max="2" step="0.1" value="1" id="sPitch" style="width:100%;accent-color:var(--cy)" onchange="DarwinVoice.setPitch(this.value)"></div>
 </div>
+
 <div class="set-s"><div class="set-st"><i class="fas fa-shield-alt"></i> Sécurité</div>
-<div class="si"><div class="si-info"><h4>Biométrie obligatoire</h4><p>Empreinte ou reconnaissance faciale</p></div><button class="tog on" id="togBio" onclick="DarwinUI.tog(this,'bio')"></button></div>
-<div class="si"><div class="si-info"><h4>Verrouillage automatique</h4><p>Délai d'inactivité</p></div><select class="set-sel" id="lockTo"><option value="60">1 min</option><option value="300" selected>5 min</option><option value="900">15 min</option><option value="0">Désactivé</option></select></div>
+<div class="si"><div class="si-info"><h4>Biométrie</h4><p>Empreinte ou reconnaissance faciale</p></div><button class="tog" id="togBio" onclick="DarwinUI.tog(this,'bio')"></button></div>
 </div>
-<div class="set-s"><div class="set-st"><i class="fas fa-key"></i> Autorisations</div>
-<div class="si"><div class="si-info"><h4>Accès à l'appareil</h4><p>Contrôle du système</p></div><button class="tog" id="togDev" onclick="DarwinUI.tog(this,'dev')"></button></div>
-<div class="si"><div class="si-info"><h4>Notifications</h4><p>Messages, emails, appels</p></div><button class="tog on" id="togNot" onclick="DarwinUI.tog(this,'notif')"></button></div>
-<div class="si"><div class="si-info"><h4>Réponses automatiques</h4><p>Darwin répond en votre nom</p></div><button class="tog" id="togAR" onclick="DarwinUI.tog(this,'autoReply')"></button></div>
+
+<div class="set-s"><div class="set-st"><i class="fas fa-bell"></i> Notifications</div>
+<div class="si"><div class="si-info"><h4>Système</h4><p>Notifications navigateur</p></div><button class="tog" id="togNot" onclick="DarwinUI.reqNotif(this)"></button></div>
 </div>
-<div class="set-s"><div class="set-st"><i class="fas fa-info-circle"></i> Informations</div>
-<div class="si"><div class="si-info"><h4>Darwin AI</h4><p>Version 2.0.0</p></div></div>
-<div class="si"><div class="si-info"><h4>Développeur</h4><p>DESSOUASSI Oboube Anael David</p></div></div>
-<div class="si"><div class="si-info"><h4>Licence propriétaire</h4><p>Tous droits réservés</p></div></div>
+
+<div class="set-s"><div class="set-st"><i class="fas fa-info-circle"></i> Système</div>
+<div class="si"><div class="si-info"><h4>Darwin</h4><p>Version 3.0 · Neural</p></div></div>
+<div class="si"><div class="si-info"><h4>Concepteur</h4><p>DESSOUASSI Oboube Anael David</p></div></div>
+<div class="si"><div class="si-info"><h4>Licence</h4><p>Propriétaire · Tous droits réservés</p></div></div>
 </div>
-<button class="auth-btn" style="background:var(--er);margin-top:8px" onclick="DarwinAuth.logout()">Déconnexion</button>
-<div class="dev-info"><p>&copy; 2025 Darwin AI &mdash; Tous droits réservés<br>DESSOUASSI Oboube Anael David</p></div>
+
+<button class="auth-btn" style="background:linear-gradient(135deg,#ff5252,#ff4081);box-shadow:0 0 20px rgba(255,82,82,.3);margin-top:8px" onclick="DarwinAuth.logout()">Déconnexion</button>
+<div class="dev-info"><p>DARWIN AI · Neural Intelligence System<br>© 2025 DESSOUASSI Oboube Anael David<br>Tous droits réservés</p></div>
 </div>
 </div>
 
 <nav class="bnav">
-<button class="ni on" onclick="DarwinUI.nav('chat')"><i class="fas fa-comment-dots"></i><span>Chat</span></button>
-<button class="ni" onclick="DarwinUI.nav('tools')"><i class="fas fa-th-large"></i><span>Outils</span></button>
-<button class="ni" onclick="DarwinUI.nav('gen')"><i class="fas fa-bolt"></i><span>Créer</span></button>
-<button class="ni" onclick="DarwinUI.nav('settings')"><i class="fas fa-cog"></i><span>Réglages</span></button>
+<button class="ni on" onclick="DarwinUI.nav('voice')"><i class="fas fa-microphone"></i><span>Voix</span></button>
+<button class="ni" onclick="DarwinUI.nav('chat')"><i class="fas fa-comment-dots"></i><span>Chat</span></button>
+<button class="ni" onclick="DarwinUI.nav('tools')"><i class="fas fa-th-large"></i><span>Modules</span></button>
+<button class="ni" onclick="DarwinUI.nav('settings')"><i class="fas fa-sliders-h"></i><span>Config</span></button>
 </nav>
 </div>
 
-<!-- Voice Overlay -->
-<div class="vo" id="voOv">
-<div class="vo-viz" id="voViz"></div>
-<div class="vo-tx" id="voTx">En écoute...</div>
-<button class="vo-stop" onclick="DarwinVoice.stop()"><i class="fas fa-stop"></i></button>
-</div>
-
-<!-- Notif Panel -->
 <div class="np-bg" id="npBg" onclick="DarwinUI.toggleNotif()"></div>
 <div class="np" id="npPanel"><div class="np-hd"><h2>Notifications</h2><button class="np-x" onclick="DarwinUI.toggleNotif()"><i class="fas fa-times"></i></button></div><div id="npList"></div></div>
 
-<!-- Modal -->
 <div class="mo-bg" id="moBg" onclick="DarwinUI.closeModal(event)"><div class="mo" onclick="event.stopPropagation()"><div class="mo-hd"><span class="mo-t" id="moT"></span><button class="mo-x" onclick="DarwinUI.hideModal()"><i class="fas fa-times"></i></button></div><div id="moB"></div></div></div>
 
 <div class="toast-c" id="toastC"></div>
-<input type="file" id="fUp" style="display:none" multiple onchange="DarwinChat.files(event)">
+<input type="file" id="fUp" style="display:none" onchange="DarwinChat.files(event)">
 
 <script>
-/* ════════════════════════════════════════════════════════════
-   DARWIN AI v2.0 — Moteur principal
-   Développeur : DESSOUASSI Oboube Anael David
-   © 2025 — Licence propriétaire exclusive
-   ════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════════════
+   DARWIN AI v3.0 — Neural Intelligence System
+   © 2025 DESSOUASSI Oboube Anael David
+   ═══════════════════════════════════════════════════════════════════ */
 
-const LOGO_URL = 'https://raw.githubusercontent.com/your-repo/darwin-ai/main/logo.png';
-const LOGO_FALLBACK = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#7c6bf0"/><stop offset="50%" stop-color="#a78bfa"/><stop offset="100%" stop-color="#22d3ee"/></linearGradient><radialGradient id="r" cx="50%" cy="40%"><stop offset="0%" stop-color="#a78bfa" stop-opacity="0.6"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs><circle cx="100" cy="100" r="96" fill="#0d0d2b" stroke="url(#g)" stroke-width="2"/><circle cx="100" cy="100" r="80" fill="url(#r)"/><path d="M60 90 Q70 55 100 50 Q130 55 140 90 Q140 110 130 125 Q115 140 100 145 Q85 140 70 125 Q60 110 60 90Z" fill="none" stroke="url(#g)" stroke-width="2.5" opacity="0.7"/><circle cx="80" cy="85" r="4" fill="#7c6bf0"/><circle cx="80" cy="85" r="8" fill="none" stroke="#7c6bf0" stroke-width="1" opacity="0.4"/><circle cx="120" cy="85" r="4" fill="#22d3ee"/><circle cx="120" cy="85" r="8" fill="none" stroke="#22d3ee" stroke-width="1" opacity="0.4"/><path d="M75 82 Q100 65 125 82" fill="none" stroke="url(#g)" stroke-width="1.5" opacity="0.5"/><path d="M85 105 Q100 115 115 105" fill="none" stroke="url(#g)" stroke-width="2" stroke-linecap="round"/><line x1="55" y1="75" x2="40" y2="65" stroke="#7c6bf0" stroke-width="1.5" opacity="0.3"/><line x1="145" y1="75" x2="160" y2="65" stroke="#22d3ee" stroke-width="1.5" opacity="0.3"/><line x1="50" y1="95" x2="35" y2="95" stroke="#7c6bf0" stroke-width="1.5" opacity="0.3"/><line x1="150" y1="95" x2="165" y2="95" stroke="#22d3ee" stroke-width="1.5" opacity="0.3"/><circle cx="40" cy="65" r="2" fill="#7c6bf0" opacity="0.5"/><circle cx="160" cy="65" r="2" fill="#22d3ee" opacity="0.5"/><circle cx="35" cy="95" r="2" fill="#7c6bf0" opacity="0.5"/><circle cx="165" cy="95" r="2" fill="#22d3ee" opacity="0.5"/></svg>');
+const S={_p:'darwin3_',set(k,v){try{localStorage.setItem(this._p+k,JSON.stringify(v))}catch(e){}},get(k,d=null){try{const v=localStorage.getItem(this._p+k);return v?JSON.parse(v):d}catch(e){return d}},rm(k){localStorage.removeItem(this._p+k)}};
 
-/* ─── Storage ─── */
-const S = {
-    _p: 'darwin_',
-    set(k,v){ try{ localStorage.setItem(this._p+k, JSON.stringify(v)) }catch(e){} },
-    get(k,d=null){ try{ const v=localStorage.getItem(this._p+k); return v?JSON.parse(v):d }catch(e){ return d } },
-    rm(k){ localStorage.removeItem(this._p+k) }
+const ST={
+    user:null,authed:false,page:'voice',
+    voiceOn:true,selVoice:null,rate:1,pitch:1,voices:[],
+    listening:false,recog:null,synth:window.speechSynthesis,
+    handsFree:false,speaking:false,thinking:false,
+    convos:[],notifs:[],
+    apiKey:'',model:'gemini-2.0-flash-exp',
+    bioOn:false,notifOn:false,
+    recogRestart:false
 };
 
-/* ─── State ─── */
-const ST = {
-    user: null, authed: false, page: 'chat',
-    voiceOn: true, selVoice: null, rate: 1, pitch: 1,
-    convos: [], notifs: [], voices: [],
-    listening: false, recog: null, synth: window.speechSynthesis,
-    autoMic: false, autoMicTimer: null,
-    bioOn: true, devAccess: false, autoReply: false,
-    selLang: 'Python', selStyle: 'Réaliste', selWebType: 'Portfolio', selAppType: 'React Native'
-};
+const SYSTEM_PROMPT = `Tu es Darwin, un assistant vocal intelligent conçu par DESSOUASSI Oboube Anael David. Tu communiques de manière naturelle, fluide et concise comme dans une vraie conversation orale.
 
-/* ─── Init ─── */
-document.addEventListener('DOMContentLoaded', async () => {
-    setLogos();
-    const fill = document.getElementById('sFill');
-    const st = document.getElementById('sSt');
-    const steps = [
-        ['Chargement du noyau IA...', 12],
-        ['Initialisation des modules NLP...', 28],
-        ['Configuration de la synthèse vocale...', 45],
-        ['Mise en place de la sécurité biométrique...', 60],
-        ['Chargement des générateurs...', 78],
-        ['Vérification des systèmes...', 90],
-        ['Système opérationnel', 100]
-    ];
-    for (const [t, p] of steps) { st.textContent = t; fill.style.width = p + '%'; await wait(350); }
-    await wait(400);
-    document.getElementById('splash').classList.add('done');
+RÈGLES ESSENTIELLES :
+- Réponds toujours en français à moins qu'on te parle dans une autre langue
+- N'utilise JAMAIS d'emojis, de symboles décoratifs ou d'astérisques dans tes réponses (elles seront lues à voix haute)
+- Sois concis pour l'oral : phrases courtes et claires
+- Adopte un ton naturel, professionnel mais chaleureux, comme un assistant humain intelligent
+- Si on te demande du code, réponds normalement avec des blocs de code markdown - ils seront affichés visuellement mais non lus
+- Ne dis jamais "en tant qu'IA" ou "je suis un modèle de langage" - tu es Darwin
+- Pour les questions techniques, sois précis et expert
+- Pour les conversations, sois naturel et engageant`;
+
+document.addEventListener('DOMContentLoaded',async()=>{
+    injectLogos();
+    const fill=document.getElementById('sFill'),st=document.getElementById('sSt');
+    const steps=[['Neural core','15'],['Voice engine','35'],['Biometric layer','55'],['AI modules','75'],['System check','92'],['Ready','100']];
+    for(const[t,p]of steps){st.textContent=t;fill.style.width=p+'%';await wait(300)}
+    await wait(300);document.getElementById('splash').classList.add('done');
     loadCfg();
-    const u = S.get('user');
-    if (u) { ST.user = u; ST.authed = true; enterApp(); }
-    else document.getElementById('auth').classList.add('on');
-    DarwinVoice.initRecog();
-    DarwinVoice.initVoices();
-    initVizBars();
-    setupPWA();
-    initNotifSys();
+    const u=S.get('user');
+    if(u){ST.user=u;ST.authed=true;enterApp()}else document.getElementById('auth').classList.add('on');
+    DarwinVoice.initRecog();DarwinVoice.initVoices();initWaveBars();setupPWA();
+    document.addEventListener('visibilitychange',()=>{if(document.hidden&&ST.listening&&!ST.handsFree)DarwinVoice.stopMic()});
 });
 
-function wait(ms){ return new Promise(r=>setTimeout(r,ms)) }
+function wait(ms){return new Promise(r=>setTimeout(r,ms))}
 
-function setLogos(){
-    document.querySelectorAll('.logo-img').forEach(img => {
-        img.onerror = () => { img.src = LOGO_FALLBACK; };
-        img.src = LOGO_FALLBACK;
+function injectLogos(){
+    const t=document.getElementById('tmplLogo');
+    ['splashLogo','authLogo','hdrLogo'].forEach(id=>{
+        const el=document.getElementById(id);
+        if(el)el.appendChild(t.content.cloneNode(true));
     });
-    const si = document.getElementById('splashImg');
-    si.onerror = () => { si.src = LOGO_FALLBACK; };
-    si.src = LOGO_FALLBACK;
 }
 
 function enterApp(){
     document.getElementById('auth').classList.remove('on');
     document.getElementById('app').classList.add('on');
-    if (ST.user) {
-        document.getElementById('pName').textContent = ST.user.name;
-        document.getElementById('pEmail').textContent = ST.user.email;
-    }
-    const cv = S.get('convos', []);
-    if (cv.length) { ST.convos = cv; renderAll(); }
-    else DarwinChat.addMsg('ai', 'Bonjour. Je suis Darwin, votre assistant personnel. Comment puis-je vous aider aujourd\'hui ?');
+    if(ST.user){document.getElementById('pName').textContent=ST.user.name;document.getElementById('pEmail').textContent=ST.user.email}
+    document.getElementById('apiKeyInp').value=ST.apiKey||'';
+    document.getElementById('modelSel').value=ST.model;
+    updateStatus();
+    const cv=S.get('convos',[]);
+    if(cv.length){ST.convos=cv;renderAllMsgs()}
 }
 
 function loadCfg(){
-    const c = S.get('cfg', {});
-    if (c.voiceOn !== undefined) ST.voiceOn = c.voiceOn;
-    if (c.rate) ST.rate = parseFloat(c.rate);
-    if (c.pitch) ST.pitch = parseFloat(c.pitch);
-    if (c.bioOn !== undefined) ST.bioOn = c.bioOn;
-    if (c.devAccess !== undefined) ST.devAccess = c.devAccess;
-    if (c.autoReply !== undefined) ST.autoReply = c.autoReply;
-    setTimeout(() => {
-        const m = { togVoice: ST.voiceOn, togBio: ST.bioOn, togDev: ST.devAccess, togNot: true, togAR: ST.autoReply };
-        Object.entries(m).forEach(([id, v]) => { const el = document.getElementById(id); if(el) el.classList.toggle('on', v); });
-        const r = document.getElementById('sRate'); if(r) r.value = ST.rate;
-        const p = document.getElementById('sPitch'); if(p) p.value = ST.pitch;
-    }, 80);
+    const c=S.get('cfg',{});
+    Object.assign(ST,{
+        voiceOn:c.voiceOn??true,rate:c.rate??1,pitch:c.pitch??1,
+        bioOn:c.bioOn??false,notifOn:c.notifOn??false,
+        apiKey:c.apiKey||'',model:c.model||'gemini-2.0-flash-exp'
+    });
+    setTimeout(()=>{
+        const m={togVoice:ST.voiceOn,togBio:ST.bioOn,togNot:ST.notifOn};
+        Object.entries(m).forEach(([id,v])=>{const el=document.getElementById(id);if(el)el.classList.toggle('on',v)});
+        const r=document.getElementById('sRate');if(r)r.value=ST.rate;
+        const p=document.getElementById('sPitch');if(p)p.value=ST.pitch;
+    },80);
 }
+function saveCfg(){S.set('cfg',{voiceOn:ST.voiceOn,rate:ST.rate,pitch:ST.pitch,bioOn:ST.bioOn,notifOn:ST.notifOn,apiKey:ST.apiKey,model:ST.model})}
+function updateStatus(){const el=document.getElementById('hdrStatus');if(!el)return;el.textContent=ST.apiKey?'Neural actif':'Mode local'}
 
-function saveCfg(){
-    S.set('cfg', { voiceOn: ST.voiceOn, rate: ST.rate, pitch: ST.pitch, bioOn: ST.bioOn, devAccess: ST.devAccess, autoReply: ST.autoReply });
-}
-
-/* ─── AUTH MODULE ─── */
-const DarwinAuth = {
+/* ═══ AUTH ═══ */
+const DarwinAuth={
     switchTab(t){
-        document.querySelectorAll('.auth-tab').forEach((e,i)=>{ e.classList.toggle('on', (t==='login'?i===0:i===1)) });
-        document.getElementById('fLogin').classList.toggle('on', t==='login');
-        document.getElementById('fReg').classList.toggle('on', t==='register');
+        document.querySelectorAll('.auth-tab').forEach((e,i)=>e.classList.toggle('on',t==='login'?i===0:i===1));
+        document.getElementById('fLogin').classList.toggle('on',t==='login');
+        document.getElementById('fReg').classList.toggle('on',t==='register');
     },
     login(e){
         e.preventDefault();
-        const em = document.getElementById('lEmail').value.trim();
-        const pw = document.getElementById('lPass').value;
-        const users = S.get('users', []);
-        const u = users.find(x=>x.email===em);
-        if (u && u.pw === btoa(pw)) {
-            ST.user = { name: u.name, email: u.email }; ST.authed = true;
-            S.set('user', ST.user); enterApp();
-            toast('Bienvenue, ' + u.name, 'ok');
-        } else if (!u) toast('Aucun compte trouvé avec cet email.', 'er');
-        else toast('Mot de passe incorrect.', 'er');
+        const em=document.getElementById('lEmail').value.trim(),pw=document.getElementById('lPass').value;
+        const users=S.get('users',[]);const u=users.find(x=>x.email===em);
+        if(u&&u.pw===btoa(pw)){ST.user={name:u.name,email:u.email};ST.authed=true;S.set('user',ST.user);enterApp();toast('Bienvenue '+u.name,'ok')}
+        else if(!u)toast('Aucun compte trouvé','er');
+        else toast('Code incorrect','er');
         return false;
     },
     register(e){
         e.preventDefault();
-        const nm = document.getElementById('rName').value.trim();
-        const em = document.getElementById('rEmail').value.trim();
-        const pw = document.getElementById('rPass').value;
-        const pw2 = document.getElementById('rPass2').value;
-        if (pw !== pw2){ toast('Les mots de passe ne correspondent pas.', 'er'); return false; }
-        if (pw.length < 6){ toast('Le mot de passe doit contenir au moins 6 caractères.', 'er'); return false; }
-        const users = S.get('users', []);
-        if (users.find(x=>x.email===em)){ toast('Cet email est déjà utilisé.', 'er'); return false; }
-        users.push({ name:nm, email:em, pw:btoa(pw), ts:Date.now() });
-        S.set('users', users);
-        ST.user = { name:nm, email:em }; ST.authed = true;
-        S.set('user', ST.user); enterApp();
-        toast('Compte créé. Bienvenue, ' + nm, 'ok');
+        const nm=document.getElementById('rName').value.trim(),em=document.getElementById('rEmail').value.trim(),pw=document.getElementById('rPass').value,pw2=document.getElementById('rPass2').value;
+        if(pw!==pw2){toast('Les codes ne correspondent pas','er');return false}
+        if(pw.length<6){toast('Minimum 6 caractères','er');return false}
+        const users=S.get('users',[]);
+        if(users.find(x=>x.email===em)){toast('Email déjà utilisé','er');return false}
+        users.push({name:nm,email:em,pw:btoa(pw),ts:Date.now()});
+        S.set('users',users);
+        ST.user={name:nm,email:em};ST.authed=true;S.set('user',ST.user);enterApp();
+        toast('Compte créé, '+nm,'ok');
         return false;
     },
     async biometric(){
-        const btn = document.getElementById('bioBtn');
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-        
-        if (window.PublicKeyCredential) {
-            try {
-                const cred = await navigator.credentials.create({
-                    publicKey: {
-                        challenge: crypto.getRandomValues(new Uint8Array(32)),
-                        rp: { name: 'Darwin AI', id: location.hostname || 'localhost' },
-                        user: { id: crypto.getRandomValues(new Uint8Array(16)), name: 'user@darwin.ai', displayName: 'Utilisateur Darwin' },
-                        pubKeyCredParams: [{ alg: -7, type: 'public-key' }, { alg: -257, type: 'public-key' }],
-                        authenticatorSelection: { authenticatorAttachment: 'platform', userVerification: 'required', residentKey: 'preferred' },
-                        timeout: 60000,
-                        attestation: 'none'
+        const btn=document.getElementById('bioBtn');
+        btn.innerHTML='<i class="fas fa-spinner fa-spin"></i>';
+        if(window.PublicKeyCredential){
+            try{
+                await navigator.credentials.create({
+                    publicKey:{
+                        challenge:crypto.getRandomValues(new Uint8Array(32)),
+                        rp:{name:'Darwin AI'},
+                        user:{id:crypto.getRandomValues(new Uint8Array(16)),name:'user@darwin.ai',displayName:'Utilisateur'},
+                        pubKeyCredParams:[{alg:-7,type:'public-key'},{alg:-257,type:'public-key'}],
+                        authenticatorSelection:{authenticatorAttachment:'platform',userVerification:'required'},
+                        timeout:60000,attestation:'none'
                     }
                 });
-                if (cred) {
-                    S.set('bioCredId', Array.from(new Uint8Array(cred.rawId)));
-                    const u = S.get('user');
-                    if (u) { ST.user = u; ST.authed = true; enterApp(); toast('Authentification biométrique réussie.', 'ok'); }
-                    else toast('Veuillez d\'abord créer un compte.', 'wr');
-                }
-            } catch(err) {
-                this._fallbackBio();
-            }
-        } else {
-            this._fallbackBio();
-        }
-        btn.innerHTML = '<i class="fas fa-fingerprint"></i>';
+                this._enter();
+            }catch(e){this._enter()}
+        }else this._enter();
+        btn.innerHTML='<i class="fas fa-fingerprint"></i>';
     },
-    _fallbackBio(){
-        const u = S.get('user');
-        if (u) {
-            ST.user = u; ST.authed = true; enterApp();
-            toast('Connexion effectuée.', 'ok');
-        } else {
-            toast('Aucun compte enregistré. Veuillez vous inscrire.', 'wr');
-        }
+    _enter(){
+        const u=S.get('user');
+        if(u){ST.user=u;ST.authed=true;enterApp();toast('Accès autorisé','ok')}
+        else toast('Créez d\'abord un compte','wr');
     },
-    logout(){
-        S.rm('user'); ST.user = null; ST.authed = false; ST.convos = [];
-        document.getElementById('app').classList.remove('on');
-        document.getElementById('auth').classList.add('on');
-        document.getElementById('chatMsgs').innerHTML = '';
-        toast('Déconnexion effectuée.', 'ok');
-    }
+    logout(){S.rm('user');ST.user=null;ST.authed=false;ST.convos=[];document.getElementById('app').classList.remove('on');document.getElementById('auth').classList.add('on');document.getElementById('chatMsgs').innerHTML='';toast('Déconnecté','ok')}
 };
 
-/* ─── UI MODULE ─── */
-const DarwinUI = {
+/* ═══ UI ═══ */
+const DarwinUI={
     nav(pg){
-        ST.page = pg;
+        ST.page=pg;
         document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
         document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));
-        document.getElementById('pg-' + pg).classList.add('on');
-        const idx = ['chat','tools','gen','settings'].indexOf(pg);
-        if (idx >= 0) document.querySelectorAll('.ni')[idx].classList.add('on');
+        document.getElementById('pg-'+pg).classList.add('on');
+        const idx=['voice','chat','tools','settings'].indexOf(pg);
+        if(idx===-1&&pg==='gen'){}
+        else if(idx>=0)document.querySelectorAll('.ni')[idx].classList.add('on');
     },
-    toggleNotif(){
-        document.getElementById('npPanel').classList.toggle('on');
-        document.getElementById('npBg').classList.toggle('on');
-        renderNotifs();
-    },
-    tog(el, key){
+    toggleNotif(){document.getElementById('npPanel').classList.toggle('on');document.getElementById('npBg').classList.toggle('on');renderNotifs()},
+    tog(el,key){
         el.classList.toggle('on');
-        const on = el.classList.contains('on');
-        const map = { voice:'voiceOn', bio:'bioOn', dev:'devAccess', notif:'notifOn', autoReply:'autoReply' };
-        if (map[key]) ST[map[key]] = on;
-        if (key === 'dev' && on) toast('Accès à l\'appareil activé.', 'ok');
-        if (key === 'autoReply' && on) toast('Réponses automatiques activées.', 'ok');
+        const on=el.classList.contains('on');
+        const map={voice:'voiceOn',bio:'bioOn'};
+        if(map[key])ST[map[key]]=on;
         saveCfg();
     },
-    openTool(t){
-        this.nav('chat');
-        const p = { code:'Génère du code', website:'Crée un site web complet', image:'Génère une image', app:'Crée une application mobile', translate:'Aide-moi à traduire un texte', automation:'Je veux automatiser une tâche' };
-        document.getElementById('chatIn').value = p[t] || '';
-        DarwinChat.send();
+    async reqNotif(el){
+        if(!('Notification' in window)){toast('Non supporté','er');return}
+        if(Notification.permission==='granted'){el.classList.toggle('on');ST.notifOn=el.classList.contains('on');saveCfg()}
+        else{const p=await Notification.requestPermission();if(p==='granted'){el.classList.add('on');ST.notifOn=true;saveCfg();toast('Notifications activées','ok')}else toast('Permission refusée','wr')}
     },
-    editProfile(){
-        showModal('Modifier le profil', `
-            <div class="fg"><label>Nom</label><input type="text" class="fi" id="edName" value="${ST.user?.name||''}"></div>
-            <button class="auth-btn" onclick="DarwinUI.saveProfile()">Enregistrer</button>
-        `);
-    },
-    saveProfile(){
-        const nm = document.getElementById('edName').value.trim();
-        if (nm) {
-            ST.user.name = nm; S.set('user', ST.user);
-            document.getElementById('pName').textContent = nm;
-            const users = S.get('users',[]); const u = users.find(x=>x.email===ST.user.email);
-            if(u){ u.name=nm; S.set('users', users); }
-            hideModal(); toast('Profil mis à jour.', 'ok');
-        }
-    },
-    closeModal(e){ if(e.target===e.currentTarget) hideModal(); }
+    editProfile(){showModal('Profil',`<div class="fg"><label>Nom</label><input type="text" class="fi" id="edName" value="${ST.user?.name||''}"></div><button class="auth-btn" onclick="DarwinUI.saveProfile()">Enregistrer</button>`)},
+    saveProfile(){const nm=document.getElementById('edName').value.trim();if(nm){ST.user.name=nm;S.set('user',ST.user);document.getElementById('pName').textContent=nm;const u=S.get('users',[]);const usr=u.find(x=>x.email===ST.user.email);if(usr){usr.name=nm;S.set('users',u)}hideModal();toast('Profil mis à jour','ok')}},
+    closeModal(e){if(e.target===e.currentTarget)hideModal()}
 };
 
-/* ─── CHAT MODULE ─── */
-const DarwinChat = {
-    addMsg(role, text){
-        const msg = { id:Date.now(), role, text, ts:new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}) };
-        ST.convos.push(msg);
-        S.set('convos', ST.convos);
-        this._render(msg);
-        this._scroll();
-    },
-    _render(msg){
-        const c = document.getElementById('chatMsgs');
-        const d = document.createElement('div');
-        d.className = `msg ${msg.role==='ai'?'ai':'u'} fadeUp`;
-        const av = msg.role==='ai' ? 'D' : (ST.user?.name?.[0]?.toUpperCase()||'U');
-        const acts = msg.role==='ai' ? `<div class="msg-acts"><button class="msg-act" onclick="DarwinUtil.copyMsg(this)"><i class="fas fa-copy"></i> Copier</button><button class="msg-act" onclick="DarwinVoice.speak(this.closest('.msg').querySelector('.msg-bub').textContent)"><i class="fas fa-volume-up"></i></button></div>` : '';
-        d.innerHTML = `<div class="msg-av">${av}</div><div class="msg-body"><div class="msg-bub">${this._fmt(msg.text)}</div>${acts}<div class="msg-t">${msg.ts}</div></div>`;
-        c.appendChild(d);
-    },
-    _fmt(t){
-        t = t.replace(/```(\w+)?\n([\s\S]*?)```/g,'<pre><code>$2</code></pre>');
-        t = t.replace(/`([^`]+)`/g,'<code>$1</code>');
-        t = t.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
-        t = t.replace(/\*([^*]+)\*/g,'<em>$1</em>');
-        t = t.replace(/(https?:\/\/[^\s]+)/g,'<a href="$1" target="_blank" rel="noopener">$1</a>');
-        t = t.replace(/\n/g,'<br>');
-        return t;
-    },
-    _scroll(){ const c=document.getElementById('chatMsgs'); setTimeout(()=>c.scrollTop=c.scrollHeight,40); },
-    _typing(on){ document.getElementById('typInd').classList.toggle('on',on); if(on) this._scroll(); },
+/* ═══ AI ENGINE ═══ */
+const DarwinAI={
+    saveKey(k){ST.apiKey=k.trim();saveCfg();updateStatus();if(k)toast('Clé enregistrée','ok')},
+    setModel(m){ST.model=m;saveCfg();toast('Modèle : '+m,'ok')},
 
-    async send(){
-        const inp = document.getElementById('chatIn');
-        const txt = inp.value.trim();
-        if (!txt) return;
-        inp.value=''; this.resize(inp);
-        this.addMsg('user', txt);
-        this._typing(true);
-        await wait(600 + Math.random()*900);
-        const resp = DarwinBrain.process(txt);
-        this._typing(false);
-        this.addMsg('ai', resp);
-        if (ST.voiceOn) DarwinVoice.speak(resp);
-    },
-    quick(t){ document.getElementById('chatIn').value=t; this.send(); },
-    keydown(e){ if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();this.send()} },
-    resize(el){ el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,100)+'px'; },
-    files(e){
-        const files=e.target.files; if(!files.length) return;
-        for(const f of files){
-            this.addMsg('user','Fichier joint : '+f.name+' ('+fmtSize(f.size)+')');
-            if(f.type.startsWith('text/')||/\.(json|js|py|html|css|md|txt)$/i.test(f.name)){
-                const r=new FileReader();
-                r.onload=ev=>this.addMsg('ai','J\'ai lu le fichier **'+f.name+'** :\n\n```\n'+ev.target.result.substring(0,600)+(ev.target.result.length>600?'\n...(tronqué)':'')+'\n```\n\nQue souhaitez-vous en faire ?');
-                r.readAsText(f);
-            } else this.addMsg('ai','Fichier **'+f.name+'** reçu. Dites-moi ce que vous voulez en faire.');
-        }
-        e.target.value='';
-    },
-    autoMicToggle(){
-        ST.autoMic = !ST.autoMic;
-        document.getElementById('autoMicBtn').classList.toggle('on', ST.autoMic);
-        document.getElementById('autoMicInd').classList.toggle('off', !ST.autoMic);
-        if (ST.autoMic) {
-            toast('Micro automatique activé. Je vous écoute en continu.', 'ok');
-            this._autoListen();
-        } else {
-            toast('Micro automatique désactivé.', 'info');
-            if (ST.autoMicTimer) clearTimeout(ST.autoMicTimer);
-            DarwinVoice.stopRecog();
-        }
-    },
-    _autoListen(){
-        if (!ST.autoMic || !ST.recog) return;
-        DarwinVoice.startRecog(true);
-    }
-};
-
-function renderAll(){ document.getElementById('chatMsgs').innerHTML=''; ST.convos.forEach(m=>DarwinChat._render(m)); DarwinChat._scroll(); }
-
-/* ─── BRAIN MODULE ─── */
-const DarwinBrain = {
-    process(input){
-        const lo = input.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-        
-        if (/^(salut|bonjour|hey|hello|coucou|hi|yo|bjr|slt|bonsoir)/i.test(lo)){
-            const r=['Bonjour. Comment puis-je vous être utile ?','Bonjour. Dites-moi ce dont vous avez besoin, je suis à votre disposition.','Bonjour. Que puis-je faire pour vous aujourd\'hui ?','Bien le bonjour. Je suis prêt à vous assister.'];
-            return r[Math.floor(Math.random()*r.length)];
-        }
-        if (/comment.*(va|allez)|ca va|ça va/i.test(lo)){
-            return 'Tout fonctionne parfaitement de mon côté, merci de demander. Et vous, comment allez-vous ? Je suis prêt à vous aider sur n\'importe quel sujet.';
-        }
-        if (/qui (es|est).*(tu|darwin)|c'est quoi darwin|presente.toi|tu es qui/i.test(lo)){
-            return 'Je suis Darwin, une plateforme d\'intelligence artificielle conçue par DESSOUASSI Oboube Anael David. Mes capacités couvrent la génération de code dans de nombreux langages, la création de sites web et d\'applications, la génération d\'images, la traduction, l\'automatisation de tâches, la gestion de communications, et bien plus encore. Je suis conçu pour être un assistant complet et polyvalent.';
-        }
-        if (/merci|thanks/i.test(lo)){
-            const r=['Je vous en prie. N\'hésitez pas si vous avez besoin d\'autre chose.','Avec plaisir. Je reste disponible.','C\'est tout naturel. À votre service.'];
-            return r[Math.floor(Math.random()*r.length)];
-        }
-        if (/code|python|javascript|js|java|html|css|php|react|programme|script|fonction|api|class/i.test(lo)){
-            return this._code(input, lo);
-        }
-        if (/site.*(web)?|page.*(web)?|portfolio|landing|e-?commerce|blog/i.test(lo)){
-            return 'Je peux créer un site web complet pour vous. Rendez-vous dans l\'onglet Créer, section Site, ou précisez-moi le type de site souhaité, les couleurs, les sections et les fonctionnalités. Je génèrerai l\'intégralité du code HTML, CSS et JavaScript.';
-        }
-        if (/app(lication)?.*mobile|mobile.*(app)?|flutter|react native/i.test(lo)){
-            return 'Bien sûr. Je peux générer le code d\'une application mobile. Dites-moi le type d\'application, les fonctionnalités principales et la technologie souhaitée parmi React Native, Flutter ou PWA. Vous pouvez aussi utiliser l\'onglet Créer pour un accès direct au générateur.';
-        }
-        if (/image|photo|dessine|illustration|genere.*image|cree.*image/i.test(lo)){
-            return 'Pour la génération d\'images, utilisez l\'onglet Créer, section Image. Décrivez ce que vous souhaitez obtenir, choisissez un style, et je produirai un visuel. Vous pouvez aussi me décrire directement l\'image que vous avez en tête.';
-        }
-        if (/tradui/i.test(lo)){ return this._translate(input); }
-        if (/message|mail|email|notification|appel|sms|whatsapp|messenger|telegram|discord/i.test(lo)){
-            return 'Je suis en mesure de vous assister avec la gestion de vos communications. Activez les réponses automatiques dans les paramètres et j\'analyserai vos notifications entrantes pour y répondre de manière appropriée, en m\'adaptant à votre style de communication habituel.';
-        }
-        if (/heure|quelle heure|date|jour/i.test(lo)){
-            const n=new Date();
-            return 'Il est '+n.toLocaleTimeString('fr-FR')+'. Nous sommes le '+n.toLocaleDateString('fr-FR',{weekday:'long',year:'numeric',month:'long',day:'numeric'})+'.';
-        }
-        if (/meteo|temps.*fait|temperature/i.test(lo)){
-            return 'Pour obtenir les données météorologiques en temps réel, j\'aurais besoin d\'une connexion à un service externe et de votre localisation. Activez l\'accès appareil dans les paramètres pour que je puisse accéder à ces informations.';
-        }
-        if (/blague|humour|drole|rigol/i.test(lo)){
-            const j=['Un développeur entre dans un bar et commande 1.0000000000000002 bières. Le barman répond : "Erreur d\'arrondi ?"','Pourquoi les programmeurs confondent-ils Halloween et Noël ? Parce que Oct 31 = Dec 25.','Un QA entre dans un bar. Commande 1 bière. Commande 0 bière. Commande -1 bière. Commande 999999 bières. Commande une bière en mandarin. Commande NULL.'];
-            return j[Math.floor(Math.random()*j.length)];
-        }
-        if (/calcul|combien.*fait|\d+\s*[\+\-\*\/]\s*\d+/i.test(lo)){
-            return this._calc(input);
-        }
-        if (/aide|help|que.*(peux|sais).*faire|comment.*fonctionne/i.test(lo)){
-            return 'Voici un aperçu de mes capacités :\n\n**Développement** : Génération de code multi-langages, création de sites web et d\'applications mobiles.\n\n**Créativité** : Génération d\'images, rédaction de contenu.\n\n**Communication** : Gestion des messages, emails et notifications avec réponses automatiques.\n\n**Productivité** : Traduction, calculs, analyse de fichiers, automatisation de tâches.\n\n**Interaction** : Conversation vocale bidirectionnelle, micro automatique pour un échange naturel.\n\nDemandez-moi simplement ce dont vous avez besoin.';
-        }
-        // Generic
-        return this._generic(input);
-    },
-
-    _code(input, lo){
-        let lang='Python';
-        if(/javascript|js/i.test(lo)) lang='JavaScript';
-        else if(/html|css/i.test(lo)) lang='HTML/CSS';
-        else if(/react/i.test(lo)) lang='React';
-        else if(/java(?!script)/i.test(lo)) lang='Java';
-        else if(/php/i.test(lo)) lang='PHP';
-        else if(/c\+\+|cpp/i.test(lo)) lang='C++';
-        else if(/sql/i.test(lo)) lang='SQL';
-        const c = CodeGen[lang] ? CodeGen[lang](input) : CodeGen.Python(input);
-        return 'Voici le code '+lang+' demandé :\n\n```'+lang.toLowerCase()+'\n'+c+'\n```\n\nJe peux modifier ou compléter ce code selon vos besoins.';
-    },
-    _translate(input){
-        const t = input.replace(/tradui(s|re|t)?\s*(en\s+\w+)?\s*/i,'').trim();
-        if(!t) return 'Indiquez le texte à traduire et la langue cible. Par exemple : "Traduis bonjour en anglais".';
-        const dic = {
-            'bonjour':{en:'Hello',es:'Hola',de:'Hallo',it:'Ciao',pt:'Olá',ja:'Konnichiwa',zh:'Nǐ hǎo',ar:'Marhaba',ru:'Privet'},
-            'merci':{en:'Thank you',es:'Gracias',de:'Danke',it:'Grazie',pt:'Obrigado'},
-            'au revoir':{en:'Goodbye',es:'Adiós',de:'Auf Wiedersehen',it:'Arrivederci'},
-            "je t'aime":{en:'I love you',es:'Te quiero',de:'Ich liebe dich',it:'Ti amo'}
-        };
-        const k=t.toLowerCase();
-        if(dic[k]){
-            let r='Traductions de "'+t+'" :\n\n';
-            for(const[l,tr]of Object.entries(dic[k])) r += l.toUpperCase()+' : '+tr+'\n';
-            return r;
-        }
-        return 'Traduction de "'+t+'" : pour une traduction précise, une connexion à un service de traduction serait nécessaire. Je maîtrise néanmoins les traductions courantes. Reformulez si besoin.';
-    },
-    _calc(input){
+    async ask(prompt,history=[]){
+        if(!ST.apiKey){return this._local(prompt)}
         try{
-            const expr=input.replace(/[^0-9+\-*/().%\s^]/g,'').replace(/\^/g,'**').trim();
-            if(expr){const r=Function('"use strict";return('+expr+')')();return 'Résultat : '+expr+' = **'+r+'**';}
-        }catch(e){}
-        return 'Je n\'ai pas pu interpréter ce calcul. Utilisez un format comme : 25 * 4 + 10';
+            const contents=[];
+            history.slice(-8).forEach(m=>{contents.push({role:m.role==='ai'?'model':'user',parts:[{text:m.text}]})});
+            contents.push({role:'user',parts:[{text:prompt}]});
+
+            const url=`https://generativelanguage.googleapis.com/v1beta/models/${ST.model}:generateContent?key=${ST.apiKey}`;
+            const r=await fetch(url,{
+                method:'POST',
+                headers:{'Content-Type':'application/json'},
+                body:JSON.stringify({
+                    contents,
+                    systemInstruction:{parts:[{text:SYSTEM_PROMPT}]},
+                    generationConfig:{temperature:0.8,maxOutputTokens:2048,topP:0.95}
+                })
+            });
+            if(!r.ok){
+                const err=await r.json().catch(()=>({}));
+                if(r.status===403||r.status===400)return 'La clé API semble invalide ou le modèle inaccessible. Vérifiez votre clé dans les paramètres.';
+                return 'Erreur temporaire du service. '+(err.error?.message||'');
+            }
+            const d=await r.json();
+            return d.candidates?.[0]?.content?.parts?.[0]?.text||'Je n\'ai pas pu générer de réponse.';
+        }catch(e){
+            return 'Connexion impossible au service. Vérifiez votre connexion Internet et votre clé API.';
+        }
     },
-    _generic(input){
-        const r=[
-            'C\'est une question pertinente. Pourriez-vous préciser un peu votre demande afin que je puisse vous fournir la réponse la plus adaptée ?',
-            'Je comprends. Donnez-moi plus de détails et je ferai de mon mieux pour vous assister efficacement.',
-            'Intéressant. N\'hésitez pas à reformuler ou à ajouter du contexte pour que je puisse mieux vous aider.',
-            'Je prends note de votre demande. Pourriez-vous développer un peu pour que je cerne exactement ce dont vous avez besoin ?'
-        ];
-        return r[Math.floor(Math.random()*r.length)];
+
+    _local(prompt){
+        const lo=prompt.toLowerCase();
+        if(/salut|bonjour|hello|hey|coucou/.test(lo))return 'Bonjour. Pour bénéficier de mes pleines capacités, ajoutez une clé API Gemini gratuite dans les paramètres. Comment puis-je vous aider ?';
+        if(/qui es.tu|c'est quoi darwin/.test(lo))return 'Je suis Darwin, un assistant intelligent créé par DESSOUASSI Oboube Anael David. Pour activer mon intelligence complète, ajoutez une clé API gratuite Gemini dans les paramètres.';
+        if(/api|cle|clé/.test(lo))return 'Pour obtenir une clé API gratuite : allez sur aistudio.google.com/apikey, connectez-vous, créez une clé et collez-la dans les paramètres de Darwin.';
+        if(/merci/.test(lo))return 'Avec plaisir.';
+        if(/heure/.test(lo))return 'Il est '+new Date().toLocaleTimeString('fr-FR')+'.';
+        if(/date|jour/.test(lo))return 'Nous sommes le '+new Date().toLocaleDateString('fr-FR',{weekday:'long',year:'numeric',month:'long',day:'numeric'})+'.';
+        return 'Pour vous répondre intelligemment sur ce sujet, j\'ai besoin d\'une clé API Gemini. Elle est gratuite et se configure en deux minutes dans les paramètres.';
     }
 };
 
-/* ─── CODE GENERATORS ─── */
-const CodeGen = {
-    Python(p){
-        if(/api|rest|flask/i.test(p)) return `from flask import Flask, jsonify, request\nfrom flask_cors import CORS\n\napp = Flask(__name__)\nCORS(app)\n\ndb = []\n\n@app.route('/api/items', methods=['GET'])\ndef get_items():\n    return jsonify({'data': db, 'total': len(db)})\n\n@app.route('/api/items', methods=['POST'])\ndef create_item():\n    data = request.get_json()\n    if not data or 'name' not in data:\n        return jsonify({'error': 'Champ name requis'}), 400\n    item = {'id': len(db) + 1, 'name': data['name']}\n    db.append(item)\n    return jsonify(item), 201\n\nif __name__ == '__main__':\n    app.run(debug=True, port=5000)`;
-        return `import os\nimport json\nfrom datetime import datetime\n\nclass DataProcessor:\n    def __init__(self, source):\n        self.source = source\n        self.data = []\n        self.results = {}\n\n    def load(self):\n        if os.path.exists(self.source):\n            with open(self.source, 'r') as f:\n                self.data = json.load(f)\n        return self\n\n    def process(self):\n        self.results = {\n            'count': len(self.data),\n            'timestamp': datetime.now().isoformat()\n        }\n        return self\n\n    def export(self, path='output.json'):\n        with open(path, 'w') as f:\n            json.dump(self.results, f, indent=2)\n        print(f'Export terminé : {path}')\n\nif __name__ == '__main__':\n    proc = DataProcessor('data.json')\n    proc.load().process().export()`;
-    },
-    JavaScript(p){
-        return `class ApplicationEngine {\n    constructor(config = {}) {\n        this.config = { debug: false, ...config };\n        this.modules = new Map();\n        this.state = {};\n    }\n\n    register(name, module) {\n        this.modules.set(name, module);\n        if (this.config.debug) console.log(\`Module \${name} enregistré\`);\n        return this;\n    }\n\n    async execute(command, params = {}) {\n        const [mod, action] = command.split('.');\n        const module = this.modules.get(mod);\n        if (!module) throw new Error(\`Module \${mod} introuvable\`);\n        return await module[action]?.(params);\n    }\n\n    init() {\n        this.modules.forEach((mod, name) => mod.init?.());\n        console.log('Engine initialisé');\n    }\n}\n\nconst engine = new ApplicationEngine({ debug: true });\nengine.init();`;
-    },
-    'HTML/CSS'(p){ return `<!DOCTYPE html>\n<html lang="fr">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>Application</title>\n    <style>\n        * { margin: 0; padding: 0; box-sizing: border-box; }\n        body { font-family: system-ui, sans-serif; background: #0f172a; color: #e2e8f0; }\n        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }\n        .header { text-align: center; padding: 4rem 0; }\n        .header h1 { font-size: 3rem; background: linear-gradient(135deg, #7c3aed, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }\n        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem; }\n        .card { background: #1e293b; border-radius: 12px; padding: 2rem; border: 1px solid #334155; transition: transform .3s; }\n        .card:hover { transform: translateY(-4px); }\n    </style>\n</head>\n<body>\n    <div class="container">\n        <div class="header"><h1>Application Web</h1></div>\n        <div class="grid">\n            <div class="card"><h3>Module 1</h3><p>Description du module</p></div>\n            <div class="card"><h3>Module 2</h3><p>Description du module</p></div>\n        </div>\n    </div>\n</body>\n</html>`; },
-    React(p){ return `import React, { useState, useEffect, useCallback } from 'react';\n\nconst App = () => {\n    const [items, setItems] = useState([]);\n    const [input, setInput] = useState('');\n    const [loading, setLoading] = useState(false);\n\n    const addItem = useCallback(() => {\n        if (!input.trim()) return;\n        setItems(prev => [...prev, {\n            id: Date.now(),\n            text: input.trim(),\n            completed: false\n        }]);\n        setInput('');\n    }, [input]);\n\n    const toggleItem = useCallback((id) => {\n        setItems(prev => prev.map(item =>\n            item.id === id ? { ...item, completed: !item.completed } : item\n        ));\n    }, []);\n\n    return (\n        <div style={{ maxWidth: 600, margin: '0 auto', padding: 20 }}>\n            <h1>Application React</h1>\n            <div style={{ display: 'flex', gap: 8, marginBottom: 20 }}>\n                <input\n                    value={input}\n                    onChange={e => setInput(e.target.value)}\n                    onKeyDown={e => e.key === 'Enter' && addItem()}\n                    placeholder="Nouvel élément..."\n                    style={{ flex: 1, padding: 12, borderRadius: 8 }}\n                />\n                <button onClick={addItem}>Ajouter</button>\n            </div>\n            {items.map(item => (\n                <div key={item.id} onClick={() => toggleItem(item.id)}\n                    style={{ padding: 12, marginBottom: 8, borderRadius: 8,\n                        textDecoration: item.completed ? 'line-through' : 'none',\n                        opacity: item.completed ? 0.5 : 1 }}>\n                    {item.text}\n                </div>\n            ))}\n        </div>\n    );\n};\n\nexport default App;`; },
-    Java(p){ return `public class Application {\n    private final String name;\n    private final List<String> modules;\n\n    public Application(String name) {\n        this.name = name;\n        this.modules = new ArrayList<>();\n    }\n\n    public void addModule(String module) {\n        modules.add(module);\n        System.out.println("Module ajouté : " + module);\n    }\n\n    public void run() {\n        System.out.println(name + " démarré avec " + modules.size() + " modules");\n        modules.forEach(m -> System.out.println("  > " + m));\n    }\n\n    public static void main(String[] args) {\n        Application app = new Application("Darwin");\n        app.addModule("NLP");\n        app.addModule("Vision");\n        app.run();\n    }\n}`; },
-    'C++'(p){ return `#include <iostream>\n#include <vector>\n#include <string>\n#include <memory>\n\nclass Engine {\nprivate:\n    std::string name_;\n    std::vector<std::string> logs_;\npublic:\n    explicit Engine(std::string name) : name_(std::move(name)) {}\n\n    void log(const std::string& msg) {\n        logs_.push_back("[" + name_ + "] " + msg);\n        std::cout << logs_.back() << std::endl;\n    }\n\n    std::string process(const std::string& query) {\n        log("Traitement : " + query);\n        return "Résultat pour : " + query;\n    }\n};\n\nint main() {\n    auto engine = std::make_unique<Engine>("Darwin");\n    std::cout << engine->process("Analyse") << std::endl;\n    return 0;\n}`; },
-    PHP(p){ return `<?php\ndeclare(strict_types=1);\n\nclass APIController {\n    private PDO \\$db;\n\n    public function __construct() {\n        \\$this->db = new PDO('sqlite:app.db');\n        \\$this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\n        \\$this->migrate();\n    }\n\n    private function migrate(): void {\n        \\$this->db->exec("CREATE TABLE IF NOT EXISTS items (\n            id INTEGER PRIMARY KEY AUTOINCREMENT,\n            name TEXT NOT NULL,\n            created_at DATETIME DEFAULT CURRENT_TIMESTAMP\n        )");\n    }\n\n    public function getAll(): array {\n        return \\$this->db->query("SELECT * FROM items ORDER BY created_at DESC")\n            ->fetchAll(PDO::FETCH_ASSOC);\n    }\n\n    public function create(string \\$name): int {\n        \\$stmt = \\$this->db->prepare("INSERT INTO items (name) VALUES (?)");\n        \\$stmt->execute([\\$name]);\n        return (int)\\$this->db->lastInsertId();\n    }\n}\n\nheader('Content-Type: application/json');\n\\$api = new APIController();\necho json_encode(\\$api->getAll());\n?>`; },
-    SQL(p){ return `CREATE TABLE users (\n    id SERIAL PRIMARY KEY,\n    username VARCHAR(50) UNIQUE NOT NULL,\n    email VARCHAR(100) UNIQUE NOT NULL,\n    password_hash VARCHAR(255) NOT NULL,\n    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n);\n\nCREATE TABLE projects (\n    id SERIAL PRIMARY KEY,\n    user_id INT REFERENCES users(id) ON DELETE CASCADE,\n    title VARCHAR(200) NOT NULL,\n    status VARCHAR(20) DEFAULT 'active',\n    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n);\n\nCREATE INDEX idx_projects_user ON projects(user_id);\nCREATE INDEX idx_projects_status ON projects(status);\n\nSELECT u.username, COUNT(p.id) AS total_projects\nFROM users u\nLEFT JOIN projects p ON u.id = p.user_id\nGROUP BY u.id\nORDER BY total_projects DESC;`; }
-};
-
-/* ─── VOICE MODULE ─── */
-const DarwinVoice = {
+/* ═══ VOICE ═══ */
+const DarwinVoice={
     initRecog(){
-        const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-        if (!SR) return;
-        ST.recog = new SR();
-        ST.recog.continuous = false;
-        ST.recog.interimResults = true;
-        ST.recog.lang = 'fr-FR';
+        const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+        if(!SR){toast('Reconnaissance vocale non disponible','wr');return}
+        ST.recog=new SR();
+        ST.recog.continuous=false;
+        ST.recog.interimResults=true;
+        ST.recog.lang='fr-FR';
 
-        ST.recog.onresult = (e) => {
-            let tr = '';
-            for(let i=e.resultIndex;i<e.results.length;i++) tr += e.results[i][0].transcript;
-            document.getElementById('voTx').textContent = tr;
+        ST.recog.onstart=()=>{ST.listening=true;this._setState('listening','Écoute...');this._waveOn(true)};
+        ST.recog.onresult=(e)=>{
+            let tr='';
+            for(let i=e.resultIndex;i<e.results.length;i++)tr+=e.results[i][0].transcript;
+            document.getElementById('voiceTx').textContent=tr;
+            document.getElementById('voiceTx').className='voice-transcript user';
             if(e.results[e.results.length-1].isFinal){
-                if (ST.autoMic) {
-                    document.getElementById('chatIn').value = tr;
-                    this.stopRecog();
-                    setTimeout(()=>{ DarwinChat.send(); setTimeout(()=>{ if(ST.autoMic) this._waitThenListen(); }, 500); }, 200);
-                } else {
-                    document.getElementById('chatIn').value = tr;
-                    this.stop();
-                    setTimeout(()=>DarwinChat.send(), 200);
-                }
+                this._processVoice(tr.trim());
             }
         };
-        ST.recog.onerror = (e) => {
-            if(e.error !== 'no-speech' && e.error !== 'aborted') toast('Erreur micro : '+e.error, 'er');
-            if (!ST.autoMic) this.stop();
-            else this._waitThenListen();
+        ST.recog.onerror=(e)=>{
+            if(e.error!=='no-speech'&&e.error!=='aborted')toast('Erreur : '+e.error,'wr');
+            this._setState('idle','Prêt');this._waveOn(false);ST.listening=false;
+            if(ST.handsFree&&e.error==='no-speech'){setTimeout(()=>{if(ST.handsFree)this.startMic()},800)}
         };
-        ST.recog.onend = () => {
-            if(ST.listening && !ST.autoMic) try{ST.recog.start()}catch(e){}
+        ST.recog.onend=()=>{
+            ST.listening=false;
+            if(ST.recogRestart){ST.recogRestart=false;setTimeout(()=>this.startMic(),200);return}
+            if(ST.handsFree&&!ST.speaking&&!ST.thinking){setTimeout(()=>{if(ST.handsFree&&!ST.speaking)this.startMic()},600)}
+            else{this._setState('idle','Prêt');this._waveOn(false)}
         };
-    },
-    _waitThenListen(){
-        if (!ST.autoMic) return;
-        ST.autoMicTimer = setTimeout(()=>{
-            if (ST.autoMic && !ST.synth.speaking) this.startRecog(true);
-        }, 1500);
     },
     initVoices(){
-        const load = () => {
-            ST.voices = ST.synth.getVoices();
+        const load=()=>{
+            ST.voices=ST.synth.getVoices();
             this._renderVoices();
         };
-        if(ST.synth.onvoiceschanged!==undefined) ST.synth.onvoiceschanged=load;
-        load(); setTimeout(load,500); setTimeout(load,1500);
+        if(ST.synth.onvoiceschanged!==undefined)ST.synth.onvoiceschanged=load;
+        load();setTimeout(load,500);setTimeout(load,1500);
     },
     _renderVoices(){
-        const l = document.getElementById('voiceList'); if(!l) return;
+        const l=document.getElementById('voiceList');if(!l)return;
         l.innerHTML='';
         const fr=ST.voices.filter(v=>/fr/i.test(v.lang));
         const en=ST.voices.filter(v=>/en/i.test(v.lang));
-        const show=[...fr,...en.slice(0,4)];
+        const show=[...fr,...en.slice(0,5)];
         const saved=S.get('selVoice');
         show.forEach((v,i)=>{
-            const sel = saved ? v.name===saved : i===0;
-            if(sel && !ST.selVoice) ST.selVoice = v;
+            const sel=saved?v.name===saved:i===0;
+            if(sel&&!ST.selVoice)ST.selVoice=v;
             const d=document.createElement('div');
             d.className='vi'+(sel?' on':'');
             d.onclick=()=>this.selectVoice(v.name,d);
-            d.innerHTML=`<div class="vi-i"><span>${v.name.substring(0,28)}</span><small>${v.lang}</small></div><button class="vp-btn" onclick="event.stopPropagation();DarwinVoice.preview('${v.name}')"><i class="fas fa-play"></i></button>`;
+            d.innerHTML=`<div class="vi-i"><span>${v.name.substring(0,30)}</span><small>${v.lang}</small></div><button class="vp-btn" onclick="event.stopPropagation();DarwinVoice.preview('${v.name}')"><i class="fas fa-play"></i></button>`;
             l.appendChild(d);
         });
-        if(!show.length) l.innerHTML='<p style="color:var(--tx3);font-size:11px;padding:8px">Aucune voix disponible</p>';
+        if(!show.length)l.innerHTML='<p style="color:var(--tx4);font-size:11px;padding:8px">Aucune voix disponible</p>';
     },
     selectVoice(name,el){
         document.querySelectorAll('.vi').forEach(v=>v.classList.remove('on'));
-        if(el) el.classList.add('on');
-        ST.selVoice = ST.voices.find(v=>v.name===name);
+        if(el)el.classList.add('on');
+        ST.selVoice=ST.voices.find(v=>v.name===name);
         S.set('selVoice',name);
-        toast('Voix modifiée.','ok');
+        toast('Voix sélectionnée','ok');
     },
     preview(name){
-        const v=ST.voices.find(x=>x.name===name); if(!v) return;
+        const v=ST.voices.find(x=>x.name===name);if(!v)return;
         ST.synth.cancel();
-        const u=new SpeechSynthesisUtterance('Bonjour, je suis Darwin, votre assistant.');
-        u.voice=v; u.rate=ST.rate; u.pitch=ST.pitch;
+        const u=new SpeechSynthesisUtterance('Bonjour, je suis Darwin. Je suis votre assistant.');
+        u.voice=v;u.rate=ST.rate;u.pitch=ST.pitch;
         ST.synth.speak(u);
     },
-    speak(text){
-        if(!ST.voiceOn) return;
+    setRate(v){ST.rate=parseFloat(v);saveCfg()},
+    setPitch(v){ST.pitch=parseFloat(v);saveCfg()},
+
+    speak(text,onEnd){
+        if(!ST.voiceOn){if(onEnd)onEnd();return}
         ST.synth.cancel();
-        // Clean text for speech - remove emojis, markdown, code blocks
-        let clean = text
-            .replace(/```[\s\S]*?```/g,' code généré ')
+        const clean=this._cleanForSpeech(text);
+        if(!clean){if(onEnd)onEnd();return}
+        this._setState('speaking','Réponse...');
+        ST.speaking=true;
+        const u=new SpeechSynthesisUtterance(clean);
+        if(ST.selVoice)u.voice=ST.selVoice;
+        u.rate=ST.rate;u.pitch=ST.pitch;u.lang='fr-FR';
+        u.onend=()=>{
+            ST.speaking=false;
+            this._setState(ST.handsFree?'idle':'idle','Prêt');
+            if(onEnd)onEnd();
+            if(ST.handsFree)setTimeout(()=>{if(ST.handsFree&&!ST.listening&&!ST.thinking)this.startMic()},400);
+        };
+        u.onerror=()=>{ST.speaking=false;this._setState('idle','Prêt');if(onEnd)onEnd()};
+        ST.synth.speak(u);
+    },
+    _cleanForSpeech(text){
+        return text
+            .replace(/```[\s\S]*?```/g,' bloc de code ')
             .replace(/`[^`]+`/g,'')
             .replace(/\*\*([^*]+)\*\*/g,'$1')
             .replace(/\*([^*]+)\*/g,'$1')
             .replace(/#{1,6}\s/g,'')
+            .replace(/\[([^\]]+)\]\([^)]+\)/g,'$1')
             .replace(/<[^>]+>/g,'')
-            .replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F1E0}-\u{1F1FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{FE00}-\u{FE0F}\u{1F900}-\u{1F9FF}\u{200D}\u{20E3}\u{E0020}-\u{E007F}]/gu,'')
+            .replace(/[\u{1F000}-\u{1FFFF}]|[\u{2600}-\u{27BF}]|[\u{FE00}-\u{FE0F}]|[\u{1F1E0}-\u{1F1FF}]|[\u{200D}]|[\u{20E3}]/gu,'')
+            .replace(/[·•→←↑↓★☆✓✗❤️💡🔥⚡]/g,'')
             .replace(/\n+/g,'. ')
             .replace(/\s+/g,' ')
             .trim();
-        if(!clean) return;
-        const u=new SpeechSynthesisUtterance(clean);
-        if(ST.selVoice) u.voice=ST.selVoice;
-        u.rate=ST.rate; u.pitch=ST.pitch; u.lang='fr-FR';
-        u.onend = () => {
-            if (ST.autoMic) this._waitThenListen();
-        };
-        ST.synth.speak(u);
     },
-    setRate(v){ ST.rate=parseFloat(v); saveCfg(); },
-    setPitch(v){ ST.pitch=parseFloat(v); saveCfg(); },
-    toggle(){
-        if(ST.listening) this.stop(); else this.start();
+
+    tap(){
+        if(ST.speaking){ST.synth.cancel();ST.speaking=false;this._setState('idle','Prêt');return}
+        if(ST.listening){this.stopMic();return}
+        this.startMic();
     },
-    start(){
-        if(!ST.recog){ toast('Reconnaissance vocale non disponible.','wr'); return; }
-        ST.listening=true;
-        document.getElementById('micBtn').classList.add('on');
-        document.getElementById('voOv').classList.add('on');
-        document.getElementById('voTx').textContent='En écoute...';
-        animViz(true);
-        try{ST.recog.start()}catch(e){}
+    startMic(){
+        if(!ST.recog){toast('Micro indisponible','wr');return}
+        if(ST.speaking){ST.synth.cancel();ST.speaking=false}
+        try{ST.recog.start()}catch(e){ST.recogRestart=true;try{ST.recog.stop()}catch(_){}}
     },
-    stop(){
-        ST.listening=false;
-        document.getElementById('micBtn').classList.remove('on');
-        document.getElementById('voOv').classList.remove('on');
-        animViz(false);
-        try{ST.recog.stop()}catch(e){}
+    stopMic(){try{ST.recog.stop()}catch(e){}ST.listening=false;this._setState('idle','Prêt');this._waveOn(false)},
+    stopAll(){ST.handsFree=false;document.getElementById('hfToggle').classList.remove('on');ST.synth.cancel();this.stopMic();ST.speaking=false;this._setState('idle','Prêt');toast('Arrêt complet','info')},
+
+    toggleHandsFree(){
+        ST.handsFree=!ST.handsFree;
+        const el=document.getElementById('hfToggle');
+        el.classList.toggle('on',ST.handsFree);
+        if(ST.handsFree){toast('Mode mains-libres activé','ok');this.startMic()}
+        else{toast('Mode mains-libres désactivé','info');this.stopMic()}
     },
-    startRecog(silent){
-        if(!ST.recog) return;
-        try{ ST.recog.start(); } catch(e){}
+
+    async _processVoice(text){
+        if(!text){if(ST.handsFree)setTimeout(()=>this.startMic(),500);return}
+        document.getElementById('voiceTx').textContent=text;
+        DarwinChat.addMsg('user',text);
+        this._setState('thinking','Réflexion...');
+        ST.thinking=true;
+        const response=await DarwinAI.ask(text,ST.convos);
+        ST.thinking=false;
+        DarwinChat.addMsg('ai',response);
+        document.getElementById('voiceTx').textContent=response;
+        document.getElementById('voiceTx').className='voice-transcript';
+        this.speak(response);
     },
-    stopRecog(){
-        try{ ST.recog.stop(); } catch(e){}
+
+    _setState(state,label){
+        const core=document.getElementById('voiceCore');
+        const status=document.getElementById('voiceStatus');
+        const micL=document.getElementById('micLarge');
+        const micB=document.getElementById('micBtn');
+        core.classList.remove('listening','speaking','thinking');
+        status.classList.remove('listening','speaking','thinking');
+        if(state!=='idle'){core.classList.add(state);status.classList.add(state)}
+        status.textContent=label;
+        if(micL)micL.classList.toggle('on',state==='listening');
+        if(micB)micB.classList.toggle('on',state==='listening');
+    },
+    _waveOn(on){document.getElementById('waveViz').classList.toggle('on',on);if(on)this._animWave();else if(waveInt){clearInterval(waveInt);waveInt=null}}
+};
+
+let waveInt;
+function initWaveBars(){
+    const w=document.getElementById('waveViz');w.innerHTML='';
+    for(let i=0;i<24;i++){const b=document.createElement('div');b.className='wave-bar';w.appendChild(b)}
+}
+DarwinVoice._animWave=function(){
+    if(waveInt)clearInterval(waveInt);
+    const bars=document.querySelectorAll('.wave-bar');
+    waveInt=setInterval(()=>{bars.forEach(b=>{b.style.height=(6+Math.random()*30)+'px'})},80);
+};
+
+/* ═══ CHAT ═══ */
+const DarwinChat={
+    addMsg(role,text){
+        const m={id:Date.now(),role,text,ts:new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})};
+        ST.convos.push(m);
+        if(ST.convos.length>50)ST.convos=ST.convos.slice(-50);
+        S.set('convos',ST.convos);
+        this._render(m);this._scroll();
+    },
+    _render(m){
+        const c=document.getElementById('chatMsgs');
+        const d=document.createElement('div');
+        d.className='msg '+(m.role==='ai'?'ai':'u')+' fadeUp';
+        const av=m.role==='ai'?'DA':(ST.user?.name?.substring(0,2).toUpperCase()||'U');
+        const acts=m.role==='ai'?`<div class="msg-acts"><button class="msg-act" onclick="DarwinUtil.copyMsg(this)"><i class="fas fa-copy"></i></button><button class="msg-act" onclick="DarwinVoice.speak(this.closest('.msg').querySelector('.msg-bub').innerText)"><i class="fas fa-volume-up"></i></button></div>`:'';
+        d.innerHTML=`<div class="msg-av">${av}</div><div class="msg-body"><div class="msg-bub">${this._fmt(m.text)}</div>${acts}<div class="msg-t">${m.ts}</div></div>`;
+        c.appendChild(d);
+    },
+    _fmt(t){
+        t=this._esc(t);
+        t=t.replace(/```(\w+)?\n?([\s\S]*?)```/g,(_,l,c)=>`<pre><code>${c.trim()}</code></pre>`);
+        t=t.replace(/`([^`]+)`/g,'<code>$1</code>');
+        t=t.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
+        t=t.replace(/(?<!\*)\*([^*\n]+)\*(?!\*)/g,'<em>$1</em>');
+        t=t.replace(/\n/g,'<br>');
+        return t;
+    },
+    _esc(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')},
+    _scroll(){const c=document.getElementById('chatMsgs');setTimeout(()=>c.scrollTop=c.scrollHeight,40)},
+    _typing(on){document.getElementById('typInd').classList.toggle('on',on);if(on)this._scroll()},
+
+    async send(){
+        const inp=document.getElementById('chatIn');
+        const t=inp.value.trim();if(!t)return;
+        inp.value='';this.resize(inp);
+        this.addMsg('user',t);
+        this._typing(true);
+        const r=await DarwinAI.ask(t,ST.convos.slice(0,-1));
+        this._typing(false);
+        this.addMsg('ai',r);
+        if(ST.voiceOn)DarwinVoice.speak(r);
+    },
+    quick(t){document.getElementById('chatIn').value=t;this.send()},
+    keydown(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();this.send()}},
+    resize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,100)+'px'},
+    files(e){
+        const f=e.target.files[0];if(!f)return;
+        if(f.type.startsWith('text/')||/\.(json|js|py|html|css|md|txt|xml)$/i.test(f.name)){
+            const r=new FileReader();
+            r.onload=async ev=>{
+                const content=ev.target.result.substring(0,3000);
+                this.addMsg('user','Fichier joint : '+f.name+'\n\n```\n'+content+'\n```');
+                this._typing(true);
+                const resp=await DarwinAI.ask('Analyse ce fichier ('+f.name+') et donne-moi ton avis. Contenu :\n\n'+content,ST.convos.slice(0,-1));
+                this._typing(false);
+                this.addMsg('ai',resp);
+                if(ST.voiceOn)DarwinVoice.speak(resp);
+            };
+            r.readAsText(f);
+        }else this.addMsg('ai','Type de fichier non supporté pour l\'analyse. Utilisez des fichiers texte.');
+        e.target.value='';
     }
 };
 
-/* ─── VOICE VIZ ─── */
-let vizInt;
-function initVizBars(){
-    const v=document.getElementById('voViz'); v.innerHTML='';
-    for(let i=0;i<16;i++){const b=document.createElement('div');b.className='vo-bar';v.appendChild(b)}
-}
-function animViz(on){
-    if(vizInt) clearInterval(vizInt);
-    const bars=document.querySelectorAll('.vo-bar');
-    if(on){
-        vizInt=setInterval(()=>{
-            bars.forEach(b=>{b.style.height=(8+Math.random()*50)+'px'});
-        },80);
-    } else bars.forEach(b=>{b.style.height='16px'});
-}
+function renderAllMsgs(){document.getElementById('chatMsgs').innerHTML='';ST.convos.forEach(m=>DarwinChat._render(m));DarwinChat._scroll()}
 
-/* ─── GENERATE MODULE ─── */
-const DarwinGen = {
-    tab(id,el){
-        document.querySelectorAll('.gt').forEach(t=>t.classList.remove('on'));
-        document.querySelectorAll('.gp').forEach(p=>p.classList.remove('on'));
-        el.classList.add('on');
-        document.getElementById('gp-'+id).classList.add('on');
+/* ═══ COMMS ═══ */
+const DarwinComms={
+    openWhatsApp(){
+        showModal('WhatsApp',`
+        <div class="fg"><label>Numéro (format international)</label><input class="fi" id="waNum" placeholder="+33612345678"></div>
+        <div class="fg"><label>Message</label><textarea class="fi" id="waMsg" rows="4" placeholder="Votre message..."></textarea></div>
+        <button class="auth-btn" onclick="DarwinComms._sendWA()">Ouvrir WhatsApp</button>`);
     },
-    opt(el){
-        el.parentElement.querySelectorAll('.go-i').forEach(o=>o.classList.remove('on'));
-        el.classList.add('on');
+    _sendWA(){
+        const n=document.getElementById('waNum').value.replace(/\D/g,'');
+        const m=encodeURIComponent(document.getElementById('waMsg').value);
+        if(!n){toast('Numéro requis','er');return}
+        window.open(`https://wa.me/${n}?text=${m}`,'_blank');
+        hideModal();
     },
-    async code(){
-        const p=document.getElementById('codeP').value.trim();
-        if(!p){toast('Décrivez le code souhaité.','wr');return}
-        toast('Génération en cours...','info');
-        await wait(1200);
-        const lang=document.querySelector('#codeLO .go-i.on')?.textContent||'Python';
-        const fn=CodeGen[lang]||CodeGen.Python;
-        document.getElementById('codeO').textContent=fn(p);
-        document.getElementById('codeR').classList.add('on');
-        toast('Code généré.','ok');
+    openEmail(){
+        showModal('Email',`
+        <div class="fg"><label>Destinataire</label><input class="fi" id="emTo" type="email" placeholder="destinataire@exemple.com"></div>
+        <div class="fg"><label>Sujet</label><input class="fi" id="emSub" placeholder="Sujet"></div>
+        <div class="fg"><label>Message</label><textarea class="fi" id="emBody" rows="5" placeholder="Votre message..."></textarea></div>
+        <button class="auth-btn" onclick="DarwinComms._sendEmail()">Ouvrir mail</button>`);
     },
+    _sendEmail(){
+        const to=document.getElementById('emTo').value,sub=encodeURIComponent(document.getElementById('emSub').value),b=encodeURIComponent(document.getElementById('emBody').value);
+        if(!to){toast('Destinataire requis','er');return}
+        window.location.href=`mailto:${to}?subject=${sub}&body=${b}`;
+        hideModal();
+    },
+    openSMS(){
+        showModal('SMS',`
+        <div class="fg"><label>Numéro</label><input class="fi" id="smsNum" placeholder="+33612345678"></div>
+        <div class="fg"><label>Message</label><textarea class="fi" id="smsMsg" rows="4" placeholder="Votre SMS..."></textarea></div>
+        <button class="auth-btn" onclick="DarwinComms._sendSMS()">Envoyer SMS</button>`);
+    },
+    _sendSMS(){
+        const n=document.getElementById('smsNum').value,m=encodeURIComponent(document.getElementById('smsMsg').value);
+        if(!n){toast('Numéro requis','er');return}
+        window.location.href=`sms:${n}?body=${m}`;
+        hideModal();
+    },
+    openCall(){
+        showModal('Appel',`
+        <div class="fg"><label>Numéro</label><input class="fi" id="callNum" placeholder="+33612345678"></div>
+        <button class="auth-btn" onclick="DarwinComms._call()">Composer</button>`);
+    },
+    _call(){
+        const n=document.getElementById('callNum').value;
+        if(!n){toast('Numéro requis','er');return}
+        window.location.href=`tel:${n}`;
+        hideModal();
+    }
+};
+
+/* ═══ GEN ═══ */
+const DarwinGen={
+    opt(el){el.parentElement.querySelectorAll('.go-i').forEach(o=>o.classList.remove('on'));el.classList.add('on')},
     async img(){
-        const p=document.getElementById('imgP').value.trim();
-        if(!p){toast('Décrivez l\'image souhaitée.','wr');return}
-        toast('Génération de l\'image...','info');
-        const cv=document.getElementById('aiCv');const ctx=cv.getContext('2d');
-        cv.width=512;cv.height=512;
-        const style=document.querySelector('#imgSO .go-i.on')?.textContent||'Réaliste';
-        await this._drawImage(ctx,p,style,512,512);
+        const p=document.getElementById('imgP').value.trim();if(!p){toast('Description requise','wr');return}
+        toast('Génération...','info');
+        const cv=document.getElementById('aiCv');const ctx=cv.getContext('2d');cv.width=512;cv.height=512;
+        const style=document.querySelector('#imgSO .go-i.on')?.textContent||'Cosmos';
+        await this._draw(ctx,p,style,512,512);
         document.getElementById('imgR').classList.add('on');
-        toast('Image générée.','ok');
+        toast('Image générée','ok');
     },
-    async _drawImage(ctx,prompt,style,w,h){
-        const lo=prompt.toLowerCase();
-        let colors=['#7c6bf0','#22d3ee','#f472b6','#4f46e5','#34d399'];
-        if(/nuit|sombre|dark/i.test(lo)) colors=['#06061a','#14143e','#1c1c52','#0d0d2b'];
-        if(/nature|vert|foret/i.test(lo)) colors=['#10b981','#34d399','#1e293b','#475569'];
-        if(/coucher|sunset|orange/i.test(lo)) colors=['#dc2626','#f59e0b','#f472b6','#7c6bf0'];
-        if(/ocean|mer|bleu/i.test(lo)) colors=['#0369a1','#22d3ee','#06b6d4','#06061a'];
-        const gd=ctx.createLinearGradient(0,0,w,h);
-        colors.forEach((c,i)=>gd.addColorStop(i/(colors.length-1),c));
-        ctx.fillStyle=gd;ctx.fillRect(0,0,w,h);
-        for(let i=0;i<40;i++){
-            await wait(15);
-            ctx.globalAlpha=.08+Math.random()*.35;
+    async _draw(ctx,prompt,style,w,h){
+        const palettes={Cosmos:['#7c4dff','#00e5ff','#ff4081','#000814'],Neon:['#ff00ff','#00ffff','#ffff00','#000000'],Nature:['#00e676','#00e5ff','#001d3d','#003566'],Cyber:['#00e5ff','#ff4081','#7c4dff','#000814'],Ocean:['#0091ea','#00e5ff','#001d3d','#000814']};
+        const colors=palettes[style]||palettes.Cosmos;
+        const g=ctx.createRadialGradient(w/2,h/2,0,w/2,h/2,w/2);
+        colors.forEach((c,i)=>g.addColorStop(i/(colors.length-1),c));
+        ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
+        for(let i=0;i<80;i++){
+            await wait(10);
+            ctx.globalAlpha=.1+Math.random()*.4;
             ctx.fillStyle=colors[Math.floor(Math.random()*colors.length)];
-            const x=Math.random()*w,y=Math.random()*h,s=15+Math.random()*70;
-            if(style==='Abstrait'){ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+s,y+s*Math.random());ctx.lineTo(x-s*Math.random(),y+s);ctx.closePath();ctx.fill()}
-            else if(style==='Minimaliste'){ctx.fillRect(x-s/2,y-s/2,s,s)}
-            else{ctx.beginPath();ctx.arc(x,y,s/2,0,Math.PI*2);ctx.fill()}
+            ctx.beginPath();
+            ctx.arc(Math.random()*w,Math.random()*h,10+Math.random()*80,0,Math.PI*2);
+            ctx.fill();
         }
         ctx.globalAlpha=1;
-        for(let i=0;i<12;i++){ctx.fillStyle='#fff';ctx.globalAlpha=.4+Math.random()*.5;ctx.beginPath();ctx.arc(Math.random()*w,Math.random()*h,1+Math.random()*3,0,Math.PI*2);ctx.fill()}
-        ctx.globalAlpha=.25;ctx.fillStyle='#fff';ctx.font='12px Inter';ctx.textAlign='right';ctx.fillText('Darwin AI',w-12,h-12);ctx.globalAlpha=1;
-    },
-    dlCanvas(){
-        const cv=document.getElementById('aiCv');const a=document.createElement('a');
-        a.download='darwin-image.png';a.href=cv.toDataURL('image/png');a.click();toast('Image téléchargée.','ok');
-    },
-    async web(){
-        const p=document.getElementById('webP').value.trim();
-        if(!p){toast('Décrivez votre site web.','wr');return}
-        toast('Création du site...','info'); await wait(1200);
-        const type=document.querySelector('#webTO .go-i.on')?.textContent||'Portfolio';
-        const code=this._webCode(p,type);
-        document.getElementById('webO').textContent=code;
-        document.getElementById('webR').classList.add('on');
-        toast('Site web généré.','ok');
-    },
-    _webCode(p,type){
-        return `<!DOCTYPE html>\n<html lang="fr">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>${type}</title>\n    <style>\n        :root { --primary: #7c6bf0; --bg: #0f172a; --surface: #1e293b; --text: #e2e8f0; --dim: #94a3b8; }\n        * { margin: 0; padding: 0; box-sizing: border-box; }\n        body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }\n        nav { position: fixed; top: 0; width: 100%; padding: 16px 32px; display: flex; justify-content: space-between; align-items: center; background: rgba(15,23,42,.9); backdrop-filter: blur(12px); z-index: 100; border-bottom: 1px solid rgba(255,255,255,.06); }\n        nav .brand { font-size: 20px; font-weight: 800; color: var(--primary); }\n        nav ul { display: flex; list-style: none; gap: 24px; }\n        nav a { color: var(--dim); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .3s; }\n        nav a:hover { color: var(--primary); }\n        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 80px 20px; }\n        .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; margin-bottom: 16px; letter-spacing: -1px; }\n        .hero h1 em { font-style: normal; color: var(--primary); }\n        .hero p { font-size: 1.1rem; color: var(--dim); max-width: 560px; margin: 0 auto 32px; }\n        .btn { display: inline-block; padding: 14px 36px; background: var(--primary); color: white; text-decoration: none; border-radius: 10px; font-weight: 700; transition: transform .3s, box-shadow .3s; }\n        .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(124,107,240,.3); }\n        section { padding: 80px 32px; max-width: 1100px; margin: 0 auto; }\n        .section-title { font-size: 2rem; font-weight: 800; text-align: center; margin-bottom: 40px; }\n        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }\n        .card { background: var(--surface); border-radius: 14px; padding: 28px; border: 1px solid rgba(255,255,255,.06); transition: transform .3s; }\n        .card:hover { transform: translateY(-4px); }\n        .card h3 { margin-bottom: 8px; font-size: 18px; }\n        .card p { color: var(--dim); font-size: 14px; }\n        footer { text-align: center; padding: 32px; color: var(--dim); font-size: 13px; border-top: 1px solid rgba(255,255,255,.06); }\n    </style>\n</head>\n<body>\n    <nav>\n        <div class="brand">${type}</div>\n        <ul><li><a href="#home">Accueil</a></li><li><a href="#work">Projets</a></li><li><a href="#contact">Contact</a></li></ul>\n    </nav>\n    <div class="hero" id="home">\n        <div>\n            <h1>Bienvenue sur <em>${type}</em></h1>\n            <p>${p}</p>\n            <a href="#work" class="btn">Découvrir</a>\n        </div>\n    </div>\n    <section id="work">\n        <div class="section-title">Projets</div>\n        <div class="grid">\n            <div class="card"><h3>Projet Alpha</h3><p>Description détaillée du projet et des technologies utilisées.</p></div>\n            <div class="card"><h3>Projet Beta</h3><p>Description détaillée du projet et des technologies utilisées.</p></div>\n            <div class="card"><h3>Projet Gamma</h3><p>Description détaillée du projet et des technologies utilisées.</p></div>\n        </div>\n    </section>\n    <section id="contact" style="text-align:center">\n        <div class="section-title">Contact</div>\n        <p style="color:var(--dim);margin-bottom:24px">Travaillons ensemble sur votre prochain projet.</p>\n        <a href="mailto:contact@example.com" class="btn">Me contacter</a>\n    </section>\n    <footer>Généré par Darwin AI &mdash; ${new Date().getFullYear()}</footer>\n</body>\n</html>`;
-    },
-    preview(){
-        const c=document.getElementById('webO').textContent;
-        const w=window.open('','_blank');w.document.write(c);w.document.close();
-    },
-    dlWeb(){
-        const c=document.getElementById('webO').textContent;
-        const b=new Blob([c],{type:'text/html'});const u=URL.createObjectURL(b);
-        const a=document.createElement('a');a.href=u;a.download='darwin-site.html';a.click();URL.revokeObjectURL(u);
-        toast('Site téléchargé.','ok');
-    },
-    async app(){
-        const p=document.getElementById('appP').value.trim();
-        if(!p){toast('Décrivez votre application.','wr');return}
-        toast('Création de l\'application...','info');await wait(1200);
-        const type=document.querySelector('#appTO .go-i.on')?.textContent||'React Native';
-        let code='';
-        if(type==='React Native') code=CodeGen.React(p);
-        else if(type==='Flutter') code=`import 'package:flutter/material.dart';\n\nvoid main() => runApp(const DarwinApp());\n\nclass DarwinApp extends StatelessWidget {\n    const DarwinApp({super.key});\n    @override\n    Widget build(BuildContext context) {\n        return MaterialApp(\n            title: 'Application',\n            theme: ThemeData(useMaterial3: true, colorSchemeSeed: const Color(0xFF7C6BF0)),\n            home: const HomePage(),\n        );\n    }\n}\n\nclass HomePage extends StatefulWidget {\n    const HomePage({super.key});\n    @override\n    State<HomePage> createState() => _HomePageState();\n}\n\nclass _HomePageState extends State<HomePage> {\n    final List<String> _items = [];\n    final _controller = TextEditingController();\n\n    void _add() {\n        if (_controller.text.trim().isNotEmpty) {\n            setState(() => _items.add(_controller.text.trim()));\n            _controller.clear();\n        }\n    }\n\n    @override\n    Widget build(BuildContext context) {\n        return Scaffold(\n            appBar: AppBar(title: const Text('Application')),\n            body: ListView.builder(\n                itemCount: _items.length,\n                itemBuilder: (_, i) => ListTile(title: Text(_items[i])),\n            ),\n            floatingActionButton: FloatingActionButton(\n                onPressed: _add, child: const Icon(Icons.add)),\n        );\n    }\n}`;
-        else code=CodeGen['HTML/CSS'](p);
-        document.getElementById('appO').textContent=code;
-        document.getElementById('appR').classList.add('on');
-        toast('Application générée.','ok');
-    }
-};
-
-/* ─── UTIL MODULE ─── */
-const DarwinUtil = {
-    copy(id){
-        const t=document.getElementById(id).textContent;
-        navigator.clipboard.writeText(t).then(()=>toast('Copié.','ok')).catch(()=>{
-            const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);toast('Copié.','ok');
-        });
-    },
-    copyMsg(btn){
-        const t=btn.closest('.msg').querySelector('.msg-bub').textContent;
-        navigator.clipboard.writeText(t).then(()=>toast('Copié.','ok')).catch(()=>toast('Erreur de copie.','er'));
-    },
-    dl(id){
-        const t=document.getElementById(id).textContent;
-        const ext={codeO:'.py',webO:'.html',appO:'.jsx'};
-        const b=new Blob([t],{type:'text/plain'});const u=URL.createObjectURL(b);
-        const a=document.createElement('a');a.href=u;a.download='darwin-output'+(ext[id]||'.txt');a.click();URL.revokeObjectURL(u);
-        toast('Fichier téléchargé.','ok');
-    }
-};
-
-function fmtSize(b){
-    if(b<1024) return b+' o';
-    if(b<1048576) return (b/1024).toFixed(1)+' Ko';
-    return (b/1048576).toFixed(1)+' Mo';
-}
-
-/* ─── NOTIFICATIONS ─── */
-function initNotifSys(){
-    if('Notification' in window && Notification.permission==='default') Notification.requestPermission();
-    setInterval(()=>{
-        if(Math.random()>.85 && ST.authed){
-            const ns=[
-                {ic:'fas fa-envelope',bg:'#0369a1',t:'Nouvel email',d:'Message non lu dans votre boîte'},
-                {ic:'fas fa-comment',bg:'#10b981',t:'Message reçu',d:'Nouveau message en attente'},
-                {ic:'fas fa-phone-missed',bg:'#dc2626',t:'Appel manqué',d:'Tentative d\'appel non répondu'}
-            ];
-            addNotif(ns[Math.floor(Math.random()*ns.length)]);
+        for(let i=0;i<50;i++){
+            ctx.fillStyle='#fff';ctx.globalAlpha=.5+Math.random()*.5;
+            ctx.beginPath();ctx.arc(Math.random()*w,Math.random()*h,.5+Math.random()*2,0,Math.PI*2);ctx.fill();
         }
-    },25000);
-}
-function addNotif(n){
-    ST.notifs.unshift({...n,tm:new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}),id:Date.now()});
-    updateBdg();renderNotifs();
-    if('Notification' in window && Notification.permission==='granted') new Notification(n.t,{body:n.d});
-}
-function updateBdg(){
-    const b=document.getElementById('nBdg');
-    b.textContent=ST.notifs.length>9?'9+':ST.notifs.length;
-    b.classList.toggle('on',ST.notifs.length>0);
-}
+        ctx.globalAlpha=.4;ctx.fillStyle='#fff';ctx.font='300 11px "Space Grotesk"';ctx.textAlign='right';ctx.fillText('DARWIN · '+style.toUpperCase(),w-12,h-12);ctx.globalAlpha=1;
+    },
+    dlCanvas(){const cv=document.getElementById('aiCv');const a=document.createElement('a');a.download='darwin-'+Date.now()+'.png';a.href=cv.toDataURL('image/png');a.click();toast('Téléchargé','ok')}
+};
+
+/* ═══ UTIL ═══ */
+const DarwinUtil={
+    copyMsg(btn){const t=btn.closest('.msg').querySelector('.msg-bub').innerText;navigator.clipboard.writeText(t).then(()=>toast('Copié','ok')).catch(()=>toast('Erreur','er'))}
+};
+
 function renderNotifs(){
     const l=document.getElementById('npList');
-    l.innerHTML=ST.notifs.length?ST.notifs.map(n=>`<div class="ni-it fadeUp"><div class="ni-ic" style="background:${n.bg}"><i class="${n.ic}"></i></div><div class="ni-ct"><h4>${n.t}</h4><p>${n.d}</p><div class="ni-tm">${n.tm}</div></div></div>`).join(''):'<p style="text-align:center;color:var(--tx3);padding:32px;font-size:13px">Aucune notification</p>';
+    l.innerHTML=ST.notifs.length?ST.notifs.map(n=>`<div class="ni-it fadeUp"><div class="ni-ic" style="background:${n.bg}"><i class="${n.ic}"></i></div><div class="ni-ct"><h4>${n.t}</h4><p>${n.d}</p><div class="ni-tm">${n.tm}</div></div></div>`).join(''):'<p style="text-align:center;color:var(--tx4);padding:32px;font-size:12px;letter-spacing:1px;text-transform:uppercase">Aucune notification</p>';
 }
 
-/* ─── MODAL / TOAST ─── */
 function showModal(t,b){document.getElementById('moT').textContent=t;document.getElementById('moB').innerHTML=b;document.getElementById('moBg').classList.add('on')}
 function hideModal(){document.getElementById('moBg').classList.remove('on')}
 function toast(msg,type='info'){
@@ -1249,22 +1140,20 @@ function toast(msg,type='info'){
     setTimeout(()=>{d.style.opacity='0';d.style.transform='translateX(80px)';d.style.transition='.3s';setTimeout(()=>d.remove(),300)},3500);
 }
 
-/* ─── PWA ─── */
 function setupPWA(){
-    const m={name:'Darwin AI',short_name:'Darwin AI',description:'Plateforme d\'intelligence artificielle avancée',start_url:'.',display:'standalone',background_color:'#06061a',theme_color:'#06061a',orientation:'any',
-    icons:[{src:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><rect width="192" height="192" rx="40" fill="#06061a"/><text x="96" y="125" text-anchor="middle" fill="#7c6bf0" font-size="100" font-weight="900">D</text></svg>'),sizes:'192x192',type:'image/svg+xml',purpose:'any maskable'}]};
+    const m={name:'Darwin AI',short_name:'Darwin',description:'Neural Intelligence',start_url:'.',display:'standalone',background_color:'#000814',theme_color:'#000814',orientation:'any',
+    icons:[{src:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00e5ff"/><stop offset="100%" stop-color="#7c4dff"/></linearGradient></defs><rect width="192" height="192" rx="42" fill="#000814"/><circle cx="96" cy="96" r="60" fill="none" stroke="url(#g)" stroke-width="2" stroke-dasharray="8 4"/><circle cx="96" cy="96" r="28" fill="url(#g)"/></svg>'),sizes:'192x192',type:'image/svg+xml',purpose:'any maskable'}]};
     const b=new Blob([JSON.stringify(m)],{type:'application/json'});
-    document.getElementById('pwaManifest').href=URL.createObjectURL(b);
+    document.getElementById('pwaMan').href=URL.createObjectURL(b);
     if('serviceWorker' in navigator){
-        const sw=`const C='darwin-v2';self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(['/'])));self.skipWaiting()});self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>new Response('Hors ligne',{status:503}))))});self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x)))))})`;
+        const sw=`const C='darwin3';self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(['/'])));self.skipWaiting()});self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>new Response('Offline'))))});`;
         navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw],{type:'application/javascript'}))).catch(()=>{});
     }
 }
 
-/* ─── LICENCE ─── */
-console.log('%cDarwin AI v2.0','font-size:16px;font-weight:900;color:#7c6bf0');
-console.log('%cDéveloppé par DESSOUASSI Oboube Anael David','font-size:11px;color:#9898b8');
-console.log('%cLicence propriétaire exclusive — Tous droits réservés','font-size:10px;color:#6868a0');
+console.log('%cDARWIN AI v3.0','font-size:20px;font-weight:900;background:linear-gradient(135deg,#00e5ff,#7c4dff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;padding:8px');
+console.log('%cNeural Intelligence System','color:#00e5ff;font-size:11px;letter-spacing:2px');
+console.log('%c© 2025 DESSOUASSI Oboube Anael David','color:#4dd0e1;font-size:10px');
 </script>
 </body>
 </html>
